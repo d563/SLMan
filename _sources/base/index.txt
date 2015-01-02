@@ -1,0 +1,6 @@
+base
+====
+.. toctree::
+    host
+    vim
+    httpd

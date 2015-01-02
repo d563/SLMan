@@ -1,0 +1,32 @@
+mysql
+=====
+::
+
+    yum -y install mysql-server
+
+.. index:: /etc/my.cnf
+
+::
+
+    sed -i.org \
+    -e '/\[mysqld\]/a\
+    character-set-server=utf8' \
+    /etc/my.cnf
+
+    echo '
+    [client]
+    default-character-set=utf8' >> /etc/my.cnf
+
+    /etc/init.d/mysqld start
+
+::
+
+    mysql_secure_installation
+    mysql -u root -p
+
+::
+
+    grant all privileges on SLMan.* to SLMan@localhost identified by 'SLManPass';
+    select user from mysql.user;
+    revoke all privileges on *.* from SLMan@localhost;
+    delete from mysql.user where user='SLMan' and host='localhost';

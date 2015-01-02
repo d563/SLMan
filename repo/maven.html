@@ -1,0 +1,269 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>2.2. maven &mdash; SLMan 0.0.1 documentation</title>
+    
+    <link rel="stylesheet" href="../_static/pyramid.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/SLMan.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '0.0.1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <link rel="top" title="SLMan 0.0.1 documentation" href="../index.html" />
+    <link rel="up" title="2. repo" href="index.html" />
+    <link rel="next" title="2.3. subversion" href="subversion.html" />
+    <link rel="prev" title="2.1. git" href="git.html" />
+<link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Neuton&amp;subset=latin" type="text/css" media="screen" charset="utf-8" />
+<link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Nobile:regular,italic,bold,bolditalic&amp;subset=latin" type="text/css" media="screen" charset="utf-8" />
+<!--[if lte IE 6]>
+<link rel="stylesheet" href="../_static/ie6.css" type="text/css" media="screen" charset="utf-8" />
+<![endif]-->
+
+  </head>
+  <body>
+
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="subversion.html" title="2.3. subversion"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="git.html" title="2.1. git"
+             accesskey="P">previous</a> |</li>
+        <li><a href="../index.html">SLMan 0.0.1 documentation</a> &raquo;</li>
+          <li><a href="index.html" accesskey="U">2. repo</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="maven">
+<h1>2.2. maven<a class="headerlink" href="#maven" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="proxy">
+<h2>2.2.1. proxy<a class="headerlink" href="#proxy" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-python"><div class="highlight"><pre>useradd -m maven
+passwd maven
+su - maven
+mkdir -p ~/target/repo
+mkdir -p ~/target/repo-local
+</pre></div>
+</div>
+<div class="highlight-python"><div class="highlight"><pre>wget http://dist.codehaus.org/maven-proxy/jars/maven-proxy-standalone-0.2-app.jar
+</pre></div>
+</div>
+<div class="highlight-python"><div class="highlight"><pre>cat &lt;&lt; &#39;[EOF]&#39; &gt; maven-proxy.properties
+repo.local.store=/home/maven/target/repo
+port=9999
+prefix=repository
+lastModifiedDateFormat=yyyy/MM/dd HH:mm:ss Z(z)
+snapshot.update=true
+pom.update=true
+promotion=false
+serverName=http://localhost:9999
+browsable=true
+searchable=true
+webdav=true
+stylesheet=/maven-proxy/style.css
+bgColor=#14B
+bgColorHighlight=#94B
+rowColor=#CCF
+rowColorHighlight=#DDF
+# proxy.list=one,two,three
+# proxy.one.host=proxy1.example.com
+# proxy.one.port=3128
+# proxy.one.username=username
+# proxy.one.password=password
+repo.list=local-repo,central
+repo.local-repo.url=file:////home/maven/target/repo-local
+repo.local-repo.description=Local Repo
+repo.local-repo.copy=false
+repo.local-repo.hardfail=true
+repo.local-repo.cache.period=0
+repo.central.url=http://repo1.maven.org/maven2
+# repo.central.proxy=one
+repo.central.hardfail=false
+repo.central.period=3600
+repo.central.failures=true
+[EOF]
+</pre></div>
+</div>
+<div class="highlight-python"><div class="highlight"><pre>java -jar /home/maven/maven-proxy-standalone-0.2-app.jar /home/maven/maven-proxy.properties &amp;
+</pre></div>
+</div>
+</div>
+<div class="section" id="module-mavend">
+<span id="daemon"></span><h2>2.2.2. daemon<a class="headerlink" href="#module-mavend" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-shell"><div class="highlight"><pre><span class="c">#!/bin/bash</span>
+<span class="c"># chkconfig: - 80 20</span>
+<span class="c"># description: maven server</span>
+<span class="c"># /etc/init.d/mavend</span>
+<span class="nv">CMD</span><span class="o">=</span><span class="s1">&#39;java -jar /home/maven/maven-proxy-standalone-0.2-app.jar /home/maven/maven-proxy.properties&#39;</span>
+<span class="nv">LOCK</span><span class="o">=</span>/var/lock/subsys/<span class="si">${</span><span class="nv">0</span><span class="p">##*/</span><span class="si">}</span>
+<span class="nv">PID</span><span class="o">=</span><span class="sb">`</span>pgrep -f <span class="s2">&quot;</span><span class="nv">$CMD</span><span class="s2">&quot;</span><span class="sb">`</span>
+start<span class="o">()</span> <span class="o">{</span>
+  <span class="nb">echo</span> <span class="s2">&quot;starting </span><span class="si">${</span><span class="nv">0</span><span class="p">##*/</span><span class="si">}</span><span class="s2">&quot;</span>
+  <span class="nv">$CMD</span> &gt; /dev/null 2&gt;<span class="p">&amp;</span><span class="m">1</span> <span class="p">&amp;</span>
+  touch <span class="nv">$LOCK</span>
+  <span class="k">return</span> 0
+<span class="o">}</span>
+stop<span class="o">()</span> <span class="o">{</span>
+  <span class="k">if</span> <span class="o">[[</span> -f <span class="nv">$LOCK</span> <span class="o">]]</span><span class="p">;</span> <span class="k">then</span>
+    rm -f <span class="nv">$LOCK</span>
+  <span class="k">fi</span>
+  <span class="k">if</span> <span class="o">[[</span> -z <span class="nv">$PID</span> <span class="o">]]</span><span class="p">;</span> <span class="k">then</span>
+    <span class="nb">echo</span> <span class="s2">&quot;</span><span class="si">${</span><span class="nv">0</span><span class="p">##*/</span><span class="si">}</span><span class="s2"> is not running&quot;</span>
+    <span class="k">return</span> 1
+  <span class="k">fi</span>
+  <span class="nb">echo</span> <span class="s2">&quot;stopping </span><span class="si">${</span><span class="nv">0</span><span class="p">##*/</span><span class="si">}</span><span class="s2"> (PID:</span><span class="si">${</span><span class="nv">PID</span><span class="si">}</span><span class="s2">)&quot;</span>
+  <span class="nb">kill</span> -9 <span class="si">${</span><span class="nv">PID</span><span class="si">}</span>
+  <span class="k">return</span> 0
+<span class="o">}</span>
+status<span class="o">()</span> <span class="o">{</span>
+  <span class="k">if</span> <span class="o">[[</span> -z <span class="nv">$PID</span> <span class="o">]]</span><span class="p">;</span> <span class="k">then</span>
+    <span class="nb">echo</span> <span class="s2">&quot;</span><span class="si">${</span><span class="nv">0</span><span class="p">##*/</span><span class="si">}</span><span class="s2"> is stopped&quot;</span>
+    <span class="k">return</span> 0
+  <span class="k">else</span>
+    <span class="nb">echo</span> <span class="s2">&quot;</span><span class="si">${</span><span class="nv">0</span><span class="p">##*/</span><span class="si">}</span><span class="s2"> is running (PID:</span><span class="si">${</span><span class="nv">PID</span><span class="si">}</span><span class="s2">)&quot;</span>
+    <span class="k">return</span> 1
+  <span class="k">fi</span>
+<span class="o">}</span>
+<span class="k">case</span> <span class="s2">&quot;</span><span class="nv">$1</span><span class="s2">&quot;</span> in
+  start<span class="o">)</span> start <span class="p">;;</span>
+  stop<span class="o">)</span> stop <span class="p">;;</span>
+  restart<span class="o">)</span> stop<span class="p">;</span> start <span class="p">;;</span>
+  status<span class="o">)</span> status <span class="p">;;</span>
+  *<span class="o">)</span>
+    <span class="nb">echo</span> <span class="s2">&quot;Usage: </span><span class="nv">$0</span><span class="s2"> {start|stop|restart|status}&quot;</span>
+    <span class="nb">exit </span><span class="m">1</span> <span class="p">;;</span>
+<span class="k">esac</span>
+<span class="nb">exit</span> <span class="nv">$?</span>
+</pre></div>
+</div>
+<div class="highlight-python"><div class="highlight"><pre>chmod 775 /etc/init.d/mavend
+chkconfig mavend on
+</pre></div>
+</div>
+</div>
+<div class="section" id="client">
+<h2>2.2.3. client<a class="headerlink" href="#client" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-python"><div class="highlight"><pre>cd /usr/local/lib
+wget http://ftp.riken.jp/net/apache/maven/maven-3/3.1.1/binaries/apache-maven-3.1.1-bin.zip
+unzip apache-maven-3.1.1-bin.zip
+ln -s /usr/local/lib/apache-maven-3.1.1/bin/mvn /usr/local/bin/mvn
+</pre></div>
+</div>
+<div class="highlight-xml"><div class="highlight"><pre><span class="nt">&lt;settings&gt;</span>
+  <span class="c">&lt;!-- ~/.m2/settings.xml --&gt;</span>
+  <span class="nt">&lt;localRepository&gt;</span>~/.m2/repo<span class="nt">&lt;/localRepository&gt;</span>
+  <span class="nt">&lt;servers&gt;</span>
+    <span class="nt">&lt;server&gt;</span>
+      <span class="nt">&lt;id&gt;</span>server001<span class="nt">&lt;/id&gt;</span>
+      <span class="nt">&lt;username&gt;</span>maven<span class="nt">&lt;/username&gt;</span>
+      <span class="nt">&lt;password&gt;</span>maven<span class="nt">&lt;/password&gt;</span>
+      <span class="nt">&lt;filePermissions&gt;</span>664<span class="nt">&lt;/filePermissions&gt;</span>
+      <span class="nt">&lt;directoryPermissions&gt;</span>775<span class="nt">&lt;/directoryPermissions&gt;</span>
+    <span class="nt">&lt;/server&gt;</span>
+  <span class="nt">&lt;/servers&gt;</span>
+  <span class="nt">&lt;mirrors&gt;</span>
+    <span class="nt">&lt;mirror&gt;</span>
+      <span class="nt">&lt;id&gt;</span>mirror001<span class="nt">&lt;/id&gt;</span>
+      <span class="nt">&lt;name&gt;</span>Maven Proxy<span class="nt">&lt;/name&gt;</span>
+      <span class="nt">&lt;url&gt;</span>http://localhost:9999/repository<span class="nt">&lt;/url&gt;</span>
+      <span class="nt">&lt;mirrorOf&gt;</span>central<span class="nt">&lt;/mirrorOf&gt;</span>
+    <span class="nt">&lt;/mirror&gt;</span>
+  <span class="nt">&lt;/mirrors&gt;</span>
+<span class="nt">&lt;/settings&gt;</span>
+</pre></div>
+</div>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="../index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">2.2. maven</a><ul>
+<li><a class="reference internal" href="#proxy">2.2.1. proxy</a></li>
+<li><a class="reference internal" href="#module-mavend">2.2.2. daemon</a></li>
+<li><a class="reference internal" href="#client">2.2.3. client</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="git.html"
+                        title="previous chapter">2.1. git</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="subversion.html"
+                        title="next chapter">2.3. subversion</a></p>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="subversion.html" title="2.3. subversion"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="git.html" title="2.1. git"
+             >previous</a> |</li>
+        <li><a href="../index.html">SLMan 0.0.1 documentation</a> &raquo;</li>
+          <li><a href="index.html" >2. repo</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2014, Daisuke Maeda.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.2.3.
+    </div>
+  </body>
+</html>

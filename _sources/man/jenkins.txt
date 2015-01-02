@@ -1,0 +1,53 @@
+jenkins
+=======
+.. index:: /etc/yum.repos.d/jenkins.repo
+
+::
+
+    cd /etc/yum.repos.d/
+    wget http://pkg.jenkins-ci.org/redhat/jenkins.repo
+    rpm --import http://pkg.jenkins-ci.org/redhat/jenkins-ci.org.key
+
+::
+
+    yum -y install jenkins
+
+.. index:: /etc/sysconfig/jenkins
+
+::
+
+    sed -i.org \
+    -e 's#JENKINS_HOME=.*#JENKINS_HOME="/var/lib/git/jenkins"#' \
+    -e 's#JENKINS_ARGS=.*#JENKINS_ARGS="--prefix=/jenkins"#' \
+    /etc/sysconfig/jenkins
+
+::
+
+    mkdir -p /var/lib/git/jenkins
+    cd /var/lib/git
+    chgrp jenkins jenkins
+    chmod 2775 jenkins
+    git init jenkins
+
+::
+
+    echo 'ProxyPass /jenkins ajp://localhost:8009/jenkins
+    ProxyPassReverse /jenkins ajp://localhost:8009/jenkins' > /etc/httpd/conf.d/jenkins.conf
+
+    /etc/init.d/httpd restart
+
+::
+
+    chkconfig jenkins on
+    /etc/init.d/jenkins start
+
+::
+
+    cd /var/lib/git/jenkins
+    cat << '[EOF]' > .gitignore
+    *
+    !.gitignore
+    !jobs
+    !jobs/*/
+    !config.xml
+    [EOF]

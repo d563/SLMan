@@ -1,0 +1,84 @@
+wsgi
+====
+::
+
+    yum -y install mod_wsgi
+
+    pip install pymongo
+
+.. module:: json.py
+.. code-block:: python
+
+    #!/usr/bin/python
+    # -*- coding: utf-8 -*-
+    # /var/www/cgi-bin/json.py
+
+    import json
+    import logging
+    from pymongo import Connection
+
+    logging.basicConfig(filename='/var/tmp/json.log', level=logging.DEBUG)
+    def application(environ, start_response):
+      dat = environ['wsgi.input'].read(int(environ.get('CONTENT_LENGTH', 0)))
+      logging.debug(dat)
+      start_response('200 OK', [('Content-type', 'text/plain')])
+      return json.dumps(Main().gene(json.loads(dat)))
+
+    def deco(func):
+      def _deco(*args):
+        return [i for i in func(*args) if i]
+      return _deco
+
+    class Main():
+      def __init__(self): self.key = 'val'
+      @deco
+      def gene(self, inp):
+        con = Connection('localhost', 27017)
+        con.testdb.testcol.save(inp)
+        for dat in con.testdb.testcol.find():
+          yield str(dat['_id'])
+
+.. module:: json.html
+.. code-block:: html
+
+    <!doctype html>
+    <!-- /var/www/cgi-bin/json.html -->
+    <!-- /var/lib/git/tomcat/target/tomcat/json.html -->
+    <html>
+    <head>
+      <title>json</title>
+      <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+      <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+      <script>
+      $(function() {
+        "use strict";
+        $.ajax({
+          type: "POST",
+          url: "json",
+          data: JSON.stringify({post_key: "post_val"}),
+          dataType: "json",
+          success: function(ls) {
+            $("#main").html(JSON.stringify(ls));
+          }
+        });
+      });
+      </script>
+    </head>
+    <body>
+      <div id="main"></div>
+    </body>
+    </html>
+
+::
+
+    git init /var/www/cgi-bin
+    ln -s /var/www/cgi-bin /var/lib/git/app
+
+.. index:: /etc/httpd/conf.d/wsgi.conf
+
+::
+
+    echo 'WSGIScriptAlias /json /var/www/cgi-bin/json.py
+    Alias /app /var/www/cgi-bin' >> /etc/httpd/conf.d/wsgi.conf
+
+    /etc/init.d/httpd restart

@@ -1,0 +1,11 @@
+SLMan
+=====
+.. toctree::
+    :maxdepth: 2
+    :numbered:
+
+    base/index
+    repo/index
+    man/index
+    data/index
+    app/index

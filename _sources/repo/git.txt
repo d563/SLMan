@@ -1,0 +1,50 @@
+git
+===
+
+gitweb
+------
+::
+
+    yum -y install gitweb
+
+.. index:: /etc/httpd/conf.d/git.conf
+
+::
+
+    cat /etc/httpd/conf.d/git.conf
+    /etc/init.d/httpd restart
+
+.. index:: ~/.gitconfig
+
+::
+
+    git config --global user.name "Daisuke Maeda"
+    git config --global user.email mail.d563@gmail.com
+    cat ~/.gitconfig
+
+github
+------
+.. index:: ~/.ssh/id_rsa.pub
+.. index:: ~/.ssh/id_rsa
+
+::
+
+    mkdir ~/.ssh
+    ssh-keygen -t rsa -C "mail.d563@gmail.com"
+    chmod 600 ~/.ssh/id_rsa
+    chmod 644 ~/.ssh/id_rsa.pub
+    ssh -T git@github.com
+
+::
+
+    cd /var/www/html
+    git init .
+    touch .nojekyll
+    git add .
+    git commit -mstart
+    git remote add origin git@github.com:d563/SLMan.git
+    git push -u origin master:gh-pages
+
+::
+
+    git clone git@github.com:d563/SLMan.git /var/www/html

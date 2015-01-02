@@ -1,0 +1,151 @@
+tomcat
+======
+::
+
+    yum -y install tomcat6
+
+::
+
+    mkdir /var/lib/git/tomcat
+    cd /var/lib/git/tomcat
+    git init .
+
+::
+
+    mkdir -p src/main/groovy/d563
+    mkdir -p src/main/java/d563
+    mkdir -p src/main/resources
+    mkdir -p src/main/webapp/WEB-INF
+    mkdir -p src/test/groovy
+    mkdir -p src/test/java
+
+.. module:: pom.xml
+.. code-block:: xml
+
+    <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+      <!-- /var/lib/git/tomcat/pom.xml -->
+      <modelVersion>4.0.0</modelVersion>
+      <groupId>d563</groupId>
+      <artifactId>SLMan</artifactId>
+      <packaging>war</packaging>
+      <version>0.0.1-SNAPSHOT</version>
+      <name>tomcat Maven Webapp</name>
+      <url>http://d563.github.io/SLMan/</url>
+      <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+      </properties>
+      <dependencies>
+        <dependency>
+          <groupId>junit</groupId>
+          <artifactId>junit</artifactId>
+          <version>3.8.1</version>
+          <scope>test</scope>
+        </dependency>
+        <dependency>
+          <groupId>javax.servlet</groupId>
+          <artifactId>servlet-api</artifactId>
+          <version>2.5</version>
+          <scope>provided</scope>
+        </dependency>
+        <dependency>
+          <groupId>org.codehaus.groovy</groupId>
+          <artifactId>groovy-all</artifactId>
+          <version>2.3.9</version>
+        </dependency>
+        <dependency>
+          <groupId>com.gmongo</groupId>
+          <artifactId>gmongo</artifactId>
+          <version>1.3</version>
+        </dependency>
+      </dependencies>
+      <build>
+        <finalName>tomcat</finalName>
+        <plugins>
+          <plugin>
+            <groupId>org.codehaus.gmaven</groupId>
+            <artifactId>gmaven-plugin</artifactId>
+            <version>1.4</version>
+            <executions>
+              <execution>
+                <goals>
+                  <goal>generateStubs</goal>
+                  <goal>compile</goal>
+                  <goal>generateTestStubs</goal>
+                  <goal>testCompile</goal>
+                </goals>
+                <configuration>
+                  <providerSelection>1.8</providerSelection>
+                </configuration>
+              </execution>
+            </executions>
+          </plugin>
+        </plugins>
+      </build>
+      <distributionManagement>
+        <repository>
+          <id>server001</id>
+          <url>scp://localhost/home/maven/target/repo-local</url>
+        </repository>
+        <site>
+          <id>server001</id>
+          <url>scp://localhost/home/maven/site/${project.artifactId}</url>
+        </site>
+      </distributionManagement>
+    </project>
+
+.. module:: web.xml
+.. code-block:: xml
+
+    <!DOCTYPE web-app PUBLIC
+     "-//Sun Microsystems, Inc.//DTD Web Application 2.3//EN"
+     "http://java.sun.com/dtd/web-app_2_3.dtd" >
+    <!-- /var/lib/git/tomcat/src/main/webapp/WEB-INF/web.xml -->
+    <web-app>
+      <display-name>Archetype Created Web Application</display-name>
+      <servlet>
+        <servlet-name>Json</servlet-name>
+        <servlet-class>d563.Json</servlet-class>
+      </servlet>
+      <servlet-mapping>
+        <servlet-name>Json</servlet-name>
+        <url-pattern>/json</url-pattern>
+      </servlet-mapping>
+    </web-app>
+
+.. module:: Json.groovy
+.. code-block:: groovy
+
+    package d563;
+    import com.gmongo.GMongo
+    import groovy.json.JsonBuilder
+    import groovy.json.JsonSlurper
+    import javax.servlet.ServletException
+    import javax.servlet.http.HttpServlet
+    import javax.servlet.http.HttpServletRequest
+    import javax.servlet.http.HttpServletResponse
+
+    // /var/lib/git/tomcat/src/main/groovy/d563/Json.groovy
+    class Json extends HttpServlet {
+      void doPost(HttpServletRequest req, HttpServletResponse res)
+        throws IOException, ServletException {
+
+        def inp = new JsonSlurper().parseText(req.reader.text)
+        inp.ret_key = 'ret_val'
+        new GMongo().getDB('testdb').testcol.save(inp)
+
+        res.contentType = 'text/html; charset=UTF-8'
+        def out = res.writer
+        out.println(new JsonBuilder(new GMongo().getDB('testdb').testcol.find()))
+        out.close()
+      }
+    }
+
+::
+
+    echo '<Context path="/SLMan" docBase="/var/lib/git/tomcat/target/tomcat" reloadable="true"/>' \
+    > /usr/share/tomcat6/conf/Catalina/localhost/SLMan.xml
+
+::
+
+    mvn clean package

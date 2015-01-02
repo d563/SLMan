@@ -1,0 +1,54 @@
+ant
+===
+::
+
+    yum -y install ant
+
+.. module:: build.xml
+.. code-block:: xml
+
+    <project name="SLMan" default="main">
+      <!-- build.xml -->
+      <property file="SLMan.properties" />
+      <taskdef resource="tasks.properties" classpath=".:lib" />
+      <target name="init">
+      </target>
+      <target name="main" depends="init">
+        <SLMan KEY="${key1}" />
+        <echo message="${key2}" />
+      </target>
+    </project>
+
+::
+
+    echo 'key1=val1
+    key2=val2' > SLMan.properties
+
+::
+
+    echo 'tasks.properties' > SLMan=d563.SLManTask
+
+::
+
+    mkdir d563
+    cd d563
+    cat << '[EOF]' > SLManTask.java
+    package d563;
+    import org.apache.tools.ant.Task;
+    import org.apache.tools.ant.BuildException;
+    public class SLManTask extends Task {
+      private String key;
+      @Override
+      public void execute() throws BuildException {
+        System.out.println(getProject().getName());
+        System.out.println(key);
+      }
+      public void setKey(String key) {this.key = key;}
+    }
+    [EOF]
+
+::
+
+    mkdir lib
+    javac -cp /usr/share/java/ant.jar -d lib d563/SLManTask.java
+    ant

@@ -1,0 +1,5 @@
+man
+===
+.. toctree::
+    jenkins
+    hinemos

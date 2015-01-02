@@ -1,0 +1,147 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>4.3. mysql &mdash; SLMan 0.0.1 documentation</title>
+    
+    <link rel="stylesheet" href="../_static/pyramid.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/SLMan.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '0.0.1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <link rel="top" title="SLMan 0.0.1 documentation" href="../index.html" />
+    <link rel="up" title="4. data" href="index.html" />
+    <link rel="next" title="5. app" href="../app/index.html" />
+    <link rel="prev" title="4.2. oracle" href="oracle.html" />
+<link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Neuton&amp;subset=latin" type="text/css" media="screen" charset="utf-8" />
+<link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Nobile:regular,italic,bold,bolditalic&amp;subset=latin" type="text/css" media="screen" charset="utf-8" />
+<!--[if lte IE 6]>
+<link rel="stylesheet" href="../_static/ie6.css" type="text/css" media="screen" charset="utf-8" />
+<![endif]-->
+
+  </head>
+  <body>
+
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="../app/index.html" title="5. app"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="oracle.html" title="4.2. oracle"
+             accesskey="P">previous</a> |</li>
+        <li><a href="../index.html">SLMan 0.0.1 documentation</a> &raquo;</li>
+          <li><a href="index.html" accesskey="U">4. data</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="mysql">
+<h1>4.3. mysql<a class="headerlink" href="#mysql" title="Permalink to this headline">¶</a></h1>
+<div class="highlight-python"><div class="highlight"><pre>yum -y install mysql-server
+</pre></div>
+</div>
+<div class="highlight-python" id="index-0"><div class="highlight"><pre>sed -i.org \
+-e &#39;/\[mysqld\]/a\
+character-set-server=utf8&#39; \
+/etc/my.cnf
+
+echo &#39;
+[client]
+default-character-set=utf8&#39; &gt;&gt; /etc/my.cnf
+
+/etc/init.d/mysqld start
+</pre></div>
+</div>
+<div class="highlight-python"><div class="highlight"><pre>mysql_secure_installation
+mysql -u root -p
+</pre></div>
+</div>
+<div class="highlight-python"><div class="highlight"><pre>grant all privileges on SLMan.* to SLMan@localhost identified by &#39;SLManPass&#39;;
+select user from mysql.user;
+revoke all privileges on *.* from SLMan@localhost;
+delete from mysql.user where user=&#39;SLMan&#39; and host=&#39;localhost&#39;;
+</pre></div>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="oracle.html"
+                        title="previous chapter">4.2. oracle</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="../app/index.html"
+                        title="next chapter">5. app</a></p>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="../app/index.html" title="5. app"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="oracle.html" title="4.2. oracle"
+             >previous</a> |</li>
+        <li><a href="../index.html">SLMan 0.0.1 documentation</a> &raquo;</li>
+          <li><a href="index.html" >4. data</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2014, Daisuke Maeda.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.2.3.
+    </div>
+  </body>
+</html>

@@ -1,0 +1,158 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>5.5. ant &mdash; SLMan 0.0.1 documentation</title>
+    
+    <link rel="stylesheet" href="../_static/pyramid.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/SLMan.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '0.0.1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <link rel="top" title="SLMan 0.0.1 documentation" href="../index.html" />
+    <link rel="up" title="5. app" href="index.html" />
+    <link rel="prev" title="5.4. tomcat" href="tomcat.html" />
+<link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Neuton&amp;subset=latin" type="text/css" media="screen" charset="utf-8" />
+<link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Nobile:regular,italic,bold,bolditalic&amp;subset=latin" type="text/css" media="screen" charset="utf-8" />
+<!--[if lte IE 6]>
+<link rel="stylesheet" href="../_static/ie6.css" type="text/css" media="screen" charset="utf-8" />
+<![endif]-->
+
+  </head>
+  <body>
+
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="tomcat.html" title="5.4. tomcat"
+             accesskey="P">previous</a> |</li>
+        <li><a href="../index.html">SLMan 0.0.1 documentation</a> &raquo;</li>
+          <li><a href="index.html" accesskey="U">5. app</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="ant">
+<h1>5.5. ant<a class="headerlink" href="#ant" title="Permalink to this headline">¶</a></h1>
+<div class="highlight-python"><div class="highlight"><pre>yum -y install ant
+</pre></div>
+</div>
+<span class="target" id="module-build.xml"></span><div class="highlight-xml"><div class="highlight"><pre><span class="nt">&lt;project</span> <span class="na">name=</span><span class="s">&quot;SLMan&quot;</span> <span class="na">default=</span><span class="s">&quot;main&quot;</span><span class="nt">&gt;</span>
+  <span class="c">&lt;!-- build.xml --&gt;</span>
+  <span class="nt">&lt;property</span> <span class="na">file=</span><span class="s">&quot;SLMan.properties&quot;</span> <span class="nt">/&gt;</span>
+  <span class="nt">&lt;taskdef</span> <span class="na">resource=</span><span class="s">&quot;tasks.properties&quot;</span> <span class="na">classpath=</span><span class="s">&quot;.:lib&quot;</span> <span class="nt">/&gt;</span>
+  <span class="nt">&lt;target</span> <span class="na">name=</span><span class="s">&quot;init&quot;</span><span class="nt">&gt;</span>
+  <span class="nt">&lt;/target&gt;</span>
+  <span class="nt">&lt;target</span> <span class="na">name=</span><span class="s">&quot;main&quot;</span> <span class="na">depends=</span><span class="s">&quot;init&quot;</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;SLMan</span> <span class="na">KEY=</span><span class="s">&quot;${key1}&quot;</span> <span class="nt">/&gt;</span>
+    <span class="nt">&lt;echo</span> <span class="na">message=</span><span class="s">&quot;${key2}&quot;</span> <span class="nt">/&gt;</span>
+  <span class="nt">&lt;/target&gt;</span>
+<span class="nt">&lt;/project&gt;</span>
+</pre></div>
+</div>
+<div class="highlight-python"><div class="highlight"><pre>echo &#39;key1=val1
+key2=val2&#39; &gt; SLMan.properties
+</pre></div>
+</div>
+<div class="highlight-python"><div class="highlight"><pre>echo &#39;tasks.properties&#39; &gt; SLMan=d563.SLManTask
+</pre></div>
+</div>
+<div class="highlight-python"><div class="highlight"><pre>mkdir d563
+cd d563
+cat &lt;&lt; &#39;[EOF]&#39; &gt; SLManTask.java
+package d563;
+import org.apache.tools.ant.Task;
+import org.apache.tools.ant.BuildException;
+public class SLManTask extends Task {
+  private String key;
+  @Override
+  public void execute() throws BuildException {
+    System.out.println(getProject().getName());
+    System.out.println(key);
+  }
+  public void setKey(String key) {this.key = key;}
+}
+[EOF]
+</pre></div>
+</div>
+<div class="highlight-python"><div class="highlight"><pre>mkdir lib
+javac -cp /usr/share/java/ant.jar -d lib d563/SLManTask.java
+ant
+</pre></div>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="tomcat.html"
+                        title="previous chapter">5.4. tomcat</a></p>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="tomcat.html" title="5.4. tomcat"
+             >previous</a> |</li>
+        <li><a href="../index.html">SLMan 0.0.1 documentation</a> &raquo;</li>
+          <li><a href="index.html" >5. app</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2014, Daisuke Maeda.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.2.3.
+    </div>
+  </body>
+</html>

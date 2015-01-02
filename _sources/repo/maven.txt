@@ -1,0 +1,147 @@
+maven
+=====
+
+proxy
+-----
+::
+
+    useradd -m maven
+    passwd maven
+    su - maven
+    mkdir -p ~/target/repo
+    mkdir -p ~/target/repo-local
+
+::
+
+    wget http://dist.codehaus.org/maven-proxy/jars/maven-proxy-standalone-0.2-app.jar
+
+::
+
+    cat << '[EOF]' > maven-proxy.properties
+    repo.local.store=/home/maven/target/repo
+    port=9999
+    prefix=repository
+    lastModifiedDateFormat=yyyy/MM/dd HH:mm:ss Z(z)
+    snapshot.update=true
+    pom.update=true
+    promotion=false
+    serverName=http://localhost:9999
+    browsable=true
+    searchable=true
+    webdav=true
+    stylesheet=/maven-proxy/style.css
+    bgColor=#14B
+    bgColorHighlight=#94B
+    rowColor=#CCF
+    rowColorHighlight=#DDF
+    # proxy.list=one,two,three
+    # proxy.one.host=proxy1.example.com
+    # proxy.one.port=3128
+    # proxy.one.username=username
+    # proxy.one.password=password
+    repo.list=local-repo,central
+    repo.local-repo.url=file:////home/maven/target/repo-local
+    repo.local-repo.description=Local Repo
+    repo.local-repo.copy=false
+    repo.local-repo.hardfail=true
+    repo.local-repo.cache.period=0
+    repo.central.url=http://repo1.maven.org/maven2
+    # repo.central.proxy=one
+    repo.central.hardfail=false
+    repo.central.period=3600
+    repo.central.failures=true
+    [EOF]
+
+::
+
+    java -jar /home/maven/maven-proxy-standalone-0.2-app.jar /home/maven/maven-proxy.properties &
+
+daemon
+------
+
+.. module:: mavend
+.. code-block:: shell
+
+    #!/bin/bash
+    # chkconfig: - 80 20
+    # description: maven server
+    # /etc/init.d/mavend
+    CMD='java -jar /home/maven/maven-proxy-standalone-0.2-app.jar /home/maven/maven-proxy.properties'
+    LOCK=/var/lock/subsys/${0##*/}
+    PID=`pgrep -f "$CMD"`
+    start() {
+      echo "starting ${0##*/}"
+      $CMD > /dev/null 2>&1 &
+      touch $LOCK
+      return 0
+    }
+    stop() {
+      if [[ -f $LOCK ]]; then
+        rm -f $LOCK
+      fi
+      if [[ -z $PID ]]; then
+        echo "${0##*/} is not running"
+        return 1
+      fi
+      echo "stopping ${0##*/} (PID:${PID})"
+      kill -9 ${PID}
+      return 0
+    }
+    status() {
+      if [[ -z $PID ]]; then
+        echo "${0##*/} is stopped"
+        return 0
+      else
+        echo "${0##*/} is running (PID:${PID})"
+        return 1
+      fi
+    }
+    case "$1" in
+      start) start ;;
+      stop) stop ;;
+      restart) stop; start ;;
+      status) status ;;
+      *)
+        echo "Usage: $0 {start|stop|restart|status}"
+        exit 1 ;;
+    esac
+    exit $?
+
+::
+
+    chmod 775 /etc/init.d/mavend
+    chkconfig mavend on
+
+client 
+------
+::
+
+    cd /usr/local/lib
+    wget http://ftp.riken.jp/net/apache/maven/maven-3/3.1.1/binaries/apache-maven-3.1.1-bin.zip
+    unzip apache-maven-3.1.1-bin.zip
+    ln -s /usr/local/lib/apache-maven-3.1.1/bin/mvn /usr/local/bin/mvn
+
+.. module ~/.m2/settings.xml
+.. code-block:: xml
+
+    <settings>
+      <!-- ~/.m2/settings.xml -->
+      <localRepository>~/.m2/repo</localRepository>
+      <servers>
+        <server>
+          <id>server001</id>
+          <username>maven</username>
+          <password>maven</password>
+          <filePermissions>664</filePermissions>
+          <directoryPermissions>775</directoryPermissions>
+        </server>
+      </servers>
+      <mirrors>
+        <mirror>
+          <id>mirror001</id>
+          <name>Maven Proxy</name>
+          <url>http://localhost:9999/repository</url>
+          <mirrorOf>central</mirrorOf>
+        </mirror>
+      </mirrors>
+    </settings>

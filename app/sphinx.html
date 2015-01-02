@@ -1,0 +1,177 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>5.2. sphinx &mdash; SLMan 0.0.1 documentation</title>
+    
+    <link rel="stylesheet" href="../_static/pyramid.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/SLMan.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '0.0.1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <link rel="top" title="SLMan 0.0.1 documentation" href="../index.html" />
+    <link rel="up" title="5. app" href="index.html" />
+    <link rel="next" title="5.3. fabric" href="fabric.html" />
+    <link rel="prev" title="5.1. wsgi" href="wsgi.html" />
+<link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Neuton&amp;subset=latin" type="text/css" media="screen" charset="utf-8" />
+<link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Nobile:regular,italic,bold,bolditalic&amp;subset=latin" type="text/css" media="screen" charset="utf-8" />
+<!--[if lte IE 6]>
+<link rel="stylesheet" href="../_static/ie6.css" type="text/css" media="screen" charset="utf-8" />
+<![endif]-->
+
+  </head>
+  <body>
+
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="fabric.html" title="5.3. fabric"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="wsgi.html" title="5.1. wsgi"
+             accesskey="P">previous</a> |</li>
+        <li><a href="../index.html">SLMan 0.0.1 documentation</a> &raquo;</li>
+          <li><a href="index.html" accesskey="U">5. app</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="sphinx">
+<h1>5.2. sphinx<a class="headerlink" href="#sphinx" title="Permalink to this headline">¶</a></h1>
+<div class="highlight-python"><div class="highlight"><pre>pip install sphinx
+</pre></div>
+</div>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">mkdir</span> <span class="o">/</span><span class="n">var</span><span class="o">/</span><span class="n">lib</span><span class="o">/</span><span class="n">git</span><span class="o">/</span><span class="n">sphinx</span>
+<span class="n">cd</span> <span class="o">/</span><span class="n">var</span><span class="o">/</span><span class="n">lib</span><span class="o">/</span><span class="n">git</span><span class="o">/</span><span class="n">sphinx</span>
+<span class="n">sphinx</span><span class="o">-</span><span class="n">quickstart</span>
+</pre></div>
+</div>
+<div class="highlight-python"><div class="highlight"><pre>Project name: SLMan
+Author name(s): Daisuke Maeda
+Project version: 0.0.1
+</pre></div>
+</div>
+<div class="highlight-python"><div class="highlight"><pre>sed -i.org -e &quot;s/html_theme =.*/html_theme = &#39;pyramid&#39;/&quot; conf.py
+echo &quot;def setup(app):
+  app.add_stylesheet(&#39;SLMan.css&#39;)&quot; &gt;&gt; conf.py
+</pre></div>
+</div>
+<div class="highlight-python" id="index-0"><div class="highlight"><pre>echo &#39;Alias /sphinx /var/lib/git/sphinx/_build/html&#39; &gt; /etc/httpd/conf.d/sphinx.conf
+/etc/init.d/httpd restart
+</pre></div>
+</div>
+<div class="highlight-python"><div class="highlight"><pre>cat &lt;&lt; &#39;[EOF]&#39; &gt; _static/SLMan.css
+body {background-color: #fff;}
+div.body h1 {background-color: #eee; border: 2px solid #ddd; margin-top: 10pt; padding-left: 10px;}
+div.body h2 {margin-left: 10pt;}
+div.body p, div.body pre {margin-left: 10pt; margin-right: 10pt;}
+div.footer {color: #000; border-top: 2px solid #ddd;}
+div.footer a {color: #1b61b6;}
+[EOF]
+</pre></div>
+</div>
+<div class="highlight-python"><div class="highlight"><pre>cat &lt;&lt; &#39;[EOF]&#39; &gt; pull.sh
+cp -rf /var/www/html/_sources/* .
+for f in `find -name &#39;*.txt&#39;`; do
+  mv -f $f ${f%.txt}.rst
+done
+[EOF]
+
+cat &lt;&lt; &#39;[EOF]&#39; &gt; push.sh
+rm -rf /var/www/html/*
+cp -rf _build/html/* /var/www/html
+d=`pwd`
+cd /var/www/html
+git commit -a -mupdate
+git push
+cd $d
+[EOF]
+
+chmod u+x pull.sh push.sh
+</pre></div>
+</div>
+<div class="highlight-python"><div class="highlight"><pre>make clean html
+</pre></div>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="wsgi.html"
+                        title="previous chapter">5.1. wsgi</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="fabric.html"
+                        title="next chapter">5.3. fabric</a></p>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="fabric.html" title="5.3. fabric"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="wsgi.html" title="5.1. wsgi"
+             >previous</a> |</li>
+        <li><a href="../index.html">SLMan 0.0.1 documentation</a> &raquo;</li>
+          <li><a href="index.html" >5. app</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2014, Daisuke Maeda.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.2.3.
+    </div>
+  </body>
+</html>

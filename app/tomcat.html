@@ -1,0 +1,261 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>5.4. tomcat &mdash; SLMan 0.0.1 documentation</title>
+    
+    <link rel="stylesheet" href="../_static/pyramid.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/SLMan.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '0.0.1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <link rel="top" title="SLMan 0.0.1 documentation" href="../index.html" />
+    <link rel="up" title="5. app" href="index.html" />
+    <link rel="next" title="5.5. ant" href="ant.html" />
+    <link rel="prev" title="5.3. fabric" href="fabric.html" />
+<link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Neuton&amp;subset=latin" type="text/css" media="screen" charset="utf-8" />
+<link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Nobile:regular,italic,bold,bolditalic&amp;subset=latin" type="text/css" media="screen" charset="utf-8" />
+<!--[if lte IE 6]>
+<link rel="stylesheet" href="../_static/ie6.css" type="text/css" media="screen" charset="utf-8" />
+<![endif]-->
+
+  </head>
+  <body>
+
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="ant.html" title="5.5. ant"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="fabric.html" title="5.3. fabric"
+             accesskey="P">previous</a> |</li>
+        <li><a href="../index.html">SLMan 0.0.1 documentation</a> &raquo;</li>
+          <li><a href="index.html" accesskey="U">5. app</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="tomcat">
+<h1>5.4. tomcat<a class="headerlink" href="#tomcat" title="Permalink to this headline">¶</a></h1>
+<div class="highlight-python"><div class="highlight"><pre>yum -y install tomcat6
+</pre></div>
+</div>
+<div class="highlight-python"><div class="highlight"><pre>mkdir /var/lib/git/tomcat
+cd /var/lib/git/tomcat
+git init .
+</pre></div>
+</div>
+<div class="highlight-python"><div class="highlight"><pre>mkdir -p src/main/groovy/d563
+mkdir -p src/main/java/d563
+mkdir -p src/main/resources
+mkdir -p src/main/webapp/WEB-INF
+mkdir -p src/test/groovy
+mkdir -p src/test/java
+</pre></div>
+</div>
+<span class="target" id="module-pom.xml"></span><div class="highlight-xml"><div class="highlight"><pre><span class="nt">&lt;project</span> <span class="na">xmlns=</span><span class="s">&quot;http://maven.apache.org/POM/4.0.0&quot;</span> <span class="na">xmlns:xsi=</span><span class="s">&quot;http://www.w3.org/2001/XMLSchema-instance&quot;</span>
+  <span class="na">xsi:schemaLocation=</span><span class="s">&quot;http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd&quot;</span><span class="nt">&gt;</span>
+  <span class="c">&lt;!-- /var/lib/git/tomcat/pom.xml --&gt;</span>
+  <span class="nt">&lt;modelVersion&gt;</span>4.0.0<span class="nt">&lt;/modelVersion&gt;</span>
+  <span class="nt">&lt;groupId&gt;</span>d563<span class="nt">&lt;/groupId&gt;</span>
+  <span class="nt">&lt;artifactId&gt;</span>SLMan<span class="nt">&lt;/artifactId&gt;</span>
+  <span class="nt">&lt;packaging&gt;</span>war<span class="nt">&lt;/packaging&gt;</span>
+  <span class="nt">&lt;version&gt;</span>0.0.1-SNAPSHOT<span class="nt">&lt;/version&gt;</span>
+  <span class="nt">&lt;name&gt;</span>tomcat Maven Webapp<span class="nt">&lt;/name&gt;</span>
+  <span class="nt">&lt;url&gt;</span>http://d563.github.io/SLMan/<span class="nt">&lt;/url&gt;</span>
+  <span class="nt">&lt;properties&gt;</span>
+    <span class="nt">&lt;project.build.sourceEncoding&gt;</span>UTF-8<span class="nt">&lt;/project.build.sourceEncoding&gt;</span>
+  <span class="nt">&lt;/properties&gt;</span>
+  <span class="nt">&lt;dependencies&gt;</span>
+    <span class="nt">&lt;dependency&gt;</span>
+      <span class="nt">&lt;groupId&gt;</span>junit<span class="nt">&lt;/groupId&gt;</span>
+      <span class="nt">&lt;artifactId&gt;</span>junit<span class="nt">&lt;/artifactId&gt;</span>
+      <span class="nt">&lt;version&gt;</span>3.8.1<span class="nt">&lt;/version&gt;</span>
+      <span class="nt">&lt;scope&gt;</span>test<span class="nt">&lt;/scope&gt;</span>
+    <span class="nt">&lt;/dependency&gt;</span>
+    <span class="nt">&lt;dependency&gt;</span>
+      <span class="nt">&lt;groupId&gt;</span>javax.servlet<span class="nt">&lt;/groupId&gt;</span>
+      <span class="nt">&lt;artifactId&gt;</span>servlet-api<span class="nt">&lt;/artifactId&gt;</span>
+      <span class="nt">&lt;version&gt;</span>2.5<span class="nt">&lt;/version&gt;</span>
+      <span class="nt">&lt;scope&gt;</span>provided<span class="nt">&lt;/scope&gt;</span>
+    <span class="nt">&lt;/dependency&gt;</span>
+    <span class="nt">&lt;dependency&gt;</span>
+      <span class="nt">&lt;groupId&gt;</span>org.codehaus.groovy<span class="nt">&lt;/groupId&gt;</span>
+      <span class="nt">&lt;artifactId&gt;</span>groovy-all<span class="nt">&lt;/artifactId&gt;</span>
+      <span class="nt">&lt;version&gt;</span>2.3.9<span class="nt">&lt;/version&gt;</span>
+    <span class="nt">&lt;/dependency&gt;</span>
+    <span class="nt">&lt;dependency&gt;</span>
+      <span class="nt">&lt;groupId&gt;</span>com.gmongo<span class="nt">&lt;/groupId&gt;</span>
+      <span class="nt">&lt;artifactId&gt;</span>gmongo<span class="nt">&lt;/artifactId&gt;</span>
+      <span class="nt">&lt;version&gt;</span>1.3<span class="nt">&lt;/version&gt;</span>
+    <span class="nt">&lt;/dependency&gt;</span>
+  <span class="nt">&lt;/dependencies&gt;</span>
+  <span class="nt">&lt;build&gt;</span>
+    <span class="nt">&lt;finalName&gt;</span>tomcat<span class="nt">&lt;/finalName&gt;</span>
+    <span class="nt">&lt;plugins&gt;</span>
+      <span class="nt">&lt;plugin&gt;</span>
+        <span class="nt">&lt;groupId&gt;</span>org.codehaus.gmaven<span class="nt">&lt;/groupId&gt;</span>
+        <span class="nt">&lt;artifactId&gt;</span>gmaven-plugin<span class="nt">&lt;/artifactId&gt;</span>
+        <span class="nt">&lt;version&gt;</span>1.4<span class="nt">&lt;/version&gt;</span>
+        <span class="nt">&lt;executions&gt;</span>
+          <span class="nt">&lt;execution&gt;</span>
+            <span class="nt">&lt;goals&gt;</span>
+              <span class="nt">&lt;goal&gt;</span>generateStubs<span class="nt">&lt;/goal&gt;</span>
+              <span class="nt">&lt;goal&gt;</span>compile<span class="nt">&lt;/goal&gt;</span>
+              <span class="nt">&lt;goal&gt;</span>generateTestStubs<span class="nt">&lt;/goal&gt;</span>
+              <span class="nt">&lt;goal&gt;</span>testCompile<span class="nt">&lt;/goal&gt;</span>
+            <span class="nt">&lt;/goals&gt;</span>
+            <span class="nt">&lt;configuration&gt;</span>
+              <span class="nt">&lt;providerSelection&gt;</span>1.8<span class="nt">&lt;/providerSelection&gt;</span>
+            <span class="nt">&lt;/configuration&gt;</span>
+          <span class="nt">&lt;/execution&gt;</span>
+        <span class="nt">&lt;/executions&gt;</span>
+      <span class="nt">&lt;/plugin&gt;</span>
+    <span class="nt">&lt;/plugins&gt;</span>
+  <span class="nt">&lt;/build&gt;</span>
+  <span class="nt">&lt;distributionManagement&gt;</span>
+    <span class="nt">&lt;repository&gt;</span>
+      <span class="nt">&lt;id&gt;</span>server001<span class="nt">&lt;/id&gt;</span>
+      <span class="nt">&lt;url&gt;</span>scp://localhost/home/maven/target/repo-local<span class="nt">&lt;/url&gt;</span>
+    <span class="nt">&lt;/repository&gt;</span>
+    <span class="nt">&lt;site&gt;</span>
+      <span class="nt">&lt;id&gt;</span>server001<span class="nt">&lt;/id&gt;</span>
+      <span class="nt">&lt;url&gt;</span>scp://localhost/home/maven/site/${project.artifactId}<span class="nt">&lt;/url&gt;</span>
+    <span class="nt">&lt;/site&gt;</span>
+  <span class="nt">&lt;/distributionManagement&gt;</span>
+<span class="nt">&lt;/project&gt;</span>
+</pre></div>
+</div>
+<span class="target" id="module-web.xml"></span><div class="highlight-xml"><div class="highlight"><pre><span class="cp">&lt;!DOCTYPE web-app PUBLIC</span>
+<span class="cp"> &quot;-//Sun Microsystems, Inc.//DTD Web Application 2.3//EN&quot;</span>
+<span class="cp"> &quot;http://java.sun.com/dtd/web-app_2_3.dtd&quot; &gt;</span>
+<span class="c">&lt;!-- /var/lib/git/tomcat/src/main/webapp/WEB-INF/web.xml --&gt;</span>
+<span class="nt">&lt;web-app&gt;</span>
+  <span class="nt">&lt;display-name&gt;</span>Archetype Created Web Application<span class="nt">&lt;/display-name&gt;</span>
+  <span class="nt">&lt;servlet&gt;</span>
+    <span class="nt">&lt;servlet-name&gt;</span>Json<span class="nt">&lt;/servlet-name&gt;</span>
+    <span class="nt">&lt;servlet-class&gt;</span>d563.Json<span class="nt">&lt;/servlet-class&gt;</span>
+  <span class="nt">&lt;/servlet&gt;</span>
+  <span class="nt">&lt;servlet-mapping&gt;</span>
+    <span class="nt">&lt;servlet-name&gt;</span>Json<span class="nt">&lt;/servlet-name&gt;</span>
+    <span class="nt">&lt;url-pattern&gt;</span>/json<span class="nt">&lt;/url-pattern&gt;</span>
+  <span class="nt">&lt;/servlet-mapping&gt;</span>
+<span class="nt">&lt;/web-app&gt;</span>
+</pre></div>
+</div>
+<span class="target" id="module-Json.groovy"></span><div class="highlight-groovy"><div class="highlight"><pre><span class="kn">package</span> <span class="n">d563</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">com.gmongo.GMongo</span>
+<span class="kn">import</span> <span class="nn">groovy.json.JsonBuilder</span>
+<span class="kn">import</span> <span class="nn">groovy.json.JsonSlurper</span>
+<span class="kn">import</span> <span class="nn">javax.servlet.ServletException</span>
+<span class="kn">import</span> <span class="nn">javax.servlet.http.HttpServlet</span>
+<span class="kn">import</span> <span class="nn">javax.servlet.http.HttpServletRequest</span>
+<span class="kn">import</span> <span class="nn">javax.servlet.http.HttpServletResponse</span>
+
+<span class="c1">// /var/lib/git/tomcat/src/main/groovy/d563/Json.groovy</span>
+<span class="kd">class</span> <span class="nc">Json</span> <span class="kd">extends</span> <span class="n">HttpServlet</span> <span class="o">{</span>
+  <span class="kt">void</span> <span class="nf">doPost</span><span class="o">(</span><span class="n">HttpServletRequest</span> <span class="n">req</span><span class="o">,</span> <span class="n">HttpServletResponse</span> <span class="n">res</span><span class="o">)</span>
+    <span class="kd">throws</span> <span class="n">IOException</span><span class="o">,</span> <span class="n">ServletException</span> <span class="o">{</span>
+
+    <span class="kt">def</span> <span class="n">inp</span> <span class="o">=</span> <span class="k">new</span> <span class="n">JsonSlurper</span><span class="o">().</span><span class="na">parseText</span><span class="o">(</span><span class="n">req</span><span class="o">.</span><span class="na">reader</span><span class="o">.</span><span class="na">text</span><span class="o">)</span>
+    <span class="n">inp</span><span class="o">.</span><span class="na">ret_key</span> <span class="o">=</span> <span class="s1">&#39;ret_val&#39;</span>
+    <span class="k">new</span> <span class="nf">GMongo</span><span class="o">().</span><span class="na">getDB</span><span class="o">(</span><span class="s1">&#39;testdb&#39;</span><span class="o">).</span><span class="na">testcol</span><span class="o">.</span><span class="na">save</span><span class="o">(</span><span class="n">inp</span><span class="o">)</span>
+
+    <span class="n">res</span><span class="o">.</span><span class="na">contentType</span> <span class="o">=</span> <span class="s1">&#39;text/html; charset=UTF-8&#39;</span>
+    <span class="kt">def</span> <span class="n">out</span> <span class="o">=</span> <span class="n">res</span><span class="o">.</span><span class="na">writer</span>
+    <span class="n">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="k">new</span> <span class="n">JsonBuilder</span><span class="o">(</span><span class="k">new</span> <span class="n">GMongo</span><span class="o">().</span><span class="na">getDB</span><span class="o">(</span><span class="s1">&#39;testdb&#39;</span><span class="o">).</span><span class="na">testcol</span><span class="o">.</span><span class="na">find</span><span class="o">()))</span>
+    <span class="n">out</span><span class="o">.</span><span class="na">close</span><span class="o">()</span>
+  <span class="o">}</span>
+<span class="o">}</span>
+</pre></div>
+</div>
+<div class="highlight-python"><div class="highlight"><pre>echo &#39;&lt;Context path=&quot;/SLMan&quot; docBase=&quot;/var/lib/git/tomcat/target/tomcat&quot; reloadable=&quot;true&quot;/&gt;&#39; \
+&gt; /usr/share/tomcat6/conf/Catalina/localhost/SLMan.xml
+</pre></div>
+</div>
+<div class="highlight-python"><div class="highlight"><pre>mvn clean package
+</pre></div>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="fabric.html"
+                        title="previous chapter">5.3. fabric</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="ant.html"
+                        title="next chapter">5.5. ant</a></p>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="ant.html" title="5.5. ant"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="fabric.html" title="5.3. fabric"
+             >previous</a> |</li>
+        <li><a href="../index.html">SLMan 0.0.1 documentation</a> &raquo;</li>
+          <li><a href="index.html" >5. app</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2014, Daisuke Maeda.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.2.3.
+    </div>
+  </body>
+</html>

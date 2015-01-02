@@ -1,0 +1,77 @@
+fabric
+======
+::
+
+    pip install virtualenv virtualenvwrapper
+
+.. index:: /etc/profile.d/virtualenv.sh
+
+::
+
+    mkdir /usr/local/lib/virtualenv
+    echo 'WORKON_HOME=/usr/local/lib/virtualenv
+    . /usr/bin/virtualenvwrapper.sh' > /etc/profile.d/virtualenv.sh
+
+::
+
+    . /etc/profile.d/virtualenv.sh
+
+::
+
+    mkvirtualenv fabric
+    workon fabric
+    deactivate
+    rmvirtualenv fabric
+
+::
+
+    pip install fabric nose mock
+
+::
+
+    mkdir /var/lib/git/fabric
+    cd /var/lib/git/fabric
+    git init .
+
+.. module:: fabfile.py
+
+::
+
+    # -*- coding: utf-8 -*-
+    # fabfile.py
+    from fabric.api import env, local, lcd, put, run, sudo, cd
+    from fabric.contrib.files import exists
+
+    def ls_bin():
+      if exists('/usr/bin'):
+        with cd('/usr/bin'):
+          sudo('ls -al')
+
+::
+
+    fab ls_bin
+
+.. module:: fabfile-test.py
+
+::
+
+    # -*- coding: utf-8 -*-
+    # fabfile-test.py
+    from mock import patch, call
+    import fabfile as f
+
+    class TestFabfile():
+      @patch('fabric.api.sudo')
+      @patch('fabric.contrib.files.exists')
+      def test_ls_bin(self, exists, sudo):
+        exists.return_value = True
+        # exists.side_effect = [True]
+        reload(f)
+        f.ls_bin()
+        assert exists.mock_calls == [call('/usr/bin')]
+        assert sudo.mock_calls == [call('ls -al')]
+
+::
+
+    nosetests -v
+

@@ -1,0 +1,29 @@
+subversion
+==========
+::
+
+    yum -y install subversion mod_dav_svn
+
+.. index:: /etc/httpd/conf.d/svn.conf
+
+::
+
+    mkdir /var/www/svn
+    chown -R apache.apache /var/www/svn
+    cat << '[EOF]' > /etc/httpd/conf.d/svn.conf
+    <Location /svn>
+      DAV svn
+      SVNParentPath /var/www/svn
+    </Location>
+    [EOF]
+
+::
+
+    /etc/init.d/httpd restart
+
+::
+
+    svnadmin create /var/www/svn/SLMan
+    svn mkdir file:///var/www/svn/SLMan/trunk -m "trunk"
+    svn mkdir file:///var/www/svn/SLMan/branches -m "branches"
+    svn mkdir file:///var/www/svn/SLMan/tags -m "tags"

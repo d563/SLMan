@@ -1,0 +1,179 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>4.2. oracle &mdash; SLMan 0.0.1 documentation</title>
+    
+    <link rel="stylesheet" href="../_static/pyramid.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/SLMan.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '0.0.1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <link rel="top" title="SLMan 0.0.1 documentation" href="../index.html" />
+    <link rel="up" title="4. data" href="index.html" />
+    <link rel="next" title="4.3. mysql" href="mysql.html" />
+    <link rel="prev" title="4.1. mongodb" href="mongodb.html" />
+<link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Neuton&amp;subset=latin" type="text/css" media="screen" charset="utf-8" />
+<link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Nobile:regular,italic,bold,bolditalic&amp;subset=latin" type="text/css" media="screen" charset="utf-8" />
+<!--[if lte IE 6]>
+<link rel="stylesheet" href="../_static/ie6.css" type="text/css" media="screen" charset="utf-8" />
+<![endif]-->
+
+  </head>
+  <body>
+
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="mysql.html" title="4.3. mysql"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="mongodb.html" title="4.1. mongodb"
+             accesskey="P">previous</a> |</li>
+        <li><a href="../index.html">SLMan 0.0.1 documentation</a> &raquo;</li>
+          <li><a href="index.html" accesskey="U">4. data</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="oracle">
+<h1>4.2. oracle<a class="headerlink" href="#oracle" title="Permalink to this headline">¶</a></h1>
+<div class="highlight-python"><div class="highlight"><pre>yum -y install libaio bc
+</pre></div>
+</div>
+<div class="highlight-python"><div class="highlight"><pre>cd /usr/local/lib
+wget http://ftp.cs.stanford.edu/pub/fedora/6/i386/oracle-xe-univ-10.2.0.1-1.0.i386.rpm
+
+rpm -ivh oracle-xe-univ-10.2.0.1-1.0.i386.rpm
+</pre></div>
+</div>
+<div class="highlight-python"><div class="highlight"><pre># Oracle Database 10g Express Edition requires 996 MB of swap space.
+dd if=/dev/zero of=/tmp/swapfile bs=1024 count=256000
+chmod 660 /tmp/swapfile
+mkswap /tmp/swapfile
+swapon /tmp/swapfile
+</pre></div>
+</div>
+<div class="highlight-python" id="index-0"><div class="highlight"><pre>/etc/init.d/oracle-xe configure
+
+echo &#39;. /usr/lib/oracle/xe/app/oracle/product/10.2.0/server/bin/oracle_env.sh&#39; \
+&gt; /etc/profile.d/oracle.sh
+</pre></div>
+</div>
+<div class="highlight-python"><div class="highlight"><pre>ALTER PROFILE DEFAULT limit
+  FAILED_LOGIN_ATTEMPTS unlimited
+  PASSWORD_LOCK_TIME unlimited
+  PASSWORD_LIFE_TIME unlimited
+  PASSWORD_GRACE_TIME unlimited;
+
+CREATE USER USER1 IDENTIFIED BY USER1 DEFAULT TABLESPACE USERS;
+
+GRANT CONNECT TO USER1;
+GRANT RESOURCE TO USER1;
+GRANT DBA TO USER1;
+
+GRANT SELECT,INSERT,UPDATE,DELETE ON USER2.TABLE1 TO USER1;
+
+CREATE OR REPLACE SYNONYM USER1.TABLE1 FOR USER2.TABLE1;
+
+CREATE TABLE TABLE1(
+  ID NUMBER(9.0),
+  NAME VARCHAR2(6),
+  IMAGE BLOB,
+  DATE_CREATED TIMESTAMP(6),
+  LAST_UPDATED TIMESTAMP(6),
+  CONSTRAINT PK_TABLE1 PRIMARY KEY(ID, NAME)
+  USING INDEX TABLESPACE USERS
+)
+COMMENT ON TABLE TABLE1 IS &#39;table1 comment&#39;;
+
+DROP USER USER1 CASCADE;
+</pre></div>
+</div>
+<div class="highlight-python"><div class="highlight"><pre>expdp USER1/USER1 DUMPFILE=SLMan.dmp LOGFILE=SLMan.log SCHEMAS=USERS
+
+impdp SYS/PASS DUMPFILE=SLMan.dmp LOGFILE=SLMan.log REMAP_TABLESPACE=USERS:USERS
+</pre></div>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="mongodb.html"
+                        title="previous chapter">4.1. mongodb</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="mysql.html"
+                        title="next chapter">4.3. mysql</a></p>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="mysql.html" title="4.3. mysql"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="mongodb.html" title="4.1. mongodb"
+             >previous</a> |</li>
+        <li><a href="../index.html">SLMan 0.0.1 documentation</a> &raquo;</li>
+          <li><a href="index.html" >4. data</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2014, Daisuke Maeda.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.2.3.
+    </div>
+  </body>
+</html>

@@ -1,0 +1,66 @@
+sphinx
+======
+::
+
+    pip install sphinx
+
+::
+
+    mkdir /var/lib/git/sphinx
+    cd /var/lib/git/sphinx
+    sphinx-quickstart
+
+::
+
+    Project name: SLMan
+    Author name(s): Daisuke Maeda
+    Project version: 0.0.1
+
+::
+
+    sed -i.org -e "s/html_theme =.*/html_theme = 'pyramid'/" conf.py
+    echo "def setup(app):
+      app.add_stylesheet('SLMan.css')" >> conf.py
+
+.. index:: /etc/httpd/conf.d/sphinx.conf
+
+::
+
+    echo 'Alias /sphinx /var/lib/git/sphinx/_build/html' > /etc/httpd/conf.d/sphinx.conf
+    /etc/init.d/httpd restart
+
+::
+
+    cat << '[EOF]' > _static/SLMan.css
+    body {background-color: #fff;}
+    div.body h1 {background-color: #eee; border: 2px solid #ddd; margin-top: 10pt; padding-left: 10px;}
+    div.body h2 {margin-left: 10pt;}
+    div.body p, div.body pre {margin-left: 10pt; margin-right: 10pt;}
+    div.footer {color: #000; border-top: 2px solid #ddd;}
+    div.footer a {color: #1b61b6;}
+    [EOF]
+
+::
+
+    cat << '[EOF]' > pull.sh
+    cp -rf /var/www/html/_sources/* .
+    for f in `find -name '*.txt'`; do
+      mv -f $f ${f%.txt}.rst
+    done
+    [EOF]
+
+    cat << '[EOF]' > push.sh
+    rm -rf /var/www/html/*
+    cp -rf _build/html/* /var/www/html
+    d=`pwd`
+    cd /var/www/html
+    git commit -a -mupdate
+    git push
+    cd $d
+    [EOF]
+
+    chmod u+x pull.sh push.sh
+
+::
+
+    make clean html

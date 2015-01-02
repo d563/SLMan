@@ -1,0 +1,34 @@
+mongodb
+=======
+.. index:: /etc/yum.repos.d/mongodb.repo
+
+::
+
+    cat << '[EOF]' > /etc/yum.repos.d/mongodb.repo
+    [mongodb]
+    name=MongoDB Repository
+    baseurl=http://downloads-distro.mongodb.org/repo/redhat/os/i686/
+    gpgcheck=0
+    enabled=1
+    [EOF]
+
+::
+
+    yum -y install mongodb-org mongodb-org-server
+
+.. index:: /etc/mongod.conf
+
+::
+
+    sed -i.org \
+    -e 's/#port=27017/port=27017/' \
+    -e 's/bind_ip=127.0.0.1/#bind_ip=127.0.0.1/' \
+    -e '$arest=true' \
+    /etc/mongod.conf
+
+::
+
+    /etc/init.d/mongod start
+
+    curl -d '{"key": "val"}' http://localhost:28017/testdb/testcol/
+    curl http://localhost:28017/testdb/testcol/

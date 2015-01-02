@@ -1,0 +1,181 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>5.3. fabric &mdash; SLMan 0.0.1 documentation</title>
+    
+    <link rel="stylesheet" href="../_static/pyramid.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/SLMan.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '0.0.1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <link rel="top" title="SLMan 0.0.1 documentation" href="../index.html" />
+    <link rel="up" title="5. app" href="index.html" />
+    <link rel="next" title="5.4. tomcat" href="tomcat.html" />
+    <link rel="prev" title="5.2. sphinx" href="sphinx.html" />
+<link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Neuton&amp;subset=latin" type="text/css" media="screen" charset="utf-8" />
+<link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Nobile:regular,italic,bold,bolditalic&amp;subset=latin" type="text/css" media="screen" charset="utf-8" />
+<!--[if lte IE 6]>
+<link rel="stylesheet" href="../_static/ie6.css" type="text/css" media="screen" charset="utf-8" />
+<![endif]-->
+
+  </head>
+  <body>
+
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="tomcat.html" title="5.4. tomcat"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="sphinx.html" title="5.2. sphinx"
+             accesskey="P">previous</a> |</li>
+        <li><a href="../index.html">SLMan 0.0.1 documentation</a> &raquo;</li>
+          <li><a href="index.html" accesskey="U">5. app</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="fabric">
+<h1>5.3. fabric<a class="headerlink" href="#fabric" title="Permalink to this headline">¶</a></h1>
+<div class="highlight-python"><div class="highlight"><pre>pip install virtualenv virtualenvwrapper
+</pre></div>
+</div>
+<div class="highlight-python" id="index-0"><div class="highlight"><pre>mkdir /usr/local/lib/virtualenv
+echo &#39;WORKON_HOME=/usr/local/lib/virtualenv
+. /usr/bin/virtualenvwrapper.sh&#39; &gt; /etc/profile.d/virtualenv.sh
+</pre></div>
+</div>
+<div class="highlight-python"><div class="highlight"><pre>. /etc/profile.d/virtualenv.sh
+</pre></div>
+</div>
+<div class="highlight-python"><div class="highlight"><pre>mkvirtualenv fabric
+workon fabric
+deactivate
+rmvirtualenv fabric
+</pre></div>
+</div>
+<div class="highlight-python"><div class="highlight"><pre>pip install fabric nose mock
+</pre></div>
+</div>
+<div class="highlight-python"><div class="highlight"><pre>mkdir /var/lib/git/fabric
+cd /var/lib/git/fabric
+git init .
+</pre></div>
+</div>
+<span class="target" id="module-fabfile.py"></span><div class="highlight-python"><div class="highlight"><pre><span class="c"># -*- coding: utf-8 -*-</span>
+<span class="c"># fabfile.py</span>
+<span class="kn">from</span> <span class="nn">fabric.api</span> <span class="kn">import</span> <span class="n">env</span><span class="p">,</span> <span class="n">local</span><span class="p">,</span> <span class="n">lcd</span><span class="p">,</span> <span class="n">put</span><span class="p">,</span> <span class="n">run</span><span class="p">,</span> <span class="n">sudo</span><span class="p">,</span> <span class="n">cd</span>
+<span class="kn">from</span> <span class="nn">fabric.contrib.files</span> <span class="kn">import</span> <span class="n">exists</span>
+
+<span class="k">def</span> <span class="nf">ls_bin</span><span class="p">():</span>
+  <span class="k">if</span> <span class="n">exists</span><span class="p">(</span><span class="s">&#39;/usr/bin&#39;</span><span class="p">):</span>
+    <span class="k">with</span> <span class="n">cd</span><span class="p">(</span><span class="s">&#39;/usr/bin&#39;</span><span class="p">):</span>
+      <span class="n">sudo</span><span class="p">(</span><span class="s">&#39;ls -al&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="highlight-python"><div class="highlight"><pre>fab ls_bin
+</pre></div>
+</div>
+<span class="target" id="module-fabfile-test.py"></span><div class="highlight-python"><div class="highlight"><pre><span class="c"># -*- coding: utf-8 -*-</span>
+<span class="c"># fabfile-test.py</span>
+<span class="kn">from</span> <span class="nn">mock</span> <span class="kn">import</span> <span class="n">patch</span><span class="p">,</span> <span class="n">call</span>
+<span class="kn">import</span> <span class="nn">fabfile</span> <span class="kn">as</span> <span class="nn">f</span>
+
+<span class="k">class</span> <span class="nc">TestFabfile</span><span class="p">():</span>
+  <span class="nd">@patch</span><span class="p">(</span><span class="s">&#39;fabric.api.sudo&#39;</span><span class="p">)</span>
+  <span class="nd">@patch</span><span class="p">(</span><span class="s">&#39;fabric.contrib.files.exists&#39;</span><span class="p">)</span>
+  <span class="k">def</span> <span class="nf">test_ls_bin</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">exists</span><span class="p">,</span> <span class="n">sudo</span><span class="p">):</span>
+    <span class="n">exists</span><span class="o">.</span><span class="n">return_value</span> <span class="o">=</span> <span class="bp">True</span>
+    <span class="c"># exists.side_effect = [True]</span>
+    <span class="nb">reload</span><span class="p">(</span><span class="n">f</span><span class="p">)</span>
+    <span class="n">f</span><span class="o">.</span><span class="n">ls_bin</span><span class="p">()</span>
+    <span class="k">assert</span> <span class="n">exists</span><span class="o">.</span><span class="n">mock_calls</span> <span class="o">==</span> <span class="p">[</span><span class="n">call</span><span class="p">(</span><span class="s">&#39;/usr/bin&#39;</span><span class="p">)]</span>
+    <span class="k">assert</span> <span class="n">sudo</span><span class="o">.</span><span class="n">mock_calls</span> <span class="o">==</span> <span class="p">[</span><span class="n">call</span><span class="p">(</span><span class="s">&#39;ls -al&#39;</span><span class="p">)]</span>
+</pre></div>
+</div>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">nosetests</span> <span class="o">-</span><span class="n">v</span>
+</pre></div>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="sphinx.html"
+                        title="previous chapter">5.2. sphinx</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="tomcat.html"
+                        title="next chapter">5.4. tomcat</a></p>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="tomcat.html" title="5.4. tomcat"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="sphinx.html" title="5.2. sphinx"
+             >previous</a> |</li>
+        <li><a href="../index.html">SLMan 0.0.1 documentation</a> &raquo;</li>
+          <li><a href="index.html" >5. app</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2014, Daisuke Maeda.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.2.3.
+    </div>
+  </body>
+</html>

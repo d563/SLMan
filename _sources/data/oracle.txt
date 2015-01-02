@@ -1,0 +1,66 @@
+oracle
+======
+::
+
+    yum -y install libaio bc
+
+::
+
+    cd /usr/local/lib
+    wget http://ftp.cs.stanford.edu/pub/fedora/6/i386/oracle-xe-univ-10.2.0.1-1.0.i386.rpm
+
+    rpm -ivh oracle-xe-univ-10.2.0.1-1.0.i386.rpm
+
+::
+
+    # Oracle Database 10g Express Edition requires 996 MB of swap space.
+    dd if=/dev/zero of=/tmp/swapfile bs=1024 count=256000
+    chmod 660 /tmp/swapfile
+    mkswap /tmp/swapfile
+    swapon /tmp/swapfile
+
+.. index:: /etc/profile.d/oracle.sh
+
+::
+
+    /etc/init.d/oracle-xe configure
+
+    echo '. /usr/lib/oracle/xe/app/oracle/product/10.2.0/server/bin/oracle_env.sh' \
+    > /etc/profile.d/oracle.sh
+
+::
+
+    ALTER PROFILE DEFAULT limit
+      FAILED_LOGIN_ATTEMPTS unlimited
+      PASSWORD_LOCK_TIME unlimited
+      PASSWORD_LIFE_TIME unlimited
+      PASSWORD_GRACE_TIME unlimited;
+
+    CREATE USER USER1 IDENTIFIED BY USER1 DEFAULT TABLESPACE USERS;
+
+    GRANT CONNECT TO USER1;
+    GRANT RESOURCE TO USER1;
+    GRANT DBA TO USER1;
+
+    GRANT SELECT,INSERT,UPDATE,DELETE ON USER2.TABLE1 TO USER1;
+
+    CREATE OR REPLACE SYNONYM USER1.TABLE1 FOR USER2.TABLE1;
+
+    CREATE TABLE TABLE1(
+      ID NUMBER(9.0),
+      NAME VARCHAR2(6),
+      IMAGE BLOB, 
+      DATE_CREATED TIMESTAMP(6),
+      LAST_UPDATED TIMESTAMP(6),
+      CONSTRAINT PK_TABLE1 PRIMARY KEY(ID, NAME)
+      USING INDEX TABLESPACE USERS
+    )
+    COMMENT ON TABLE TABLE1 IS 'table1 comment';
+
+    DROP USER USER1 CASCADE;
+
+::
+
+    expdp USER1/USER1 DUMPFILE=SLMan.dmp LOGFILE=SLMan.log SCHEMAS=USERS
+
+    impdp SYS/PASS DUMPFILE=SLMan.dmp LOGFILE=SLMan.log REMAP_TABLESPACE=USERS:USERS
