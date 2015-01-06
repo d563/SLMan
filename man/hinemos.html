@@ -64,9 +64,8 @@
             
   <div class="section" id="hinemos">
 <h1>3.2. hinemos<a class="headerlink" href="#hinemos" title="Permalink to this headline">¶</a></h1>
-<div class="highlight-python"><div class="highlight"><pre>yum -y install net-snmp net-snmp-libs
-</pre></div>
-</div>
+<div class="section" id="manager">
+<h2>3.2.1. manager<a class="headerlink" href="#manager" title="Permalink to this headline">¶</a></h2>
 <div class="highlight-python"><div class="highlight"><pre>cd /usr/local/lib
 wget http://jaist.dl.sourceforge.jp/hinemos/61878/hinemos_manager-4.1.2_rhel6_32.tar.gz
 tar xzvf hinemos_manager-4.1.2_rhel6_32.tar.gz
@@ -79,12 +78,29 @@ cp -p /opt/hinemos/sbin/service/hinemos_manager /etc/init.d
 chkconfig hinemos_manager on
 </pre></div>
 </div>
-<div class="highlight-python"><div class="highlight"><pre>/etc/init.d/iptables stop
+</div>
+<div class="section" id="client">
+<h2>3.2.2. client<a class="headerlink" href="#client" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-python"><div class="highlight"><pre>http://jaist.dl.sourceforge.jp/hinemos/61878/HinemosClientInstaller-4.1.2_win32.msi
+http://jaist.dl.sourceforge.jp/hinemos/61878/HinemosClientInstaller-4.1.2_win64.msi
 </pre></div>
 </div>
-<div class="highlight-python"><div class="highlight"><pre>su - hinemos
-/opt/hinemos/postgresql/bin/psql -p 24001 -d hinemos
+</div>
+<div class="section" id="agent">
+<h2>3.2.3. agent<a class="headerlink" href="#agent" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-python"><div class="highlight"><pre>yum -y install net-snmp net-snmp-libs expect krb5-workstation openssh-clients
 </pre></div>
+</div>
+<div class="highlight-python"><div class="highlight"><pre>cd /usr/local/lib
+wget http://jaist.dl.sourceforge.jp/hinemos/61878/hinemos_agent-4.1.2_rhel5-rhel6.tar.gz
+tar xzvf hinemos_agent-4.1.2_rhel5-rhel6.tar.gz
+cd Hinemos_Agent-4.1.2_rhel5-rhel6
+./agent_installer_JP.sh
+</pre></div>
+</div>
+<div class="highlight-python"><div class="highlight"><pre>/opt/hinemos_agent/bin/agent_start.sh
+</pre></div>
+</div>
 </div>
 </div>
 
@@ -94,6 +110,16 @@ chkconfig hinemos_manager on
       </div>
       <div class="sphinxsidebar">
         <div class="sphinxsidebarwrapper">
+  <h3><a href="../index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">3.2. hinemos</a><ul>
+<li><a class="reference internal" href="#manager">3.2.1. manager</a></li>
+<li><a class="reference internal" href="#client">3.2.2. client</a></li>
+<li><a class="reference internal" href="#agent">3.2.3. agent</a></li>
+</ul>
+</li>
+</ul>
+
   <h4>Previous topic</h4>
   <p class="topless"><a href="jenkins.html"
                         title="previous chapter">3.1. jenkins</a></p>

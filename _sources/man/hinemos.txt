@@ -1,9 +1,8 @@
 hinemos
 =======
-::
 
-    yum -y install net-snmp net-snmp-libs
-
+manager
+-------
 ::
 
     cd /usr/local/lib
@@ -18,11 +17,27 @@ hinemos
     cp -p /opt/hinemos/sbin/service/hinemos_manager /etc/init.d
     chkconfig hinemos_manager on
 
+client
+------
 ::
 
-    /etc/init.d/iptables stop
+    http://jaist.dl.sourceforge.jp/hinemos/61878/HinemosClientInstaller-4.1.2_win32.msi
+    http://jaist.dl.sourceforge.jp/hinemos/61878/HinemosClientInstaller-4.1.2_win64.msi
+
+agent
+-----
+::
+
+    yum -y install net-snmp net-snmp-libs expect krb5-workstation openssh-clients
 
 ::
 
-    su - hinemos
-    /opt/hinemos/postgresql/bin/psql -p 24001 -d hinemos
+    cd /usr/local/lib
+    wget http://jaist.dl.sourceforge.jp/hinemos/61878/hinemos_agent-4.1.2_rhel5-rhel6.tar.gz
+    tar xzvf hinemos_agent-4.1.2_rhel5-rhel6.tar.gz
+    cd Hinemos_Agent-4.1.2_rhel5-rhel6
+    ./agent_installer_JP.sh
+
+::
+
+    /opt/hinemos_agent/bin/agent_start.sh
