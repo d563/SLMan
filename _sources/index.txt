@@ -9,3 +9,4 @@ SLMan
     man/index
     data/index
     app/index
+    tip/index
