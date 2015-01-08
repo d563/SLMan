@@ -60,19 +60,26 @@
             
   <div class="section" id="linux">
 <h1>6.1. linux<a class="headerlink" href="#linux" title="Permalink to this headline">¶</a></h1>
+<div class="highlight-python"><div class="highlight"><pre>top          (1 M T)
+</pre></div>
+</div>
+<div class="highlight-python"><div class="highlight"><pre>yum -y install sysstat
+
+sar -q       (load average)
+sar          (cpur/io)
+sar -W       (swap)
+
+sar 1 -P ALL
+</pre></div>
+</div>
+<div class="highlight-python"><div class="highlight"><pre>vmstat 1
+watch -n1 free -m
+</pre></div>
+</div>
 <div class="highlight-python"><div class="highlight"><pre>netstat -antp
 netstat -anup
 
-ps alxf
-
-top
-  M
-  T
-</pre></div>
-</div>
-<div class="highlight-python"><div class="highlight"><pre>watch -n1 free -m
-
-vmstat 1
+ps alxfww
 </pre></div>
 </div>
 <div class="highlight-python"><div class="highlight"><pre>rsync -rtv a/ b/
