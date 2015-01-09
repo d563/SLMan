@@ -83,10 +83,38 @@ default-character-set=utf8&#39; &gt;&gt; /etc/my.cnf
 mysql -u root -p
 </pre></div>
 </div>
-<div class="highlight-python"><div class="highlight"><pre>grant all privileges on SLMan.* to SLMan@localhost identified by &#39;SLManPass&#39;;
+<div class="highlight-python"><div class="highlight"><pre>grant all privileges on d563.* to SLMan@localhost identified by &#39;SLManPass&#39;;
 select user from mysql.user;
 revoke all privileges on *.* from SLMan@localhost;
 delete from mysql.user where user=&#39;SLMan&#39; and host=&#39;localhost&#39;;
+flush privileges;
+</pre></div>
+</div>
+<div class="highlight-python"><div class="highlight"><pre>create database d563;
+show create database d563;
+show databases;
+show variables like &#39;char%&#39;;
+use d563;
+
+create table table1(
+  id int unsigned not null,
+  name varchar(6),
+  image blob,
+  date_created timestamp default current_timestamp,
+  last_updated timestamp default current_timestamp on update current_timestamp,
+  constraint pk_table1 primary key(id, name)
+);
+
+show create table d563;
+show tables;
+</pre></div>
+</div>
+<div class="highlight-python"><div class="highlight"><pre>mysqldump -u SLMan d563 &gt; SLMan.dmp
+mysql -u SLMan d563 &lt; SLMan.dmp
+</pre></div>
+</div>
+<div class="highlight-python"><div class="highlight"><pre>drop table d563;
+drop database SLMan;
 </pre></div>
 </div>
 </div>

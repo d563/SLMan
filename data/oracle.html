@@ -86,39 +86,38 @@ echo &#39;. /usr/lib/oracle/xe/app/oracle/product/10.2.0/server/bin/oracle_env.s
 &gt; /etc/profile.d/oracle.sh
 </pre></div>
 </div>
-<div class="highlight-python"><div class="highlight"><pre>ALTER PROFILE DEFAULT limit
-  FAILED_LOGIN_ATTEMPTS unlimited
-  PASSWORD_LOCK_TIME unlimited
-  PASSWORD_LIFE_TIME unlimited
-  PASSWORD_GRACE_TIME unlimited;
+<div class="highlight-python"><div class="highlight"><pre>alter profile default limit
+  failed_login_attempts unlimited
+  password_lock_time unlimited
+  password_life_time unlimited
+  password_grace_time unlimited;
 
-CREATE USER USER1 IDENTIFIED BY USER1 DEFAULT TABLESPACE USERS;
+create user d563 identified by d563 default tablespace users;
 
-GRANT CONNECT TO USER1;
-GRANT RESOURCE TO USER1;
-GRANT DBA TO USER1;
+grant connect to d563;
+grant resource to d563;
+grant dba to d563;
 
-GRANT SELECT,INSERT,UPDATE,DELETE ON USER2.TABLE1 TO USER1;
+grant select,insert,update,delete on user1.table1 to d563;
 
-CREATE OR REPLACE SYNONYM USER1.TABLE1 FOR USER2.TABLE1;
+create or replace synonym d563.table1 for user1.table1;
 
-CREATE TABLE TABLE1(
-  ID NUMBER(9.0),
-  NAME VARCHAR2(6),
-  IMAGE BLOB,
-  DATE_CREATED TIMESTAMP(6),
-  LAST_UPDATED TIMESTAMP(6),
-  CONSTRAINT PK_TABLE1 PRIMARY KEY(ID, NAME)
-  USING INDEX TABLESPACE USERS
+create table table1(
+  id number(9.0),
+  name varchar2(6),
+  image blob,
+  date_created timestamp(6),
+  last_updated timestamp(6),
+  constraint pk_table1 primary key(id, name)
+  using index tablespace users
 )
-COMMENT ON TABLE TABLE1 IS &#39;table1 comment&#39;;
+comment on table table1 is &#39;comment&#39;;
 
-DROP USER USER1 CASCADE;
+drop user d563 cascade;
 </pre></div>
 </div>
-<div class="highlight-python"><div class="highlight"><pre>expdp USER1/USER1 DUMPFILE=SLMan.dmp LOGFILE=SLMan.log SCHEMAS=USERS
-
-impdp SYS/PASS DUMPFILE=SLMan.dmp LOGFILE=SLMan.log REMAP_TABLESPACE=USERS:USERS
+<div class="highlight-python"><div class="highlight"><pre>expdp d563/d563 dumpfile=SLMan.dmp logfile=SLMan.log schemas=users
+impdp sys/pass dumpfile=SLMan.dmp logfile=SLMan.log remap_tablespace=users:users
 </pre></div>
 </div>
 </div>
