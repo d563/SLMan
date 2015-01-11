@@ -1,0 +1,17 @@
+make
+====
+.. code-block:: c
+
+    #include <stdio.h>
+    int main(void) {
+      char str[8];
+      printf("%d\n", sizeof(str));
+      fgets(str, sizeof(str), stdin);
+      printf("%s\n", str);
+      return 0;
+    }
+
+::
+
+    d563: d563.c
+        gcc -o d563 d563.c

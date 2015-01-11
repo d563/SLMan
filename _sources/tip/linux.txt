@@ -1,0 +1,32 @@
+linux
+=====
+::
+
+    top          (1 M T)
+
+::
+
+    yum -y install sysstat
+
+    sar -q       (load average)
+    sar          (cpur/io)
+    sar -W       (swap)
+
+    sar 1 -P ALL
+
+::
+
+    vmstat 1
+    watch -n1 free -m
+
+::
+
+    netstat -antp
+    netstat -anup
+
+    ps alxfww
+
+::
+
+    rsync -rtv a/ b/
+    rsync -rlpcgoDvz --delete --exclude='.svn' -e ssh /var/a/ user@ip:/var/b/
