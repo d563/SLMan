@@ -1,0 +1,21 @@
+windows
+=======
+
+pytty
+-----
+::
+
+    Window
+      Colours
+        Default Foreground  87: 87: 87
+        Default Background 255:255:255
+
+winscp
+------
+::
+
+    Preferences - Preferences...
+      Editors - Edit...
+        (remove) Force text transfer mode for files edited in external editor
+      Transfer - Edit...
+        Binary

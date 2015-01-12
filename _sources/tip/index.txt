@@ -2,4 +2,5 @@ tip
 ===
 .. toctree::
     linux
+    windows
     html
