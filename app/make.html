@@ -66,11 +66,15 @@
 <span id="make"></span><h1>5.6. make<a class="headerlink" href="#module-header.h" title="Permalink to this headline">¶</a></h1>
 <div class="highlight-c"><div class="highlight"><pre><span class="cp">#ifndef HEADER_H</span>
 <span class="cp">#define HEADER_H</span>
+<span class="cp">#define DATA_SIZE 16</span>
 <span class="cm">/* header.h */</span>
 <span class="k">typedef</span> <span class="k">struct</span> <span class="n">SLMan</span> <span class="p">{</span>
   <span class="kt">void</span> <span class="p">(</span><span class="o">*</span><span class="n">exec</span><span class="p">)(</span><span class="k">struct</span> <span class="n">SLMan</span> <span class="o">*</span><span class="n">sl</span><span class="p">);</span>
-  <span class="kt">char</span> <span class="n">name</span><span class="p">[</span><span class="mi">8</span><span class="p">];</span>
+  <span class="kt">char</span> <span class="n">data</span><span class="p">[</span><span class="n">DATA_SIZE</span><span class="p">];</span>
 <span class="p">}</span> <span class="n">SLMan</span><span class="p">;</span>
+<span class="k">typedef</span> <span class="k">struct</span> <span class="n">DATA01</span> <span class="p">{</span>
+  <span class="kt">char</span> <span class="n">name</span><span class="p">[</span><span class="mi">8</span><span class="p">];</span>
+<span class="p">}</span> <span class="n">DATA01</span><span class="p">;</span>
 <span class="kt">void</span> <span class="nf">sub</span><span class="p">(</span><span class="n">SLMan</span> <span class="o">*</span><span class="n">sl</span><span class="p">);</span>
 <span class="cp">#endif</span>
 </pre></div>
@@ -79,18 +83,20 @@
 <span class="cp">#include &quot;header.h&quot;</span>
 <span class="cm">/* sub.c */</span>
 <span class="kt">void</span> <span class="nf">sub</span><span class="p">(</span><span class="n">SLMan</span> <span class="o">*</span><span class="n">sl</span><span class="p">)</span> <span class="p">{</span>
-  <span class="n">printf</span><span class="p">(</span><span class="s">&quot;%s</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span> <span class="n">sl</span><span class="o">-&gt;</span><span class="n">name</span><span class="p">);</span>
+  <span class="n">printf</span><span class="p">(</span><span class="s">&quot;%s</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span> <span class="p">((</span><span class="n">DATA01</span><span class="o">*</span><span class="p">)</span> <span class="n">sl</span><span class="o">-&gt;</span><span class="n">data</span><span class="p">)</span><span class="o">-&gt;</span><span class="n">name</span><span class="p">);</span>
 <span class="p">}</span>
 </pre></div>
 </div>
 <span class="target" id="module-main.c"></span><div class="highlight-c"><div class="highlight"><pre><span class="cp">#include &lt;stdio.h&gt;</span>
+<span class="cp">#include &lt;assert.h&gt;</span>
 <span class="cp">#include &quot;header.h&quot;</span>
 <span class="cm">/* main.c */</span>
 <span class="kt">int</span> <span class="nf">main</span><span class="p">(</span><span class="kt">int</span> <span class="n">argc</span><span class="p">,</span> <span class="kt">char</span> <span class="o">*</span><span class="n">argv</span><span class="p">[])</span> <span class="p">{</span>
   <span class="n">SLMan</span> <span class="n">sl</span><span class="p">;</span>
-  <span class="n">printf</span><span class="p">(</span><span class="s">&quot;%d</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span> <span class="k">sizeof</span><span class="p">(</span><span class="n">sl</span><span class="p">));</span>
+  <span class="n">assert</span><span class="p">(</span><span class="k">sizeof</span><span class="p">(</span><span class="n">DATA01</span><span class="p">)</span> <span class="o">&lt;=</span> <span class="n">DATA_SIZE</span><span class="p">);</span>
   <span class="n">sl</span><span class="p">.</span><span class="n">exec</span> <span class="o">=</span> <span class="n">sub</span><span class="p">;</span>
-  <span class="n">fgets</span><span class="p">(</span><span class="n">sl</span><span class="p">.</span><span class="n">name</span><span class="p">,</span> <span class="k">sizeof</span><span class="p">(</span><span class="n">sl</span><span class="p">.</span><span class="n">name</span><span class="p">),</span> <span class="n">stdin</span><span class="p">);</span>
+  <span class="n">DATA01</span> <span class="o">*</span><span class="n">d01</span> <span class="o">=</span> <span class="p">(</span><span class="n">DATA01</span><span class="o">*</span><span class="p">)</span> <span class="n">sl</span><span class="p">.</span><span class="n">data</span><span class="p">;</span>
+  <span class="n">fgets</span><span class="p">(</span><span class="n">d01</span><span class="o">-&gt;</span><span class="n">name</span><span class="p">,</span> <span class="k">sizeof</span><span class="p">(</span><span class="n">d01</span><span class="o">-&gt;</span><span class="n">name</span><span class="p">),</span> <span class="n">stdin</span><span class="p">);</span>
   <span class="n">sl</span><span class="p">.</span><span class="n">exec</span><span class="p">(</span><span class="o">&amp;</span><span class="n">sl</span><span class="p">);</span>
   <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
 <span class="p">}</span>

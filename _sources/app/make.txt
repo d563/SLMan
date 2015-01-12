@@ -5,11 +5,15 @@ make
 
     #ifndef HEADER_H
     #define HEADER_H
+    #define DATA_SIZE 16
     /* header.h */
     typedef struct SLMan {
       void (*exec)(struct SLMan *sl);
-      char name[8];
+      char data[DATA_SIZE];
     } SLMan;
+    typedef struct DATA01 {
+      char name[8];
+    } DATA01;
     void sub(SLMan *sl);
     #endif
 
@@ -20,20 +24,22 @@ make
     #include "header.h"
     /* sub.c */
     void sub(SLMan *sl) {
-      printf("%s\n", sl->name);
+      printf("%s\n", ((DATA01*) sl->data)->name);
     }
 
 .. module:: main.c
 .. code-block:: c
 
     #include <stdio.h>
+    #include <assert.h>
     #include "header.h"
     /* main.c */
     int main(int argc, char *argv[]) {
       SLMan sl;
-      printf("%d\n", sizeof(sl));
+      assert(sizeof(DATA01) <= DATA_SIZE);
       sl.exec = sub;
-      fgets(sl.name, sizeof(sl.name), stdin);
+      DATA01 *d01 = (DATA01*) sl.data;
+      fgets(d01->name, sizeof(d01->name), stdin);
       sl.exec(&sl);
       return 0;
     }
