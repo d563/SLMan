@@ -1,0 +1,52 @@
+html
+====
+.. code-block:: html
+
+    <!doctype html>
+    <html>
+    <head>
+      <title>SLMan</title>
+      <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+      <link rel="stylesheet" href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.11.1/themes/smoothness/jquery-ui.css" />
+      <style>
+      body {background-color: #eee;}
+      #head {
+        position: absolute;
+        top   : 0;
+        left  : 0;
+        right : 0;
+        height: 3.5em;
+        background-color: #ddd;
+      }
+      #main {
+        position: absolute;
+        top   : 3.5em;
+        left  : 0;
+        right : 0;
+        bottom: 0;
+        overflow   : auto;
+      }
+      #list {
+        position: absolute;
+        top   : 0;
+        left  : 5em;
+        right : 5em;
+        bottom: 0;
+      }
+      </style>
+      <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+      <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.11.1/jquery-ui.min.js"></script>
+      <script>
+      $(function() {
+        "use strict";
+      });
+      </script>
+    </head>
+    <body>
+      <div id="head">
+      </div>
+      <div id="main">
+        <ul id="list"></ul>
+      </div>
+    </body>
+    </html>
