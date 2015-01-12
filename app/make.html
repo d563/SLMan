@@ -62,20 +62,33 @@
         <div class="bodywrapper">
           <div class="body">
             
-  <div class="section" id="make">
-<h1>5.6. make<a class="headerlink" href="#make" title="Permalink to this headline">¶</a></h1>
-<div class="highlight-c"><div class="highlight"><pre><span class="cp">#include &lt;stdio.h&gt;</span>
+  <div class="section" id="module-header.c">
+<span id="make"></span><h1>5.6. make<a class="headerlink" href="#module-header.c" title="Permalink to this headline">¶</a></h1>
+<div class="highlight-c"><div class="highlight"><pre><span class="cp">#ifndef HEADER_H</span>
+<span class="cp">#define HEADER_H</span>
+<span class="cm">/* header.c */</span>
+<span class="k">typedef</span> <span class="k">struct</span> <span class="p">{</span>
+  <span class="kt">int</span> <span class="n">id</span><span class="p">;</span>
+  <span class="kt">char</span> <span class="n">name</span><span class="p">[</span><span class="mi">8</span><span class="p">];</span>
+<span class="p">}</span> <span class="n">SLMan</span><span class="p">;</span>
+<span class="cp">#endif</span>
+</pre></div>
+</div>
+<span class="target" id="module-main.c"></span><div class="highlight-c"><div class="highlight"><pre><span class="cp">#include &lt;stdio.h&gt;</span>
+<span class="cp">#include &quot;header.h&quot;</span>
+<span class="cm">/* main.c */</span>
 <span class="kt">int</span> <span class="nf">main</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span> <span class="p">{</span>
-  <span class="kt">char</span> <span class="n">str</span><span class="p">[</span><span class="mi">8</span><span class="p">];</span>
-  <span class="n">printf</span><span class="p">(</span><span class="s">&quot;%d</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span> <span class="k">sizeof</span><span class="p">(</span><span class="n">str</span><span class="p">));</span>
-  <span class="n">fgets</span><span class="p">(</span><span class="n">str</span><span class="p">,</span> <span class="k">sizeof</span><span class="p">(</span><span class="n">str</span><span class="p">),</span> <span class="n">stdin</span><span class="p">);</span>
-  <span class="n">printf</span><span class="p">(</span><span class="s">&quot;%s</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span> <span class="n">str</span><span class="p">);</span>
+  <span class="n">SLMan</span> <span class="n">sl</span><span class="p">;</span>
+  <span class="n">printf</span><span class="p">(</span><span class="s">&quot;%d</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span> <span class="k">sizeof</span><span class="p">(</span><span class="n">sl</span><span class="p">));</span>
+  <span class="n">fgets</span><span class="p">(</span><span class="n">sl</span><span class="p">.</span><span class="n">name</span><span class="p">,</span> <span class="k">sizeof</span><span class="p">(</span><span class="n">sl</span><span class="p">.</span><span class="n">name</span><span class="p">),</span> <span class="n">stdin</span><span class="p">);</span>
+  <span class="n">printf</span><span class="p">(</span><span class="s">&quot;%s</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span> <span class="n">sl</span><span class="p">.</span><span class="n">name</span><span class="p">);</span>
   <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
 <span class="p">}</span>
 </pre></div>
 </div>
-<div class="highlight-python"><div class="highlight"><pre>d563: d563.c
-    gcc -o d563 d563.c
+<span class="target" id="module-makefile"></span><div class="highlight-python"><div class="highlight"><pre># makefile
+main: header.h main.c
+    gcc -o main main.c
 </pre></div>
 </div>
 </div>

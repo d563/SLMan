@@ -1,17 +1,36 @@
 make
 ====
+.. module:: header.c
+.. code-block:: c
+
+    #ifndef HEADER_H
+    #define HEADER_H
+    /* header.c */
+    typedef struct {
+      int id;
+      char name[8];
+    } SLMan;
+    #endif
+
+.. module:: main.c
 .. code-block:: c
 
     #include <stdio.h>
+    #include "header.h"
+    /* main.c */
     int main(void) {
-      char str[8];
-      printf("%d\n", sizeof(str));
-      fgets(str, sizeof(str), stdin);
-      printf("%s\n", str);
+      SLMan sl;
+      printf("%d\n", sizeof(sl));
+      fgets(sl.name, sizeof(sl.name), stdin);
+      printf("%s\n", sl.name);
       return 0;
     }
 
+.. module:: makefile
+
 ::
 
-    d563: d563.c
-        gcc -o d563 d563.c
+    # makefile
+    main: header.h main.c
+        gcc -o main main.c
+
