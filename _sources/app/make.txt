@@ -1,16 +1,27 @@
 make
 ====
-.. module:: header.c
+.. module:: header.h
 .. code-block:: c
 
     #ifndef HEADER_H
     #define HEADER_H
-    /* header.c */
-    typedef struct {
-      int id;
+    /* header.h */
+    typedef struct SLMan {
+      void (*exec)(struct SLMan *sl);
       char name[8];
     } SLMan;
+    void sub(SLMan *sl);
     #endif
+
+.. module:: sub.c
+.. code-block:: c
+
+    #include <stdio.h>
+    #include "header.h"
+    /* sub.c */
+    void sub(SLMan *sl) {
+      printf("%s\n", sl->name);
+    }
 
 .. module:: main.c
 .. code-block:: c
@@ -18,11 +29,12 @@ make
     #include <stdio.h>
     #include "header.h"
     /* main.c */
-    int main(void) {
+    int main(int argc, char *argv[]) {
       SLMan sl;
       printf("%d\n", sizeof(sl));
+      sl.exec = sub;
       fgets(sl.name, sizeof(sl.name), stdin);
-      printf("%s\n", sl.name);
+      sl.exec(&sl);
       return 0;
     }
 
@@ -31,6 +43,11 @@ make
 ::
 
     # makefile
-    main: header.h main.c
-        gcc -o main main.c
-
+    DEST = main
+    OBJS = main.o sub.o
+    ${DEST}: header.h ${OBJS}
+        gcc -Wall -O2 -o ${DEST} ${OBJS}
+    .c.o:
+        gcc -c $<
+    clean:
+        rm -f ${DEST} ${OBJS}
