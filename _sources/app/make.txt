@@ -51,7 +51,7 @@ make
     # makefile
     DEST = main
     OBJS = main.o sub.o
-    ${DEST}: header.h ${OBJS}
+    ${DEST}: ${OBJS}
         gcc -Wall -O2 -o ${DEST} ${OBJS}
     .c.o:
         gcc -c $<
