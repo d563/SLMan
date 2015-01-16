@@ -64,6 +64,8 @@
             
   <div class="section" id="oracle">
 <h1>4.2. oracle<a class="headerlink" href="#oracle" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="server">
+<h2>4.2.1. server<a class="headerlink" href="#server" title="Permalink to this headline">¶</a></h2>
 <div class="highlight-python"><div class="highlight"><pre>yum -y install libaio bc
 </pre></div>
 </div>
@@ -121,6 +123,38 @@ impdp sys/pass dumpfile=SLMan.dmp logfile=SLMan.log remap_tablespace=users:users
 </pre></div>
 </div>
 </div>
+<div class="section" id="client">
+<h2>4.2.2. client<a class="headerlink" href="#client" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-python"><div class="highlight"><pre>rpm -ivh oracle-instantclient11.2-basic-11.2.0.4.0-1.i386.rpm
+rpm -ivh oracle-instantclient11.2-devel-11.2.0.4.0-1.i386.rpm
+</pre></div>
+</div>
+<div class="highlight-python"><div class="highlight"><pre>export ORACLE_HOME=/usr/lib/oracle/11.2/client
+export PATH=$PATH:$ORACLE_HOME/bin
+export LD_LIBRARY_PATH=/usr/lib/oracle/11.2/client/lib
+
+sudo ln -s /usr/include/oracle/11.2/client /usr/lib/oracle/11.2/client/include
+echo &#39;/usr/lib/oracle/11.2/client/lib/&#39; &gt; /etc/ld.so.conf.d/oracle.conf
+ldconfig
+</pre></div>
+</div>
+<div class="highlight-python"><div class="highlight"><pre>pip install cx_Oracle
+</pre></div>
+</div>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">python</span>
+<span class="kn">import</span> <span class="nn">cx_Oracle</span>
+<span class="n">conn</span> <span class="o">=</span> <span class="n">cx_Oracle</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="s">&#39;d563&#39;</span><span class="p">,</span> <span class="s">&#39;d563&#39;</span><span class="p">,</span> <span class="s">&#39;(DESCRIPTION=(ADDRESS_LIST=(ADDRESS=(PROTOCOL=TCP)(HOST=localhost)(PORT=1521)(CONNECT_DATA=(SERVICE_NAME=XE)))&#39;</span><span class="p">)</span>
+<span class="n">cur</span> <span class="o">=</span> <span class="n">conn</span><span class="o">.</span><span class="n">cursor</span><span class="p">()</span>
+<span class="n">cur</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="s">&#39;select * from dual&#39;</span><span class="p">)</span>
+<span class="n">rows</span> <span class="o">=</span> <span class="n">cur</span><span class="o">.</span><span class="n">fetchall</span><span class="p">()</span>
+<span class="k">for</span> <span class="n">row</span> <span class="ow">in</span> <span class="n">rows</span><span class="p">:</span>
+  <span class="k">print</span> <span class="n">row</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+<span class="n">cur</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+<span class="n">conn</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
 
 
           </div>
@@ -128,6 +162,15 @@ impdp sys/pass dumpfile=SLMan.dmp logfile=SLMan.log remap_tablespace=users:users
       </div>
       <div class="sphinxsidebar">
         <div class="sphinxsidebarwrapper">
+  <h3><a href="../index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">4.2. oracle</a><ul>
+<li><a class="reference internal" href="#server">4.2.1. server</a></li>
+<li><a class="reference internal" href="#client">4.2.2. client</a></li>
+</ul>
+</li>
+</ul>
+
   <h4>Previous topic</h4>
   <p class="topless"><a href="mongodb.html"
                         title="previous chapter">4.1. mongodb</a></p>

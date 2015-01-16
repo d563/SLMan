@@ -1,5 +1,8 @@
 oracle
 ======
+
+server
+------
 ::
 
     yum -y install libaio bc
@@ -63,3 +66,38 @@ oracle
 
     expdp d563/d563 dumpfile=SLMan.dmp logfile=SLMan.log schemas=users
     impdp sys/pass dumpfile=SLMan.dmp logfile=SLMan.log remap_tablespace=users:users
+
+client
+------
+::
+
+    rpm -ivh oracle-instantclient11.2-basic-11.2.0.4.0-1.i386.rpm
+    rpm -ivh oracle-instantclient11.2-devel-11.2.0.4.0-1.i386.rpm
+
+::
+
+    export ORACLE_HOME=/usr/lib/oracle/11.2/client
+    export PATH=$PATH:$ORACLE_HOME/bin
+    export LD_LIBRARY_PATH=/usr/lib/oracle/11.2/client/lib
+
+    sudo ln -s /usr/include/oracle/11.2/client /usr/lib/oracle/11.2/client/include
+    echo '/usr/lib/oracle/11.2/client/lib/' > /etc/ld.so.conf.d/oracle.conf
+    ldconfig
+
+::
+
+    pip install cx_Oracle
+
+::
+
+    python
+    import cx_Oracle
+    conn = cx_Oracle.connect('d563', 'd563', '(DESCRIPTION=(ADDRESS_LIST=(ADDRESS=(PROTOCOL=TCP)(HOST=localhost)(PORT=1521)(CONNECT_DATA=(SERVICE_NAME=XE)))')
+    cur = conn.cursor()
+    cur.execute('select * from dual')
+    rows = cur.fetchall()
+    for row in rows:
+      print row[0]
+    cur.close()
+    conn.close()
+
