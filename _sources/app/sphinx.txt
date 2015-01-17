@@ -54,7 +54,7 @@ sphinx
     cp -rf _build/html/* /var/www/html
     d=`pwd`
     cd /var/www/html
-    git add .
+    git add -A
     git commit -mupdate
     git push
     cd $d
