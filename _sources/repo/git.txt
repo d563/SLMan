@@ -48,3 +48,19 @@ github
 ::
 
     git clone git@github.com:d563/SLMan.git /var/www/html
+
+memo
+----
+::
+
+    git show-branch
+    git cat-file -p HEAD
+    git remote show origin
+    git diff HEAD~2
+
+::
+
+    git reset HEAD
+    git reset --hard HEAD
+    git commit --amend
+
