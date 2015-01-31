@@ -1,7 +1,7 @@
 tip
 ===
 .. toctree::
-    article
+    pdca
     linux
     windows
     html
