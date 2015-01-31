@@ -1,6 +1,7 @@
 tip
 ===
 .. toctree::
+    article
     linux
     windows
     html

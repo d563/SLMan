@@ -6,7 +6,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>6.2. linux &mdash; SLMan 0.0.1 documentation</title>
+    <title>6.1. article &mdash; SLMan 0.0.1 documentation</title>
     
     <link rel="stylesheet" href="../_static/pyramid.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
@@ -26,8 +26,8 @@
     <script type="text/javascript" src="../_static/doctools.js"></script>
     <link rel="top" title="SLMan 0.0.1 documentation" href="../index.html" />
     <link rel="up" title="6. tip" href="index.html" />
-    <link rel="next" title="6.3. windows" href="windows.html" />
-    <link rel="prev" title="6.1. article" href="article.html" />
+    <link rel="next" title="6.2. linux" href="linux.html" />
+    <link rel="prev" title="6. tip" href="index.html" />
 <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Neuton&amp;subset=latin" type="text/css" media="screen" charset="utf-8" />
 <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Nobile:regular,italic,bold,bolditalic&amp;subset=latin" type="text/css" media="screen" charset="utf-8" />
 <!--[if lte IE 6]>
@@ -47,10 +47,10 @@
           <a href="../py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
         <li class="right" >
-          <a href="windows.html" title="6.3. windows"
+          <a href="linux.html" title="6.2. linux"
              accesskey="N">next</a> |</li>
         <li class="right" >
-          <a href="article.html" title="6.1. article"
+          <a href="index.html" title="6. tip"
              accesskey="P">previous</a> |</li>
         <li><a href="../index.html">SLMan 0.0.1 documentation</a> &raquo;</li>
           <li><a href="index.html" accesskey="U">6. tip</a> &raquo;</li> 
@@ -62,33 +62,24 @@
         <div class="bodywrapper">
           <div class="body">
             
-  <div class="section" id="linux">
-<h1>6.2. linux<a class="headerlink" href="#linux" title="Permalink to this headline">¶</a></h1>
-<div class="highlight-python"><div class="highlight"><pre>top          (1 M T)
-</pre></div>
+  <div class="section" id="article">
+<h1>6.1. article<a class="headerlink" href="#article" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="id1">
+<h2>6.1.1. 提案<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h2>
+<ol class="arabic simple">
+<li>理想の状態を決める</li>
+<li>理想の状態と現状との違い（問題点）を決める</li>
+<li>理想の状態にするためのアクションを決める</li>
+<li>アクションに必要な準備と分担（スコープ）を決める</li>
+<li>準備にどれぐらいの時間をかけるかを決める</li>
+</ol>
 </div>
-<div class="highlight-python"><div class="highlight"><pre>yum -y install sysstat
-
-sar -q       (load average)
-sar          (cpur/io)
-sar -W       (swap)
-
-sar 1 -P ALL
-</pre></div>
-</div>
-<div class="highlight-python"><div class="highlight"><pre>vmstat 1
-watch -n1 free -m
-</pre></div>
-</div>
-<div class="highlight-python"><div class="highlight"><pre>netstat -antp
-netstat -anup
-
-ps alxfww
-</pre></div>
-</div>
-<div class="highlight-python"><div class="highlight"><pre>rsync -rtv a/ b/
-rsync -rlpcgoDvz --delete --exclude=&#39;.svn&#39; -e ssh /var/a/ user@ip:/var/b/
-</pre></div>
+<div class="section" id="id2">
+<h2>6.1.2. 課題<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h2>
+<ol class="arabic simple">
+<li>提案の課題が判った時点で報告する</li>
+<li>それぞれの課題ごとに提案を繰り返す</li>
+</ol>
 </div>
 </div>
 
@@ -98,12 +89,21 @@ rsync -rlpcgoDvz --delete --exclude=&#39;.svn&#39; -e ssh /var/a/ user@ip:/var/b
       </div>
       <div class="sphinxsidebar">
         <div class="sphinxsidebarwrapper">
+  <h3><a href="../index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">6.1. article</a><ul>
+<li><a class="reference internal" href="#id1">6.1.1. 提案</a></li>
+<li><a class="reference internal" href="#id2">6.1.2. 課題</a></li>
+</ul>
+</li>
+</ul>
+
   <h4>Previous topic</h4>
-  <p class="topless"><a href="article.html"
-                        title="previous chapter">6.1. article</a></p>
+  <p class="topless"><a href="index.html"
+                        title="previous chapter">6. tip</a></p>
   <h4>Next topic</h4>
-  <p class="topless"><a href="windows.html"
-                        title="next chapter">6.3. windows</a></p>
+  <p class="topless"><a href="linux.html"
+                        title="next chapter">6.2. linux</a></p>
 <div id="searchbox" style="display: none">
   <h3>Quick search</h3>
     <form class="search" action="../search.html" method="get">
@@ -131,10 +131,10 @@ rsync -rlpcgoDvz --delete --exclude=&#39;.svn&#39; -e ssh /var/a/ user@ip:/var/b
           <a href="../py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
         <li class="right" >
-          <a href="windows.html" title="6.3. windows"
+          <a href="linux.html" title="6.2. linux"
              >next</a> |</li>
         <li class="right" >
-          <a href="article.html" title="6.1. article"
+          <a href="index.html" title="6. tip"
              >previous</a> |</li>
         <li><a href="../index.html">SLMan 0.0.1 documentation</a> &raquo;</li>
           <li><a href="index.html" >6. tip</a> &raquo;</li> 
