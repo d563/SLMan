@@ -1,8 +1,6 @@
 tip
 ===
 .. toctree::
-    pdca
-    cycle
     linux
     windows
     html
