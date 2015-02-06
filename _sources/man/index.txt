@@ -3,3 +3,4 @@ man
 .. toctree::
     jenkins
     hinemos
+    krb5

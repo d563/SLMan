@@ -1,0 +1,89 @@
+krb5
+====
+
+kdc
+---
+::
+
+    yum -y install krb5-server krb5-workstation pam_krb5 authconfig
+    cat /var/kerberos/krb5kdc/kdc.conf
+    cat /var/kerberos/krb5kdc/kadm5.acl
+
+::
+
+    authconfig --enablekrb5 --krb5kdc=localhost.localdomain --krb5adminserver=localhost.localdomain --krb5realm=EXAMPLE.COM --update
+    cat /etc/krb5.conf
+    cat /etc/pam.d/system-auth
+
+::
+
+    kdb5_util create -s
+
+    chkconfig krb5kdc on
+    /etc/init.d/krb5kdc start
+
+::
+
+    kadmin.local -q "addprinc root/admin"
+    kadmin.local -q "addprinc d563"
+    useradd d563
+    kadmin.local -q "getprincs"
+    kadmin.local -q "cpw d563"
+    kadmin.local -q "delprinc d563"
+
+workstation
+-----------
+::
+
+    yum -y install krb5-workstation pam_krb5 authconfig
+    authconfig --enablekrb5 --krb5kdc=localhost.localdomain --krb5adminserver=localhost.localdomain --krb5realm=EXAMPLE.COM --update
+    useradd d563
+
+
+.. module:: Krb5.groovy
+.. code-block:: groovy
+
+    import javax.security.auth.callback.Callback
+    import javax.security.auth.callback.CallbackHandler
+    import javax.security.auth.callback.NameCallback
+    import javax.security.auth.callback.PasswordCallback
+    import javax.security.auth.login.AppConfigurationEntry
+    import javax.security.auth.login.AppConfigurationEntry.LoginModuleControlFlag
+    import javax.security.auth.login.Configuration
+    import javax.security.auth.login.LoginContext
+    // Krb5.groovy
+    System.setProperty('java.security.krb5.realm', 'EXAMPLE.COM')
+    System.setProperty('java.security.krb5.kdc', 'localhost.localdomain')
+    class CBHandler implements CallbackHandler {
+      String id, pw
+      CBHandler(String id, String pw) {
+        this.id = id
+        this.pw = pw
+      }
+      void handle(Callback[] cbs) {
+        cbs.each {
+          if (it instanceof NameCallback) ((NameCallback) it).name = id.toUpperCase()
+          if (it instanceof PasswordCallback) ((PasswordCallback) it).password = pw.toCharArray()
+        }
+      }
+    }
+    class Conf extends Configuration {
+      @Override
+      AppConfigurationEntry[] getAppConfigurationEntry(String name) {
+        [
+          new AppConfigurationEntry(
+            'com.sun.security.auth.module.Krb5LoginModule',
+            LoginModuleControlFlag.REQUIRED,
+            [client: 'true', useTicketCache: 'false', debug: 'false']
+          )
+        ]
+      }
+    }
+    new LoginContext(
+      "SLMan",
+      null,
+      new CBHandler('d563', 'd563'),
+      new Conf()
+    ).login()
+    println('OK')
+

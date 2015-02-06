@@ -1,0 +1,211 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>3.3. krb5 &mdash; SLMan 0.0.1 documentation</title>
+    
+    <link rel="stylesheet" href="../_static/pyramid.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/SLMan.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '0.0.1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <link rel="top" title="SLMan 0.0.1 documentation" href="../index.html" />
+    <link rel="up" title="3. man" href="index.html" />
+    <link rel="next" title="4. data" href="../data/index.html" />
+    <link rel="prev" title="3.2. hinemos" href="hinemos.html" />
+<link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Neuton&amp;subset=latin" type="text/css" media="screen" charset="utf-8" />
+<link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Nobile:regular,italic,bold,bolditalic&amp;subset=latin" type="text/css" media="screen" charset="utf-8" />
+<!--[if lte IE 6]>
+<link rel="stylesheet" href="../_static/ie6.css" type="text/css" media="screen" charset="utf-8" />
+<![endif]-->
+
+  </head>
+  <body>
+
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="../data/index.html" title="4. data"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="hinemos.html" title="3.2. hinemos"
+             accesskey="P">previous</a> |</li>
+        <li><a href="../index.html">SLMan 0.0.1 documentation</a> &raquo;</li>
+          <li><a href="index.html" accesskey="U">3. man</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="krb5">
+<h1>3.3. krb5<a class="headerlink" href="#krb5" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="kdc">
+<h2>3.3.1. kdc<a class="headerlink" href="#kdc" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-python"><div class="highlight"><pre>yum -y install krb5-server krb5-workstation pam_krb5 authconfig
+cat /var/kerberos/krb5kdc/kdc.conf
+cat /var/kerberos/krb5kdc/kadm5.acl
+</pre></div>
+</div>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">authconfig</span> <span class="o">--</span><span class="n">enablekrb5</span> <span class="o">--</span><span class="n">krb5kdc</span><span class="o">=</span><span class="n">localhost</span><span class="o">.</span><span class="n">localdomain</span> <span class="o">--</span><span class="n">krb5adminserver</span><span class="o">=</span><span class="n">localhost</span><span class="o">.</span><span class="n">localdomain</span> <span class="o">--</span><span class="n">krb5realm</span><span class="o">=</span><span class="n">EXAMPLE</span><span class="o">.</span><span class="n">COM</span> <span class="o">--</span><span class="n">update</span>
+<span class="n">cat</span> <span class="o">/</span><span class="n">etc</span><span class="o">/</span><span class="n">krb5</span><span class="o">.</span><span class="n">conf</span>
+<span class="n">cat</span> <span class="o">/</span><span class="n">etc</span><span class="o">/</span><span class="n">pam</span><span class="o">.</span><span class="n">d</span><span class="o">/</span><span class="n">system</span><span class="o">-</span><span class="n">auth</span>
+</pre></div>
+</div>
+<div class="highlight-python"><div class="highlight"><pre>kdb5_util create -s
+
+chkconfig krb5kdc on
+/etc/init.d/krb5kdc start
+</pre></div>
+</div>
+<div class="highlight-python"><div class="highlight"><pre>kadmin.local -q &quot;addprinc root/admin&quot;
+kadmin.local -q &quot;addprinc d563&quot;
+useradd d563
+kadmin.local -q &quot;getprincs&quot;
+kadmin.local -q &quot;cpw d563&quot;
+kadmin.local -q &quot;delprinc d563&quot;
+</pre></div>
+</div>
+</div>
+<div class="section" id="workstation">
+<h2>3.3.2. workstation<a class="headerlink" href="#workstation" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-python"><div class="highlight"><pre>yum -y install krb5-workstation pam_krb5 authconfig
+authconfig --enablekrb5 --krb5kdc=localhost.localdomain --krb5adminserver=localhost.localdomain --krb5realm=EXAMPLE.COM --update
+useradd d563
+</pre></div>
+</div>
+<span class="target" id="module-Krb5.groovy"></span><div class="highlight-groovy"><div class="highlight"><pre><span class="kn">import</span> <span class="nn">javax.security.auth.callback.Callback</span>
+<span class="kn">import</span> <span class="nn">javax.security.auth.callback.CallbackHandler</span>
+<span class="kn">import</span> <span class="nn">javax.security.auth.callback.NameCallback</span>
+<span class="kn">import</span> <span class="nn">javax.security.auth.callback.PasswordCallback</span>
+<span class="kn">import</span> <span class="nn">javax.security.auth.login.AppConfigurationEntry</span>
+<span class="kn">import</span> <span class="nn">javax.security.auth.login.AppConfigurationEntry.LoginModuleControlFlag</span>
+<span class="kn">import</span> <span class="nn">javax.security.auth.login.Configuration</span>
+<span class="kn">import</span> <span class="nn">javax.security.auth.login.LoginContext</span>
+<span class="c1">// Krb5.groovy</span>
+<span class="n">System</span><span class="o">.</span><span class="na">setProperty</span><span class="o">(</span><span class="s1">&#39;java.security.krb5.realm&#39;</span><span class="o">,</span> <span class="s1">&#39;EXAMPLE.COM&#39;</span><span class="o">)</span>
+<span class="n">System</span><span class="o">.</span><span class="na">setProperty</span><span class="o">(</span><span class="s1">&#39;java.security.krb5.kdc&#39;</span><span class="o">,</span> <span class="s1">&#39;localhost.localdomain&#39;</span><span class="o">)</span>
+<span class="kd">class</span> <span class="nc">CBHandler</span> <span class="kd">implements</span> <span class="n">CallbackHandler</span> <span class="o">{</span>
+  <span class="n">String</span> <span class="n">id</span><span class="o">,</span> <span class="n">pw</span>
+  <span class="n">CBHandler</span><span class="o">(</span><span class="n">String</span> <span class="n">id</span><span class="o">,</span> <span class="n">String</span> <span class="n">pw</span><span class="o">)</span> <span class="o">{</span>
+    <span class="k">this</span><span class="o">.</span><span class="na">id</span> <span class="o">=</span> <span class="n">id</span>
+    <span class="k">this</span><span class="o">.</span><span class="na">pw</span> <span class="o">=</span> <span class="n">pw</span>
+  <span class="o">}</span>
+  <span class="kt">void</span> <span class="nf">handle</span><span class="o">(</span><span class="n">Callback</span><span class="o">[]</span> <span class="n">cbs</span><span class="o">)</span> <span class="o">{</span>
+    <span class="n">cbs</span><span class="o">.</span><span class="na">each</span> <span class="o">{</span>
+      <span class="k">if</span> <span class="o">(</span><span class="n">it</span> <span class="k">instanceof</span> <span class="n">NameCallback</span><span class="o">)</span> <span class="o">((</span><span class="n">NameCallback</span><span class="o">)</span> <span class="n">it</span><span class="o">).</span><span class="na">name</span> <span class="o">=</span> <span class="n">id</span><span class="o">.</span><span class="na">toUpperCase</span><span class="o">()</span>
+      <span class="k">if</span> <span class="o">(</span><span class="n">it</span> <span class="k">instanceof</span> <span class="n">PasswordCallback</span><span class="o">)</span> <span class="o">((</span><span class="n">PasswordCallback</span><span class="o">)</span> <span class="n">it</span><span class="o">).</span><span class="na">password</span> <span class="o">=</span> <span class="n">pw</span><span class="o">.</span><span class="na">toCharArray</span><span class="o">()</span>
+    <span class="o">}</span>
+  <span class="o">}</span>
+<span class="o">}</span>
+<span class="kd">class</span> <span class="nc">Conf</span> <span class="kd">extends</span> <span class="n">Configuration</span> <span class="o">{</span>
+  <span class="nd">@Override</span>
+  <span class="n">AppConfigurationEntry</span><span class="o">[]</span> <span class="nf">getAppConfigurationEntry</span><span class="o">(</span><span class="n">String</span> <span class="n">name</span><span class="o">)</span> <span class="o">{</span>
+    <span class="o">[</span>
+      <span class="k">new</span> <span class="nf">AppConfigurationEntry</span><span class="o">(</span>
+        <span class="s1">&#39;com.sun.security.auth.module.Krb5LoginModule&#39;</span><span class="o">,</span>
+        <span class="n">LoginModuleControlFlag</span><span class="o">.</span><span class="na">REQUIRED</span><span class="o">,</span>
+        <span class="o">[</span><span class="nl">client:</span> <span class="s1">&#39;true&#39;</span><span class="o">,</span> <span class="nl">useTicketCache:</span> <span class="s1">&#39;false&#39;</span><span class="o">,</span> <span class="nl">debug:</span> <span class="s1">&#39;false&#39;</span><span class="o">]</span>
+      <span class="o">)</span>
+    <span class="o">]</span>
+  <span class="o">}</span>
+<span class="o">}</span>
+<span class="k">new</span> <span class="nf">LoginContext</span><span class="o">(</span>
+  <span class="s2">&quot;SLMan&quot;</span><span class="o">,</span>
+  <span class="kc">null</span><span class="o">,</span>
+  <span class="k">new</span> <span class="nf">CBHandler</span><span class="o">(</span><span class="s1">&#39;d563&#39;</span><span class="o">,</span> <span class="s1">&#39;d563&#39;</span><span class="o">),</span>
+  <span class="k">new</span> <span class="nf">Conf</span><span class="o">()</span>
+<span class="o">).</span><span class="na">login</span><span class="o">()</span>
+<span class="n">println</span><span class="o">(</span><span class="s1">&#39;OK&#39;</span><span class="o">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="../index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">3.3. krb5</a><ul>
+<li><a class="reference internal" href="#kdc">3.3.1. kdc</a></li>
+<li><a class="reference internal" href="#workstation">3.3.2. workstation</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="hinemos.html"
+                        title="previous chapter">3.2. hinemos</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="../data/index.html"
+                        title="next chapter">4. data</a></p>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="../data/index.html" title="4. data"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="hinemos.html" title="3.2. hinemos"
+             >previous</a> |</li>
+        <li><a href="../index.html">SLMan 0.0.1 documentation</a> &raquo;</li>
+          <li><a href="index.html" >3. man</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2014, Daisuke Maeda.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.2.3.
+    </div>
+  </body>
+</html>

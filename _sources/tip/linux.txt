@@ -28,5 +28,10 @@ linux
 
 ::
 
+    uname -a
+    cat /proc/cpuinfo
+
+::
+
     rsync -rtv a/ b/
     rsync -rlpcgoDvz --delete --exclude='.svn' -e ssh /var/a/ user@ip:/var/b/
