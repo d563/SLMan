@@ -3,11 +3,17 @@ krb5
 
 kdc
 ---
+.. index:: /var/kerberos/krb5kdc/kdc.conf
+.. index:: /var/kerberos/krb5kdc/kadm5.acl
+
 ::
 
     yum -y install krb5-server krb5-workstation pam_krb5 authconfig
     cat /var/kerberos/krb5kdc/kdc.conf
     cat /var/kerberos/krb5kdc/kadm5.acl
+
+.. index:: /etc/krb5.conf
+.. index:: /etc/pam.d/system-auth
 
 ::
 
@@ -62,8 +68,8 @@ workstation
       }
       void handle(Callback[] cbs) {
         cbs.each {
-          if (it instanceof NameCallback) ((NameCallback) it).name = id.toUpperCase()
-          if (it instanceof PasswordCallback) ((PasswordCallback) it).password = pw.toCharArray()
+          if (it instanceof NameCallback) it.name = id
+          if (it instanceof PasswordCallback) it.password = pw.toCharArray()
         }
       }
     }
@@ -74,16 +80,21 @@ workstation
           new AppConfigurationEntry(
             'com.sun.security.auth.module.Krb5LoginModule',
             LoginModuleControlFlag.REQUIRED,
-            [client: 'true', useTicketCache: 'false', debug: 'false']
+            [useTicketCache: 'false', debug: 'false']
           )
         ]
       }
     }
-    new LoginContext(
-      "SLMan",
-      null,
-      new CBHandler('d563', 'd563'),
-      new Conf()
-    ).login()
-    println('OK')
-
+    try {
+      new LoginContext(
+        'SLMan',
+        null,
+        new CBHandler('d563', 'd563'),
+        new Conf()
+      ).login()
+      'OK'
+    }
+    catch (Exception e) {
+      e.printStackTrace()
+      'NG'
+    }
