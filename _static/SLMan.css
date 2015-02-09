@@ -1,5 +1,6 @@
 body {background-color: #fff;}
 div.body h1 {background-color: #eee; border: 2px solid #ddd; margin-top: 10pt; padding-left: 10px;}
+dd {margin-left: 0px;}
 div.body h2 {margin-left: 10pt;}
 div.body p, div.body pre {margin-left: 10pt; margin-right: 10pt;}
 div.footer {color: #000; border-top: 2px solid #ddd;}

@@ -41,10 +41,24 @@ workstation
 -----------
 ::
 
-    yum -y install krb5-workstation pam_krb5 authconfig
+    yum -y install krb5-workstation pam_krb5 authconfig mod_auth_kerb
     authconfig --enablekrb5 --krb5kdc=localhost.localdomain --krb5adminserver=localhost.localdomain --krb5realm=EXAMPLE.COM --update
     useradd d563
 
+.. index:: /etc/httpd/conf.d/kerb.conf
+
+::
+
+    cat << '[EOF]' > /etc/httpd/conf.d/kerb.conf
+    <Location />
+      AuthType Kerberos
+      AuthName "SLMan"
+      KrbAuthRealms EXAMPLE.COM
+      KrbVerifyKDC Off
+      KrbMethodNegotiate Off
+      require valid-user
+    </Location>
+    [EOF]
 
 .. module:: Krb5.groovy
 .. code-block:: groovy

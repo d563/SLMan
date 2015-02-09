@@ -93,9 +93,21 @@ kadmin.local -q &quot;delprinc d563&quot;
 </div>
 <div class="section" id="workstation">
 <h2>3.3.2. workstation<a class="headerlink" href="#workstation" title="Permalink to this headline">¶</a></h2>
-<div class="highlight-python"><div class="highlight"><pre>yum -y install krb5-workstation pam_krb5 authconfig
+<div class="highlight-python"><div class="highlight"><pre>yum -y install krb5-workstation pam_krb5 authconfig mod_auth_kerb
 authconfig --enablekrb5 --krb5kdc=localhost.localdomain --krb5adminserver=localhost.localdomain --krb5realm=EXAMPLE.COM --update
 useradd d563
+</pre></div>
+</div>
+<div class="highlight-python" id="index-4"><div class="highlight"><pre>cat &lt;&lt; &#39;[EOF]&#39; &gt; /etc/httpd/conf.d/kerb.conf
+&lt;Location /&gt;
+  AuthType Kerberos
+  AuthName &quot;SLMan&quot;
+  KrbAuthRealms EXAMPLE.COM
+  KrbVerifyKDC Off
+  KrbMethodNegotiate Off
+  require valid-user
+&lt;/Location&gt;
+[EOF]
 </pre></div>
 </div>
 <span class="target" id="module-Krb5.groovy"></span><div class="highlight-groovy"><div class="highlight"><pre><span class="kn">import</span> <span class="nn">javax.security.auth.callback.Callback</span>
