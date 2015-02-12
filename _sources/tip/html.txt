@@ -5,48 +5,83 @@ html
     <!doctype html>
     <html>
     <head>
-      <title>SLMan</title>
       <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+      <meta name="viewport" content="width=device-width">
+      <title>SLMan</title>
       <link rel="stylesheet" href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.11.1/themes/smoothness/jquery-ui.css" />
       <style>
-      body {background-color: #eee;}
-      #head {
-        position: absolute;
-        top   : 0;
-        left  : 0;
-        right : 0;
-        height: 3.5em;
-        background-color: #ddd;
-      }
-      #main {
-        position: absolute;
-        top   : 3.5em;
-        left  : 0;
-        right : 0;
-        bottom: 0;
-        overflow   : auto;
-      }
-      #list {
-        position: absolute;
-        top   : 0;
-        left  : 5em;
-        right : 5em;
-        bottom: 0;
-      }
+    article,aside,footer,header,nav,section {
+      display: block;
+    }
+    #wrapper {
+      background-color: #aaa;
+      width: 800px;
+      margin: auto;
+    }
+    header {
+      background-color: #ddd;
+      position: relative;
+      top: 0; left: 0; right: 0; height: 35px;
+    }
       </style>
+      <!--[if lt IE 9]>
+      <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+      <![endif]-->
       <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
       <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.11.1/jquery-ui.min.js"></script>
       <script>
-      $(function() {
-        "use strict";
-      });
+    $(function() {
+      "use strict";
+    });
       </script>
     </head>
     <body>
-      <div id="head">
-      </div>
-      <div id="main">
-        <ul id="list"></ul>
+      <div id="wrapper">
+        <header>
+          <h1><a href="#">SLMan</a></h1>
+        </header>
+        <nav>
+          <ul>
+            <li><a href="#">ナビ１</a></li>
+            <li><a href="#">ナビ２</a></li>
+          </ul>
+        </nav>
+        <article>
+          <section>
+            <h1>ヘッダ１</h1>
+            <p>パラグラフ１</p>
+            <p>パラグラフ２</p>
+          </section>
+          <section>
+            <h1>ヘッダ２</h1>
+            <dl>
+              <dt>定義１</dt>
+              <dd>説明１</dd>
+              <dt>定義２</dt>
+              <dd>説明２</dd>
+            </dl>
+          </section>
+          <section>
+            <h1>ヘッダ３</h1>
+            <table>
+              <tr>
+                <th>テーブルヘッダ１</th>
+                <td>テーブル内容１</td>
+              </tr>
+              <tr>
+                <th>テーブルヘッダ２</th>
+                <td>テーブル内容２</td>
+              </tr>
+            </table>
+          </section>
+        </article>
+        <aside>
+          <p><a href="#">備考</a></p>
+        </aside>
+        <footer>
+          <span><a href="#">SLMan</a></span>
+        </footer>
       </div>
     </body>
     </html>
+

@@ -1,6 +1,6 @@
 tip
 ===
 .. toctree::
-    linux
     windows
+    performance
     html
