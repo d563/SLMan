@@ -83,13 +83,21 @@
   <span class="k">font-weight</span><span class="o">:</span> <span class="k">normal</span><span class="p">;</span>
   <span class="k">font-size</span><span class="o">:</span> <span class="m">100%</span><span class="p">;</span>
   <span class="k">font-family</span><span class="o">:</span> <span class="k">sans-serif</span><span class="p">;</span>
-  <span class="k">vertical-align</span><span class="o">:</span> <span class="k">baseline</span><span class="p">;</span>
+  <span class="k">vertical-align</span><span class="o">:</span> <span class="k">top</span><span class="p">;</span>
 <span class="p">}</span>
 <span class="nt">header</span><span class="o">,</span><span class="nt">nav</span><span class="o">,</span><span class="nt">article</span><span class="o">,</span><span class="nt">section</span><span class="o">,</span><span class="nt">footer</span> <span class="p">{</span> <span class="k">display</span><span class="o">:</span> <span class="k">block</span><span class="p">;</span> <span class="p">}</span>
-<span class="nt">html</span><span class="p">{</span> <span class="k">overflow-y</span><span class="o">:</span> <span class="k">scroll</span><span class="p">;</span> <span class="p">}</span>
-<span class="nt">ul</span><span class="p">{</span> <span class="k">list-style-type</span><span class="o">:</span> <span class="k">none</span><span class="p">;</span> <span class="p">}</span>
-<span class="nt">table</span><span class="p">{</span> <span class="k">border-collapse</span><span class="o">:</span> <span class="k">collapse</span><span class="p">;</span> <span class="k">border-spacing</span><span class="o">:</span> <span class="m">0</span><span class="p">;</span> <span class="p">}</span>
+<span class="nt">html</span> <span class="p">{</span> <span class="k">overflow-y</span><span class="o">:</span> <span class="k">scroll</span><span class="p">;</span> <span class="p">}</span>
+<span class="nt">ul</span> <span class="p">{</span> <span class="k">list-style-type</span><span class="o">:</span> <span class="k">none</span><span class="p">;</span> <span class="p">}</span>
+<span class="nt">table</span> <span class="p">{</span> <span class="k">border-collapse</span><span class="o">:</span> <span class="k">collapse</span><span class="p">;</span> <span class="k">border-spacing</span><span class="o">:</span> <span class="m">0</span><span class="p">;</span> <span class="p">}</span>
+<span class="nt">table</span><span class="o">,</span><span class="nt">td</span><span class="o">,</span><span class="nt">th</span><span class="o">,</span><span class="nt">input</span><span class="o">,</span><span class="nt">textarea</span> <span class="p">{</span> <span class="k">border</span><span class="o">:</span> <span class="m">1px</span> <span class="k">solid</span> <span class="m">#666</span><span class="p">;</span> <span class="p">}</span>
+<span class="nt">table</span><span class="o">,</span><span class="nt">p</span><span class="o">,</span><span class="nt">dl</span><span class="o">,</span><span class="nt">ul</span><span class="o">,</span><span class="nt">input</span><span class="o">,</span><span class="nt">textarea</span> <span class="p">{</span> <span class="k">margin</span><span class="o">:</span> <span class="m">5px</span> <span class="m">10px</span><span class="p">;</span> <span class="c">/* 上下,右左 */</span> <span class="p">}</span>
+<span class="nt">li</span> <span class="p">{</span> <span class="k">margin</span><span class="o">:</span> <span class="m">2px</span> <span class="m">0</span><span class="p">;</span> <span class="p">}</span>
 <span class="nt">th</span> <span class="p">{</span> <span class="k">text-align</span><span class="o">:</span> <span class="k">left</span><span class="p">;</span> <span class="p">}</span>
+<span class="nt">dl</span> <span class="p">{</span> <span class="k">overflow</span><span class="o">:</span> <span class="k">auto</span><span class="p">;</span> <span class="k">height</span><span class="o">:</span> <span class="m">50px</span><span class="p">;</span> <span class="p">}</span>
+<span class="nt">dt</span> <span class="p">{</span> <span class="k">float</span><span class="o">:</span> <span class="k">left</span><span class="p">;</span> <span class="k">width</span><span class="o">:</span> <span class="m">100px</span><span class="p">;</span> <span class="p">}</span>
+<span class="nt">dd</span> <span class="p">{</span> <span class="k">border-bottom</span><span class="o">:</span> <span class="m">1px</span> <span class="k">solid</span> <span class="m">#666</span><span class="p">;</span> <span class="p">}</span>
+<span class="nt">a</span> <span class="p">{</span> <span class="k">color</span><span class="o">:</span> <span class="m">#666</span><span class="p">;</span> <span class="p">}</span>
+<span class="nt">a</span><span class="nd">:hover</span> <span class="p">{</span> <span class="k">color</span><span class="o">:</span> <span class="m">#888</span><span class="p">;</span> <span class="k">text-decoration</span><span class="o">:</span> <span class="k">none</span><span class="p">;</span> <span class="p">}</span>
 <span class="nf">#wrapper</span> <span class="p">{</span>
   <span class="k">background-color</span><span class="o">:</span> <span class="m">#EEE</span><span class="p">;</span>
   <span class="k">width</span><span class="o">:</span> <span class="m">768px</span><span class="p">;</span>
@@ -97,6 +105,7 @@
 <span class="p">}</span>
 <span class="nt">header</span> <span class="p">{</span>
   <span class="k">background-color</span><span class="o">:</span> <span class="m">#BBB</span><span class="p">;</span>
+  <span class="k">position</span><span class="o">:</span> <span class="k">relative</span><span class="p">;</span>
   <span class="k">width</span><span class="o">:</span> <span class="m">100%</span><span class="p">;</span> <span class="k">height</span><span class="o">:</span> <span class="m">30px</span><span class="p">;</span>
 <span class="p">}</span>
 <span class="nt">nav</span> <span class="p">{</span>
@@ -116,43 +125,21 @@
 <span class="k">@media</span> <span class="nt">screen</span> <span class="nt">and</span> <span class="o">(</span><span class="nt">max-width</span><span class="o">:</span> <span class="nt">768px</span><span class="o">)</span> <span class="p">{</span>
   <span class="nf">#wrapper</span> <span class="p">{</span> <span class="k">width</span><span class="o">:</span> <span class="k">auto</span><span class="p">;</span> <span class="p">}</span>
   <span class="nt">nav</span><span class="o">,</span><span class="nt">article</span> <span class="p">{</span> <span class="k">width</span><span class="o">:</span> <span class="m">100%</span><span class="p">;</span> <span class="p">}</span>
-  <span class="nt">nav</span> <span class="nt">ul</span> <span class="nt">li</span> <span class="p">{</span> <span class="k">float</span><span class="o">:</span> <span class="k">left</span><span class="p">;</span> <span class="k">width</span><span class="o">:</span> <span class="m">25%</span> <span class="p">}</span>
+  <span class="nt">nav</span> <span class="nt">ul</span> <span class="nt">li</span> <span class="p">{</span> <span class="k">float</span><span class="o">:</span> <span class="k">left</span><span class="p">;</span> <span class="k">width</span><span class="o">:</span> <span class="m">25%</span><span class="p">;</span> <span class="k">text-align</span><span class="o">:</span> <span class="k">center</span><span class="p">;</span> <span class="p">}</span>
 <span class="p">}</span>
 <span class="k">@media</span> <span class="nt">screen</span> <span class="nt">and</span> <span class="o">(</span><span class="nt">max-width</span><span class="o">:</span> <span class="nt">480px</span><span class="o">)</span> <span class="p">{</span>
-  <span class="nt">nav</span> <span class="nt">ul</span> <span class="nt">li</span> <span class="p">{</span> <span class="k">float</span><span class="o">:</span> <span class="k">left</span><span class="p">;</span> <span class="k">width</span><span class="o">:</span> <span class="m">50%</span> <span class="p">}</span>
+  <span class="nt">nav</span> <span class="nt">ul</span> <span class="nt">li</span> <span class="p">{</span> <span class="k">float</span><span class="o">:</span> <span class="k">left</span><span class="p">;</span> <span class="k">width</span><span class="o">:</span> <span class="m">50%</span><span class="p">;</span> <span class="p">}</span>
 <span class="p">}</span>
-<span class="nt">a</span> <span class="p">{</span> <span class="k">color</span><span class="o">:</span> <span class="m">#666</span><span class="p">;</span> <span class="p">}</span>
-<span class="nt">a</span><span class="nd">:hover</span> <span class="p">{</span> <span class="k">color</span><span class="o">:</span> <span class="m">#888</span><span class="p">;</span> <span class="k">text-decoration</span><span class="o">:</span> <span class="k">none</span><span class="p">;</span> <span class="p">}</span>
 <span class="nt">header</span> <span class="nt">h1</span> <span class="p">{</span>
   <span class="k">background-color</span><span class="o">:</span> <span class="m">#AAA</span><span class="p">;</span>
   <span class="k">position</span><span class="o">:</span> <span class="k">relative</span><span class="p">;</span>
-  <span class="k">left</span><span class="o">:</span> <span class="m">5px</span><span class="p">;</span> <span class="k">top</span><span class="o">:</span> <span class="m">5px</span><span class="p">;</span> <span class="k">width</span><span class="o">:</span> <span class="m">100px</span><span class="p">;</span> <span class="k">bottom</span><span class="o">:</span> <span class="m">0</span><span class="p">;</span>
+  <span class="k">left</span><span class="o">:</span> <span class="m">5px</span><span class="p">;</span> <span class="k">top</span><span class="o">:</span> <span class="m">5px</span><span class="p">;</span> <span class="k">width</span><span class="o">:</span> <span class="m">100px</span><span class="p">;</span> <span class="k">height</span><span class="o">:</span> <span class="m">1.1em</span><span class="p">;</span>
   <span class="k">text-align</span><span class="o">:</span> <span class="k">center</span><span class="p">;</span>
 <span class="p">}</span>
 <span class="nt">nav</span> <span class="nt">h1</span><span class="o">,</span><span class="nt">article</span> <span class="nt">h1</span> <span class="p">{</span>
   <span class="k">background-color</span><span class="o">:</span> <span class="m">#AAA</span><span class="p">;</span>
   <span class="k">clear</span><span class="o">:</span> <span class="k">both</span><span class="p">;</span>
   <span class="k">padding</span><span class="o">:</span> <span class="m">3px</span> <span class="m">0px</span> <span class="m">3px</span> <span class="m">10px</span><span class="p">;</span> <span class="c">/* 上,右,下,左 */</span>
-<span class="p">}</span>
-<span class="nt">article</span> <span class="nt">p</span> <span class="p">{</span>
-  <span class="k">padding</span><span class="o">:</span> <span class="m">5px</span> <span class="m">10px</span><span class="p">;</span> <span class="c">/* 上下,右左 */</span>
-<span class="p">}</span>
-<span class="nt">section</span> <span class="nt">dl</span> <span class="p">{</span>
-  <span class="k">overflow</span><span class="o">:</span> <span class="k">auto</span><span class="p">;</span>
-  <span class="k">height</span><span class="o">:</span> <span class="m">30px</span><span class="p">;</span>
-<span class="p">}</span>
-<span class="nt">section</span> <span class="nt">dt</span> <span class="p">{</span>
-  <span class="k">float</span><span class="o">:</span> <span class="k">left</span><span class="p">;</span>
-  <span class="k">width</span><span class="o">:</span> <span class="m">100px</span><span class="p">;</span>
-<span class="p">}</span>
-<span class="nt">section</span> <span class="nt">dd</span> <span class="p">{</span>
-  <span class="k">border-bottom</span><span class="o">:</span> <span class="m">1px</span> <span class="k">solid</span> <span class="m">#666</span><span class="p">;</span>
-<span class="p">}</span>
-<span class="nt">table</span> <span class="p">{</span>
-  <span class="k">width</span><span class="o">:</span> <span class="m">100%</span><span class="p">;</span>
-<span class="p">}</span>
-<span class="nt">table</span><span class="o">,</span><span class="nt">table</span> <span class="nt">td</span><span class="o">,</span><span class="nt">table</span> <span class="nt">th</span> <span class="p">{</span>
-  <span class="k">border</span><span class="o">:</span> <span class="m">1px</span> <span class="k">solid</span> <span class="m">#666</span><span class="p">;</span>
 <span class="p">}</span>
   <span class="nt">&lt;/style&gt;</span>
   <span class="c">&lt;!--[if lt IE 9]&gt;</span>
@@ -172,12 +159,17 @@
       <span class="nt">&lt;h1&gt;&lt;a</span> <span class="na">href=</span><span class="s">&quot;#&quot;</span><span class="nt">&gt;</span>SLMan<span class="nt">&lt;/a&gt;&lt;/h1&gt;</span>
     <span class="nt">&lt;/header&gt;</span>
     <span class="nt">&lt;nav&gt;</span>
-      <span class="nt">&lt;h1&gt;</span>ナビヘッダ<span class="nt">&lt;/h1&gt;</span>
+      <span class="nt">&lt;h1&gt;</span>ナビヘッダ１<span class="nt">&lt;/h1&gt;</span>
       <span class="nt">&lt;ul&gt;</span>
-        <span class="nt">&lt;li&gt;&lt;a</span> <span class="na">href=</span><span class="s">&quot;#&quot;</span><span class="nt">&gt;</span>ナビ１<span class="nt">&lt;/a&gt;&lt;/li&gt;</span>
-        <span class="nt">&lt;li&gt;&lt;a</span> <span class="na">href=</span><span class="s">&quot;#&quot;</span><span class="nt">&gt;</span>ナビ２<span class="nt">&lt;/a&gt;&lt;/li&gt;</span>
-        <span class="nt">&lt;li&gt;&lt;a</span> <span class="na">href=</span><span class="s">&quot;#&quot;</span><span class="nt">&gt;</span>ナビ３<span class="nt">&lt;/a&gt;&lt;/li&gt;</span>
-        <span class="nt">&lt;li&gt;&lt;a</span> <span class="na">href=</span><span class="s">&quot;#&quot;</span><span class="nt">&gt;</span>ナビ４<span class="nt">&lt;/a&gt;&lt;/li&gt;</span>
+        <span class="nt">&lt;li&gt;&lt;a</span> <span class="na">href=</span><span class="s">&quot;#&quot;</span><span class="nt">&gt;</span>ナビ１－１<span class="nt">&lt;/a&gt;&lt;/li&gt;</span>
+        <span class="nt">&lt;li&gt;&lt;a</span> <span class="na">href=</span><span class="s">&quot;#&quot;</span><span class="nt">&gt;</span>ナビ１－２<span class="nt">&lt;/a&gt;&lt;/li&gt;</span>
+        <span class="nt">&lt;li&gt;&lt;a</span> <span class="na">href=</span><span class="s">&quot;#&quot;</span><span class="nt">&gt;</span>ナビ１－３<span class="nt">&lt;/a&gt;&lt;/li&gt;</span>
+        <span class="nt">&lt;li&gt;&lt;a</span> <span class="na">href=</span><span class="s">&quot;#&quot;</span><span class="nt">&gt;</span>ナビ１－４<span class="nt">&lt;/a&gt;&lt;/li&gt;</span>
+      <span class="nt">&lt;/ul&gt;</span>
+      <span class="nt">&lt;h1&gt;</span>ナビヘッダ２<span class="nt">&lt;/h1&gt;</span>
+      <span class="nt">&lt;ul&gt;</span>
+        <span class="nt">&lt;li&gt;&lt;a</span> <span class="na">href=</span><span class="s">&quot;#&quot;</span><span class="nt">&gt;</span>ナビ２－１<span class="nt">&lt;/a&gt;&lt;/li&gt;</span>
+        <span class="nt">&lt;li&gt;&lt;a</span> <span class="na">href=</span><span class="s">&quot;#&quot;</span><span class="nt">&gt;</span>ナビ２－２<span class="nt">&lt;/a&gt;&lt;/li&gt;</span>
       <span class="nt">&lt;/ul&gt;</span>
     <span class="nt">&lt;/nav&gt;</span>
     <span class="nt">&lt;article&gt;</span>
@@ -189,10 +181,10 @@
       <span class="nt">&lt;section&gt;</span>
         <span class="nt">&lt;h1&gt;</span>ヘッダ２<span class="nt">&lt;/h1&gt;</span>
         <span class="nt">&lt;dl&gt;</span>
-          <span class="nt">&lt;dt&gt;</span>定義１<span class="nt">&lt;/dt&gt;</span>
-          <span class="nt">&lt;dd&gt;</span>説明１<span class="nt">&lt;/dd&gt;</span>
-          <span class="nt">&lt;dt&gt;</span>定義２<span class="nt">&lt;/dt&gt;</span>
-          <span class="nt">&lt;dd&gt;</span>説明２<span class="nt">&lt;/dd&gt;</span>
+          <span class="nt">&lt;dt&gt;</span>定義１<span class="nt">&lt;/dt&gt;&lt;dd&gt;</span>説明１<span class="nt">&lt;/dd&gt;</span>
+          <span class="nt">&lt;dt&gt;</span>定義２<span class="nt">&lt;/dt&gt;&lt;dd&gt;</span>説明２<span class="nt">&lt;/dd&gt;</span>
+          <span class="nt">&lt;dt&gt;</span>定義３<span class="nt">&lt;/dt&gt;&lt;dd&gt;</span>説明３<span class="nt">&lt;/dd&gt;</span>
+          <span class="nt">&lt;dt&gt;</span>定義４<span class="nt">&lt;/dt&gt;&lt;dd&gt;</span>説明４<span class="nt">&lt;/dd&gt;</span>
         <span class="nt">&lt;/dl&gt;</span>
       <span class="nt">&lt;/section&gt;</span>
       <span class="nt">&lt;section&gt;</span>
@@ -200,19 +192,21 @@
         <span class="nt">&lt;table&gt;</span>
           <span class="nt">&lt;tr&gt;</span>
             <span class="nt">&lt;th&gt;</span>テーブルヘッダ１<span class="nt">&lt;/th&gt;</span>
-            <span class="nt">&lt;td&gt;</span>テーブル内容１<span class="nt">&lt;/td&gt;</span>
+            <span class="nt">&lt;td&gt;</span>テーブル内容１－１<span class="nt">&lt;/td&gt;</span>
+            <span class="nt">&lt;td&gt;</span>テーブル内容１－２<span class="nt">&lt;/td&gt;</span>
           <span class="nt">&lt;/tr&gt;</span>
           <span class="nt">&lt;tr&gt;</span>
             <span class="nt">&lt;th&gt;</span>テーブルヘッダ２<span class="nt">&lt;/th&gt;</span>
-            <span class="nt">&lt;td&gt;</span>テーブル内容２<span class="nt">&lt;/td&gt;</span>
+            <span class="nt">&lt;td&gt;</span>テーブル内容２－１<span class="nt">&lt;/td&gt;</span>
+            <span class="nt">&lt;td&gt;</span>テーブル内容２－２<span class="nt">&lt;/td&gt;</span>
           <span class="nt">&lt;/tr&gt;</span>
         <span class="nt">&lt;/table&gt;</span>
       <span class="nt">&lt;/section&gt;</span>
       <span class="nt">&lt;section&gt;</span>
         <span class="nt">&lt;h1&gt;</span>ヘッダ４<span class="nt">&lt;/h1&gt;</span>
         <span class="nt">&lt;form&gt;</span>
-          <span class="nt">&lt;p&gt;&lt;input</span> <span class="na">value=</span><span class="s">&quot;テキスト&quot;</span><span class="nt">&gt;&lt;/p&gt;</span>
-          <span class="nt">&lt;p&gt;&lt;textarea&gt;</span>テキストエリア<span class="nt">&lt;/textarea&gt;&lt;/p&gt;</span>
+          <span class="nt">&lt;input</span> <span class="na">value=</span><span class="s">&quot;テキスト&quot;</span><span class="nt">&gt;</span>
+          <span class="nt">&lt;textarea&gt;</span>テキストエリア<span class="nt">&lt;/textarea&gt;</span>
         <span class="nt">&lt;/form&gt;</span>
       <span class="nt">&lt;/section&gt;</span>
     <span class="nt">&lt;/article&gt;</span>

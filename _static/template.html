@@ -21,13 +21,21 @@ table,tr,th,td {
   font-weight: normal;
   font-size: 100%;
   font-family: sans-serif;
-  vertical-align: baseline;
+  vertical-align: top;
 }
 header,nav,article,section,footer { display: block; }
-html{ overflow-y: scroll; }
-ul{ list-style-type: none; }
-table{ border-collapse: collapse; border-spacing: 0; }
+html { overflow-y: scroll; }
+ul { list-style-type: none; }
+table { border-collapse: collapse; border-spacing: 0; }
+table,td,th,input,textarea { border: 1px solid #666; }
+table,p,dl,ul,input,textarea { margin: 5px 10px; /* 上下,右左 */ }
+li { margin: 2px 0; }
 th { text-align: left; }
+dl { overflow: auto; height: 50px; }
+dt { float: left; width: 100px; }
+dd { border-bottom: 1px solid #666; }
+a { color: #666; }
+a:hover { color: #888; text-decoration: none; }
 #wrapper {
   background-color: #EEE;
   width: 768px;
@@ -35,6 +43,7 @@ th { text-align: left; }
 }
 header {
   background-color: #BBB;
+  position: relative;
   width: 100%; height: 30px;
 }
 nav {
@@ -54,43 +63,21 @@ footer {
 @media screen and (max-width: 768px) {
   #wrapper { width: auto; }
   nav,article { width: 100%; }
-  nav ul li { float: left; width: 25% }
+  nav ul li { float: left; width: 25%; text-align: center; }
 }
 @media screen and (max-width: 480px) {
-  nav ul li { float: left; width: 50% }
+  nav ul li { float: left; width: 50%; }
 }
-a { color: #666; }
-a:hover { color: #888; text-decoration: none; }
 header h1 {
   background-color: #AAA;
   position: relative;
-  left: 5px; top: 5px; width: 100px; bottom: 0;
+  left: 5px; top: 5px; width: 100px; height: 1.1em;
   text-align: center;
 }
 nav h1,article h1 {
   background-color: #AAA;
   clear: both;
   padding: 3px 0px 3px 10px; /* 上,右,下,左 */
-}
-article p {
-  padding: 5px 10px; /* 上下,右左 */
-}
-section dl {
-  overflow: auto;
-  height: 30px;
-}
-section dt {
-  float: left;
-  width: 100px;
-}
-section dd {
-  border-bottom: 1px solid #666;
-}
-table {
-  width: 100%;
-}
-table,table td,table th {
-  border: 1px solid #666;
 }
   </style>
   <!--[if lt IE 9]>
@@ -110,12 +97,17 @@ $(function() {
       <h1><a href="#">SLMan</a></h1>
     </header>
     <nav>
-      <h1>ナビヘッダ</h1>
+      <h1>ナビヘッダ１</h1>
       <ul>
-        <li><a href="#">ナビ１</a></li>
-        <li><a href="#">ナビ２</a></li>
-        <li><a href="#">ナビ３</a></li>
-        <li><a href="#">ナビ４</a></li>
+        <li><a href="#">ナビ１－１</a></li>
+        <li><a href="#">ナビ１－２</a></li>
+        <li><a href="#">ナビ１－３</a></li>
+        <li><a href="#">ナビ１－４</a></li>
+      </ul>
+      <h1>ナビヘッダ２</h1>
+      <ul>
+        <li><a href="#">ナビ２－１</a></li>
+        <li><a href="#">ナビ２－２</a></li>
       </ul>
     </nav>
     <article>
@@ -127,10 +119,10 @@ $(function() {
       <section>
         <h1>ヘッダ２</h1>
         <dl>
-          <dt>定義１</dt>
-          <dd>説明１</dd>
-          <dt>定義２</dt>
-          <dd>説明２</dd>
+          <dt>定義１</dt><dd>説明１</dd>
+          <dt>定義２</dt><dd>説明２</dd>
+          <dt>定義３</dt><dd>説明３</dd>
+          <dt>定義４</dt><dd>説明４</dd>
         </dl>
       </section>
       <section>
@@ -138,19 +130,21 @@ $(function() {
         <table>
           <tr>
             <th>テーブルヘッダ１</th>
-            <td>テーブル内容１</td>
+            <td>テーブル内容１－１</td>
+            <td>テーブル内容１－２</td>
           </tr>
           <tr>
             <th>テーブルヘッダ２</th>
-            <td>テーブル内容２</td>
+            <td>テーブル内容２－１</td>
+            <td>テーブル内容２－２</td>
           </tr>
         </table>
       </section>
       <section>
         <h1>ヘッダ４</h1>
         <form>
-          <p><input value="テキスト"></p>
-          <p><textarea>テキストエリア</textarea></p>
+          <input value="テキスト">
+          <textarea>テキストエリア</textarea>
         </form>
       </section>
     </article>
