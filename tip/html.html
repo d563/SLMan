@@ -74,19 +74,180 @@
 <span class="nt">html</span><span class="o">,</span><span class="nt">body</span><span class="o">,</span><span class="nt">div</span><span class="o">,</span><span class="nt">h1</span><span class="o">,</span><span class="nt">p</span><span class="o">,</span><span class="nt">a</span><span class="o">,</span><span class="nt">form</span><span class="o">,</span>
 <span class="nt">header</span><span class="o">,</span><span class="nt">nav</span><span class="o">,</span><span class="nt">article</span><span class="o">,</span><span class="nt">section</span><span class="o">,</span><span class="nt">footer</span><span class="o">,</span>
 <span class="nt">dl</span><span class="o">,</span><span class="nt">dt</span><span class="o">,</span><span class="nt">dd</span><span class="o">,</span><span class="nt">ul</span><span class="o">,</span><span class="nt">li</span><span class="o">,</span>
+<span class="nt">input</span><span class="o">,</span><span class="nt">textarea</span><span class="o">,</span>
 <span class="nt">table</span><span class="o">,</span><span class="nt">tr</span><span class="o">,</span><span class="nt">th</span><span class="o">,</span><span class="nt">td</span> <span class="p">{</span>
   <span class="k">margin</span><span class="o">:</span> <span class="m">0</span><span class="p">;</span>
   <span class="k">padding</span><span class="o">:</span> <span class="m">0</span><span class="p">;</span>
   <span class="k">border</span><span class="o">:</span> <span class="m">0</span><span class="p">;</span>
-  <span class="k">font-style</span><span class="o">:</span><span class="k">normal</span><span class="p">;</span>
+  <span class="k">font-style</span><span class="o">:</span> <span class="k">normal</span><span class="p">;</span>
   <span class="k">font-weight</span><span class="o">:</span> <span class="k">normal</span><span class="p">;</span>
   <span class="k">font-size</span><span class="o">:</span> <span class="m">100%</span><span class="p">;</span>
+  <span class="k">font-family</span><span class="o">:</span> <span class="k">sans-serif</span><span class="p">;</span>
   <span class="k">vertical-align</span><span class="o">:</span> <span class="k">baseline</span><span class="p">;</span>
 <span class="p">}</span>
 <span class="nt">header</span><span class="o">,</span><span class="nt">nav</span><span class="o">,</span><span class="nt">article</span><span class="o">,</span><span class="nt">section</span><span class="o">,</span><span class="nt">footer</span> <span class="p">{</span> <span class="k">display</span><span class="o">:</span> <span class="k">block</span><span class="p">;</span> <span class="p">}</span>
 <span class="nt">html</span><span class="p">{</span> <span class="k">overflow-y</span><span class="o">:</span> <span class="k">scroll</span><span class="p">;</span> <span class="p">}</span>
 <span class="nt">ul</span><span class="p">{</span> <span class="k">list-style-type</span><span class="o">:</span> <span class="k">none</span><span class="p">;</span> <span class="p">}</span>
-<span class="nt">input</span><span class="o">,</span><span class="nt">textarea</span> <span class="p">{</span> <span class="k">margin</span><span class="o">:</span> <span class="m">0</span><span class="p">;</span> <span class="k">padding</span><span class="o">:</span> <span class="m">0</span><span class="p">;</span> <span class="p">}</span>
+<span class="nt">table</span><span class="p">{</span> <span class="k">border-collapse</span><span class="o">:</span> <span class="k">collapse</span><span class="p">;</span> <span class="k">border-spacing</span><span class="o">:</span> <span class="m">0</span><span class="p">;</span> <span class="p">}</span>
+<span class="nt">th</span> <span class="p">{</span> <span class="k">text-align</span><span class="o">:</span> <span class="k">left</span><span class="p">;</span> <span class="p">}</span>
+<span class="nf">#wrapper</span> <span class="p">{</span>
+  <span class="k">background-color</span><span class="o">:</span> <span class="m">#EEE</span><span class="p">;</span>
+  <span class="k">width</span><span class="o">:</span> <span class="m">768px</span><span class="p">;</span>
+  <span class="k">margin</span><span class="o">:</span> <span class="k">auto</span><span class="p">;</span>
+<span class="p">}</span>
+<span class="nt">header</span> <span class="p">{</span>
+  <span class="k">background-color</span><span class="o">:</span> <span class="m">#BBB</span><span class="p">;</span>
+  <span class="k">width</span><span class="o">:</span> <span class="m">100%</span><span class="p">;</span> <span class="k">height</span><span class="o">:</span> <span class="m">30px</span><span class="p">;</span>
+<span class="p">}</span>
+<span class="nt">nav</span> <span class="p">{</span>
+  <span class="k">background-color</span><span class="o">:</span> <span class="m">#CCC</span><span class="p">;</span>
+  <span class="k">float</span><span class="o">:</span> <span class="k">left</span><span class="p">;</span>
+  <span class="k">width</span><span class="o">:</span> <span class="m">150px</span><span class="p">;</span>
+<span class="p">}</span>
+<span class="nt">article</span> <span class="p">{</span>
+  <span class="k">background-color</span><span class="o">:</span> <span class="m">#DDD</span><span class="p">;</span>
+  <span class="k">float</span><span class="o">:</span> <span class="k">right</span><span class="p">;</span>
+  <span class="k">width</span><span class="o">:</span> <span class="m">600px</span><span class="p">;</span>
+<span class="p">}</span>
+<span class="nt">footer</span> <span class="p">{</span>
+  <span class="k">background-color</span><span class="o">:</span> <span class="m">#BBB</span><span class="p">;</span>
+  <span class="k">clear</span><span class="o">:</span> <span class="k">both</span><span class="p">;</span>
+<span class="p">}</span>
+<span class="k">@media</span> <span class="nt">screen</span> <span class="nt">and</span> <span class="o">(</span><span class="nt">max-width</span><span class="o">:</span> <span class="nt">768px</span><span class="o">)</span> <span class="p">{</span>
+  <span class="nf">#wrapper</span> <span class="p">{</span> <span class="k">width</span><span class="o">:</span> <span class="k">auto</span><span class="p">;</span> <span class="p">}</span>
+  <span class="nt">nav</span><span class="o">,</span><span class="nt">article</span> <span class="p">{</span> <span class="k">width</span><span class="o">:</span> <span class="m">100%</span><span class="p">;</span> <span class="p">}</span>
+  <span class="nt">nav</span> <span class="nt">ul</span> <span class="nt">li</span> <span class="p">{</span> <span class="k">float</span><span class="o">:</span> <span class="k">left</span><span class="p">;</span> <span class="k">width</span><span class="o">:</span> <span class="m">50%</span> <span class="p">}</span>
+<span class="p">}</span>
+<span class="k">@media</span> <span class="nt">screen</span> <span class="nt">and</span> <span class="o">(</span><span class="nt">max-width</span><span class="o">:</span> <span class="nt">480px</span><span class="o">)</span> <span class="p">{}</span>
+<span class="nt">a</span> <span class="p">{</span> <span class="k">color</span><span class="o">:</span> <span class="m">#666</span><span class="p">;</span> <span class="p">}</span>
+<span class="nt">a</span><span class="nd">:hover</span> <span class="p">{</span> <span class="k">color</span><span class="o">:</span> <span class="m">#888</span><span class="p">;</span> <span class="k">text-decoration</span><span class="o">:</span> <span class="k">none</span><span class="p">;</span> <span class="p">}</span>
+<span class="nt">header</span> <span class="nt">h1</span> <span class="p">{</span>
+  <span class="k">background-color</span><span class="o">:</span> <span class="m">#AAA</span><span class="p">;</span>
+  <span class="k">position</span><span class="o">:</span> <span class="k">relative</span><span class="p">;</span>
+  <span class="k">left</span><span class="o">:</span> <span class="m">5px</span><span class="p">;</span> <span class="k">top</span><span class="o">:</span> <span class="m">5px</span><span class="p">;</span> <span class="k">width</span><span class="o">:</span> <span class="m">100px</span><span class="p">;</span> <span class="k">bottom</span><span class="o">:</span> <span class="m">0</span><span class="p">;</span>
+  <span class="k">text-align</span><span class="o">:</span> <span class="k">center</span><span class="p">;</span>
+<span class="p">}</span>
+<span class="nt">nav</span> <span class="nt">h1</span><span class="o">,</span><span class="nt">article</span> <span class="nt">h1</span> <span class="p">{</span>
+  <span class="k">background-color</span><span class="o">:</span> <span class="m">#AAA</span><span class="p">;</span>
+  <span class="k">clear</span><span class="o">:</span> <span class="k">both</span><span class="p">;</span>
+  <span class="k">padding</span><span class="o">:</span> <span class="m">3px</span> <span class="m">0px</span> <span class="m">3px</span> <span class="m">10px</span><span class="p">;</span> <span class="c">/* 上,右,下,左 */</span>
+<span class="p">}</span>
+<span class="nt">article</span> <span class="nt">p</span> <span class="p">{</span>
+  <span class="k">padding</span><span class="o">:</span> <span class="m">5px</span> <span class="m">10px</span><span class="p">;</span> <span class="c">/* 上下,右左 */</span>
+<span class="p">}</span>
+<span class="nt">section</span> <span class="nt">dl</span> <span class="p">{</span>
+  <span class="k">overflow</span><span class="o">:</span> <span class="k">auto</span><span class="p">;</span>
+  <span class="k">height</span><span class="o">:</span> <span class="m">30px</span><span class="p">;</span>
+<span class="p">}</span>
+<span class="nt">section</span> <span class="nt">dt</span> <span class="p">{</span>
+  <span class="k">float</span><span class="o">:</span> <span class="k">left</span><span class="p">;</span>
+  <span class="k">width</span><span class="o">:</span> <span class="m">100px</span><span class="p">;</span>
+<span class="p">}</span>
+<span class="nt">section</span> <span class="nt">dd</span> <span class="p">{</span>
+  <span class="k">border-bottom</span><span class="o">:</span> <span class="m">1px</span> <span class="k">solid</span> <span class="m">#666</span><span class="p">;</span>
+<span class="p">}</span>
+<span class="nt">table</span> <span class="p">{</span>
+  <span class="k">width</span><span class="o">:</span> <span class="m">100%</span><span class="p">;</span>
+<span class="p">}</span>
+<span class="nt">table</span><span class="o">,</span><span class="nt">table</span> <span class="nt">td</span><span class="o">,</span><span class="nt">table</span> <span class="nt">th</span> <span class="p">{</span>
+  <span class="k">border</span><span class="o">:</span> <span class="m">1px</span> <span class="k">solid</span> <span class="m">#666</span><span class="p">;</span>
+<span class="p">}</span>
+  <span class="nt">&lt;/style&gt;</span>
+  <span class="c">&lt;!--[if lt IE 9]&gt;</span>
+<span class="c">  &lt;script src=&quot;http://html5shiv.googlecode.com/svn/trunk/html5.js&quot;&gt;&lt;/script&gt;</span>
+<span class="c">  &lt;![endif]--&gt;</span>
+  <span class="nt">&lt;script </span><span class="na">type=</span><span class="s">&quot;text/javascript&quot;</span> <span class="na">src=</span><span class="s">&quot;http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js&quot;</span><span class="nt">&gt;&lt;/script&gt;</span>
+  <span class="nt">&lt;script </span><span class="na">type=</span><span class="s">&quot;text/javascript&quot;</span> <span class="na">src=</span><span class="s">&quot;http://ajax.googleapis.com/ajax/libs/jqueryui/1.11.1/jquery-ui.min.js&quot;</span><span class="nt">&gt;&lt;/script&gt;</span>
+  <span class="nt">&lt;script&gt;</span>
+<span class="nx">$</span><span class="p">(</span><span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+  <span class="s2">&quot;use strict&quot;</span><span class="p">;</span>
+<span class="p">});</span>
+  <span class="nt">&lt;/script&gt;</span>
+<span class="nt">&lt;/head&gt;</span>
+<span class="nt">&lt;body&gt;</span>
+  <span class="nt">&lt;div</span> <span class="na">id=</span><span class="s">&quot;wrapper&quot;</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;header&gt;</span>
+      <span class="nt">&lt;h1&gt;&lt;a</span> <span class="na">href=</span><span class="s">&quot;#&quot;</span><span class="nt">&gt;</span>SLMan<span class="nt">&lt;/a&gt;&lt;/h1&gt;</span>
+    <span class="nt">&lt;/header&gt;</span>
+    <span class="nt">&lt;nav&gt;</span>
+      <span class="nt">&lt;h1&gt;</span>ナビヘッダ<span class="nt">&lt;/h1&gt;</span>
+      <span class="nt">&lt;ul&gt;</span>
+        <span class="nt">&lt;li&gt;&lt;a</span> <span class="na">href=</span><span class="s">&quot;#&quot;</span><span class="nt">&gt;</span>ナビ１<span class="nt">&lt;/a&gt;&lt;/li&gt;</span>
+        <span class="nt">&lt;li&gt;&lt;a</span> <span class="na">href=</span><span class="s">&quot;#&quot;</span><span class="nt">&gt;</span>ナビ２<span class="nt">&lt;/a&gt;&lt;/li&gt;</span>
+        <span class="nt">&lt;li&gt;&lt;a</span> <span class="na">href=</span><span class="s">&quot;#&quot;</span><span class="nt">&gt;</span>ナビ３<span class="nt">&lt;/a&gt;&lt;/li&gt;</span>
+        <span class="nt">&lt;li&gt;&lt;a</span> <span class="na">href=</span><span class="s">&quot;#&quot;</span><span class="nt">&gt;</span>ナビ４<span class="nt">&lt;/a&gt;&lt;/li&gt;</span>
+      <span class="nt">&lt;/ul&gt;</span>
+    <span class="nt">&lt;/nav&gt;</span>
+    <span class="nt">&lt;article&gt;</span>
+      <span class="nt">&lt;section&gt;</span>
+        <span class="nt">&lt;h1&gt;</span>ヘッダ１<span class="nt">&lt;/h1&gt;</span>
+        <span class="nt">&lt;p&gt;</span>段落１<span class="nt">&lt;/p&gt;</span>
+        <span class="nt">&lt;p&gt;</span>段落２<span class="nt">&lt;/p&gt;</span>
+      <span class="nt">&lt;/section&gt;</span>
+      <span class="nt">&lt;section&gt;</span>
+        <span class="nt">&lt;h1&gt;</span>ヘッダ２<span class="nt">&lt;/h1&gt;</span>
+        <span class="nt">&lt;dl&gt;</span>
+          <span class="nt">&lt;dt&gt;</span>定義１<span class="nt">&lt;/dt&gt;</span>
+          <span class="nt">&lt;dd&gt;</span>説明１<span class="nt">&lt;/dd&gt;</span>
+          <span class="nt">&lt;dt&gt;</span>定義２<span class="nt">&lt;/dt&gt;</span>
+          <span class="nt">&lt;dd&gt;</span>説明２<span class="nt">&lt;/dd&gt;</span>
+        <span class="nt">&lt;/dl&gt;</span>
+      <span class="nt">&lt;/section&gt;</span>
+      <span class="nt">&lt;section&gt;</span>
+        <span class="nt">&lt;h1&gt;</span>ヘッダ３<span class="nt">&lt;/h1&gt;</span>
+        <span class="nt">&lt;table&gt;</span>
+          <span class="nt">&lt;tr&gt;</span>
+            <span class="nt">&lt;th&gt;</span>テーブルヘッダ１<span class="nt">&lt;/th&gt;</span>
+            <span class="nt">&lt;td&gt;</span>テーブル内容１<span class="nt">&lt;/td&gt;</span>
+          <span class="nt">&lt;/tr&gt;</span>
+          <span class="nt">&lt;tr&gt;</span>
+            <span class="nt">&lt;th&gt;</span>テーブルヘッダ２<span class="nt">&lt;/th&gt;</span>
+            <span class="nt">&lt;td&gt;</span>テーブル内容２<span class="nt">&lt;/td&gt;</span>
+          <span class="nt">&lt;/tr&gt;</span>
+        <span class="nt">&lt;/table&gt;</span>
+      <span class="nt">&lt;/section&gt;</span>
+      <span class="nt">&lt;section&gt;</span>
+        <span class="nt">&lt;h1&gt;</span>ヘッダ４<span class="nt">&lt;/h1&gt;</span>
+        <span class="nt">&lt;form&gt;</span>
+          <span class="nt">&lt;p&gt;&lt;input</span> <span class="na">value=</span><span class="s">&quot;テキスト&quot;</span><span class="nt">&gt;&lt;/p&gt;</span>
+          <span class="nt">&lt;p&gt;&lt;textarea&gt;</span>テキストエリア<span class="nt">&lt;/textarea&gt;&lt;/p&gt;</span>
+        <span class="nt">&lt;/form&gt;</span>
+      <span class="nt">&lt;/section&gt;</span>
+    <span class="nt">&lt;/article&gt;</span>
+    <span class="nt">&lt;footer&gt;</span>
+      <span class="nt">&lt;h1&gt;&lt;a</span> <span class="na">href=</span><span class="s">&quot;#&quot;</span><span class="nt">&gt;</span>SLMan<span class="nt">&lt;/a&gt;&lt;/h1&gt;</span>
+    <span class="nt">&lt;/footer&gt;</span>
+  <span class="nt">&lt;/div&gt;</span>
+<span class="nt">&lt;/body&gt;</span>
+<span class="nt">&lt;/html&gt;</span>
+<span class="cp">&lt;!doctype html&gt;</span>
+<span class="nt">&lt;html</span> <span class="na">lang=</span><span class="s">&quot;ja&quot;</span><span class="nt">&gt;</span>
+<span class="nt">&lt;head&gt;</span>
+  <span class="nt">&lt;meta</span> <span class="na">http-equiv=</span><span class="s">&quot;Content-Type&quot;</span> <span class="na">content=</span><span class="s">&quot;text/html; charset=UTF-8&quot;</span><span class="nt">&gt;</span>
+  <span class="nt">&lt;meta</span> <span class="na">name=</span><span class="s">&quot;viewport&quot;</span> <span class="na">content=</span><span class="s">&quot;width=device-width&quot;</span><span class="nt">&gt;</span>
+  <span class="nt">&lt;meta</span> <span class="na">name=</span><span class="s">&quot;copyright&quot;</span> <span class="na">content=</span><span class="s">&quot;SLMan&quot;</span><span class="nt">&gt;</span>
+  <span class="nt">&lt;meta</span> <span class="na">name=</span><span class="s">&quot;description&quot;</span> <span class="na">content=</span><span class="s">&quot;説明&quot;</span><span class="nt">&gt;</span>
+  <span class="nt">&lt;meta</span> <span class="na">name=</span><span class="s">&quot;keywords&quot;</span> <span class="na">content=</span><span class="s">&quot;key1,key2&quot;</span><span class="nt">&gt;</span>
+  <span class="nt">&lt;title&gt;</span>SLMan<span class="nt">&lt;/title&gt;</span>
+  <span class="nt">&lt;link</span> <span class="na">rel=</span><span class="s">&quot;stylesheet&quot;</span> <span class="na">href=</span><span class="s">&quot;http://ajax.googleapis.com/ajax/libs/jqueryui/1.11.1/themes/smoothness/jquery-ui.css&quot;</span> <span class="nt">/&gt;</span>
+  <span class="nt">&lt;style&gt;</span>
+<span class="nt">html</span><span class="o">,</span><span class="nt">body</span><span class="o">,</span><span class="nt">div</span><span class="o">,</span><span class="nt">h1</span><span class="o">,</span><span class="nt">p</span><span class="o">,</span><span class="nt">a</span><span class="o">,</span><span class="nt">form</span><span class="o">,</span>
+<span class="nt">header</span><span class="o">,</span><span class="nt">nav</span><span class="o">,</span><span class="nt">article</span><span class="o">,</span><span class="nt">section</span><span class="o">,</span><span class="nt">footer</span><span class="o">,</span>
+<span class="nt">dl</span><span class="o">,</span><span class="nt">dt</span><span class="o">,</span><span class="nt">dd</span><span class="o">,</span><span class="nt">ul</span><span class="o">,</span><span class="nt">li</span><span class="o">,</span>
+<span class="nt">input</span><span class="o">,</span><span class="nt">textarea</span><span class="o">,</span>
+<span class="nt">table</span><span class="o">,</span><span class="nt">tr</span><span class="o">,</span><span class="nt">th</span><span class="o">,</span><span class="nt">td</span> <span class="p">{</span>
+  <span class="k">margin</span><span class="o">:</span> <span class="m">0</span><span class="p">;</span>
+  <span class="k">padding</span><span class="o">:</span> <span class="m">0</span><span class="p">;</span>
+  <span class="k">border</span><span class="o">:</span> <span class="m">0</span><span class="p">;</span>
+  <span class="k">font-style</span><span class="o">:</span> <span class="k">normal</span><span class="p">;</span>
+  <span class="k">font-weight</span><span class="o">:</span> <span class="k">normal</span><span class="p">;</span>
+  <span class="k">font-size</span><span class="o">:</span> <span class="m">100%</span><span class="p">;</span>
+  <span class="k">font-family</span><span class="o">:</span> <span class="k">sans-serif</span><span class="p">;</span>
+  <span class="k">vertical-align</span><span class="o">:</span> <span class="k">baseline</span><span class="p">;</span>
+<span class="p">}</span>
+<span class="nt">header</span><span class="o">,</span><span class="nt">nav</span><span class="o">,</span><span class="nt">article</span><span class="o">,</span><span class="nt">section</span><span class="o">,</span><span class="nt">footer</span> <span class="p">{</span> <span class="k">display</span><span class="o">:</span> <span class="k">block</span><span class="p">;</span> <span class="p">}</span>
+<span class="nt">html</span><span class="p">{</span> <span class="k">overflow-y</span><span class="o">:</span> <span class="k">scroll</span><span class="p">;</span> <span class="p">}</span>
+<span class="nt">ul</span><span class="p">{</span> <span class="k">list-style-type</span><span class="o">:</span> <span class="k">none</span><span class="p">;</span> <span class="p">}</span>
 <span class="nt">table</span><span class="p">{</span> <span class="k">border-collapse</span><span class="o">:</span> <span class="k">collapse</span><span class="p">;</span> <span class="k">border-spacing</span><span class="o">:</span> <span class="m">0</span><span class="p">;</span> <span class="p">}</span>
 <span class="nt">th</span> <span class="p">{</span> <span class="k">text-align</span><span class="o">:</span> <span class="k">left</span><span class="p">;</span> <span class="p">}</span>
 <span class="nf">#wrapper</span> <span class="p">{</span>
