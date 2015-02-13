@@ -9,10 +9,10 @@
   <title>SLMan</title>
   <link rel="stylesheet" href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.11.1/themes/smoothness/jquery-ui.css" />
   <style>
-html,body,div,h1,p,a,form,
+html,body,div,h1,p,a,
 header,nav,article,section,footer,
 dl,dt,dd,ul,li,
-input,textarea,
+form,input,textarea,
 table,tr,th,td {
   margin: 0;
   padding: 0;
@@ -54,9 +54,11 @@ footer {
 @media screen and (max-width: 768px) {
   #wrapper { width: auto; }
   nav,article { width: 100%; }
+  nav ul li { float: left; width: 25% }
+}
+@media screen and (max-width: 480px) {
   nav ul li { float: left; width: 50% }
 }
-@media screen and (max-width: 480px) {}
 a { color: #666; }
 a:hover { color: #888; text-decoration: none; }
 header h1 {
