@@ -28,7 +28,7 @@ html
       vertical-align: top;
     }
     header,nav,article,section,footer { display: block; }
-    html,dl { overflow-y: scroll; }
+    html { overflow-y: scroll; }
     ul { list-style-type: none; }
     table { border-collapse: collapse; border-spacing: 0; }
     table,td,th,input,textarea { border: 1px solid #666; }
@@ -38,7 +38,7 @@ html
     th { text-align: left; }
     dl { overflow: auto; height: 50px; }
     dt { float: left; width: 100px; }
-    dd { border-bottom: 1px solid #666; }
+    dd { background-color: #CCC; border-bottom: 1px solid #666; }
     a { color: #666; }
     a:hover { color: #888; text-decoration: none; }
     #wrapper {
