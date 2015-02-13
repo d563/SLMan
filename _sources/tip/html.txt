@@ -16,7 +16,7 @@ html
     html,body,div,h1,p,a,
     header,nav,article,section,footer,
     dl,dt,dd,ul,li,
-    form,input,textarea,
+    form,input,textarea,select,
     table,tr,th,td {
       margin: 0;
       padding: 0;
@@ -31,14 +31,15 @@ html
     html { overflow-y: scroll; }
     ul { list-style-type: none; }
     table { border-collapse: collapse; border-spacing: 0; }
-    table,td,th,input,textarea { border: 1px solid #666; }
-    table,p,dl,ul,input,textarea { margin: 5px 10px; /* 上下,右左 */ }
+    table,td,th,input,textarea,select { border: 1px solid #666; padding: 3px; }
+    table,p,dl,ul,input,textarea,select { margin: 5px 10px; /* 上下,右左 */ }
     h1 { padding: 3px 0px 3px 10px; /* 上,右,下,左 */ }
-    li { margin: 2px 0; }
+    li { margin: 5px 0; }
     th { text-align: left; }
-    dl { overflow: auto; height: 50px; }
+    dl { overflow: auto; height: 60px; }
     dt { float: left; width: 100px; }
     dd { background-color: #CCC; border-bottom: 1px solid #666; }
+    dt,dd { padding: 3px; }
     a { color: #666; }
     a:hover { color: #888; text-decoration: none; }
     #wrapper {
@@ -138,6 +139,11 @@ html
             <form>
               <input value="テキスト">
               <textarea>テキストエリア</textarea>
+              <select>
+                <option value="1">選択１</option>
+                <option value="2">選択２</option>
+                <option value="3">選択３</option>
+              </select>
             </form>
           </section>
         </article>
