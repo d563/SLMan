@@ -12,7 +12,7 @@
 html,body,div,h1,p,a,
 header,nav,article,section,footer,
 dl,dt,dd,ul,li,
-form,input,textarea,select,
+form,input,button,textarea,select,
 table,tr,th,td {
   margin: 0;
   padding: 0;
@@ -27,10 +27,10 @@ header,nav,article,section,footer { display: block; }
 html { overflow-y: scroll; }
 ul { list-style-type: none; }
 table { border-collapse: collapse; border-spacing: 0; }
-table,td,th,input,textarea,select { border: 1px solid #666; padding: 3px; }
-table,p,dl,ul,input,textarea,select { margin: 5px 10px; /* 上下,右左 */ }
+table,td,th,input,button,textarea,select { border: 1px solid #666; padding: 3px; }
+table,p,dl,ul,input,button,textarea,select { margin: 3px 0px 3px 10px; }
 h1 { padding: 3px 0px 3px 10px; /* 上,右,下,左 */ }
-li { margin: 5px 0; }
+li { margin: 3px 0; /* 上下,右左 */ }
 th { text-align: left; }
 dl { overflow: auto; height: 60px; }
 dt { float: left; width: 100px; }
@@ -38,6 +38,9 @@ dd { background-color: #CCC; border-bottom: 1px solid #666; }
 dt,dd { padding: 3px; }
 a { color: #666; }
 a:hover { color: #888; text-decoration: none; }
+button { background-color: #AAA; }
+button:hover { background-color: #BBB; }
+button:active { background-color: #EEE; }
 #wrapper {
   background-color: #EEE;
   width: 768px;
@@ -102,12 +105,12 @@ $(function() {
     </nav>
     <article>
       <section>
-        <h1>ヘッダ１</h1>
+        <h1>セクションヘッダ１</h1>
         <p>段落１</p>
         <p>段落２</p>
       </section>
       <section>
-        <h1>ヘッダ２</h1>
+        <h1>セクションヘッダ２</h1>
         <dl>
           <dt>定義１</dt><dd>説明１</dd>
           <dt>定義２</dt><dd>説明２</dd>
@@ -116,7 +119,7 @@ $(function() {
         </dl>
       </section>
       <section>
-        <h1>ヘッダ３</h1>
+        <h1>セクションヘッダ３</h1>
         <table>
           <tr>
             <th>テーブルヘッダ１</th>
@@ -131,9 +134,11 @@ $(function() {
         </table>
       </section>
       <section>
-        <h1>ヘッダ４</h1>
+        <h1>セクションヘッダ４</h1>
         <form>
-          <input value="テキスト">
+          <input value="テキスト" />
+          <input type="password" />
+          <button>ボタン</button>
           <textarea>テキストエリア</textarea>
           <select>
             <option value="1">選択１</option>
