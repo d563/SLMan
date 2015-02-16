@@ -21,14 +21,14 @@ table,tr,th,td {
   font-weight: normal;
   font-size: 100%;
   font-family: sans-serif;
-  vertical-align: top;
+  vertical-align: middle;
 }
 header,nav,article,section,footer { display: block; }
 html { overflow-y: scroll; }
 ul { list-style-type: none; }
 table { border-collapse: collapse; border-spacing: 0; }
 table,td,th,input,button,textarea,select { border: 1px solid #666; padding: 3px; }
-table,p,dl,ul,input,button,textarea,select { margin: 3px 0px 3px 10px; }
+table,p,dl,ul { margin: 3px 0px 3px 10px; }
 h1 { padding: 3px 0px 3px 10px; /* 上,右,下,左 */ }
 li { margin: 3px 0; /* 上下,右左 */ }
 th { text-align: left; }
@@ -41,7 +41,7 @@ a:hover { color: #888; text-decoration: none; }
 button { background-color: #AAA; }
 button:hover { background-color: #BBB; }
 button:active { background-color: #EEE; }
-#wrapper {
+body {
   background-color: #EEE;
   width: 768px;
   margin: auto;
@@ -61,12 +61,12 @@ article {
   width: 600px;
 }
 @media screen and (max-width: 768px) {
-  #wrapper { width: auto; }
+  body { width: auto; }
   nav,article { width: 100%; }
-  nav ul li { float: left; width: 25%; text-align: center; }
+  li { float: left; width: 25%; text-align: center; }
 }
 @media screen and (max-width: 480px) {
-  nav ul li { float: left; width: 50%; }
+  li { float: left; width: 50%; }
 }
 nav h1,article h1 {
   background-color: #AAA;
@@ -81,76 +81,81 @@ nav h1,article h1 {
   <script>
 $(function() {
   "use strict";
+  $('aside').dialog({ autoOpen: false, modal: true });
+  $('#btn1').click(function() { $('#dlg1').dialog('open'); return false; });
 });
   </script>
 </head>
 <body>
-  <div id="wrapper">
-    <header>
-      <h1><a href="#">SLMan</a></h1>
-    </header>
-    <nav>
-      <h1>ナビヘッダ１</h1>
-      <ul>
-        <li><a href="#">ナビ１－１</a></li>
-        <li><a href="#">ナビ１－２</a></li>
-        <li><a href="#">ナビ１－３</a></li>
-        <li><a href="#">ナビ１－４</a></li>
-      </ul>
-      <h1>ナビヘッダ２</h1>
-      <ul>
-        <li><a href="#">ナビ２－１</a></li>
-        <li><a href="#">ナビ２－２</a></li>
-      </ul>
-    </nav>
-    <article>
-      <section>
-        <h1>セクションヘッダ１</h1>
-        <p>段落１</p>
-        <p>段落２</p>
-      </section>
-      <section>
-        <h1>セクションヘッダ２</h1>
-        <dl>
-          <dt>定義１</dt><dd>説明１</dd>
-          <dt>定義２</dt><dd>説明２</dd>
-          <dt>定義３</dt><dd>説明３</dd>
-          <dt>定義４</dt><dd>説明４</dd>
-        </dl>
-      </section>
-      <section>
-        <h1>セクションヘッダ３</h1>
+  <header>
+    <h1><a href="#">SLMan</a></h1>
+  </header>
+  <nav>
+    <h1>ナビヘッダ１</h1>
+    <ul>
+      <li><a href="#">ナビ１－１</a></li>
+      <li><a href="#">ナビ１－２</a></li>
+      <li><a href="#">ナビ１－３</a></li>
+      <li><a href="#">ナビ１－４</a></li>
+    </ul>
+    <h1>ナビヘッダ２</h1>
+    <ul>
+      <li><a href="#">ナビ２－１</a></li>
+      <li><a href="#">ナビ２－２</a></li>
+    </ul>
+  </nav>
+  <article>
+    <section>
+      <h1>セクションヘッダ１</h1>
+      <p>段落１</p>
+      <p>段落２</p>
+    </section>
+    <section>
+      <h1>セクションヘッダ２</h1>
+      <dl>
+        <dt>定義１</dt><dd>説明１</dd>
+        <dt>定義２</dt><dd>説明２</dd>
+        <dt>定義３</dt><dd>説明３</dd>
+        <dt>定義４</dt><dd>説明４</dd>
+      </dl>
+    </section>
+    <section>
+      <h1>セクションヘッダ３</h1>
+      <form>
         <table>
           <tr>
-            <th>テーブルヘッダ１</th>
-            <td>テーブル内容１－１</td>
-            <td>テーブル内容１－２</td>
+            <th>テキスト</th>
+            <td><input value="テキスト" /></td>
           </tr>
           <tr>
-            <th>テーブルヘッダ２</th>
-            <td>テーブル内容２－１</td>
-            <td>テーブル内容２－２</td>
+            <th>パスワード</th>
+            <td><input type="password" /></td>
+          </tr>
+          <tr>
+            <th>ボタン</th>
+            <td><button id="btn1">ボタン</button></td>
+          </tr>
+          <tr>
+            <th>テキストエリア</th>
+            <td><textarea>テキストエリア</textarea></td>
+          </tr>
+          <tr>
+            <th>セレクト</th>
+            <td>
+              <select>
+                <option value="1">選択１</option>
+                <option value="2">選択２</option>
+                <option value="3">選択３</option>
+              </select>
+            </td>
           </tr>
         </table>
-      </section>
-      <section>
-        <h1>セクションヘッダ４</h1>
-        <form>
-          <input value="テキスト" />
-          <input type="password" />
-          <button>ボタン</button>
-          <textarea>テキストエリア</textarea>
-          <select>
-            <option value="1">選択１</option>
-            <option value="2">選択２</option>
-            <option value="3">選択３</option>
-          </select>
-        </form>
-      </section>
-    </article>
-    <footer>
-      <h1><a href="#">SLMan</a></h1>
-    </footer>
-  </div>
+      </form>
+    </section>
+  </article>
+  <aside id="dlg1" title="ダイアログ">内容</aside>
+  <footer>
+    <h1><a href="#">SLMan</a></h1>
+  </footer>
 </body>
 </html>
