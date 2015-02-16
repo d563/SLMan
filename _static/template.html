@@ -81,6 +81,10 @@ nav h1,article h1 {
   <script>
 $(function() {
   "use strict";
+  $("input").keydown(function(e) {
+    if ((e.which && e.which === 13) || (e.keyCode && e.keyCode === 13)) return false;
+    else return true;
+  });
   $('aside').dialog({ autoOpen: false, modal: true });
   $('#btn1').click(function() { $('#dlg1').dialog('open'); return false; });
 });
