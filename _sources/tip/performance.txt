@@ -2,36 +2,71 @@ performance
 ===========
 ::
 
-    top          (1 M T)
+    cat /proc/cpuinfo     CPU情報
 
+coreutils
+---------
+::
+
+    uname -a              システム情報
+
+procps
+------
+::
+
+    top
+      -u tomcat           ユーザ指定
+      -H                  スレッド表示
+      -p 12345            プロセス指定
+
+      表示変更
+        1                 マルチコア
+        c                 フルパス
+
+      ソート変更
+        P                 CPU使用率
+        T                 CPU時間
+        M                 メモリ
+
+    ps
+      alxfww              詳細ツリー
+      alx -L              スレッド表示
+
+    free
+      -ms1                1秒間隔（メガバイト）
+
+net-tools
+---------
+::
+
+    yum -y install net-tools
+
+    netstat
+      -antp               TCPポート
+      -anup               UDPポート
+    
+strace
+------
+::
+
+    yum -y install strace
+
+    strace                システムコール出力
+      -p 12345            プロセス指定
+
+sysstat
+-------
 ::
 
     yum -y install sysstat
 
-    sar -q       (load average)
-    sar          (cpur/io)
-    sar -W       (swap)
+    sar
+      -f /var/log/sa/sa01 日付指定
+      -P ALL              マルチコア
+      -q                  ロードアベレージ
+      -W                  スワップ
+      1                   1秒間隔
 
-    sar 1 -P ALL
-
-::
-
-    vmstat 1
-    watch -n1 free -m
-
-::
-
-    netstat -antp
-    netstat -anup
-
-    ps alxfww
-
-::
-
-    uname -a
-    cat /proc/cpuinfo
-
-::
-
-    rsync -rtv a/ b/
-    rsync -rlpcgoDvz --delete --exclude='.svn' -e ssh /var/a/ user@ip:/var/b/
+    pidstat
+      -p 12345            プロセス指定
+      1                   1秒間隔
