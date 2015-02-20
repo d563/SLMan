@@ -13,8 +13,8 @@ httpd
 
 ::
 
-    sed -i.org \ INPUT -m state --state NEW -m tcp -p tcp --dport 80 -j ACCEPT
-    -e '/--dport 22/a' \
+    sed -i.org \
+    -e '/--dport 22/a-A INPUT -m state --state NEW -m tcp -p tcp --dport 80 -j ACCEPT' \
     /etc/sysconfig/iptables
 
     /etc/init.d/iptables restart

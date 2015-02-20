@@ -71,8 +71,8 @@
 /etc/init.d/httpd start
 </pre></div>
 </div>
-<div class="highlight-python" id="index-0"><div class="highlight"><pre>sed -i.org \ INPUT -m state --state NEW -m tcp -p tcp --dport 80 -j ACCEPT
--e &#39;/--dport 22/a&#39; \
+<div class="highlight-python" id="index-0"><div class="highlight"><pre>sed -i.org \
+-e &#39;/--dport 22/a-A INPUT -m state --state NEW -m tcp -p tcp --dport 80 -j ACCEPT&#39; \
 /etc/sysconfig/iptables
 
 /etc/init.d/iptables restart

@@ -1,5 +1,0 @@
-linux
-=====
-::
-
-    rsync  -vrlpz --checksum --delete --exclude="**/.svn**" -e ssh ~/from/ d563@host:~/to/

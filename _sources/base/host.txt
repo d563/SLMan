@@ -8,6 +8,8 @@ os
     http://ftp.riken.jp/Linux/scientific/6.5/i386/iso/SL-65-i386-2013-12-05-boot.iso
     http://ftp.riken.jp/Linux/scientific/6.5/i386/os/
 
+::
+
     http://ftp.riken.jp/Linux/centos/6/isos/i386/CentOS-6.6-i386-netinstall.iso
     http://ftp.riken.jp/Linux/centos/6/os/i386/
 
@@ -47,10 +49,7 @@ misc
 
     sed -i.org -e 's/debuglevel=2/debuglevel=1/' /etc/yum.conf
 
-    yum -y install wget unzip gcc gcc-c++ \
-    java-1.7.0-openjdk-devel \
-    python-setuptools python-devel
-
+    yum -y install wget unzip gcc gcc-c++ java-1.7.0-openjdk-devel python-setuptools python-devel
     yum -y update
 
 ::

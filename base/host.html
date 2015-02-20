@@ -68,8 +68,9 @@
 <h2>1.1.1. os<a class="headerlink" href="#os" title="Permalink to this headline">¶</a></h2>
 <div class="highlight-python"><div class="highlight"><pre>http://ftp.riken.jp/Linux/scientific/6.5/i386/iso/SL-65-i386-2013-12-05-boot.iso
 http://ftp.riken.jp/Linux/scientific/6.5/i386/os/
-
-http://ftp.riken.jp/Linux/centos/6/isos/i386/CentOS-6.6-i386-netinstall.iso
+</pre></div>
+</div>
+<div class="highlight-python"><div class="highlight"><pre>http://ftp.riken.jp/Linux/centos/6/isos/i386/CentOS-6.6-i386-netinstall.iso
 http://ftp.riken.jp/Linux/centos/6/os/i386/
 </pre></div>
 </div>
@@ -102,10 +103,7 @@ Defaults passprompt = &quot;%u@%h Password: &quot;
 <h2>1.1.5. misc<a class="headerlink" href="#misc" title="Permalink to this headline">¶</a></h2>
 <div class="highlight-python"><div class="highlight"><pre>sed -i.org -e &#39;s/debuglevel=2/debuglevel=1/&#39; /etc/yum.conf
 
-yum -y install wget unzip gcc gcc-c++ \
-java-1.7.0-openjdk-devel \
-python-setuptools python-devel
-
+yum -y install wget unzip gcc gcc-c++ java-1.7.0-openjdk-devel python-setuptools python-devel
 yum -y update
 </pre></div>
 </div>
