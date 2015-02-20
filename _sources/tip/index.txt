@@ -2,5 +2,5 @@ tip
 ===
 .. toctree::
     windows
-    dry-run
+    linux
     performance

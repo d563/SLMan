@@ -4,3 +4,4 @@ base
     host
     vim
     httpd
+    sshd

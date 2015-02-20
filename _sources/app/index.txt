@@ -6,4 +6,3 @@ app
     fabric
     tomcat
     ant
-    make

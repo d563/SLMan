@@ -1,0 +1,19 @@
+sshd
+====
+::
+
+    sed -i.org \
+    -e 's/--dport 22/--dport 443/' \
+    /etc/sysconfig/iptables
+
+    /etc/init.d/iptables restart
+
+.. index:: /etc/ssh/sshd_config
+
+::
+
+    sed -i.org \
+    -e '/#Port 22/aPort 443' \
+    /etc/ssh/sshd_config
+
+    /etc/init.d/sshd restart

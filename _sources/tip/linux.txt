@@ -1,13 +1,11 @@
+linux
+=====
 dry-run
-=======
+-------
 ::
 
     rsync  -vrlpzn --checksum --delete --exclude="**/.svn**" -e ssh ~/from/ d563@host:~/to/
 
-::
-
     tar ztvf xxx.tar.gz
-
-::
 
     zipinfo xxx.zip

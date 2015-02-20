@@ -43,8 +43,8 @@ visudo
     Defaults passprompt = "%u@%h Password: "
     %wheel ALL=(ALL) NOPASSWD: ALL
 
-misc
-----
+package
+-------
 ::
 
     sed -i.org -e 's/debuglevel=2/debuglevel=1/' /etc/yum.conf
