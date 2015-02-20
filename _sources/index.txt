@@ -9,5 +9,6 @@ SLMan
     man/index
     data/index
     app/index
+    temp/index
     idea/index
     tip/index

@@ -1,5 +1,6 @@
 html
 ====
+.. module:: template.html
 .. code-block:: html
 
     <!doctype html>
@@ -11,6 +12,7 @@ html
       <meta name="description" content="説明">
       <meta name="keywords" content="key1,key2">
       <title>SLMan</title>
+      <!-- template.html -->
       <link rel="stylesheet" href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.11.1/themes/smoothness/jquery-ui.css" />
       <style>
     html,body,div,h1,p,a,

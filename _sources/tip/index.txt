@@ -2,5 +2,5 @@ tip
 ===
 .. toctree::
     windows
+    linux
     performance
-    html

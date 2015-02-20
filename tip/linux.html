@@ -6,7 +6,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>8.3. performance &mdash; SLMan 0.0.1 documentation</title>
+    <title>8.2. linux &mdash; SLMan 0.0.1 documentation</title>
     
     <link rel="stylesheet" href="../_static/pyramid.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
@@ -26,7 +26,8 @@
     <script type="text/javascript" src="../_static/doctools.js"></script>
     <link rel="top" title="SLMan 0.0.1 documentation" href="../index.html" />
     <link rel="up" title="8. tip" href="index.html" />
-    <link rel="prev" title="8.2. linux" href="linux.html" />
+    <link rel="next" title="8.3. performance" href="performance.html" />
+    <link rel="prev" title="8.1. windows" href="windows.html" />
 <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Neuton&amp;subset=latin" type="text/css" media="screen" charset="utf-8" />
 <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Nobile:regular,italic,bold,bolditalic&amp;subset=latin" type="text/css" media="screen" charset="utf-8" />
 <!--[if lte IE 6]>
@@ -46,7 +47,10 @@
           <a href="../py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
         <li class="right" >
-          <a href="linux.html" title="8.2. linux"
+          <a href="performance.html" title="8.3. performance"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="windows.html" title="8.1. windows"
              accesskey="P">previous</a> |</li>
         <li><a href="../index.html">SLMan 0.0.1 documentation</a> &raquo;</li>
           <li><a href="index.html" accesskey="U">8. tip</a> &raquo;</li> 
@@ -58,77 +62,10 @@
         <div class="bodywrapper">
           <div class="body">
             
-  <div class="section" id="performance">
-<h1>8.3. performance<a class="headerlink" href="#performance" title="Permalink to this headline">¶</a></h1>
-<div class="highlight-python"><div class="highlight"><pre>cat /proc/cpuinfo     CPU情報
+  <div class="section" id="linux">
+<h1>8.2. linux<a class="headerlink" href="#linux" title="Permalink to this headline">¶</a></h1>
+<div class="highlight-python"><div class="highlight"><pre>rsync  -vrlpz --checksum --delete --exclude=&quot;**/.svn**&quot; -e ssh ~/from/ d563@host:~/to/
 </pre></div>
-</div>
-<div class="section" id="coreutils">
-<h2>8.3.1. coreutils<a class="headerlink" href="#coreutils" title="Permalink to this headline">¶</a></h2>
-<div class="highlight-python"><div class="highlight"><pre>uname -a              システム情報
-</pre></div>
-</div>
-</div>
-<div class="section" id="procps">
-<h2>8.3.2. procps<a class="headerlink" href="#procps" title="Permalink to this headline">¶</a></h2>
-<div class="highlight-python"><div class="highlight"><pre>top
-  -u tomcat           ユーザ指定
-  -H                  スレッド表示
-  -p 12345            プロセス指定
-
-  表示変更
-    1                 マルチコア
-    c                 フルパス
-
-  ソート変更
-    P                 CPU使用率
-    T                 CPU時間
-    M                 メモリ
-
-ps
-  alxfww              詳細ツリー
-  alx -L              スレッド表示
-
-free
-  -ms1                1秒間隔（メガバイト）
-</pre></div>
-</div>
-</div>
-<div class="section" id="net-tools">
-<h2>8.3.3. net-tools<a class="headerlink" href="#net-tools" title="Permalink to this headline">¶</a></h2>
-<div class="highlight-python"><div class="highlight"><pre>yum -y install net-tools
-
-netstat
-  -antp               TCPポート
-  -anup               UDPポート
-</pre></div>
-</div>
-</div>
-<div class="section" id="strace">
-<h2>8.3.4. strace<a class="headerlink" href="#strace" title="Permalink to this headline">¶</a></h2>
-<div class="highlight-python"><div class="highlight"><pre>yum -y install strace
-
-strace                システムコール出力
-  -p 12345            プロセス指定
-</pre></div>
-</div>
-</div>
-<div class="section" id="sysstat">
-<h2>8.3.5. sysstat<a class="headerlink" href="#sysstat" title="Permalink to this headline">¶</a></h2>
-<div class="highlight-python"><div class="highlight"><pre>yum -y install sysstat
-
-sar
-  -f /var/log/sa/sa01 日付指定
-  -P ALL              マルチコア
-  -q                  ロードアベレージ
-  -W                  スワップ
-  1                   1秒間隔
-
-pidstat
-  -p 12345            プロセス指定
-  1                   1秒間隔
-</pre></div>
-</div>
 </div>
 </div>
 
@@ -138,21 +75,12 @@ pidstat
       </div>
       <div class="sphinxsidebar">
         <div class="sphinxsidebarwrapper">
-  <h3><a href="../index.html">Table Of Contents</a></h3>
-  <ul>
-<li><a class="reference internal" href="#">8.3. performance</a><ul>
-<li><a class="reference internal" href="#coreutils">8.3.1. coreutils</a></li>
-<li><a class="reference internal" href="#procps">8.3.2. procps</a></li>
-<li><a class="reference internal" href="#net-tools">8.3.3. net-tools</a></li>
-<li><a class="reference internal" href="#strace">8.3.4. strace</a></li>
-<li><a class="reference internal" href="#sysstat">8.3.5. sysstat</a></li>
-</ul>
-</li>
-</ul>
-
   <h4>Previous topic</h4>
-  <p class="topless"><a href="linux.html"
-                        title="previous chapter">8.2. linux</a></p>
+  <p class="topless"><a href="windows.html"
+                        title="previous chapter">8.1. windows</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="performance.html"
+                        title="next chapter">8.3. performance</a></p>
 <div id="searchbox" style="display: none">
   <h3>Quick search</h3>
     <form class="search" action="../search.html" method="get">
@@ -180,7 +108,10 @@ pidstat
           <a href="../py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
         <li class="right" >
-          <a href="linux.html" title="8.2. linux"
+          <a href="performance.html" title="8.3. performance"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="windows.html" title="8.1. windows"
              >previous</a> |</li>
         <li><a href="../index.html">SLMan 0.0.1 documentation</a> &raquo;</li>
           <li><a href="index.html" >8. tip</a> &raquo;</li> 
