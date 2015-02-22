@@ -1,0 +1,25 @@
+python
+======
+mail
+----
+.. module:: mail.py
+
+::
+
+    #!/usr/bin/python
+    # -*- coding: utf-8 -*-
+    # mail.py
+    import smtplib
+    from email.MIMEText import MIMEText
+    u = 'user'
+    p = 'pass'
+    f = '%s@yahoo.co.jp' % u
+    t = [f]
+    m = MIMEText('本文', 'plain', 'UTF-8')
+    m['Subject'] = 'タイトル'
+    m['From'] = f
+    m['To'] = ','.join(t)
+    s = smtplib.SMTP_SSL('smtp.mail.yahoo.co.jp', 465)
+    s.login(u, p)
+    s.sendmail(f, t, m.as_string())
+    s.quit()
