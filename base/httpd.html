@@ -26,7 +26,7 @@
     <script type="text/javascript" src="../_static/doctools.js"></script>
     <link rel="top" title="SLMan 0.0.1 documentation" href="../index.html" />
     <link rel="up" title="1. base" href="index.html" />
-    <link rel="next" title="1.4. sshd" href="sshd.html" />
+    <link rel="next" title="2. repo" href="../repo/index.html" />
     <link rel="prev" title="1.2. vim" href="vim.html" />
 <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Neuton&amp;subset=latin" type="text/css" media="screen" charset="utf-8" />
 <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Nobile:regular,italic,bold,bolditalic&amp;subset=latin" type="text/css" media="screen" charset="utf-8" />
@@ -47,7 +47,7 @@
           <a href="../py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
         <li class="right" >
-          <a href="sshd.html" title="1.4. sshd"
+          <a href="../repo/index.html" title="2. repo"
              accesskey="N">next</a> |</li>
         <li class="right" >
           <a href="vim.html" title="1.2. vim"
@@ -71,25 +71,11 @@
 /etc/init.d/httpd start
 </pre></div>
 </div>
-<div class="highlight-python" id="index-0"><div class="highlight"><pre>sed -i.org \
+<div class="highlight-python"><div class="highlight"><pre>sed -i.org \
 -e &#39;/--dport 22/a-A INPUT -m state --state NEW -m tcp -p tcp --dport 80 -j ACCEPT&#39; \
 /etc/sysconfig/iptables
 
 /etc/init.d/iptables restart
-</pre></div>
-</div>
-<div class="highlight-python"><div class="highlight"><pre># /etc/sysconfig/iptables (default)
-*filter
-:INPUT ACCEPT [0:0]
-:FORWARD ACCEPT [0:0]
-:OUTPUT ACCEPT [0:0]
--A INPUT -m state --state ESTABLISHED,RELATED -j ACCEPT
--A INPUT -p icmp -j ACCEPT
--A INPUT -i lo -j ACCEPT
--A INPUT -m state --state NEW -m tcp -p tcp --dport 22 -j ACCEPT
--A INPUT -j REJECT --reject-with icmp-host-prohibited
--A FORWARD -j REJECT --reject-with icmp-host-prohibited
-COMMIT
 </pre></div>
 </div>
 </div>
@@ -104,8 +90,8 @@ COMMIT
   <p class="topless"><a href="vim.html"
                         title="previous chapter">1.2. vim</a></p>
   <h4>Next topic</h4>
-  <p class="topless"><a href="sshd.html"
-                        title="next chapter">1.4. sshd</a></p>
+  <p class="topless"><a href="../repo/index.html"
+                        title="next chapter">2. repo</a></p>
 <div id="searchbox" style="display: none">
   <h3>Quick search</h3>
     <form class="search" action="../search.html" method="get">
@@ -133,7 +119,7 @@ COMMIT
           <a href="../py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
         <li class="right" >
-          <a href="sshd.html" title="1.4. sshd"
+          <a href="../repo/index.html" title="2. repo"
              >next</a> |</li>
         <li class="right" >
           <a href="vim.html" title="1.2. vim"
