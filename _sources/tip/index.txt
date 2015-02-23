@@ -4,4 +4,4 @@ tip
     windows
     linux
     performance
-    python
+    mail

@@ -1,0 +1,62 @@
+mail
+====
+python
+------
+.. module:: mail.py
+.. code-block:: python
+
+    #!/usr/bin/python
+    # -*- coding: utf-8 -*-
+    # mail.py
+    import smtplib
+    from email.MIMEText import MIMEText
+    u = 'user'
+    p = 'pass'
+    f = '%s@yahoo.co.jp' % u
+    t = [f]
+    m = MIMEText('本文', 'plain', 'UTF-8')
+    m['Subject'] = 'タイトル'
+    m['From'] = f
+    m['To'] = ','.join(t)
+    s = smtplib.SMTP_SSL('smtp.mail.yahoo.co.jp', 465)
+    s.login(u, p)
+    s.sendmail(f, t, m.as_string())
+    s.quit()
+
+groovy
+------
+.. module:: mail.groovy
+.. code-block:: groovy
+
+    @Grab(group='javax.mail', module='mail', version='1.4.7')
+    import javax.mail.Authenticator
+    import javax.mail.Message.RecipientType
+    import javax.mail.PasswordAuthentication
+    import javax.mail.Session
+    import javax.mail.Transport
+    import javax.mail.internet.InternetAddress
+    import javax.mail.internet.MimeMessage
+    // mail.groovy
+    def u = 'mail.d563'
+    def p = 'pass'
+    Session s = Session.getInstance(
+      new ConfigSlurper().parse('''
+        mail {
+          smtp {
+            host = 'smtp.gmail.com'
+            port = 465
+            auth = true
+            ssl.enable = true
+          }
+        }
+      ''').toProperties(),
+      new Authenticator() {
+        PasswordAuthentication passwordAuthentication = new PasswordAuthentication(u, p)
+      }
+    )
+    MimeMessage m = new MimeMessage(s)
+    m.addRecipient(RecipientType.TO, new InternetAddress("${u}@gmail.com"))
+    m.setFrom(new InternetAddress("${u}@gmail.com"))
+    m.setSubject('タイトル', 'UTF-8')
+    m.setText('本文', 'UTF-8')
+    Transport.send(m)
