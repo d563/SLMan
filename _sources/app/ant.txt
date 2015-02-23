@@ -26,7 +26,7 @@ ant
 
 ::
 
-    echo 'tasks.properties' > SLMan=d563.SLManTask
+    echo 'SLMan=d563.SLManTask' > tasks.properties
 
 ::
 
