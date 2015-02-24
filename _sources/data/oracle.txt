@@ -84,6 +84,8 @@ client
     echo '/usr/lib/oracle/11.2/client/lib/' > /etc/ld.so.conf.d/oracle.conf
     ldconfig
 
+python
+------
 ::
 
     pip install cx_Oracle

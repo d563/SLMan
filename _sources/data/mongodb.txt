@@ -1,5 +1,7 @@
 mongodb
 =======
+server
+------
 .. index:: /etc/yum.repos.d/mongodb.repo
 
 ::
@@ -26,6 +28,8 @@ mongodb
     -e '$arest=true' \
     /etc/mongod.conf
 
+rest
+----
 ::
 
     /etc/init.d/mongod start
@@ -33,6 +37,8 @@ mongodb
     curl -d '{"key": "val"}' http://localhost:28017/testdb/testcol/
     curl http://localhost:28017/testdb/testcol/
 
+python
+------
 ::
 
     pip install pymongo
