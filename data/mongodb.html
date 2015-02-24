@@ -83,14 +83,14 @@ enabled=1
 -e &#39;s/bind_ip=127.0.0.1/#bind_ip=127.0.0.1/&#39; \
 -e &#39;$arest=true&#39; \
 /etc/mongod.conf
+
+/etc/init.d/mongod start
 </pre></div>
 </div>
 </div>
 <div class="section" id="rest">
 <h2>4.1.2. rest<a class="headerlink" href="#rest" title="Permalink to this headline">¶</a></h2>
-<div class="highlight-python"><div class="highlight"><pre>/etc/init.d/mongod start
-
-curl -d &#39;{&quot;key&quot;: &quot;val&quot;}&#39; http://localhost:28017/testdb/testcol/
+<div class="highlight-python"><div class="highlight"><pre>curl -d &#39;{&quot;key&quot;: &quot;val&quot;}&#39; http://localhost:28017/testdb/testcol/
 curl http://localhost:28017/testdb/testcol/
 </pre></div>
 </div>

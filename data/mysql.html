@@ -64,6 +64,8 @@
             
   <div class="section" id="mysql">
 <h1>4.3. mysql<a class="headerlink" href="#mysql" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="server">
+<h2>4.3.1. server<a class="headerlink" href="#server" title="Permalink to this headline">¶</a></h2>
 <div class="highlight-python"><div class="highlight"><pre>yum -y install mysql-server
 </pre></div>
 </div>
@@ -83,6 +85,9 @@ default-character-set=utf8&#39; &gt;&gt; /etc/my.cnf
 mysql -u root -p
 </pre></div>
 </div>
+</div>
+<div class="section" id="setting">
+<h2>4.3.2. setting<a class="headerlink" href="#setting" title="Permalink to this headline">¶</a></h2>
 <div class="highlight-python"><div class="highlight"><pre>grant all privileges on d563.* to SLMan@localhost identified by &#39;SLManPass&#39;;
 select user from mysql.user;
 revoke all privileges on *.* from SLMan@localhost;
@@ -105,17 +110,20 @@ create table table1(
   constraint pk_table1 primary key(id, name)
 );
 
-show create table d563;
+show create table table1;
 show tables;
+
+drop table table1;
+drop database SLMan;
 </pre></div>
 </div>
+</div>
+<div class="section" id="backup">
+<h2>4.3.3. backup<a class="headerlink" href="#backup" title="Permalink to this headline">¶</a></h2>
 <div class="highlight-python"><div class="highlight"><pre>mysqldump -u SLMan d563 &gt; SLMan.dmp
 mysql -u SLMan d563 &lt; SLMan.dmp
 </pre></div>
 </div>
-<div class="highlight-python"><div class="highlight"><pre>drop table d563;
-drop database SLMan;
-</pre></div>
 </div>
 </div>
 
@@ -125,6 +133,16 @@ drop database SLMan;
       </div>
       <div class="sphinxsidebar">
         <div class="sphinxsidebarwrapper">
+  <h3><a href="../index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">4.3. mysql</a><ul>
+<li><a class="reference internal" href="#server">4.3.1. server</a></li>
+<li><a class="reference internal" href="#setting">4.3.2. setting</a></li>
+<li><a class="reference internal" href="#backup">4.3.3. backup</a></li>
+</ul>
+</li>
+</ul>
+
   <h4>Previous topic</h4>
   <p class="topless"><a href="oracle.html"
                         title="previous chapter">4.2. oracle</a></p>

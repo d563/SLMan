@@ -28,11 +28,11 @@ server
     -e '$arest=true' \
     /etc/mongod.conf
 
+    /etc/init.d/mongod start
+
 rest
 ----
 ::
-
-    /etc/init.d/mongod start
 
     curl -d '{"key": "val"}' http://localhost:28017/testdb/testcol/
     curl http://localhost:28017/testdb/testcol/

@@ -1,6 +1,5 @@
 oracle
 ======
-
 server
 ------
 ::
@@ -31,6 +30,8 @@ server
     echo '. /usr/lib/oracle/xe/app/oracle/product/10.2.0/server/bin/oracle_env.sh' \
     > /etc/profile.d/oracle.sh
 
+setting
+-------
 ::
 
     alter profile default limit
@@ -62,6 +63,8 @@ server
 
     drop user d563 cascade;
 
+backup
+------
 ::
 
     expdp d563/d563 dumpfile=SLMan.dmp logfile=SLMan.log schemas=users
@@ -94,12 +97,13 @@ python
 
     python
     import cx_Oracle
-    conn = cx_Oracle.connect('d563', 'd563', '(DESCRIPTION=(ADDRESS_LIST=(ADDRESS=(PROTOCOL=TCP)(HOST=localhost)(PORT=1521)(CONNECT_DATA=(SERVICE_NAME=XE)))')
-    cur = conn.cursor()
+    con = cx_Oracle.connect('d563', 'd563', '(DESCRIPTION=(ADDRESS_LIST=(ADDRESS=(PROTOCOL=TCP)(HOST=localhost)(PORT=1521)(CONNECT_DATA=(SERVICE_NAME=XE)))')
+    cur = con.cursor()
     cur.execute('select * from dual')
-    rows = cur.fetchall()
-    for row in rows:
+    lst = cur.fetchall()
+    for row in lst:
       print row[0]
+
     cur.close()
-    conn.close()
+    con.close()
 

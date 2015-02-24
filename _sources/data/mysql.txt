@@ -1,5 +1,7 @@
 mysql
 =====
+server
+------
 ::
 
     yum -y install mysql-server
@@ -24,6 +26,8 @@ mysql
     mysql_secure_installation
     mysql -u root -p
 
+setting
+-------
 ::
 
     grant all privileges on d563.* to SLMan@localhost identified by 'SLManPass';
@@ -49,15 +53,15 @@ mysql
       constraint pk_table1 primary key(id, name)
     );
 
-    show create table d563;
+    show create table table1;
     show tables;
 
+    drop table table1;
+    drop database SLMan;
+
+backup
+------
 ::
 
     mysqldump -u SLMan d563 > SLMan.dmp
     mysql -u SLMan d563 < SLMan.dmp 
-
-::
-
-    drop table d563;
-    drop database SLMan;

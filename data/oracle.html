@@ -88,6 +88,9 @@ echo &#39;. /usr/lib/oracle/xe/app/oracle/product/10.2.0/server/bin/oracle_env.s
 &gt; /etc/profile.d/oracle.sh
 </pre></div>
 </div>
+</div>
+<div class="section" id="setting">
+<h2>4.2.2. setting<a class="headerlink" href="#setting" title="Permalink to this headline">¶</a></h2>
 <div class="highlight-python"><div class="highlight"><pre>alter profile default limit
   failed_login_attempts unlimited
   password_lock_time unlimited
@@ -118,13 +121,16 @@ comment on table table1 is &#39;comment&#39;;
 drop user d563 cascade;
 </pre></div>
 </div>
+</div>
+<div class="section" id="backup">
+<h2>4.2.3. backup<a class="headerlink" href="#backup" title="Permalink to this headline">¶</a></h2>
 <div class="highlight-python"><div class="highlight"><pre>expdp d563/d563 dumpfile=SLMan.dmp logfile=SLMan.log schemas=users
 impdp sys/pass dumpfile=SLMan.dmp logfile=SLMan.log remap_tablespace=users:users
 </pre></div>
 </div>
 </div>
 <div class="section" id="client">
-<h2>4.2.2. client<a class="headerlink" href="#client" title="Permalink to this headline">¶</a></h2>
+<h2>4.2.4. client<a class="headerlink" href="#client" title="Permalink to this headline">¶</a></h2>
 <div class="highlight-python"><div class="highlight"><pre>rpm -ivh oracle-instantclient11.2-basic-11.2.0.4.0-1.i386.rpm
 rpm -ivh oracle-instantclient11.2-devel-11.2.0.4.0-1.i386.rpm
 </pre></div>
@@ -140,20 +146,21 @@ ldconfig
 </div>
 </div>
 <div class="section" id="python">
-<h2>4.2.3. python<a class="headerlink" href="#python" title="Permalink to this headline">¶</a></h2>
+<h2>4.2.5. python<a class="headerlink" href="#python" title="Permalink to this headline">¶</a></h2>
 <div class="highlight-python"><div class="highlight"><pre>pip install cx_Oracle
 </pre></div>
 </div>
 <div class="highlight-python"><div class="highlight"><pre><span class="n">python</span>
 <span class="kn">import</span> <span class="nn">cx_Oracle</span>
-<span class="n">conn</span> <span class="o">=</span> <span class="n">cx_Oracle</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="s">&#39;d563&#39;</span><span class="p">,</span> <span class="s">&#39;d563&#39;</span><span class="p">,</span> <span class="s">&#39;(DESCRIPTION=(ADDRESS_LIST=(ADDRESS=(PROTOCOL=TCP)(HOST=localhost)(PORT=1521)(CONNECT_DATA=(SERVICE_NAME=XE)))&#39;</span><span class="p">)</span>
-<span class="n">cur</span> <span class="o">=</span> <span class="n">conn</span><span class="o">.</span><span class="n">cursor</span><span class="p">()</span>
+<span class="n">con</span> <span class="o">=</span> <span class="n">cx_Oracle</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="s">&#39;d563&#39;</span><span class="p">,</span> <span class="s">&#39;d563&#39;</span><span class="p">,</span> <span class="s">&#39;(DESCRIPTION=(ADDRESS_LIST=(ADDRESS=(PROTOCOL=TCP)(HOST=localhost)(PORT=1521)(CONNECT_DATA=(SERVICE_NAME=XE)))&#39;</span><span class="p">)</span>
+<span class="n">cur</span> <span class="o">=</span> <span class="n">con</span><span class="o">.</span><span class="n">cursor</span><span class="p">()</span>
 <span class="n">cur</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="s">&#39;select * from dual&#39;</span><span class="p">)</span>
-<span class="n">rows</span> <span class="o">=</span> <span class="n">cur</span><span class="o">.</span><span class="n">fetchall</span><span class="p">()</span>
-<span class="k">for</span> <span class="n">row</span> <span class="ow">in</span> <span class="n">rows</span><span class="p">:</span>
+<span class="n">lst</span> <span class="o">=</span> <span class="n">cur</span><span class="o">.</span><span class="n">fetchall</span><span class="p">()</span>
+<span class="k">for</span> <span class="n">row</span> <span class="ow">in</span> <span class="n">lst</span><span class="p">:</span>
   <span class="k">print</span> <span class="n">row</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+
 <span class="n">cur</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
-<span class="n">conn</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+<span class="n">con</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
 </pre></div>
 </div>
 </div>
@@ -169,8 +176,10 @@ ldconfig
   <ul>
 <li><a class="reference internal" href="#">4.2. oracle</a><ul>
 <li><a class="reference internal" href="#server">4.2.1. server</a></li>
-<li><a class="reference internal" href="#client">4.2.2. client</a></li>
-<li><a class="reference internal" href="#python">4.2.3. python</a></li>
+<li><a class="reference internal" href="#setting">4.2.2. setting</a></li>
+<li><a class="reference internal" href="#backup">4.2.3. backup</a></li>
+<li><a class="reference internal" href="#client">4.2.4. client</a></li>
+<li><a class="reference internal" href="#python">4.2.5. python</a></li>
 </ul>
 </li>
 </ul>
