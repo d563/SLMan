@@ -36,7 +36,8 @@ wsgi
         con = Connection('localhost', 27017)
         con.testdb.testcol.save(inp)
         for dat in con.testdb.testcol.find():
-          yield str(dat['_id'])
+          del dat['_id']
+          yield dat
 
 .. module:: json.html
 .. code-block:: html

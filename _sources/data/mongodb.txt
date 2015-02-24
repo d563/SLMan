@@ -32,3 +32,20 @@ mongodb
 
     curl -d '{"key": "val"}' http://localhost:28017/testdb/testcol/
     curl http://localhost:28017/testdb/testcol/
+
+::
+
+    pip install pymongo
+
+::
+
+    python
+    from pymongo import Connection
+    import json
+    con = Connection('localhost', 27017)
+    lst = list(con.testdb.testcol.find())
+    for dat in lst:
+      del dat['_id']
+
+    print json.dumps(lst)
+

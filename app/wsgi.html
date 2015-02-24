@@ -96,7 +96,8 @@ pip install pymongo
     <span class="n">con</span> <span class="o">=</span> <span class="n">Connection</span><span class="p">(</span><span class="s">&#39;localhost&#39;</span><span class="p">,</span> <span class="mi">27017</span><span class="p">)</span>
     <span class="n">con</span><span class="o">.</span><span class="n">testdb</span><span class="o">.</span><span class="n">testcol</span><span class="o">.</span><span class="n">save</span><span class="p">(</span><span class="n">inp</span><span class="p">)</span>
     <span class="k">for</span> <span class="n">dat</span> <span class="ow">in</span> <span class="n">con</span><span class="o">.</span><span class="n">testdb</span><span class="o">.</span><span class="n">testcol</span><span class="o">.</span><span class="n">find</span><span class="p">():</span>
-      <span class="k">yield</span> <span class="nb">str</span><span class="p">(</span><span class="n">dat</span><span class="p">[</span><span class="s">&#39;_id&#39;</span><span class="p">])</span>
+      <span class="k">del</span> <span class="n">dat</span><span class="p">[</span><span class="s">&#39;_id&#39;</span><span class="p">]</span>
+      <span class="k">yield</span> <span class="n">dat</span>
 </pre></div>
 </div>
 <span class="target" id="module-json.html"></span><div class="highlight-html"><div class="highlight"><pre><span class="cp">&lt;!doctype html&gt;</span>
