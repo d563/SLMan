@@ -156,8 +156,8 @@ ldconfig
 <span class="n">cur</span> <span class="o">=</span> <span class="n">con</span><span class="o">.</span><span class="n">cursor</span><span class="p">()</span>
 <span class="n">cur</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="s">&#39;select * from dual&#39;</span><span class="p">)</span>
 <span class="n">lst</span> <span class="o">=</span> <span class="n">cur</span><span class="o">.</span><span class="n">fetchall</span><span class="p">()</span>
-<span class="k">for</span> <span class="n">row</span> <span class="ow">in</span> <span class="n">lst</span><span class="p">:</span>
-  <span class="k">print</span> <span class="n">row</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+<span class="k">for</span> <span class="n">dat</span> <span class="ow">in</span> <span class="n">lst</span><span class="p">:</span>
+  <span class="k">print</span> <span class="n">dat</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
 
 <span class="n">cur</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
 <span class="n">con</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>

@@ -24,11 +24,12 @@ server
 ::
 
     mysql_secure_installation
-    mysql -u root -p
 
 setting
 -------
 ::
+
+    mysql -u root -p
 
     grant all privileges on d563.* to SLMan@localhost identified by 'SLManPass';
     select user from mysql.user;
@@ -48,7 +49,7 @@ setting
       id int unsigned auto_increment,
       name varchar(6),
       image blob,
-      date_created timestamp default current_timestamp,
+      date_created timestamp default 0,
       last_updated timestamp default current_timestamp on update current_timestamp,
       constraint pk_table1 primary key(id, name)
     );
@@ -65,3 +66,32 @@ backup
 
     mysqldump -u SLMan d563 > SLMan.dmp
     mysql -u SLMan d563 < SLMan.dmp 
+
+python
+------
+::
+
+    yum -y install mysql-devel
+
+    pip install MySQL-python
+
+.. code-block:: python
+
+    python
+    import MySQLdb
+    import json
+    con = MySQLdb.connect(
+      host='localhost',
+      db='d563',
+      user='SLMan',
+      passwd='SLManPass')
+    cur = con.cursor(MySQLdb.cursors.DictCursor)
+    cur.execute('select * from table1')
+    lst = list(cur.fetchall())
+    for dat in lst:
+      dat['data_created'] = str(dat.get('data_created', ''))
+      dat['last_updated'] = str(dat.get('last_updated', ''))
+
+    json.dumps(lst)
+    cur.close()
+    con.close()

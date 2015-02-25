@@ -101,8 +101,8 @@ python
     cur = con.cursor()
     cur.execute('select * from dual')
     lst = cur.fetchall()
-    for row in lst:
-      print row[0]
+    for dat in lst:
+      print dat[0]
 
     cur.close()
     con.close()

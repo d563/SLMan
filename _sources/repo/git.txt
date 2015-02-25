@@ -49,8 +49,8 @@ github
 
     git clone git@github.com:d563/SLMan.git /var/www/html
 
-memo
-----
+command
+-------
 ::
 
     git show-branch
