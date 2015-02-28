@@ -1,0 +1,217 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>1.1. host6 &mdash; SLMan 0.0.1 documentation</title>
+    
+    <link rel="stylesheet" href="../_static/pyramid.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/SLMan.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '0.0.1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <link rel="top" title="SLMan 0.0.1 documentation" href="../index.html" />
+    <link rel="up" title="1. base" href="index.html" />
+    <link rel="next" title="1.2. host7" href="host7.html" />
+    <link rel="prev" title="1. base" href="index.html" />
+<link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Neuton&amp;subset=latin" type="text/css" media="screen" charset="utf-8" />
+<link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Nobile:regular,italic,bold,bolditalic&amp;subset=latin" type="text/css" media="screen" charset="utf-8" />
+<!--[if lte IE 6]>
+<link rel="stylesheet" href="../_static/ie6.css" type="text/css" media="screen" charset="utf-8" />
+<![endif]-->
+
+  </head>
+  <body>
+
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="host7.html" title="1.2. host7"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="index.html" title="1. base"
+             accesskey="P">previous</a> |</li>
+        <li><a href="../index.html">SLMan 0.0.1 documentation</a> &raquo;</li>
+          <li><a href="index.html" accesskey="U">1. base</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="host6">
+<h1>1.1. host6<a class="headerlink" href="#host6" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="os">
+<h2>1.1.1. os<a class="headerlink" href="#os" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-python"><div class="highlight"><pre>http://ftp.riken.jp/Linux/scientific/6.5/i386/iso/SL-65-i386-2013-12-05-boot.iso
+http://ftp.riken.jp/Linux/scientific/6.5/i386/os/
+</pre></div>
+</div>
+<div class="highlight-python"><div class="highlight"><pre>http://ftp.riken.jp/Linux/centos/6/isos/i386/CentOS-6.6-i386-netinstall.iso
+http://ftp.riken.jp/Linux/centos/6/os/i386/
+</pre></div>
+</div>
+</div>
+<div class="section" id="network">
+<h2>1.1.2. network<a class="headerlink" href="#network" title="Permalink to this headline">¶</a></h2>
+<span class="target" id="index-0"></span><span class="target" id="index-1"></span><div class="highlight-python" id="index-2"><div class="highlight"><pre><span class="n">vi</span> <span class="o">/</span><span class="n">etc</span><span class="o">/</span><span class="n">sysconfig</span><span class="o">/</span><span class="n">network</span><span class="o">-</span><span class="n">scripts</span><span class="o">/</span><span class="n">ifcfg</span><span class="o">-</span><span class="n">eth0</span>
+<span class="n">vi</span> <span class="o">/</span><span class="n">etc</span><span class="o">/</span><span class="n">udev</span><span class="o">/</span><span class="n">rules</span><span class="o">.</span><span class="n">d</span><span class="o">/</span><span class="mi">70</span><span class="o">-</span><span class="n">persistent</span><span class="o">-</span><span class="n">net</span><span class="o">.</span><span class="n">rules</span>
+<span class="n">vi</span> <span class="o">/</span><span class="n">etc</span><span class="o">/</span><span class="n">sysconfig</span><span class="o">/</span><span class="n">network</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="selinux">
+<span id="index-3"></span><h2>1.1.3. selinux<a class="headerlink" href="#selinux" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-python"><div class="highlight"><pre>sed -i.org -e &#39;s/^SELINUX=.*/SELINUX=disabled/&#39; /etc/selinux/config
+setenforce 0
+</pre></div>
+</div>
+</div>
+<div class="section" id="visudo">
+<h2>1.1.4. visudo<a class="headerlink" href="#visudo" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-python"><div class="highlight"><pre># Defaults requiretty
+Defaults timestamp_timeout = 0
+Defaults passprompt = &quot;%u@%h Password: &quot;
+%wheel ALL=(ALL) NOPASSWD: ALL
+</pre></div>
+</div>
+</div>
+<div class="section" id="package">
+<h2>1.1.5. package<a class="headerlink" href="#package" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-python"><div class="highlight"><pre>sed -i.org -e &#39;s/debuglevel=2/debuglevel=1/&#39; /etc/yum.conf
+
+yum -y install wget unzip gcc gcc-c++ java-1.7.0-openjdk-devel python-setuptools python-devel
+yum -y update
+</pre></div>
+</div>
+<div class="highlight-python"><div class="highlight"><pre>easy_install pip
+</pre></div>
+</div>
+</div>
+<div class="section" id="sshd">
+<h2>1.1.6. sshd<a class="headerlink" href="#sshd" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-python" id="index-4"><div class="highlight"><pre>sed -i.org \
+-e &#39;/#Port 22/aPort 443&#39; \
+/etc/ssh/sshd_config
+
+/etc/init.d/sshd restart
+</pre></div>
+</div>
+</div>
+<div class="section" id="iptables">
+<h2>1.1.7. iptables<a class="headerlink" href="#iptables" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-python" id="index-5"><div class="highlight"><pre>sed -i.org \
+-e &#39;s/--dport 22/--dport 443/&#39; \
+/etc/sysconfig/iptables
+
+/etc/init.d/iptables restart
+</pre></div>
+</div>
+<div class="highlight-python"><div class="highlight"><pre># /etc/sysconfig/iptables (default)
+*filter
+:INPUT ACCEPT [0:0]
+:FORWARD ACCEPT [0:0]
+:OUTPUT ACCEPT [0:0]
+-A INPUT -m state --state ESTABLISHED,RELATED -j ACCEPT
+-A INPUT -p icmp -j ACCEPT
+-A INPUT -i lo -j ACCEPT
+-A INPUT -m state --state NEW -m tcp -p tcp --dport 22 -j ACCEPT
+-A INPUT -j REJECT --reject-with icmp-host-prohibited
+-A FORWARD -j REJECT --reject-with icmp-host-prohibited
+COMMIT
+</pre></div>
+</div>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="../index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">1.1. host6</a><ul>
+<li><a class="reference internal" href="#os">1.1.1. os</a></li>
+<li><a class="reference internal" href="#network">1.1.2. network</a></li>
+<li><a class="reference internal" href="#selinux">1.1.3. selinux</a></li>
+<li><a class="reference internal" href="#visudo">1.1.4. visudo</a></li>
+<li><a class="reference internal" href="#package">1.1.5. package</a></li>
+<li><a class="reference internal" href="#sshd">1.1.6. sshd</a></li>
+<li><a class="reference internal" href="#iptables">1.1.7. iptables</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="index.html"
+                        title="previous chapter">1. base</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="host7.html"
+                        title="next chapter">1.2. host7</a></p>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="host7.html" title="1.2. host7"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="index.html" title="1. base"
+             >previous</a> |</li>
+        <li><a href="../index.html">SLMan 0.0.1 documentation</a> &raquo;</li>
+          <li><a href="index.html" >1. base</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2014, Daisuke Maeda.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.2.3.
+    </div>
+  </body>
+</html>

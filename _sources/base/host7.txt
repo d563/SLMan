@@ -1,0 +1,78 @@
+host7
+=====
+
+os
+--
+::
+
+    http://ftp.riken.jp/Linux/scientific/7/x86_64/iso/SL-7-x86_64-netinst.iso
+    http://ftp.riken.jp/Linux/scientific/7/x86_64/os/
+
+::
+
+    http://ftp.riken.jp/Linux/centos/7/isos/x86_64/CentOS-7.0-1406-x86_64-NetInstall.iso
+    http://ftp.riken.jp/Linux/centos/7/os/x86_64/
+
+network
+-------
+.. index:: /etc/sysconfig/network-scripts/ifcfg-enp0s3
+.. index:: /etc/udev/rules.d/98-kexec.rules
+
+::
+
+    vi /etc/sysconfig/network-scripts/ifcfg-enp0s3
+    vi /etc/udev/rules.d/98-kexec.rules
+
+selinux
+-------
+::
+
+    sed -i.org -e 's/^SELINUX=.*/SELINUX=disabled/' /etc/selinux/config
+    setenforce 0
+
+visudo
+------
+::
+
+    # Defaults requiretty
+    Defaults timestamp_timeout = 0
+    Defaults passprompt = "%u@%h Password: "
+    %wheel ALL=(ALL) NOPASSWD: ALL
+
+package
+-------
+::
+
+    sed -i.org -e 's/debuglevel=2/debuglevel=1/' /etc/yum.conf
+
+    yum -y install wget unzip gcc gcc-c++ java-1.7.0-openjdk-devel python-setuptools python-devel
+    yum -y update
+
+::
+
+    easy_install pip
+
+sshd
+----
+::
+
+    sed -i.org \
+    -e '/#Port 22/aPort 443' \
+    /etc/ssh/sshd_config
+
+    systemctl restart sshd.service
+
+iptables
+--------
+
+.. index:: /usr/lib/firewalld/services/ssh.xml
+.. index:: /usr/leb/firewalld/services/https.xml
+
+::
+
+    cat /usr/lib/firewalld/services/ssh.xml
+    cat /usr/lib/firewalld/services/https.xml
+    firewall-cmd --list-all
+    firewall-cmd --permanent --add-service=https
+    firewall-cmd --permanent --remove-service=ssh
+    firewall-cmd --reload

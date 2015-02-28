@@ -4,6 +4,8 @@ httpd
 
     yum -y install httpd
 
+6.X
+---
 ::
 
     chkconfig httpd on
@@ -16,3 +18,16 @@ httpd
     /etc/sysconfig/iptables
 
     /etc/init.d/iptables restart
+
+7.X
+---
+::
+
+    systemctl list-unit-files
+    systemctl enable httpd.service
+    systemctl start httpd.service
+
+::
+
+    firewall-cmd --permanent --add-service=http
+    firewall-cmd --reload

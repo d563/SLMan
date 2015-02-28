@@ -35,8 +35,8 @@ procps
     free
       -ms1                1秒間隔（メガバイト）
 
-net-tools
----------
+net-tools(6.X)
+--------------
 ::
 
     yum -y install net-tools
@@ -44,7 +44,17 @@ net-tools
     netstat
       -antp               TCPポート
       -anup               UDPポート
-    
+
+iproute(7.X)
+------------
+::
+
+    yum -y install iproute
+
+    ss
+      -antp               TCPポート
+      -anup               UDPポート
+
 strace
 ------
 ::
