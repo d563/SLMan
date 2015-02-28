@@ -5,7 +5,7 @@ httpd
     yum -y install httpd
 
 6.X
----
+
 ::
 
     chkconfig httpd on
@@ -20,7 +20,7 @@ httpd
     /etc/init.d/iptables restart
 
 7.X
----
+
 ::
 
     systemctl list-unit-files

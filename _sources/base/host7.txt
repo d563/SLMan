@@ -62,8 +62,8 @@ sshd
 
     systemctl restart sshd.service
 
-iptables
---------
+firewalld
+---------
 
 .. index:: /usr/lib/firewalld/services/ssh.xml
 .. index:: /usr/leb/firewalld/services/https.xml
