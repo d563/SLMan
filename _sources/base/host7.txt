@@ -45,7 +45,7 @@ package
 
     sed -i.org -e 's/debuglevel=2/debuglevel=1/' /etc/yum.conf
 
-    yum -y install wget unzip gcc gcc-c++ java-1.7.0-openjdk-devel python-setuptools python-devel
+    yum -y install wget unzip gcc gcc-c++ java-1.7.0-openjdk-devel python-devel
     yum -y update
 
 ::

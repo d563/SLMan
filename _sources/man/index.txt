@@ -4,3 +4,4 @@ man
     jenkins
     hinemos
     krb5
+    docker

@@ -1,0 +1,25 @@
+docker
+======
+::
+
+    yum -y install docker
+
+::
+
+    systemctl enable docker.service
+    systemctl start docker.service
+
+    docker info
+
+::
+
+    docker pull centos:latest
+    docker pull centos:6
+
+    docker images
+
+::
+
+    docker run -it --name co6_1 centos:6 /bin/bash
+
+    docker commit co6_1 d563/co6
