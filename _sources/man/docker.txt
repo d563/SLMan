@@ -29,7 +29,7 @@ docker
 ::
 
     docker build -t d563/co6:1 .
-    docker run -d -p 8080:80 --name co6 d563/co6:1
+    docker run -d -p 8080:80 -v ~:/var/www/html:r --name co6 d563/co6:1
 
     curl http://localhost:8080
 
