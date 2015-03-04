@@ -67,21 +67,33 @@
 <div class="highlight-python"><div class="highlight"><pre>yum -y install docker
 </pre></div>
 </div>
-<div class="highlight-python"><div class="highlight"><pre>systemctl enable docker.service
-systemctl start docker.service
-
-docker info
+<div class="highlight-python"><div class="highlight"><pre>systemctl enable docker
+systemctl start docker
 </pre></div>
 </div>
-<div class="highlight-python"><div class="highlight"><pre>docker pull centos:latest
-docker pull centos:6
-
+<div class="highlight-python"><div class="highlight"><pre>docker pull centos:6
 docker images
 </pre></div>
 </div>
-<div class="highlight-python"><div class="highlight"><pre>docker run -it --name co6_1 centos:6 /bin/bash
+<span class="target" id="module-Dockerfile"></span><div class="highlight-python"><div class="highlight"><pre>cat &lt;&lt; &#39;[EOF]&#39; &gt; Dockerfile
+FROM centos:6
+MAINTAINER d563
+RUN yum -y install httpd
+RUN echo TEST &gt; /var/www/html/index.html
+CMD [&quot;/usr/sbin/httpd&quot;, &quot;-D&quot;, &quot;FOREGROUND&quot;]
+[EOF]
+</pre></div>
+</div>
+<div class="highlight-python"><div class="highlight"><pre>docker build -t d563/co6:1 .
+docker run -d -p 8080:80 --name co6 d563/co6:1
 
-docker commit co6_1 d563/co6
+curl http://localhost:8080
+</pre></div>
+</div>
+<div class="highlight-python"><div class="highlight"><pre>docker ps -a
+docker stop co6
+docker rm co6
+docker rmi d563/co6:1
 </pre></div>
 </div>
 </div>

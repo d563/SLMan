@@ -6,20 +6,36 @@ docker
 
 ::
 
-    systemctl enable docker.service
-    systemctl start docker.service
-
-    docker info
+    systemctl enable docker
+    systemctl start docker
 
 ::
 
-    docker pull centos:latest
     docker pull centos:6
-
     docker images
 
+.. module:: Dockerfile
+
 ::
 
-    docker run -it --name co6_1 centos:6 /bin/bash
+    cat << '[EOF]' > Dockerfile
+    FROM centos:6
+    MAINTAINER d563
+    RUN yum -y install httpd
+    RUN echo TEST > /var/www/html/index.html
+    CMD ["/usr/sbin/httpd", "-D", "FOREGROUND"]
+    [EOF]
 
-    docker commit co6_1 d563/co6
+::
+
+    docker build -t d563/co6:1 .
+    docker run -d -p 8080:80 --name co6 d563/co6:1
+
+    curl http://localhost:8080
+
+::
+
+    docker ps -a
+    docker stop co6
+    docker rm co6
+    docker rmi d563/co6:1
