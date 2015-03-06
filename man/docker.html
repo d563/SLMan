@@ -78,21 +78,30 @@ docker images
 <span class="target" id="module-Dockerfile"></span><div class="highlight-python"><div class="highlight"><pre>cat &lt;&lt; &#39;[EOF]&#39; &gt; Dockerfile
 FROM centos:6
 MAINTAINER d563
-RUN yum -y install httpd
-RUN echo TEST &gt; /var/www/html/index.html
-CMD [&quot;/usr/sbin/httpd&quot;, &quot;-D&quot;, &quot;FOREGROUND&quot;]
+RUN yum -y install wget tar java-1.6.0-openjdk &amp;&amp; yum -y reinstall glibc-common &amp;&amp; yum clean all
+RUN wget http://archive.apache.org/dist/tomcat/tomcat-7/v7.0.59/bin/apache-tomcat-7.0.59.tar.gz &amp;&amp; tar xvzf apache-tomcat-7.0.59.tar.gz &amp;&amp; rm -f apache-tomcat-7.0.59.tar.gz
+ENV LANG=ja_JP.UTF-8
+ENV CATALINA_OPTS=&quot;-server -Xmx512m -Xms512m -Xss256k -XX:PermSize=256m -XX:MaxPermSize=512m -Xloggc:apache-tomcat-7.0.59/logs/GC.log -XX:+PrintGCDetails -XX:PrintGCDateStamps&quot;
+CMD apache-tomcat-7.0.59/bin/catalina.sh start &amp;&amp; tail -f /dev/null
 [EOF]
 </pre></div>
 </div>
 <div class="highlight-python"><div class="highlight"><pre>docker build -t d563/co6:1 .
-docker run -d -p 8080:80 -v ~:/var/www/html:r --name co6 d563/co6:1
 
-curl http://localhost:8080
+docker run -d \
+  -p 8888:8080 \
+  -v ~/logs:apache-tomcat-7.0.59/logs:rw \
+  -v ~/webapps:apache-tomcat-7.0.59/webapps:rw \
+  --name co6 \
+  d563/co6:1
+
+docker run -it d563/co6:1 /bin/bash
 </pre></div>
 </div>
-<div class="highlight-python"><div class="highlight"><pre>docker ps -a
-docker stop co6
-docker rm co6
+<div class="highlight-python"><div class="highlight"><pre>iptables -t nat -L
+
+docker ps -a
+docker rm -f co6
 docker rmi d563/co6:1
 </pre></div>
 </div>
