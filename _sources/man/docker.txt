@@ -31,7 +31,8 @@ docker
      rm -f apache-tomcat-7.0.59.tar.gz &&\
      mv apache-tomcat-7.0.59 tomcat
     ENV LANG ja_JP.UTF-8
-    ENV CATALINA_OPTS -server -Xmx512m -Xms512m -Xss256k\
+    ENV CATALINA_OPTS\
+     -server -Xmx512m -Xms512m -Xss256k\
      -XX:PermSize=256m -XX:MaxPermSize=512m\
      -Xloggc:tomcat/logs/GC.log\
      -XX:+PrintGCDetails -XX:+PrintGCDateStamps
