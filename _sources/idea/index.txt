@@ -1,6 +1,5 @@
 idea
 ====
 .. toctree::
+    flow
     strategy
-    pdca
-    change
