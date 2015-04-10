@@ -87,14 +87,26 @@ rmvirtualenv fabric
 <div class="highlight-python"><div class="highlight"><pre>mkdir /var/lib/git/fabric
 cd /var/lib/git/fabric
 git init .
+mkdir fabfile
 </pre></div>
 </div>
-<span class="target" id="module-fabfile.py"></span><div class="highlight-python"><div class="highlight"><pre><span class="c"># -*- coding: utf-8 -*-</span>
-<span class="c"># fabfile.py</span>
+<div class="highlight-python"><div class="highlight"><pre><span class="c"># -*- coding: utf-8 -*-</span>
+<span class="c"># __init__.py</span>
+<span class="kn">import</span> <span class="nn">fabmodule</span>
+
+<span class="n">env</span><span class="o">.</span><span class="n">user</span> <span class="o">=</span> <span class="s">&#39;d563&#39;</span>
+<span class="n">env</span><span class="o">.</span><span class="n">password</span> <span class="o">=</span> <span class="s">&#39;pass&#39;</span>
+</pre></div>
+</div>
+<span class="target" id="module-fabmodule.py"></span><div class="highlight-python"><div class="highlight"><pre><span class="c"># -*- coding: utf-8 -*-</span>
+<span class="c"># fabmodule.py</span>
 <span class="kn">from</span> <span class="nn">fabric.api</span> <span class="kn">import</span> <span class="n">env</span><span class="p">,</span> <span class="n">local</span><span class="p">,</span> <span class="n">lcd</span><span class="p">,</span> <span class="n">put</span><span class="p">,</span> <span class="n">run</span><span class="p">,</span> <span class="n">sudo</span><span class="p">,</span> <span class="n">cd</span>
 <span class="kn">from</span> <span class="nn">fabric.contrib.files</span> <span class="kn">import</span> <span class="n">exists</span>
+<span class="kn">from</span> <span class="nn">fabric.decorators</span> <span class="kn">import</span> <span class="n">task</span>
 
+<span class="nd">@task</span>
 <span class="k">def</span> <span class="nf">ls_bin</span><span class="p">():</span>
+  <span class="k">print</span> <span class="n">env</span><span class="o">.</span><span class="n">host_string</span>
   <span class="k">if</span> <span class="n">exists</span><span class="p">(</span><span class="s">&#39;/usr/bin&#39;</span><span class="p">):</span>
     <span class="k">with</span> <span class="n">cd</span><span class="p">(</span><span class="s">&#39;/usr/bin&#39;</span><span class="p">):</span>
       <span class="n">sudo</span><span class="p">(</span><span class="s">&#39;ls -al&#39;</span><span class="p">)</span>

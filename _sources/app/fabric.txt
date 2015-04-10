@@ -32,17 +32,30 @@ fabric
     mkdir /var/lib/git/fabric
     cd /var/lib/git/fabric
     git init .
+    mkdir fabfile
 
-.. module:: fabfile.py
+.. code-block:: python
+
+    # -*- coding: utf-8 -*-
+    # __init__.py
+    import fabmodule
+
+    env.user = 'd563'
+    env.password = 'pass'
+
+.. module:: fabmodule.py
 
 ::
 
     # -*- coding: utf-8 -*-
-    # fabfile.py
+    # fabmodule.py
     from fabric.api import env, local, lcd, put, run, sudo, cd
     from fabric.contrib.files import exists
+    from fabric.decorators import task
 
+    @task
     def ls_bin():
+      print env.host_string
       if exists('/usr/bin'):
         with cd('/usr/bin'):
           sudo('ls -al')

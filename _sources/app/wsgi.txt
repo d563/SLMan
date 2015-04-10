@@ -17,7 +17,10 @@ wsgi
     import logging
     from pymongo import Connection
 
-    logging.basicConfig(filename='/var/tmp/json.log', level=logging.DEBUG)
+    logging.basicConfig(
+      filename='/var/tmp/json.log',
+      level=logging.DEBUG,
+      format='%(asctime)s %(message)s')
     def application(environ, start_response):
       dat = environ['wsgi.input'].read(int(environ.get('CONTENT_LENGTH', 0)))
       logging.debug(dat)
