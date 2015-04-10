@@ -84,6 +84,15 @@ cat &lt;&lt; &#39;[EOF]&#39; &gt; /etc/httpd/conf.d/svn.conf
 svn mkdir file:///var/www/svn/SLMan/trunk -m &quot;trunk&quot;
 svn mkdir file:///var/www/svn/SLMan/branches -m &quot;branches&quot;
 svn mkdir file:///var/www/svn/SLMan/tags -m &quot;tags&quot;
+cd /var/www/svn/SLMan/hooks
+</pre></div>
+</div>
+<span class="target" id="module-pre-commit"></span><div class="highlight-shell"><div class="highlight"><pre><span class="c">#!/bin/bash</span>
+<span class="c"># pre-commit</span>
+<span class="nv">REPOS</span><span class="o">=</span><span class="s2">&quot;</span><span class="nv">$1</span><span class="s2">&quot;</span>
+<span class="nv">TXN</span><span class="o">=</span><span class="s2">&quot;</span><span class="nv">$2</span><span class="s2">&quot;</span>
+/usr/bin/svnlook log -t <span class="s2">&quot;</span><span class="nv">$TXN</span><span class="s2">&quot;</span> <span class="s2">&quot;</span><span class="nv">$REPOS</span><span class="s2">&quot;</span> <span class="p">|</span> grep <span class="s2">&quot;[a-zA-Z0-9]&quot;</span> &gt; /dev/null <span class="o">||</span> <span class="nb">exit </span>1
+<span class="nb">exit </span>0
 </pre></div>
 </div>
 </div>

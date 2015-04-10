@@ -27,3 +27,14 @@ subversion
     svn mkdir file:///var/www/svn/SLMan/trunk -m "trunk"
     svn mkdir file:///var/www/svn/SLMan/branches -m "branches"
     svn mkdir file:///var/www/svn/SLMan/tags -m "tags"
+    cd /var/www/svn/SLMan/hooks
+
+.. module:: pre-commit
+.. code-block:: shell
+
+    #!/bin/bash
+    # pre-commit
+    REPOS="$1"
+    TXN="$2"
+    /usr/bin/svnlook log -t "$TXN" "$REPOS" | grep "[a-zA-Z0-9]" > /dev/null || exit 1
+    exit 0
