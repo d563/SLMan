@@ -51,12 +51,13 @@ workstation
 
     cat << '[EOF]' > /etc/httpd/conf.d/kerb.conf
     <Location />
-      AuthType Kerberos
       AuthName "SLMan"
+      AuthType Kerberos
       KrbAuthRealms EXAMPLE.COM
-      KrbVerifyKDC Off
-      KrbMethodNegotiate Off
-      require valid-user
+      KrbMethodNegotiate off
+      KrbSaveCredentials off
+      KrbVerifyKDC off
+      Require valid-user
     </Location>
     [EOF]
 

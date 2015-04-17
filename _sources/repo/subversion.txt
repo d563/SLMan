@@ -14,6 +14,15 @@ subversion
     <Location /svn>
       DAV svn
       SVNParentPath /var/www/svn
+      <LimitExcept GET PROPFIND OPTIONS REPORT>
+        AuthName "SLMan"
+        AuthType Kerberos
+        KrbAuthRealms EXAMPLE.COM
+        KrbMethodNegotiate off
+        KrbSaveCredentials off
+        KrbVerifyKDC off
+        Require valid-user
+      </LimitExcept>
     </Location>
     [EOF]
 

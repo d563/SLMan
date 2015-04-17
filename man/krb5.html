@@ -100,12 +100,13 @@ useradd d563
 </div>
 <div class="highlight-python" id="index-4"><div class="highlight"><pre>cat &lt;&lt; &#39;[EOF]&#39; &gt; /etc/httpd/conf.d/kerb.conf
 &lt;Location /&gt;
-  AuthType Kerberos
   AuthName &quot;SLMan&quot;
+  AuthType Kerberos
   KrbAuthRealms EXAMPLE.COM
-  KrbVerifyKDC Off
-  KrbMethodNegotiate Off
-  require valid-user
+  KrbMethodNegotiate off
+  KrbSaveCredentials off
+  KrbVerifyKDC off
+  Require valid-user
 &lt;/Location&gt;
 [EOF]
 </pre></div>

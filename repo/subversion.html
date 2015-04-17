@@ -73,6 +73,15 @@ cat &lt;&lt; &#39;[EOF]&#39; &gt; /etc/httpd/conf.d/svn.conf
 &lt;Location /svn&gt;
   DAV svn
   SVNParentPath /var/www/svn
+  &lt;LimitExcept GET PROPFIND OPTIONS REPORT&gt;
+    AuthName &quot;SLMan&quot;
+    AuthType Kerberos
+    KrbAuthRealms EXAMPLE.COM
+    KrbMethodNegotiate off
+    KrbSaveCredentials off
+    KrbVerifyKDC off
+    Require valid-user
+  &lt;/LimitExcept&gt;
 &lt;/Location&gt;
 [EOF]
 </pre></div>

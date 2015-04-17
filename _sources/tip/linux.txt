@@ -9,3 +9,11 @@ dry-run
     tar ztvf xxx.tar.gz
 
     zipinfo xxx.zip
+
+link
+----
+::
+
+    ln -nfs real link
+
+    chown -h user link
