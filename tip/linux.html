@@ -82,6 +82,28 @@ chown -h user link
 </pre></div>
 </div>
 </div>
+<div class="section" id="search">
+<h2>8.2.3. search<a class="headerlink" href="#search" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-python"><div class="highlight"><pre>find ./ \
+  -maxdepth 1 \
+  -type f \
+  -name &quot;*.zip&quot; \
+  -user d563 \
+  -group d563 \
+  -ctime +90 \
+  -perm 664 \
+  -exec echo {} \; | xargs echo
+
+rpm -qf /usr/java/jdk1.7.0_75/bin/java
+rpm -ql jdk
+rpm -q --scripts jdk
+
+alternatives --display java
+alternatives --config java
+update-alternatives --auto java
+</pre></div>
+</div>
+</div>
 </div>
 
 
@@ -95,6 +117,7 @@ chown -h user link
 <li><a class="reference internal" href="#">8.2. linux</a><ul>
 <li><a class="reference internal" href="#dry-run">8.2.1. dry-run</a></li>
 <li><a class="reference internal" href="#link">8.2.2. link</a></li>
+<li><a class="reference internal" href="#search">8.2.3. search</a></li>
 </ul>
 </li>
 </ul>

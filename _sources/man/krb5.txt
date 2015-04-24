@@ -33,6 +33,7 @@ kdc
     kadmin.local -q "addprinc root/admin"
     kadmin.local -q "addprinc d563"
     useradd d563
+    gpasswd -a d563 wheel
     kadmin.local -q "getprincs"
     kadmin.local -q "cpw d563"
     kadmin.local -q "delprinc d563"

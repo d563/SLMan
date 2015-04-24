@@ -85,6 +85,7 @@ chkconfig krb5kdc on
 <div class="highlight-python"><div class="highlight"><pre>kadmin.local -q &quot;addprinc root/admin&quot;
 kadmin.local -q &quot;addprinc d563&quot;
 useradd d563
+gpasswd -a d563 wheel
 kadmin.local -q &quot;getprincs&quot;
 kadmin.local -q &quot;cpw d563&quot;
 kadmin.local -q &quot;delprinc d563&quot;
