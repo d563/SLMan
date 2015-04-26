@@ -26,13 +26,17 @@ github
 ------
 .. index:: ~/.ssh/id_rsa.pub
 .. index:: ~/.ssh/id_rsa
+.. index:: ~/.ssh/authorized_keys
 
 ::
 
     mkdir ~/.ssh
+    cd ~/.ssh
     ssh-keygen -t rsa -C "mail.d563@gmail.com"
-    chmod 600 ~/.ssh/id_rsa
-    chmod 644 ~/.ssh/id_rsa.pub
+    #cat id_rsa.pub >> authorized_keys
+    chmod 600 id_rsa
+    chmod 644 id_rsa.pub
+    #chmod 600 authorized_keys
     ssh -T git@github.com
 
 ::
