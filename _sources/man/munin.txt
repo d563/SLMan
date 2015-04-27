@@ -1,0 +1,62 @@
+munin
+=====
+.. index:: /etc/yum.repos.d/epel.repo
+
+::
+
+    rpm -Uvh http://dl.fedoraproject.org/pub/epel/6/x86_64/epel-release-6-8.noarch.rpm
+    vi /etc/yum.repos.d/epel.repo
+
+server
+------
+.. index:: /etc/munin/munin-htpasswd
+.. index:: /etc/munin/munin.conf
+
+
+::
+
+    # yum -y install httpd
+    yum -y install munin --enablerepo=epel
+
+    htpasswd -b /etc/munin/munin-htpasswd d563 d563
+
+    vi /etc/munin/munin.conf
+      [localhost-client]
+        address 127.0.0.1
+        use_node_name yes
+
+    /etc/init.d/httpd start
+
+client
+------
+.. index:: /etc/munin/munin-node.conf
+
+::
+
+    yum -y install munin-node --enablerepo=epel
+
+    vi /etc/munin/munin-node.conf
+      allow ^127\.0\.0\.1$
+
+    chkconfig munin-node on
+    /etc/init.d/munin-node start
+
+tomcat
+------
+::
+
+    cd /usr/share/tomcat6/webapps
+    http://woontai.dip.jp/muninwardownload/munin.war
+
+    /etc/init.d/tomcat6 start
+
+    cd /usr/share/munin/plugins
+    cp /usr/share/tomcat6/webapps/munin/sh/catalina_* .
+    chmod +x catalina_*
+    # munin-node-configure --shell | grep catalina | sh
+
+    # /etc/munin/plugin-conf.d/catalina
+    # [catalina_8080_*]
+    #   env.url http://localhost:8080/munin/plugins
+
+    /etc/init.d/munin-node restart

@@ -5,3 +5,4 @@ man
     hinemos
     krb5
     docker
+    munin
