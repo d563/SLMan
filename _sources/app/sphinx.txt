@@ -66,3 +66,21 @@ sphinx
 ::
 
     make clean html
+
+theme
+-----
+::
+
+    vi conf.py
+      html_theme = 'SLMan'
+      html_theme_path = ['.']
+
+    mkdir -p SLMan/static
+    cat << '[EOF]' > SLMan/theme.conf
+    [theme]
+    inherit = basic
+    stylesheet = main.css
+    pygments_style = sphinx
+    [EOF]
+
+    echo '{% extends "!layout.html" %}' > SLMan/layout.html

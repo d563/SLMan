@@ -121,6 +121,24 @@ chmod u+x pull.sh push.sh
 <div class="highlight-python"><div class="highlight"><pre>make clean html
 </pre></div>
 </div>
+<div class="section" id="theme">
+<h2>5.2.1. theme<a class="headerlink" href="#theme" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-python"><div class="highlight"><pre>vi conf.py
+  html_theme = &#39;SLMan&#39;
+  html_theme_path = [&#39;.&#39;]
+
+mkdir -p SLMan/static
+cat &lt;&lt; &#39;[EOF]&#39; &gt; SLMan/theme.conf
+[theme]
+inherit = basic
+stylesheet = main.css
+pygments_style = sphinx
+[EOF]
+
+echo &#39;{% extends &quot;!layout.html&quot; %}&#39; &gt; SLMan/layout.html
+</pre></div>
+</div>
+</div>
 </div>
 
 
@@ -129,6 +147,14 @@ chmod u+x pull.sh push.sh
       </div>
       <div class="sphinxsidebar">
         <div class="sphinxsidebarwrapper">
+  <h3><a href="../index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">5.2. sphinx</a><ul>
+<li><a class="reference internal" href="#theme">5.2.1. theme</a></li>
+</ul>
+</li>
+</ul>
+
   <h4>Previous topic</h4>
   <p class="topless"><a href="wsgi.html"
                         title="previous chapter">5.1. wsgi</a></p>
