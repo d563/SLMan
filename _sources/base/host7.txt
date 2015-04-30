@@ -51,6 +51,8 @@ package
 ::
 
     easy_install pip
+    pip install -U setuptools
+    pip install -U setuptools
 
 sshd
 ----

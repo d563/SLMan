@@ -40,6 +40,7 @@ fabric
     # __init__.py
     import fabmodule
 
+    env.hosts = ['hostname']
     env.user = 'd563'
     env.password = 'pass'
 

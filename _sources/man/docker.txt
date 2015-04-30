@@ -32,10 +32,25 @@ docker
      mv apache-tomcat-7.0.59 tomcat
     ENV LANG ja_JP.UTF-8
     ENV CATALINA_OPTS\
-     -server -Xmx512m -Xms512m -Xss256k\
-     -XX:PermSize=256m -XX:MaxPermSize=512m\
+     -server\
+     -Xms1024m\
+     -Xmx1024m\
+     -XX:PermSize=256m\
+     -XX:MaxPermSize=512m\
+     -Duser.timezone=JST\
      -Xloggc:tomcat/logs/GC.log\
-     -XX:+PrintGCDetails -XX:+PrintGCDateStamps
+     -XX:+PrintGCDetails\
+     -XX:+PrintGCDateStamps\
+     -XX:MaxTenuringThreshold=32\
+     -XX:SurvivorRatio=2\
+     -XX:TargetSurvivorRatio=90\
+     -XX:+UseParNewGC\
+     -XX:+UseConcMarkSweepGC\
+     -XX:+CMSParallelRemarkEnabled\
+     -XX:+CMSClassUnloadingEnabled\
+     -XX:+DisableExplicitGC\
+     -XX:+PrintTenuringDistribution\
+     -XX:-Inline
     CMD tomcat/bin/catalina.sh start && tail -f /dev/null
     [EOF]
 
