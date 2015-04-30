@@ -23,6 +23,12 @@ network
     vi /etc/sysconfig/network-scripts/ifcfg-enp0s3
     vi /etc/udev/rules.d/98-kexec.rules
 
+timezone
+--------
+::
+
+    cp -pf /usr/share/zoneinfo/Asia/Tokyo /etc/localtime
+
 selinux
 -------
 ::

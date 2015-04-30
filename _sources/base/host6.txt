@@ -25,6 +25,14 @@ network
     vi /etc/udev/rules.d/70-persistent-net.rules
     vi /etc/sysconfig/network
 
+timezone
+--------
+.. index:: /etc/localtime
+
+::
+
+    cp -pf /usr/share/zoneinfo/Asia/Tokyo /etc/localtime
+
 .. index:: /etc/selinux/config
 
 selinux
