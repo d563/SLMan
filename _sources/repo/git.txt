@@ -12,7 +12,7 @@ gitweb
 ::
 
     cat /etc/httpd/conf.d/git.conf
-    /etc/init.d/httpd restart
+    service httpd restart
 
 .. index:: ~/.gitconfig
 
@@ -33,11 +33,11 @@ github
     mkdir ~/.ssh
     cd ~/.ssh
     ssh-keygen -t rsa -C "mail.d563@gmail.com"
-    #cat id_rsa.pub >> authorized_keys
     chmod 600 id_rsa
     chmod 644 id_rsa.pub
-    #chmod 600 authorized_keys
     ssh -T git@github.com
+    # cat id_rsa.pub >> authorized_keys
+    # chmod 600 authorized_keys
 
 ::
 
@@ -67,4 +67,3 @@ command
     git reset HEAD
     git reset --hard HEAD
     git commit --amend
-

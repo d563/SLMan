@@ -1,7 +1,6 @@
 base
 ====
 .. toctree::
-    host6
-    host7
+    centos
     vim
     httpd

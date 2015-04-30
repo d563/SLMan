@@ -4,30 +4,24 @@ httpd
 
     yum -y install httpd
 
-6.X
-
 ::
 
+    # 6
     chkconfig httpd on
-    /etc/init.d/httpd start
-
-::
+    service httpd start
 
     sed -i.org \
     -e '/--dport 22/a-A INPUT -m state --state NEW -m tcp -p tcp --dport 80 -j ACCEPT' \
     /etc/sysconfig/iptables
 
-    /etc/init.d/iptables restart
-
-7.X
+    service iptables restart
 
 ::
 
+    # 7
     systemctl list-unit-files
     systemctl enable httpd.service
     systemctl start httpd.service
-
-::
 
     firewall-cmd --permanent --add-service=http
     firewall-cmd --reload
