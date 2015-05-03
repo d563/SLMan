@@ -6,6 +6,7 @@ SLMan
 
     base/index
     repo/index
+    auto/index
     man/index
     data/index
     app/index

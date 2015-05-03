@@ -6,7 +6,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>3.5. munin &mdash; SLMan 0.0.1 documentation</title>
+    <title>3.1. jenkins &mdash; SLMan 0.0.1 documentation</title>
     
     <link rel="stylesheet" href="../_static/pyramid.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
@@ -25,9 +25,9 @@
     <script type="text/javascript" src="../_static/underscore.js"></script>
     <script type="text/javascript" src="../_static/doctools.js"></script>
     <link rel="top" title="SLMan 0.0.1 documentation" href="../index.html" />
-    <link rel="up" title="3. man" href="index.html" />
-    <link rel="next" title="4. data" href="../data/index.html" />
-    <link rel="prev" title="3.4. docker" href="docker.html" />
+    <link rel="up" title="3. auto" href="index.html" />
+    <link rel="next" title="3.2. hinemos" href="hinemos.html" />
+    <link rel="prev" title="3. auto" href="index.html" />
 <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Neuton&amp;subset=latin" type="text/css" media="screen" charset="utf-8" />
 <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Nobile:regular,italic,bold,bolditalic&amp;subset=latin" type="text/css" media="screen" charset="utf-8" />
 <!--[if lte IE 6]>
@@ -47,13 +47,13 @@
           <a href="../py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
         <li class="right" >
-          <a href="../data/index.html" title="4. data"
+          <a href="hinemos.html" title="3.2. hinemos"
              accesskey="N">next</a> |</li>
         <li class="right" >
-          <a href="docker.html" title="3.4. docker"
+          <a href="index.html" title="3. auto"
              accesskey="P">previous</a> |</li>
         <li><a href="../index.html">SLMan 0.0.1 documentation</a> &raquo;</li>
-          <li><a href="index.html" accesskey="U">3. man</a> &raquo;</li> 
+          <li><a href="index.html" accesskey="U">3. auto</a> &raquo;</li> 
       </ul>
     </div>  
 
@@ -62,59 +62,48 @@
         <div class="bodywrapper">
           <div class="body">
             
-  <div class="section" id="munin">
-<h1>3.5. munin<a class="headerlink" href="#munin" title="Permalink to this headline">¶</a></h1>
-<div class="highlight-python" id="index-0"><div class="highlight"><pre>rpm -Uvh http://dl.fedoraproject.org/pub/epel/6/x86_64/epel-release-6-8.noarch.rpm
-vi /etc/yum.repos.d/epel.repo
+  <div class="section" id="jenkins">
+<h1>3.1. jenkins<a class="headerlink" href="#jenkins" title="Permalink to this headline">¶</a></h1>
+<div class="highlight-python" id="index-0"><div class="highlight"><pre>cd /etc/yum.repos.d/
+wget http://pkg.jenkins-ci.org/redhat/jenkins.repo
+rpm --import http://pkg.jenkins-ci.org/redhat/jenkins-ci.org.key
 </pre></div>
 </div>
-<div class="section" id="server">
-<h2>3.5.1. server<a class="headerlink" href="#server" title="Permalink to this headline">¶</a></h2>
-<span class="target" id="index-1"></span><div class="highlight-python" id="index-2"><div class="highlight"><pre># yum -y install httpd
-yum -y install munin --enablerepo=epel
-
-htpasswd -b /etc/munin/munin-htpasswd d563 d563
-
-vi /etc/munin/munin.conf
-  [localhost-client]
-    address 127.0.0.1
-    use_node_name yes
-
-/etc/init.d/httpd start
+<div class="highlight-python"><div class="highlight"><pre>yum -y install jenkins
 </pre></div>
 </div>
-</div>
-<div class="section" id="client">
-<h2>3.5.2. client<a class="headerlink" href="#client" title="Permalink to this headline">¶</a></h2>
-<div class="highlight-python" id="index-3"><div class="highlight"><pre>yum -y install munin-node --enablerepo=epel
-
-vi /etc/munin/munin-node.conf
-  allow ^127\.0\.0\.1$
-
-chkconfig munin-node on
-/etc/init.d/munin-node start
+<div class="highlight-python" id="index-1"><div class="highlight"><pre>sed -i.org \
+-e &#39;s#JENKINS_HOME=.*#JENKINS_HOME=&quot;/var/lib/git/jenkins&quot;#&#39; \
+-e &#39;s#JENKINS_ARGS=.*#JENKINS_ARGS=&quot;--prefix=/jenkins&quot;#&#39; \
+/etc/sysconfig/jenkins
 </pre></div>
 </div>
-</div>
-<div class="section" id="tomcat">
-<h2>3.5.3. tomcat<a class="headerlink" href="#tomcat" title="Permalink to this headline">¶</a></h2>
-<div class="highlight-python"><div class="highlight"><pre>cd /usr/share/tomcat6/webapps
-http://woontai.dip.jp/muninwardownload/munin.war
-
-/etc/init.d/tomcat6 start
-
-cd /usr/share/munin/plugins
-cp /usr/share/tomcat6/webapps/munin/sh/catalina_* .
-chmod +x catalina_*
-# munin-node-configure --shell | grep catalina | sh
-
-# /etc/munin/plugin-conf.d/catalina
-# [catalina_8080_*]
-#   env.url http://localhost:8080/munin/plugins
-
-/etc/init.d/munin-node restart
+<div class="highlight-python"><div class="highlight"><pre>mkdir -p /var/lib/git/jenkins
+cd /var/lib/git
+chgrp jenkins jenkins
+chmod 2775 jenkins
+git init jenkins
 </pre></div>
 </div>
+<div class="highlight-python"><div class="highlight"><pre>echo &#39;ProxyPass /jenkins ajp://localhost:8009/jenkins
+ProxyPassReverse /jenkins ajp://localhost:8009/jenkins&#39; &gt; /etc/httpd/conf.d/jenkins.conf
+
+/etc/init.d/httpd restart
+</pre></div>
+</div>
+<div class="highlight-python"><div class="highlight"><pre>chkconfig jenkins on
+/etc/init.d/jenkins start
+</pre></div>
+</div>
+<div class="highlight-python"><div class="highlight"><pre>cd /var/lib/git/jenkins
+cat &lt;&lt; &#39;[EOF]&#39; &gt; .gitignore
+*
+!.gitignore
+!jobs
+!jobs/*/
+!config.xml
+[EOF]
+</pre></div>
 </div>
 </div>
 
@@ -124,22 +113,12 @@ chmod +x catalina_*
       </div>
       <div class="sphinxsidebar">
         <div class="sphinxsidebarwrapper">
-  <h3><a href="../index.html">Table Of Contents</a></h3>
-  <ul>
-<li><a class="reference internal" href="#">3.5. munin</a><ul>
-<li><a class="reference internal" href="#server">3.5.1. server</a></li>
-<li><a class="reference internal" href="#client">3.5.2. client</a></li>
-<li><a class="reference internal" href="#tomcat">3.5.3. tomcat</a></li>
-</ul>
-</li>
-</ul>
-
   <h4>Previous topic</h4>
-  <p class="topless"><a href="docker.html"
-                        title="previous chapter">3.4. docker</a></p>
+  <p class="topless"><a href="index.html"
+                        title="previous chapter">3. auto</a></p>
   <h4>Next topic</h4>
-  <p class="topless"><a href="../data/index.html"
-                        title="next chapter">4. data</a></p>
+  <p class="topless"><a href="hinemos.html"
+                        title="next chapter">3.2. hinemos</a></p>
 <div id="searchbox" style="display: none">
   <h3>Quick search</h3>
     <form class="search" action="../search.html" method="get">
@@ -167,13 +146,13 @@ chmod +x catalina_*
           <a href="../py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
         <li class="right" >
-          <a href="../data/index.html" title="4. data"
+          <a href="hinemos.html" title="3.2. hinemos"
              >next</a> |</li>
         <li class="right" >
-          <a href="docker.html" title="3.4. docker"
+          <a href="index.html" title="3. auto"
              >previous</a> |</li>
         <li><a href="../index.html">SLMan 0.0.1 documentation</a> &raquo;</li>
-          <li><a href="index.html" >3. man</a> &raquo;</li> 
+          <li><a href="index.html" >3. auto</a> &raquo;</li> 
       </ul>
     </div>
     <div class="footer">

@@ -1,8 +1,5 @@
 man
 ===
 .. toctree::
-    jenkins
-    hinemos
     krb5
     docker
-    munin

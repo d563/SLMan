@@ -6,7 +6,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>4.3. mysql &mdash; SLMan 0.0.1 documentation</title>
+    <title>5.3. mysql &mdash; SLMan 0.0.1 documentation</title>
     
     <link rel="stylesheet" href="../_static/pyramid.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
@@ -25,9 +25,9 @@
     <script type="text/javascript" src="../_static/underscore.js"></script>
     <script type="text/javascript" src="../_static/doctools.js"></script>
     <link rel="top" title="SLMan 0.0.1 documentation" href="../index.html" />
-    <link rel="up" title="4. data" href="index.html" />
-    <link rel="next" title="5. app" href="../app/index.html" />
-    <link rel="prev" title="4.2. oracle" href="oracle.html" />
+    <link rel="up" title="5. data" href="index.html" />
+    <link rel="next" title="6. app" href="../app/index.html" />
+    <link rel="prev" title="5.2. oracle" href="oracle.html" />
 <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Neuton&amp;subset=latin" type="text/css" media="screen" charset="utf-8" />
 <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Nobile:regular,italic,bold,bolditalic&amp;subset=latin" type="text/css" media="screen" charset="utf-8" />
 <!--[if lte IE 6]>
@@ -47,13 +47,13 @@
           <a href="../py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
         <li class="right" >
-          <a href="../app/index.html" title="5. app"
+          <a href="../app/index.html" title="6. app"
              accesskey="N">next</a> |</li>
         <li class="right" >
-          <a href="oracle.html" title="4.2. oracle"
+          <a href="oracle.html" title="5.2. oracle"
              accesskey="P">previous</a> |</li>
         <li><a href="../index.html">SLMan 0.0.1 documentation</a> &raquo;</li>
-          <li><a href="index.html" accesskey="U">4. data</a> &raquo;</li> 
+          <li><a href="index.html" accesskey="U">5. data</a> &raquo;</li> 
       </ul>
     </div>  
 
@@ -63,9 +63,9 @@
           <div class="body">
             
   <div class="section" id="mysql">
-<h1>4.3. mysql<a class="headerlink" href="#mysql" title="Permalink to this headline">¶</a></h1>
+<h1>5.3. mysql<a class="headerlink" href="#mysql" title="Permalink to this headline">¶</a></h1>
 <div class="section" id="server">
-<h2>4.3.1. server<a class="headerlink" href="#server" title="Permalink to this headline">¶</a></h2>
+<h2>5.3.1. server<a class="headerlink" href="#server" title="Permalink to this headline">¶</a></h2>
 <div class="highlight-python"><div class="highlight"><pre>yum -y install mysql-server
 </pre></div>
 </div>
@@ -86,7 +86,7 @@ default-character-set=utf8&#39; &gt;&gt; /etc/my.cnf
 </div>
 </div>
 <div class="section" id="setting">
-<h2>4.3.2. setting<a class="headerlink" href="#setting" title="Permalink to this headline">¶</a></h2>
+<h2>5.3.2. setting<a class="headerlink" href="#setting" title="Permalink to this headline">¶</a></h2>
 <div class="highlight-python"><div class="highlight"><pre>mysql -u root -p
 
 grant all privileges on d563.* to SLMan@localhost identified by &#39;SLManPass&#39;;
@@ -120,14 +120,14 @@ drop database SLMan;
 </div>
 </div>
 <div class="section" id="backup">
-<h2>4.3.3. backup<a class="headerlink" href="#backup" title="Permalink to this headline">¶</a></h2>
+<h2>5.3.3. backup<a class="headerlink" href="#backup" title="Permalink to this headline">¶</a></h2>
 <div class="highlight-python"><div class="highlight"><pre>mysqldump -u SLMan d563 &gt; SLMan.dmp
 mysql -u SLMan d563 &lt; SLMan.dmp
 </pre></div>
 </div>
 </div>
 <div class="section" id="python">
-<h2>4.3.4. python<a class="headerlink" href="#python" title="Permalink to this headline">¶</a></h2>
+<h2>5.3.4. python<a class="headerlink" href="#python" title="Permalink to this headline">¶</a></h2>
 <div class="highlight-python"><div class="highlight"><pre>yum -y install mysql-devel
 
 pip install MySQL-python
@@ -164,21 +164,21 @@ pip install MySQL-python
         <div class="sphinxsidebarwrapper">
   <h3><a href="../index.html">Table Of Contents</a></h3>
   <ul>
-<li><a class="reference internal" href="#">4.3. mysql</a><ul>
-<li><a class="reference internal" href="#server">4.3.1. server</a></li>
-<li><a class="reference internal" href="#setting">4.3.2. setting</a></li>
-<li><a class="reference internal" href="#backup">4.3.3. backup</a></li>
-<li><a class="reference internal" href="#python">4.3.4. python</a></li>
+<li><a class="reference internal" href="#">5.3. mysql</a><ul>
+<li><a class="reference internal" href="#server">5.3.1. server</a></li>
+<li><a class="reference internal" href="#setting">5.3.2. setting</a></li>
+<li><a class="reference internal" href="#backup">5.3.3. backup</a></li>
+<li><a class="reference internal" href="#python">5.3.4. python</a></li>
 </ul>
 </li>
 </ul>
 
   <h4>Previous topic</h4>
   <p class="topless"><a href="oracle.html"
-                        title="previous chapter">4.2. oracle</a></p>
+                        title="previous chapter">5.2. oracle</a></p>
   <h4>Next topic</h4>
   <p class="topless"><a href="../app/index.html"
-                        title="next chapter">5. app</a></p>
+                        title="next chapter">6. app</a></p>
 <div id="searchbox" style="display: none">
   <h3>Quick search</h3>
     <form class="search" action="../search.html" method="get">
@@ -206,13 +206,13 @@ pip install MySQL-python
           <a href="../py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
         <li class="right" >
-          <a href="../app/index.html" title="5. app"
+          <a href="../app/index.html" title="6. app"
              >next</a> |</li>
         <li class="right" >
-          <a href="oracle.html" title="4.2. oracle"
+          <a href="oracle.html" title="5.2. oracle"
              >previous</a> |</li>
         <li><a href="../index.html">SLMan 0.0.1 documentation</a> &raquo;</li>
-          <li><a href="index.html" >4. data</a> &raquo;</li> 
+          <li><a href="index.html" >5. data</a> &raquo;</li> 
       </ul>
     </div>
     <div class="footer">

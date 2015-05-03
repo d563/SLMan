@@ -93,15 +93,18 @@ vi /etc/udev/rules.d/98-kexec.rules
 </pre></div>
 </div>
 </div>
-<div class="section" id="localtime">
-<h2>1.1.3. localtime<a class="headerlink" href="#localtime" title="Permalink to this headline">¶</a></h2>
-<div class="highlight-python" id="index-5"><div class="highlight"><pre><span class="n">cp</span> <span class="o">-</span><span class="n">pf</span> <span class="o">/</span><span class="n">usr</span><span class="o">/</span><span class="n">share</span><span class="o">/</span><span class="n">zoneinfo</span><span class="o">/</span><span class="n">Asia</span><span class="o">/</span><span class="n">Tokyo</span> <span class="o">/</span><span class="n">etc</span><span class="o">/</span><span class="n">localtime</span>
+<div class="section" id="location">
+<h2>1.1.3. location<a class="headerlink" href="#location" title="Permalink to this headline">¶</a></h2>
+<span class="target" id="index-5"></span><div class="highlight-python" id="index-6"><div class="highlight"><pre># AWS
+unalias cp mv rm
+echo LANG=ja_JP.UTF-8 &gt; /etc/bash_profile
+cp -pf /usr/share/zoneinfo/Asia/Tokyo /etc/localtime
 </pre></div>
 </div>
 </div>
 <div class="section" id="selinux">
 <h2>1.1.4. selinux<a class="headerlink" href="#selinux" title="Permalink to this headline">¶</a></h2>
-<div class="highlight-python" id="index-6"><div class="highlight"><pre>sed -i.org -e &#39;s/^SELINUX=.*/SELINUX=disabled/&#39; /etc/selinux/config
+<div class="highlight-python" id="index-7"><div class="highlight"><pre>sed -i.org -e &#39;s/^SELINUX=.*/SELINUX=disabled/&#39; /etc/selinux/config
 setenforce 0
 </pre></div>
 </div>
@@ -139,14 +142,14 @@ pip install -U setuptools
 </div>
 <div class="section" id="sshd">
 <h2>1.1.7. sshd<a class="headerlink" href="#sshd" title="Permalink to this headline">¶</a></h2>
-<div class="highlight-python" id="index-7"><div class="highlight"><pre>sed -i.org -e &#39;/#Port 22/aPort 443&#39; /etc/ssh/sshd_config
+<div class="highlight-python" id="index-8"><div class="highlight"><pre>sed -i.org -e &#39;/#Port 22/aPort 443&#39; /etc/ssh/sshd_config
 service sshd restart
 </pre></div>
 </div>
 </div>
 <div class="section" id="iptables">
 <h2>1.1.8. iptables<a class="headerlink" href="#iptables" title="Permalink to this headline">¶</a></h2>
-<div class="highlight-python" id="index-8"><div class="highlight"><pre># 6
+<div class="highlight-python" id="index-9"><div class="highlight"><pre># 6
 sed -i.org -e &#39;s/--dport 22/--dport 443/&#39; /etc/sysconfig/iptables
 service iptables restart
 
@@ -191,7 +194,7 @@ firewall-cmd --reload
 <li><a class="reference internal" href="#">1.1. centos</a><ul>
 <li><a class="reference internal" href="#image">1.1.1. image</a></li>
 <li><a class="reference internal" href="#network">1.1.2. network</a></li>
-<li><a class="reference internal" href="#localtime">1.1.3. localtime</a></li>
+<li><a class="reference internal" href="#location">1.1.3. location</a></li>
 <li><a class="reference internal" href="#selinux">1.1.4. selinux</a></li>
 <li><a class="reference internal" href="#visudo">1.1.5. visudo</a></li>
 <li><a class="reference internal" href="#package">1.1.6. package</a></li>
