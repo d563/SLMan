@@ -41,14 +41,14 @@ network
 
 location
 --------
+.. index:: /etc/locale.conf
 .. index:: /etc/localtime
-.. index:: /etc/bash_profile
 
 ::
 
     # AWS
     unalias cp mv rm
-    echo LANG=ja_JP.UTF-8 > /etc/bash_profile
+    echo LANG=ja_JP.UTF-8 > /etc/locale.conf
     cp -pf /usr/share/zoneinfo/Asia/Tokyo /etc/localtime
 
 selinux

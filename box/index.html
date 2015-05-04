@@ -6,7 +6,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>4.2. docker &mdash; SLMan 0.0.1 documentation</title>
+    <title>4. box &mdash; SLMan 0.0.1 documentation</title>
     
     <link rel="stylesheet" href="../_static/pyramid.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
@@ -25,9 +25,8 @@
     <script type="text/javascript" src="../_static/underscore.js"></script>
     <script type="text/javascript" src="../_static/doctools.js"></script>
     <link rel="top" title="SLMan 0.0.1 documentation" href="../index.html" />
-    <link rel="up" title="4. man" href="index.html" />
-    <link rel="next" title="5. data" href="../data/index.html" />
-    <link rel="prev" title="4.1. krb5" href="krb5.html" />
+    <link rel="next" title="4.1. aws" href="aws.html" />
+    <link rel="prev" title="3.3. munin" href="../auto/munin.html" />
 <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Neuton&amp;subset=latin" type="text/css" media="screen" charset="utf-8" />
 <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Nobile:regular,italic,bold,bolditalic&amp;subset=latin" type="text/css" media="screen" charset="utf-8" />
 <!--[if lte IE 6]>
@@ -47,13 +46,12 @@
           <a href="../py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
         <li class="right" >
-          <a href="../data/index.html" title="5. data"
+          <a href="aws.html" title="4.1. aws"
              accesskey="N">next</a> |</li>
         <li class="right" >
-          <a href="krb5.html" title="4.1. krb5"
+          <a href="../auto/munin.html" title="3.3. munin"
              accesskey="P">previous</a> |</li>
-        <li><a href="../index.html">SLMan 0.0.1 documentation</a> &raquo;</li>
-          <li><a href="index.html" accesskey="U">4. man</a> &raquo;</li> 
+        <li><a href="../index.html">SLMan 0.0.1 documentation</a> &raquo;</li> 
       </ul>
     </div>  
 
@@ -62,74 +60,13 @@
         <div class="bodywrapper">
           <div class="body">
             
-  <div class="section" id="docker">
-<h1>4.2. docker<a class="headerlink" href="#docker" title="Permalink to this headline">¶</a></h1>
-<div class="highlight-python"><div class="highlight"><pre>yum -y install docker
-</pre></div>
-</div>
-<div class="highlight-python"><div class="highlight"><pre>systemctl enable docker
-systemctl start docker
-</pre></div>
-</div>
-<div class="highlight-python"><div class="highlight"><pre>docker pull centos:6
-docker images
-</pre></div>
-</div>
-<span class="target" id="module-Dockerfile"></span><div class="highlight-python"><div class="highlight"><pre>cat &lt;&lt; &#39;[EOF]&#39; &gt; Dockerfile
-FROM centos:6
-MAINTAINER d563
-RUN\
- yum -y install wget tar java-1.6.0-openjdk &amp;&amp;\
- yum -y reinstall glibc-common &amp;&amp;\
- yum clean all
-RUN\
- wget http://archive.apache.org/dist/tomcat/tomcat-7/v7.0.59/bin/apache-tomcat-7.0.59.tar.gz &amp;&amp;\
- tar xvzf apache-tomcat-7.0.59.tar.gz &amp;&amp;\
- rm -f apache-tomcat-7.0.59.tar.gz &amp;&amp;\
- mv apache-tomcat-7.0.59 tomcat
-ENV LANG ja_JP.UTF-8
-ENV CATALINA_OPTS\
- -server\
- -Xms1024m\
- -Xmx1024m\
- -XX:PermSize=256m\
- -XX:MaxPermSize=512m\
- -Duser.timezone=JST\
- -Xloggc:tomcat/logs/GC.log\
- -XX:+PrintGCDetails\
- -XX:+PrintGCDateStamps\
- -XX:MaxTenuringThreshold=32\
- -XX:SurvivorRatio=2\
- -XX:TargetSurvivorRatio=90\
- -XX:+UseParNewGC\
- -XX:+UseConcMarkSweepGC\
- -XX:+CMSParallelRemarkEnabled\
- -XX:+CMSClassUnloadingEnabled\
- -XX:+DisableExplicitGC\
- -XX:+PrintTenuringDistribution\
- -XX:-Inline
-CMD tomcat/bin/catalina.sh start &amp;&amp; tail -f /dev/null
-[EOF]
-</pre></div>
-</div>
-<div class="highlight-python"><div class="highlight"><pre>docker build -t d563/co6:1 .
-
-docker run -d \
-  -p 8888:8080 \
-  -v ~/logs:/tomcat/logs:rw \
-  -v ~/webapps:/tomcat/webapps:rw \
-  --name co6 \
-  d563/co6:1
-
-docker run -it d563/co6:1 /bin/bash
-</pre></div>
-</div>
-<div class="highlight-python"><div class="highlight"><pre>iptables -t nat -L
-
-docker ps -a
-docker rm -f co6
-docker rmi d563/co6:1
-</pre></div>
+  <div class="section" id="box">
+<h1>4. box<a class="headerlink" href="#box" title="Permalink to this headline">¶</a></h1>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="aws.html">4.1. aws</a></li>
+<li class="toctree-l1"><a class="reference internal" href="docker.html">4.2. docker</a></li>
+</ul>
 </div>
 </div>
 
@@ -140,11 +77,11 @@ docker rmi d563/co6:1
       <div class="sphinxsidebar">
         <div class="sphinxsidebarwrapper">
   <h4>Previous topic</h4>
-  <p class="topless"><a href="krb5.html"
-                        title="previous chapter">4.1. krb5</a></p>
+  <p class="topless"><a href="../auto/munin.html"
+                        title="previous chapter">3.3. munin</a></p>
   <h4>Next topic</h4>
-  <p class="topless"><a href="../data/index.html"
-                        title="next chapter">5. data</a></p>
+  <p class="topless"><a href="aws.html"
+                        title="next chapter">4.1. aws</a></p>
 <div id="searchbox" style="display: none">
   <h3>Quick search</h3>
     <form class="search" action="../search.html" method="get">
@@ -172,13 +109,12 @@ docker rmi d563/co6:1
           <a href="../py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
         <li class="right" >
-          <a href="../data/index.html" title="5. data"
+          <a href="aws.html" title="4.1. aws"
              >next</a> |</li>
         <li class="right" >
-          <a href="krb5.html" title="4.1. krb5"
+          <a href="../auto/munin.html" title="3.3. munin"
              >previous</a> |</li>
-        <li><a href="../index.html">SLMan 0.0.1 documentation</a> &raquo;</li>
-          <li><a href="index.html" >4. man</a> &raquo;</li> 
+        <li><a href="../index.html">SLMan 0.0.1 documentation</a> &raquo;</li> 
       </ul>
     </div>
     <div class="footer">

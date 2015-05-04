@@ -1,0 +1,152 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>4.1. aws &mdash; SLMan 0.0.1 documentation</title>
+    
+    <link rel="stylesheet" href="../_static/pyramid.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/SLMan.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '0.0.1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <link rel="top" title="SLMan 0.0.1 documentation" href="../index.html" />
+    <link rel="up" title="4. box" href="index.html" />
+    <link rel="next" title="4.2. docker" href="docker.html" />
+    <link rel="prev" title="4. box" href="index.html" />
+<link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Neuton&amp;subset=latin" type="text/css" media="screen" charset="utf-8" />
+<link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Nobile:regular,italic,bold,bolditalic&amp;subset=latin" type="text/css" media="screen" charset="utf-8" />
+<!--[if lte IE 6]>
+<link rel="stylesheet" href="../_static/ie6.css" type="text/css" media="screen" charset="utf-8" />
+<![endif]-->
+
+  </head>
+  <body>
+
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="docker.html" title="4.2. docker"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="index.html" title="4. box"
+             accesskey="P">previous</a> |</li>
+        <li><a href="../index.html">SLMan 0.0.1 documentation</a> &raquo;</li>
+          <li><a href="index.html" accesskey="U">4. box</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="aws">
+<h1>4.1. aws<a class="headerlink" href="#aws" title="Permalink to this headline">¶</a></h1>
+<div class="highlight-python"><div class="highlight"><pre>pip install boto
+
+echo &#39;export AWS_ACCESS_KEY_ID=XXX
+export AWS_SECRET_ACCESS_KEY=YYY&#39; &gt; /etc/profile.d/aws.sh
+
+vi ~/.ssh/d563-tokyo.pem
+chmod 600 ~/.ssh/d563-tokyo.pem
+</pre></div>
+</div>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">python</span>
+<span class="kn">from</span> <span class="nn">boto</span> <span class="kn">import</span> <span class="n">ec2</span>
+<span class="n">conn</span> <span class="o">=</span> <span class="n">ec2</span><span class="o">.</span><span class="n">connect_to_region</span><span class="p">(</span><span class="s">&#39;ap-northeast-1&#39;</span><span class="p">)</span>
+
+<span class="n">conn</span><span class="o">.</span><span class="n">run_instances</span><span class="p">(</span>
+  <span class="s">&#39;ami-b1b458b1&#39;</span><span class="p">,</span>
+  <span class="n">instance_type</span><span class="o">=</span><span class="s">&#39;t2.micro&#39;</span><span class="p">,</span>
+  <span class="n">key_name</span><span class="o">=</span><span class="s">&#39;d563-tokyo&#39;</span><span class="p">,</span>
+  <span class="n">security_groups</span><span class="o">=</span><span class="p">[</span><span class="s">&#39;launch-wizard-1&#39;</span><span class="p">]</span>
+<span class="p">)</span>
+
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="p">[</span><span class="n">i</span> <span class="k">for</span> <span class="n">r</span> <span class="ow">in</span> <span class="n">conn</span><span class="o">.</span><span class="n">get_all_reservations</span><span class="p">()</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">r</span><span class="o">.</span><span class="n">instances</span><span class="p">]:</span>
+  <span class="k">if</span> <span class="n">i</span><span class="o">.</span><span class="n">_state</span><span class="o">.</span><span class="n">code</span> <span class="o">==</span> <span class="mi">16</span><span class="p">:</span>
+    <span class="k">print</span> <span class="s">&#39;</span><span class="si">%s</span><span class="s">=</span><span class="si">%s</span><span class="s">&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">i</span><span class="o">.</span><span class="n">id</span><span class="p">,</span> <span class="n">i</span><span class="o">.</span><span class="n">ip_address</span><span class="p">)</span>
+
+<span class="n">conn</span><span class="o">.</span><span class="n">terminate_instances</span><span class="p">(</span><span class="n">instance_ids</span><span class="o">=</span><span class="p">[</span><span class="n">i</span><span class="o">.</span><span class="n">id</span> <span class="k">for</span> <span class="n">r</span> <span class="ow">in</span> <span class="n">conn</span><span class="o">.</span><span class="n">get_all_reservations</span><span class="p">()</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">r</span><span class="o">.</span><span class="n">instances</span><span class="p">])</span>
+</pre></div>
+</div>
+<div class="highlight-python"><div class="highlight"><pre>ssh -i ~/.ssh/d563-tokyo.pem ec2-user@XX.XX.XX.XX
+</pre></div>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="index.html"
+                        title="previous chapter">4. box</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="docker.html"
+                        title="next chapter">4.2. docker</a></p>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="docker.html" title="4.2. docker"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="index.html" title="4. box"
+             >previous</a> |</li>
+        <li><a href="../index.html">SLMan 0.0.1 documentation</a> &raquo;</li>
+          <li><a href="index.html" >4. box</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2014, Daisuke Maeda.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.2.3.
+    </div>
+  </body>
+</html>

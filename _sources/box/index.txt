@@ -1,5 +1,5 @@
-man
+box
 ===
 .. toctree::
-    krb5
+    aws
     docker
