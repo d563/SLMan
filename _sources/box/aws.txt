@@ -1,5 +1,7 @@
 aws
 ===
+.. index:: /etc/profile.d/aws.sh
+
 ::
 
     pip install boto
