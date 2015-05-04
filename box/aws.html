@@ -69,29 +69,60 @@
 echo &#39;export AWS_ACCESS_KEY_ID=XXX
 export AWS_SECRET_ACCESS_KEY=YYY&#39; &gt; /etc/profile.d/aws.sh
 
+# mkdr ~/.ssh
 vi ~/.ssh/d563-tokyo.pem
 chmod 600 ~/.ssh/d563-tokyo.pem
 </pre></div>
 </div>
-<div class="highlight-python"><div class="highlight"><pre><span class="n">python</span>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">cat</span> <span class="o">&lt;&lt;</span> <span class="s">&#39;[EOF]&#39;</span> <span class="o">&gt;</span> <span class="n">fabfile</span><span class="o">.</span><span class="n">py</span>
+<span class="c"># -*- coding: utf-8 -*-</span>
+<span class="kn">from</span> <span class="nn">fabric.api</span> <span class="kn">import</span> <span class="n">env</span><span class="p">,</span> <span class="n">local</span><span class="p">,</span> <span class="n">lcd</span><span class="p">,</span> <span class="n">put</span><span class="p">,</span> <span class="n">run</span><span class="p">,</span> <span class="n">sudo</span><span class="p">,</span> <span class="n">cd</span>
+<span class="kn">from</span> <span class="nn">fabric.contrib.files</span> <span class="kn">import</span> <span class="n">exists</span>
+<span class="kn">from</span> <span class="nn">fabric.decorators</span> <span class="kn">import</span> <span class="n">task</span>
 <span class="kn">from</span> <span class="nn">boto</span> <span class="kn">import</span> <span class="n">ec2</span>
-<span class="n">conn</span> <span class="o">=</span> <span class="n">ec2</span><span class="o">.</span><span class="n">connect_to_region</span><span class="p">(</span><span class="s">&#39;ap-northeast-1&#39;</span><span class="p">)</span>
+<span class="kn">import</span> <span class="nn">time</span>
 
-<span class="n">conn</span><span class="o">.</span><span class="n">run_instances</span><span class="p">(</span>
-  <span class="s">&#39;ami-b1b458b1&#39;</span><span class="p">,</span>
-  <span class="n">instance_type</span><span class="o">=</span><span class="s">&#39;t2.micro&#39;</span><span class="p">,</span>
-  <span class="n">key_name</span><span class="o">=</span><span class="s">&#39;d563-tokyo&#39;</span><span class="p">,</span>
-  <span class="n">security_groups</span><span class="o">=</span><span class="p">[</span><span class="s">&#39;launch-wizard-1&#39;</span><span class="p">]</span>
-<span class="p">)</span>
+<span class="n">env</span><span class="o">.</span><span class="n">user</span> <span class="o">=</span> <span class="s">&#39;ec2-user&#39;</span>
 
-<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="p">[</span><span class="n">i</span> <span class="k">for</span> <span class="n">r</span> <span class="ow">in</span> <span class="n">conn</span><span class="o">.</span><span class="n">get_all_reservations</span><span class="p">()</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">r</span><span class="o">.</span><span class="n">instances</span><span class="p">]:</span>
-  <span class="k">if</span> <span class="n">i</span><span class="o">.</span><span class="n">_state</span><span class="o">.</span><span class="n">code</span> <span class="o">==</span> <span class="mi">16</span><span class="p">:</span>
-    <span class="k">print</span> <span class="s">&#39;</span><span class="si">%s</span><span class="s">=</span><span class="si">%s</span><span class="s">&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">i</span><span class="o">.</span><span class="n">id</span><span class="p">,</span> <span class="n">i</span><span class="o">.</span><span class="n">ip_address</span><span class="p">)</span>
+<span class="nd">@task</span>
+<span class="k">def</span> <span class="nf">create</span><span class="p">():</span>
+  <span class="n">conn</span> <span class="o">=</span> <span class="n">ec2</span><span class="o">.</span><span class="n">connect_to_region</span><span class="p">(</span><span class="s">&#39;ap-northeast-1&#39;</span><span class="p">)</span>
+  <span class="n">resv</span> <span class="o">=</span> <span class="n">conn</span><span class="o">.</span><span class="n">run_instances</span><span class="p">(</span>
+    <span class="s">&#39;ami-b1b458b1&#39;</span><span class="p">,</span>
+    <span class="n">instance_type</span><span class="o">=</span><span class="s">&#39;t2.micro&#39;</span><span class="p">,</span>
+    <span class="n">key_name</span><span class="o">=</span><span class="s">&#39;d563-tokyo&#39;</span><span class="p">,</span>
+    <span class="n">security_groups</span><span class="o">=</span><span class="p">[</span><span class="s">&#39;launch-wizard-1&#39;</span><span class="p">]</span>
+  <span class="p">)</span>
+  <span class="k">while</span> <span class="nb">len</span><span class="p">(</span><span class="n">env</span><span class="o">.</span><span class="n">hosts</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+    <span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="p">[</span><span class="n">i</span> <span class="k">for</span> <span class="n">r</span> <span class="ow">in</span> <span class="n">conn</span><span class="o">.</span><span class="n">get_all_reservations</span><span class="p">()</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">r</span><span class="o">.</span><span class="n">instances</span><span class="p">]:</span>
+      <span class="k">if</span> <span class="n">i</span><span class="o">.</span><span class="n">_state</span><span class="o">.</span><span class="n">code</span> <span class="o">==</span> <span class="mi">16</span> <span class="ow">and</span> <span class="n">i</span><span class="o">.</span><span class="n">id</span> <span class="o">==</span> <span class="n">resv</span><span class="o">.</span><span class="n">instances</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">id</span><span class="p">:</span>
+        <span class="n">env</span><span class="o">.</span><span class="n">hosts</span> <span class="o">=</span> <span class="p">[</span><span class="n">i</span><span class="o">.</span><span class="n">ip_address</span><span class="p">]</span>
+  <span class="k">print</span> <span class="n">env</span><span class="o">.</span><span class="n">hosts</span>
+  <span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>
 
-<span class="n">conn</span><span class="o">.</span><span class="n">terminate_instances</span><span class="p">(</span><span class="n">instance_ids</span><span class="o">=</span><span class="p">[</span><span class="n">i</span><span class="o">.</span><span class="n">id</span> <span class="k">for</span> <span class="n">r</span> <span class="ow">in</span> <span class="n">conn</span><span class="o">.</span><span class="n">get_all_reservations</span><span class="p">()</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">r</span><span class="o">.</span><span class="n">instances</span><span class="p">])</span>
+<span class="nd">@task</span>
+<span class="k">def</span> <span class="nf">init</span><span class="p">():</span>
+  <span class="n">sudo</span><span class="p">(</span><span class="s">&#39;unalias cp mv rm&#39;</span><span class="p">)</span>
+  <span class="n">sudo</span><span class="p">(</span><span class="s">&#39;echo LANG=ja_JP.UTF-8 &gt; /etc/locale.conf&#39;</span><span class="p">)</span>
+  <span class="n">sudo</span><span class="p">(</span><span class="s">&#39;cp -pf /usr/share/zoneinfo/Asia/Tokyo /etc/localtime&#39;</span><span class="p">)</span>
+  <span class="n">sudo</span><span class="p">(</span><span class="s">&quot;sed -i.org -e &#39;s/debuglevel=2/debuglevel=1/&#39; /etc/yum.conf&quot;</span><span class="p">)</span>
+  <span class="n">sudo</span><span class="p">(</span><span class="s">&#39;yum -y install wget unzip gcc gcc-c++ java-1.7.0-openjdk-devel python-devel&#39;</span><span class="p">)</span>
+  <span class="n">sudo</span><span class="p">(</span><span class="s">&#39;yum -y update&#39;</span><span class="p">)</span>
+  <span class="n">sudo</span><span class="p">(</span><span class="s">&#39;easy_install pip&#39;</span><span class="p">)</span>
+  <span class="n">sudo</span><span class="p">(</span><span class="s">&#39;pip install -U pip&#39;</span><span class="p">)</span>
+  <span class="n">sudo</span><span class="p">(</span><span class="s">&#39;pip install -U setuptools&#39;</span><span class="p">)</span>
+
+<span class="nd">@task</span>
+<span class="k">def</span> <span class="nf">delete</span><span class="p">():</span>
+  <span class="n">conn</span> <span class="o">=</span> <span class="n">ec2</span><span class="o">.</span><span class="n">connect_to_region</span><span class="p">(</span><span class="s">&#39;ap-northeast-1&#39;</span><span class="p">)</span>
+  <span class="n">conn</span><span class="o">.</span><span class="n">terminate_instances</span><span class="p">(</span><span class="n">instance_ids</span><span class="o">=</span><span class="p">[</span><span class="n">i</span><span class="o">.</span><span class="n">id</span> <span class="k">for</span> <span class="n">r</span> <span class="ow">in</span> <span class="n">conn</span><span class="o">.</span><span class="n">get_all_reservations</span><span class="p">()</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">r</span><span class="o">.</span><span class="n">instances</span><span class="p">])</span>
+<span class="p">[</span><span class="n">EOF</span><span class="p">]</span>
 </pre></div>
 </div>
-<div class="highlight-python"><div class="highlight"><pre>ssh -i ~/.ssh/d563-tokyo.pem ec2-user@XX.XX.XX.XX
+<div class="highlight-python"><div class="highlight"><pre>fab -i ~/.ssh/d563-tokyo.pem create init
+
+ssh -i ~/.ssh/d563-tokyo.pem ec2-user@XX.XX.XX.XX
 </pre></div>
 </div>
 </div>
