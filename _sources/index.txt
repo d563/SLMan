@@ -7,9 +7,9 @@ SLMan
     base/index
     repo/index
     auto/index
-    box/index
     data/index
     app/index
+    box/index
     temp/index
     idea/index
     tip/index
