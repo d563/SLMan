@@ -40,7 +40,7 @@ aws
           if i._state.code == 16 and i.id == resv.instances[0].id:
             env.hosts = [i.ip_address]
       print env.hosts
-      time.sleep(10)
+      time.sleep(30)
 
     @task
     def init():

@@ -152,15 +152,36 @@ ldconfig
 </div>
 <div class="highlight-python"><div class="highlight"><pre><span class="n">python</span>
 <span class="kn">import</span> <span class="nn">cx_Oracle</span>
-<span class="n">con</span> <span class="o">=</span> <span class="n">cx_Oracle</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="s">&#39;d563&#39;</span><span class="p">,</span> <span class="s">&#39;d563&#39;</span><span class="p">,</span> <span class="s">&#39;(DESCRIPTION=(ADDRESS_LIST=(ADDRESS=(PROTOCOL=TCP)(HOST=localhost)(PORT=1521)(CONNECT_DATA=(SERVICE_NAME=XE)))&#39;</span><span class="p">)</span>
-<span class="n">cur</span> <span class="o">=</span> <span class="n">con</span><span class="o">.</span><span class="n">cursor</span><span class="p">()</span>
-<span class="n">cur</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="s">&#39;select * from dual&#39;</span><span class="p">)</span>
-<span class="n">lst</span> <span class="o">=</span> <span class="n">cur</span><span class="o">.</span><span class="n">fetchall</span><span class="p">()</span>
-<span class="k">for</span> <span class="n">dat</span> <span class="ow">in</span> <span class="n">lst</span><span class="p">:</span>
-  <span class="k">print</span> <span class="n">dat</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+<span class="k">def</span> <span class="nf">getDual</span><span class="p">():</span>
+  <span class="n">con</span> <span class="o">=</span> <span class="n">cx_Oracle</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span>
+    <span class="s">&#39;d563&#39;</span><span class="p">,</span>
+    <span class="s">&#39;d563&#39;</span><span class="p">,</span>
+    <span class="s">&#39;(DESCRIPTION=(ADDRESS_LIST=(ADDRESS=(PROTOCOL=TCP)(HOST=localhost)(PORT=1521)(CONNECT_DATA=(SERVICE_NAME=XE)))&#39;</span>
+  <span class="p">)</span>
+  <span class="n">cur</span> <span class="o">=</span> <span class="n">con</span><span class="o">.</span><span class="n">cursor</span><span class="p">()</span>
+  <span class="n">cur</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="s">&#39;select * from dual&#39;</span><span class="p">)</span>
+  <span class="n">lst</span> <span class="o">=</span> <span class="n">cur</span><span class="o">.</span><span class="n">fetchall</span><span class="p">()</span>
+  <span class="n">cur</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+  <span class="n">con</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+  <span class="k">for</span> <span class="n">low</span> <span class="ow">in</span> <span class="n">lst</span><span class="p">:</span>
+    <span class="k">yield</span> <span class="n">Dual</span><span class="p">(</span><span class="n">low</span><span class="p">)</span>
 
-<span class="n">cur</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
-<span class="n">con</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+<span class="k">class</span> <span class="nc">Dual</span><span class="p">:</span>
+  <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">low</span><span class="p">):</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">dummy</span> <span class="o">=</span> <span class="n">low</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="tips">
+<h2>4.2.6. tips<a class="headerlink" href="#tips" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-python"><div class="highlight"><pre><span class="kn">from</span> <span class="nn">datetime</span> <span class="kn">import</span> <span class="n">date</span><span class="p">,</span> <span class="n">datetime</span><span class="p">,</span> <span class="n">timedelta</span>
+<span class="n">SQL</span> <span class="o">=</span> <span class="s">&#39;&#39;&#39;</span>
+<span class="s">SELECT *</span>
+<span class="s">FROM hoge</span>
+<span class="s">WHERE hoge_date = TO_DATE(&#39;</span><span class="si">%(dateStr)s</span><span class="s">&#39;, &#39;YYYY-MM-DD&#39;)</span>
+<span class="s">&#39;&#39;&#39;</span>
+<span class="n">dateStr</span> <span class="o">=</span> <span class="p">(</span><span class="n">date</span><span class="o">.</span><span class="n">today</span><span class="p">()</span> <span class="o">-</span> <span class="n">timedelta</span><span class="p">(</span><span class="mi">1</span><span class="p">))</span><span class="o">.</span><span class="n">strftime</span><span class="p">(</span><span class="s">&#39;%Y-%m-</span><span class="si">%d</span><span class="s">&#39;</span><span class="p">)</span>
+<span class="n">sql</span> <span class="o">=</span> <span class="n">SQL</span> <span class="o">%</span> <span class="p">{</span><span class="s">&#39;dateStr&#39;</span><span class="p">:</span> <span class="n">dateStr</span><span class="p">}</span>
 </pre></div>
 </div>
 </div>
@@ -180,6 +201,7 @@ ldconfig
 <li><a class="reference internal" href="#backup">4.2.3. backup</a></li>
 <li><a class="reference internal" href="#client">4.2.4. client</a></li>
 <li><a class="reference internal" href="#python">4.2.5. python</a></li>
+<li><a class="reference internal" href="#tips">4.2.6. tips</a></li>
 </ul>
 </li>
 </ul>

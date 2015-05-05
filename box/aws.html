@@ -99,7 +99,7 @@ chmod 600 ~/.ssh/d563-tokyo.pem
       <span class="k">if</span> <span class="n">i</span><span class="o">.</span><span class="n">_state</span><span class="o">.</span><span class="n">code</span> <span class="o">==</span> <span class="mi">16</span> <span class="ow">and</span> <span class="n">i</span><span class="o">.</span><span class="n">id</span> <span class="o">==</span> <span class="n">resv</span><span class="o">.</span><span class="n">instances</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">id</span><span class="p">:</span>
         <span class="n">env</span><span class="o">.</span><span class="n">hosts</span> <span class="o">=</span> <span class="p">[</span><span class="n">i</span><span class="o">.</span><span class="n">ip_address</span><span class="p">]</span>
   <span class="k">print</span> <span class="n">env</span><span class="o">.</span><span class="n">hosts</span>
-  <span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>
+  <span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="mi">30</span><span class="p">)</span>
 
 <span class="nd">@task</span>
 <span class="k">def</span> <span class="nf">init</span><span class="p">():</span>

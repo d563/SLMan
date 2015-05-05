@@ -65,12 +65,12 @@ fabric
 
     fab ls_bin
 
-.. module:: fabfile-test.py
+.. module:: fabmodule-test.py
 
 ::
 
     # -*- coding: utf-8 -*-
-    # fabfile-test.py
+    # fabmodule-test.py
     from mock import patch, call
     import fabfile as f
 
@@ -89,3 +89,16 @@ fabric
 
     nosetests -v
 
+tips
+----
+::
+
+    cmd = 'ls -al; echo'
+    s1 = str(run(cmd)).replace('\r', '')
+    s2 = local(cmd, capture=True)
+    if s1 != s2:
+      print 'Error!'
+
+::
+
+    put('dat', '.', use_sudo=True)
