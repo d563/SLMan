@@ -11,6 +11,6 @@ SLMan
     bapp/index
     oapp/index
     code/index
-    cont/index
+    vrtl/index
     tool/index
     idea/index
