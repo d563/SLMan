@@ -2,5 +2,5 @@ repo
 ====
 .. toctree::
     git
-    maven
     subversion
+    maven

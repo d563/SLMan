@@ -1,7 +1,7 @@
 code
 ====
 .. toctree::
-   html
+   shell
    python
    groovy
-   shell
+   html

@@ -6,7 +6,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>3.2. oracle &mdash; SLMan 0.0.1 documentation</title>
+    <title>3.1. oracle &mdash; SLMan 0.0.1 documentation</title>
     
     <link rel="stylesheet" href="../_static/pyramid.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
@@ -26,8 +26,8 @@
     <script type="text/javascript" src="../_static/doctools.js"></script>
     <link rel="top" title="SLMan 0.0.1 documentation" href="../index.html" />
     <link rel="up" title="3. data" href="index.html" />
-    <link rel="next" title="3.3. mysql" href="mysql.html" />
-    <link rel="prev" title="3.1. mongodb" href="mongodb.html" />
+    <link rel="next" title="3.2. mysql" href="mysql.html" />
+    <link rel="prev" title="3. data" href="index.html" />
 <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Neuton&amp;subset=latin" type="text/css" media="screen" charset="utf-8" />
 <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Nobile:regular,italic,bold,bolditalic&amp;subset=latin" type="text/css" media="screen" charset="utf-8" />
 <!--[if lte IE 6]>
@@ -47,10 +47,10 @@
           <a href="../py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
         <li class="right" >
-          <a href="mysql.html" title="3.3. mysql"
+          <a href="mysql.html" title="3.2. mysql"
              accesskey="N">next</a> |</li>
         <li class="right" >
-          <a href="mongodb.html" title="3.1. mongodb"
+          <a href="index.html" title="3. data"
              accesskey="P">previous</a> |</li>
         <li><a href="../index.html">SLMan 0.0.1 documentation</a> &raquo;</li>
           <li><a href="index.html" accesskey="U">3. data</a> &raquo;</li> 
@@ -63,9 +63,9 @@
           <div class="body">
             
   <div class="section" id="oracle">
-<h1>3.2. oracle<a class="headerlink" href="#oracle" title="Permalink to this headline">¶</a></h1>
+<h1>3.1. oracle<a class="headerlink" href="#oracle" title="Permalink to this headline">¶</a></h1>
 <div class="section" id="server">
-<h2>3.2.1. server<a class="headerlink" href="#server" title="Permalink to this headline">¶</a></h2>
+<h2>3.1.1. server<a class="headerlink" href="#server" title="Permalink to this headline">¶</a></h2>
 <div class="highlight-python"><div class="highlight"><pre>yum -y install libaio bc
 </pre></div>
 </div>
@@ -90,7 +90,7 @@ echo &#39;. /usr/lib/oracle/xe/app/oracle/product/10.2.0/server/bin/oracle_env.s
 </div>
 </div>
 <div class="section" id="setting">
-<h2>3.2.2. setting<a class="headerlink" href="#setting" title="Permalink to this headline">¶</a></h2>
+<h2>3.1.2. setting<a class="headerlink" href="#setting" title="Permalink to this headline">¶</a></h2>
 <div class="highlight-python"><div class="highlight"><pre>alter profile default limit
   failed_login_attempts unlimited
   password_lock_time unlimited
@@ -123,14 +123,14 @@ drop user d563 cascade;
 </div>
 </div>
 <div class="section" id="backup">
-<h2>3.2.3. backup<a class="headerlink" href="#backup" title="Permalink to this headline">¶</a></h2>
+<h2>3.1.3. backup<a class="headerlink" href="#backup" title="Permalink to this headline">¶</a></h2>
 <div class="highlight-python"><div class="highlight"><pre>expdp d563/d563 dumpfile=SLMan.dmp logfile=SLMan.log schemas=users
 impdp sys/pass dumpfile=SLMan.dmp logfile=SLMan.log remap_tablespace=users:users
 </pre></div>
 </div>
 </div>
 <div class="section" id="client">
-<h2>3.2.4. client<a class="headerlink" href="#client" title="Permalink to this headline">¶</a></h2>
+<h2>3.1.4. client<a class="headerlink" href="#client" title="Permalink to this headline">¶</a></h2>
 <div class="highlight-python"><div class="highlight"><pre>rpm -ivh oracle-instantclient11.2-basic-11.2.0.4.0-1.i386.rpm
 rpm -ivh oracle-instantclient11.2-devel-11.2.0.4.0-1.i386.rpm
 </pre></div>
@@ -155,21 +155,21 @@ ldconfig
         <div class="sphinxsidebarwrapper">
   <h3><a href="../index.html">Table Of Contents</a></h3>
   <ul>
-<li><a class="reference internal" href="#">3.2. oracle</a><ul>
-<li><a class="reference internal" href="#server">3.2.1. server</a></li>
-<li><a class="reference internal" href="#setting">3.2.2. setting</a></li>
-<li><a class="reference internal" href="#backup">3.2.3. backup</a></li>
-<li><a class="reference internal" href="#client">3.2.4. client</a></li>
+<li><a class="reference internal" href="#">3.1. oracle</a><ul>
+<li><a class="reference internal" href="#server">3.1.1. server</a></li>
+<li><a class="reference internal" href="#setting">3.1.2. setting</a></li>
+<li><a class="reference internal" href="#backup">3.1.3. backup</a></li>
+<li><a class="reference internal" href="#client">3.1.4. client</a></li>
 </ul>
 </li>
 </ul>
 
   <h4>Previous topic</h4>
-  <p class="topless"><a href="mongodb.html"
-                        title="previous chapter">3.1. mongodb</a></p>
+  <p class="topless"><a href="index.html"
+                        title="previous chapter">3. data</a></p>
   <h4>Next topic</h4>
   <p class="topless"><a href="mysql.html"
-                        title="next chapter">3.3. mysql</a></p>
+                        title="next chapter">3.2. mysql</a></p>
 <div id="searchbox" style="display: none">
   <h3>Quick search</h3>
     <form class="search" action="../search.html" method="get">
@@ -197,10 +197,10 @@ ldconfig
           <a href="../py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
         <li class="right" >
-          <a href="mysql.html" title="3.3. mysql"
+          <a href="mysql.html" title="3.2. mysql"
              >next</a> |</li>
         <li class="right" >
-          <a href="mongodb.html" title="3.1. mongodb"
+          <a href="index.html" title="3. data"
              >previous</a> |</li>
         <li><a href="../index.html">SLMan 0.0.1 documentation</a> &raquo;</li>
           <li><a href="index.html" >3. data</a> &raquo;</li> 
