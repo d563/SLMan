@@ -6,10 +6,10 @@ SLMan
 
     base/index
     repo/index
-    auto/index
     data/index
+    auto/index
     app/index
+    lang/index
     box/index
     tip/index
-    lang/index
     idea/index
