@@ -11,5 +11,5 @@ SLMan
     app/index
     lang/index
     box/index
-    tip/index
+    tool/index
     idea/index

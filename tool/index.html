@@ -6,7 +6,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>8.2. linux &mdash; SLMan 0.0.1 documentation</title>
+    <title>8. tool &mdash; SLMan 0.0.1 documentation</title>
     
     <link rel="stylesheet" href="../_static/pyramid.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
@@ -25,9 +25,8 @@
     <script type="text/javascript" src="../_static/underscore.js"></script>
     <script type="text/javascript" src="../_static/doctools.js"></script>
     <link rel="top" title="SLMan 0.0.1 documentation" href="../index.html" />
-    <link rel="up" title="8. tip" href="index.html" />
-    <link rel="next" title="8.3. performance" href="performance.html" />
-    <link rel="prev" title="8.1. windows" href="windows.html" />
+    <link rel="next" title="8.1. windows" href="windows.html" />
+    <link rel="prev" title="7.2. docker" href="../box/docker.html" />
 <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Neuton&amp;subset=latin" type="text/css" media="screen" charset="utf-8" />
 <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Nobile:regular,italic,bold,bolditalic&amp;subset=latin" type="text/css" media="screen" charset="utf-8" />
 <!--[if lte IE 6]>
@@ -47,13 +46,12 @@
           <a href="../py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
         <li class="right" >
-          <a href="performance.html" title="8.3. performance"
+          <a href="windows.html" title="8.1. windows"
              accesskey="N">next</a> |</li>
         <li class="right" >
-          <a href="windows.html" title="8.1. windows"
+          <a href="../box/docker.html" title="7.2. docker"
              accesskey="P">previous</a> |</li>
-        <li><a href="../index.html">SLMan 0.0.1 documentation</a> &raquo;</li>
-          <li><a href="index.html" accesskey="U">8. tip</a> &raquo;</li> 
+        <li><a href="../index.html">SLMan 0.0.1 documentation</a> &raquo;</li> 
       </ul>
     </div>  
 
@@ -62,47 +60,32 @@
         <div class="bodywrapper">
           <div class="body">
             
-  <div class="section" id="linux">
-<h1>8.2. linux<a class="headerlink" href="#linux" title="Permalink to this headline">¶</a></h1>
-<div class="section" id="dry-run">
-<h2>8.2.1. dry-run<a class="headerlink" href="#dry-run" title="Permalink to this headline">¶</a></h2>
-<div class="highlight-python"><div class="highlight"><pre>rsync  -vrlpzn --checksum --delete --exclude=&quot;**/.svn**&quot; -e ssh ~/from/ d563@host:~/to/
-
-tar ztvf xxx.tar.gz
-
-zipinfo xxx.zip
-</pre></div>
-</div>
-</div>
-<div class="section" id="link">
-<h2>8.2.2. link<a class="headerlink" href="#link" title="Permalink to this headline">¶</a></h2>
-<div class="highlight-python"><div class="highlight"><pre>ln -nfs real link
-
-chown -h user link
-</pre></div>
-</div>
-</div>
-<div class="section" id="search">
-<h2>8.2.3. search<a class="headerlink" href="#search" title="Permalink to this headline">¶</a></h2>
-<div class="highlight-python"><div class="highlight"><pre>find ./ \
-  -maxdepth 1 \
-  -type f \
-  -name &quot;*.zip&quot; \
-  -user d563 \
-  -group d563 \
-  -ctime +90 \
-  -perm 664 \
-  -exec echo {} \; | xargs echo
-
-rpm -qf /usr/java/jdk1.7.0_75/bin/java
-rpm -ql jdk
-rpm -q --scripts jdk
-
-alternatives --display java
-alternatives --config java
-update-alternatives --auto java
-</pre></div>
-</div>
+  <div class="section" id="tool">
+<h1>8. tool<a class="headerlink" href="#tool" title="Permalink to this headline">¶</a></h1>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="windows.html">8.1. windows</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="windows.html#pytty">8.1.1. pytty</a></li>
+<li class="toctree-l2"><a class="reference internal" href="windows.html#winscp">8.1.2. winscp</a></li>
+<li class="toctree-l2"><a class="reference internal" href="windows.html#winshot">8.1.3. winshot</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="linux.html">8.2. linux</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="linux.html#dry-run">8.2.1. dry-run</a></li>
+<li class="toctree-l2"><a class="reference internal" href="linux.html#link">8.2.2. link</a></li>
+<li class="toctree-l2"><a class="reference internal" href="linux.html#search">8.2.3. search</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="performance.html">8.3. performance</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="performance.html#coreutils">8.3.1. coreutils</a></li>
+<li class="toctree-l2"><a class="reference internal" href="performance.html#procps">8.3.2. procps</a></li>
+<li class="toctree-l2"><a class="reference internal" href="performance.html#net-tools-6-x">8.3.3. net-tools (6.X)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="performance.html#iproute-7-x">8.3.4. iproute (7.X)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="performance.html#strace">8.3.5. strace</a></li>
+<li class="toctree-l2"><a class="reference internal" href="performance.html#sysstat">8.3.6. sysstat</a></li>
+</ul>
+</li>
+</ul>
 </div>
 </div>
 
@@ -112,22 +95,12 @@ update-alternatives --auto java
       </div>
       <div class="sphinxsidebar">
         <div class="sphinxsidebarwrapper">
-  <h3><a href="../index.html">Table Of Contents</a></h3>
-  <ul>
-<li><a class="reference internal" href="#">8.2. linux</a><ul>
-<li><a class="reference internal" href="#dry-run">8.2.1. dry-run</a></li>
-<li><a class="reference internal" href="#link">8.2.2. link</a></li>
-<li><a class="reference internal" href="#search">8.2.3. search</a></li>
-</ul>
-</li>
-</ul>
-
   <h4>Previous topic</h4>
-  <p class="topless"><a href="windows.html"
-                        title="previous chapter">8.1. windows</a></p>
+  <p class="topless"><a href="../box/docker.html"
+                        title="previous chapter">7.2. docker</a></p>
   <h4>Next topic</h4>
-  <p class="topless"><a href="performance.html"
-                        title="next chapter">8.3. performance</a></p>
+  <p class="topless"><a href="windows.html"
+                        title="next chapter">8.1. windows</a></p>
 <div id="searchbox" style="display: none">
   <h3>Quick search</h3>
     <form class="search" action="../search.html" method="get">
@@ -155,13 +128,12 @@ update-alternatives --auto java
           <a href="../py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
         <li class="right" >
-          <a href="performance.html" title="8.3. performance"
+          <a href="windows.html" title="8.1. windows"
              >next</a> |</li>
         <li class="right" >
-          <a href="windows.html" title="8.1. windows"
+          <a href="../box/docker.html" title="7.2. docker"
              >previous</a> |</li>
-        <li><a href="../index.html">SLMan 0.0.1 documentation</a> &raquo;</li>
-          <li><a href="index.html" >8. tip</a> &raquo;</li> 
+        <li><a href="../index.html">SLMan 0.0.1 documentation</a> &raquo;</li> 
       </ul>
     </div>
     <div class="footer">

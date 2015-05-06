@@ -6,7 +6,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>8.1. windows &mdash; SLMan 0.0.1 documentation</title>
+    <title>8.2. linux &mdash; SLMan 0.0.1 documentation</title>
     
     <link rel="stylesheet" href="../_static/pyramid.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
@@ -25,9 +25,9 @@
     <script type="text/javascript" src="../_static/underscore.js"></script>
     <script type="text/javascript" src="../_static/doctools.js"></script>
     <link rel="top" title="SLMan 0.0.1 documentation" href="../index.html" />
-    <link rel="up" title="8. tip" href="index.html" />
-    <link rel="next" title="8.2. linux" href="linux.html" />
-    <link rel="prev" title="8. tip" href="index.html" />
+    <link rel="up" title="8. tool" href="index.html" />
+    <link rel="next" title="8.3. performance" href="performance.html" />
+    <link rel="prev" title="8.1. windows" href="windows.html" />
 <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Neuton&amp;subset=latin" type="text/css" media="screen" charset="utf-8" />
 <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Nobile:regular,italic,bold,bolditalic&amp;subset=latin" type="text/css" media="screen" charset="utf-8" />
 <!--[if lte IE 6]>
@@ -47,13 +47,13 @@
           <a href="../py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
         <li class="right" >
-          <a href="linux.html" title="8.2. linux"
+          <a href="performance.html" title="8.3. performance"
              accesskey="N">next</a> |</li>
         <li class="right" >
-          <a href="index.html" title="8. tip"
+          <a href="windows.html" title="8.1. windows"
              accesskey="P">previous</a> |</li>
         <li><a href="../index.html">SLMan 0.0.1 documentation</a> &raquo;</li>
-          <li><a href="index.html" accesskey="U">8. tip</a> &raquo;</li> 
+          <li><a href="index.html" accesskey="U">8. tool</a> &raquo;</li> 
       </ul>
     </div>  
 
@@ -62,65 +62,47 @@
         <div class="bodywrapper">
           <div class="body">
             
-  <div class="section" id="windows">
-<h1>8.1. windows<a class="headerlink" href="#windows" title="Permalink to this headline">¶</a></h1>
-<div class="section" id="pytty">
-<h2>8.1.1. pytty<a class="headerlink" href="#pytty" title="Permalink to this headline">¶</a></h2>
-<ul>
-<li><dl class="first docutils">
-<dt>Window</dt>
-<dd><ul class="first last">
-<li><dl class="first docutils">
-<dt>Colours</dt>
-<dd><ul class="first last simple">
-<li>Default Foreground  87: 87: 87</li>
-<li>Default Background 255:255:255</li>
-</ul>
-</dd>
-</dl>
-</li>
-</ul>
-</dd>
-</dl>
-</li>
-</ul>
+  <div class="section" id="linux">
+<h1>8.2. linux<a class="headerlink" href="#linux" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="dry-run">
+<h2>8.2.1. dry-run<a class="headerlink" href="#dry-run" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-python"><div class="highlight"><pre>rsync  -vrlpzn --checksum --delete --exclude=&quot;**/.svn**&quot; -e ssh ~/from/ d563@host:~/to/
+
+tar ztvf xxx.tar.gz
+
+zipinfo xxx.zip
+</pre></div>
 </div>
-<div class="section" id="winscp">
-<h2>8.1.2. winscp<a class="headerlink" href="#winscp" title="Permalink to this headline">¶</a></h2>
-<ul>
-<li><dl class="first docutils">
-<dt>Preferences - Preferences...</dt>
-<dd><ul class="first last">
-<li><dl class="first docutils">
-<dt>Editors - Edit...</dt>
-<dd><ul class="first last simple">
-<li>(削除) Force text transfer mode for files edited in external editor</li>
-</ul>
-</dd>
-</dl>
-</li>
-<li><dl class="first docutils">
-<dt>Transfer - Edit...</dt>
-<dd><ul class="first last simple">
-<li>Binary</li>
-</ul>
-</dd>
-</dl>
-</li>
-</ul>
-</dd>
-</dl>
-</li>
-</ul>
 </div>
-<div class="section" id="winshot">
-<h2>8.1.3. winshot<a class="headerlink" href="#winshot" title="Permalink to this headline">¶</a></h2>
-<ul class="simple">
-<li>基本設定 - 保存先 - C:work に変更</li>
-<li>その他設定 - 自動保存時の拡張子 - ビットマップ - .png に変更</li>
-<li>品質/減色 - 減色 - 256色 に変更</li>
-<li>ホット・キー - ビットマップで保存(範囲選択) - PrintScreen に変更</li>
-</ul>
+<div class="section" id="link">
+<h2>8.2.2. link<a class="headerlink" href="#link" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-python"><div class="highlight"><pre>ln -nfs real link
+
+chown -h user link
+</pre></div>
+</div>
+</div>
+<div class="section" id="search">
+<h2>8.2.3. search<a class="headerlink" href="#search" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-python"><div class="highlight"><pre>find ./ \
+  -maxdepth 1 \
+  -type f \
+  -name &quot;*.zip&quot; \
+  -user d563 \
+  -group d563 \
+  -ctime +90 \
+  -perm 664 \
+  -exec echo {} \; | xargs echo
+
+rpm -qf /usr/java/jdk1.7.0_75/bin/java
+rpm -ql jdk
+rpm -q --scripts jdk
+
+alternatives --display java
+alternatives --config java
+update-alternatives --auto java
+</pre></div>
+</div>
 </div>
 </div>
 
@@ -132,20 +114,20 @@
         <div class="sphinxsidebarwrapper">
   <h3><a href="../index.html">Table Of Contents</a></h3>
   <ul>
-<li><a class="reference internal" href="#">8.1. windows</a><ul>
-<li><a class="reference internal" href="#pytty">8.1.1. pytty</a></li>
-<li><a class="reference internal" href="#winscp">8.1.2. winscp</a></li>
-<li><a class="reference internal" href="#winshot">8.1.3. winshot</a></li>
+<li><a class="reference internal" href="#">8.2. linux</a><ul>
+<li><a class="reference internal" href="#dry-run">8.2.1. dry-run</a></li>
+<li><a class="reference internal" href="#link">8.2.2. link</a></li>
+<li><a class="reference internal" href="#search">8.2.3. search</a></li>
 </ul>
 </li>
 </ul>
 
   <h4>Previous topic</h4>
-  <p class="topless"><a href="index.html"
-                        title="previous chapter">8. tip</a></p>
+  <p class="topless"><a href="windows.html"
+                        title="previous chapter">8.1. windows</a></p>
   <h4>Next topic</h4>
-  <p class="topless"><a href="linux.html"
-                        title="next chapter">8.2. linux</a></p>
+  <p class="topless"><a href="performance.html"
+                        title="next chapter">8.3. performance</a></p>
 <div id="searchbox" style="display: none">
   <h3>Quick search</h3>
     <form class="search" action="../search.html" method="get">
@@ -173,13 +155,13 @@
           <a href="../py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
         <li class="right" >
-          <a href="linux.html" title="8.2. linux"
+          <a href="performance.html" title="8.3. performance"
              >next</a> |</li>
         <li class="right" >
-          <a href="index.html" title="8. tip"
+          <a href="windows.html" title="8.1. windows"
              >previous</a> |</li>
         <li><a href="../index.html">SLMan 0.0.1 documentation</a> &raquo;</li>
-          <li><a href="index.html" >8. tip</a> &raquo;</li> 
+          <li><a href="index.html" >8. tool</a> &raquo;</li> 
       </ul>
     </div>
     <div class="footer">

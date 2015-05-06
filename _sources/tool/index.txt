@@ -1,5 +1,5 @@
-tip
-===
+tool
+====
 .. toctree::
     windows
     linux
