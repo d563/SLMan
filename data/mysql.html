@@ -126,34 +126,6 @@ mysql -u SLMan d563 &lt; SLMan.dmp
 </pre></div>
 </div>
 </div>
-<div class="section" id="python">
-<h2>4.3.4. python<a class="headerlink" href="#python" title="Permalink to this headline">¶</a></h2>
-<div class="highlight-python"><div class="highlight"><pre>yum -y install mysql-devel
-
-pip install MySQL-python
-</pre></div>
-</div>
-<div class="highlight-python"><div class="highlight"><pre><span class="n">python</span>
-<span class="kn">import</span> <span class="nn">MySQLdb</span>
-<span class="kn">import</span> <span class="nn">json</span>
-<span class="n">con</span> <span class="o">=</span> <span class="n">MySQLdb</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span>
-  <span class="n">host</span><span class="o">=</span><span class="s">&#39;localhost&#39;</span><span class="p">,</span>
-  <span class="n">db</span><span class="o">=</span><span class="s">&#39;d563&#39;</span><span class="p">,</span>
-  <span class="n">user</span><span class="o">=</span><span class="s">&#39;SLMan&#39;</span><span class="p">,</span>
-  <span class="n">passwd</span><span class="o">=</span><span class="s">&#39;SLManPass&#39;</span><span class="p">)</span>
-<span class="n">cur</span> <span class="o">=</span> <span class="n">con</span><span class="o">.</span><span class="n">cursor</span><span class="p">(</span><span class="n">MySQLdb</span><span class="o">.</span><span class="n">cursors</span><span class="o">.</span><span class="n">DictCursor</span><span class="p">)</span>
-<span class="n">cur</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="s">&#39;select * from table1&#39;</span><span class="p">)</span>
-<span class="n">lst</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">cur</span><span class="o">.</span><span class="n">fetchall</span><span class="p">())</span>
-<span class="k">for</span> <span class="n">dat</span> <span class="ow">in</span> <span class="n">lst</span><span class="p">:</span>
-  <span class="n">dat</span><span class="p">[</span><span class="s">&#39;data_created&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">dat</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s">&#39;data_created&#39;</span><span class="p">,</span> <span class="s">&#39;&#39;</span><span class="p">))</span>
-  <span class="n">dat</span><span class="p">[</span><span class="s">&#39;last_updated&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">dat</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s">&#39;last_updated&#39;</span><span class="p">,</span> <span class="s">&#39;&#39;</span><span class="p">))</span>
-
-<span class="n">json</span><span class="o">.</span><span class="n">dumps</span><span class="p">(</span><span class="n">lst</span><span class="p">)</span>
-<span class="n">cur</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
-<span class="n">con</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
-</pre></div>
-</div>
-</div>
 </div>
 
 
@@ -168,7 +140,6 @@ pip install MySQL-python
 <li><a class="reference internal" href="#server">4.3.1. server</a></li>
 <li><a class="reference internal" href="#setting">4.3.2. setting</a></li>
 <li><a class="reference internal" href="#backup">4.3.3. backup</a></li>
-<li><a class="reference internal" href="#python">4.3.4. python</a></li>
 </ul>
 </li>
 </ul>

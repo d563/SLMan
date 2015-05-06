@@ -64,30 +64,8 @@
             
   <div class="section" id="mail">
 <h1>9.4. mail<a class="headerlink" href="#mail" title="Permalink to this headline">¶</a></h1>
-<div class="section" id="module-mail.py">
-<span id="python"></span><h2>9.4.1. python<a class="headerlink" href="#module-mail.py" title="Permalink to this headline">¶</a></h2>
-<div class="highlight-python"><div class="highlight"><pre><span class="c">#!/usr/bin/python</span>
-<span class="c"># -*- coding: utf-8 -*-</span>
-<span class="c"># mail.py</span>
-<span class="kn">import</span> <span class="nn">smtplib</span>
-<span class="kn">from</span> <span class="nn">email.MIMEText</span> <span class="kn">import</span> <span class="n">MIMEText</span>
-<span class="n">u</span> <span class="o">=</span> <span class="s">&#39;user&#39;</span>
-<span class="n">p</span> <span class="o">=</span> <span class="s">&#39;pass&#39;</span>
-<span class="n">f</span> <span class="o">=</span> <span class="s">&#39;</span><span class="si">%s</span><span class="s">@yahoo.co.jp&#39;</span> <span class="o">%</span> <span class="n">u</span>
-<span class="n">t</span> <span class="o">=</span> <span class="p">[</span><span class="n">f</span><span class="p">]</span>
-<span class="n">m</span> <span class="o">=</span> <span class="n">MIMEText</span><span class="p">(</span><span class="s">&#39;本文&#39;</span><span class="p">,</span> <span class="s">&#39;plain&#39;</span><span class="p">,</span> <span class="s">&#39;UTF-8&#39;</span><span class="p">)</span>
-<span class="n">m</span><span class="p">[</span><span class="s">&#39;Subject&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s">&#39;タイトル&#39;</span>
-<span class="n">m</span><span class="p">[</span><span class="s">&#39;From&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">f</span>
-<span class="n">m</span><span class="p">[</span><span class="s">&#39;To&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s">&#39;,&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">t</span><span class="p">)</span>
-<span class="n">s</span> <span class="o">=</span> <span class="n">smtplib</span><span class="o">.</span><span class="n">SMTP_SSL</span><span class="p">(</span><span class="s">&#39;smtp.mail.yahoo.co.jp&#39;</span><span class="p">,</span> <span class="mi">465</span><span class="p">)</span>
-<span class="n">s</span><span class="o">.</span><span class="n">login</span><span class="p">(</span><span class="n">u</span><span class="p">,</span> <span class="n">p</span><span class="p">)</span>
-<span class="n">s</span><span class="o">.</span><span class="n">sendmail</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">t</span><span class="p">,</span> <span class="n">m</span><span class="o">.</span><span class="n">as_string</span><span class="p">())</span>
-<span class="n">s</span><span class="o">.</span><span class="n">quit</span><span class="p">()</span>
-</pre></div>
-</div>
-</div>
 <div class="section" id="module-mail.groovy">
-<span id="groovy"></span><h2>9.4.2. groovy<a class="headerlink" href="#module-mail.groovy" title="Permalink to this headline">¶</a></h2>
+<span id="groovy"></span><h2>9.4.1. groovy<a class="headerlink" href="#module-mail.groovy" title="Permalink to this headline">¶</a></h2>
 <div class="highlight-groovy"><div class="highlight"><pre><span class="nd">@Grab</span><span class="o">(</span><span class="n">group</span><span class="o">=</span><span class="s1">&#39;javax.mail&#39;</span><span class="o">,</span> <span class="n">module</span><span class="o">=</span><span class="s1">&#39;mail&#39;</span><span class="o">,</span> <span class="n">version</span><span class="o">=</span><span class="s1">&#39;1.4.7&#39;</span><span class="o">)</span>
 <span class="kn">import</span> <span class="nn">javax.mail.Authenticator</span>
 <span class="kn">import</span> <span class="nn">javax.mail.Message.RecipientType</span>
@@ -134,8 +112,7 @@
   <h3><a href="../index.html">Table Of Contents</a></h3>
   <ul>
 <li><a class="reference internal" href="#">9.4. mail</a><ul>
-<li><a class="reference internal" href="#module-mail.py">9.4.1. python</a></li>
-<li><a class="reference internal" href="#module-mail.groovy">9.4.2. groovy</a></li>
+<li><a class="reference internal" href="#module-mail.groovy">9.4.1. groovy</a></li>
 </ul>
 </li>
 </ul>

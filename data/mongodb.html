@@ -95,25 +95,8 @@ curl http://localhost:28017/testdb/testcol/
 </pre></div>
 </div>
 </div>
-<div class="section" id="python">
-<h2>4.1.3. python<a class="headerlink" href="#python" title="Permalink to this headline">¶</a></h2>
-<div class="highlight-python"><div class="highlight"><pre>pip install pymongo
-</pre></div>
-</div>
-<div class="highlight-python"><div class="highlight"><pre><span class="n">python</span>
-<span class="kn">from</span> <span class="nn">pymongo</span> <span class="kn">import</span> <span class="n">Connection</span>
-<span class="kn">import</span> <span class="nn">json</span>
-<span class="n">con</span> <span class="o">=</span> <span class="n">Connection</span><span class="p">(</span><span class="s">&#39;localhost&#39;</span><span class="p">,</span> <span class="mi">27017</span><span class="p">)</span>
-<span class="n">lst</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">con</span><span class="o">.</span><span class="n">testdb</span><span class="o">.</span><span class="n">testcol</span><span class="o">.</span><span class="n">find</span><span class="p">())</span>
-<span class="k">for</span> <span class="n">dat</span> <span class="ow">in</span> <span class="n">lst</span><span class="p">:</span>
-  <span class="k">del</span> <span class="n">dat</span><span class="p">[</span><span class="s">&#39;_id&#39;</span><span class="p">]</span>
-
-<span class="k">print</span> <span class="n">json</span><span class="o">.</span><span class="n">dumps</span><span class="p">(</span><span class="n">lst</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
 <div class="section" id="groovy">
-<h2>4.1.4. groovy<a class="headerlink" href="#groovy" title="Permalink to this headline">¶</a></h2>
+<h2>4.1.3. groovy<a class="headerlink" href="#groovy" title="Permalink to this headline">¶</a></h2>
 <div class="highlight-groovy"><div class="highlight"><pre><span class="nd">@Grab</span><span class="o">(</span><span class="n">group</span><span class="o">=</span><span class="s1">&#39;com.gmongo&#39;</span><span class="o">,</span> <span class="n">module</span><span class="o">=</span><span class="s1">&#39;gmongo&#39;</span><span class="o">,</span> <span class="n">version</span><span class="o">=</span><span class="s1">&#39;1.3&#39;</span><span class="o">)</span>
 <span class="kn">import</span> <span class="nn">com.gmongo.GMongo</span>
 <span class="kn">import</span> <span class="nn">groovy.json.JsonBuilder</span>
@@ -134,8 +117,7 @@ curl http://localhost:28017/testdb/testcol/
 <li><a class="reference internal" href="#">4.1. mongodb</a><ul>
 <li><a class="reference internal" href="#server">4.1.1. server</a></li>
 <li><a class="reference internal" href="#rest">4.1.2. rest</a></li>
-<li><a class="reference internal" href="#python">4.1.3. python</a></li>
-<li><a class="reference internal" href="#groovy">4.1.4. groovy</a></li>
+<li><a class="reference internal" href="#groovy">4.1.3. groovy</a></li>
 </ul>
 </li>
 </ul>
