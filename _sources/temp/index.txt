@@ -1,6 +1,0 @@
-temp
-====
-.. toctree::
-    make
-    shell
-    html

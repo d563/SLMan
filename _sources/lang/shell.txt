@@ -1,0 +1,97 @@
+shell
+=====
+base
+----
+.. module:: template.sh
+.. code-block:: shell
+
+    #!/bin/bash
+    # template.sh
+    set_args() {
+      CNT=0
+      ARGS_CNT=$#
+      for i in $@
+      do
+        case $1 in
+          -a) shift; A=$1;    CNT=`expr $CNT + 2` ;;
+          -b) shift; B=$1;    CNT=`expr $CNT + 2` ;;
+          -v) set -x;         CNT=`expr $CNT + 1` ;;
+          *)  ARGS="$ARGS $1" CNT=`expr $CNT + 1` ;;
+        esac
+        if [[ $CNT -ge $ARGS_CNT ]]; then
+          break
+        fi
+        shift
+      done
+    }
+    set_args "$@"
+    echo $@
+    echo $A
+    echo $B
+    echo $ARGS
+    echo ${A%%TEST*}
+    echo ${A##*TEST}
+    [[ -z $A ]]; echo $?
+    [[ -e $A ]]; echo $?
+    [[ -f $A ]]; echo $?
+    [[ -d $A ]]; echo $?
+    [[ $A = TEST ]]; echo $?
+    [[ $A =~ ^TEST[0-9a-z]{3}$ ]]; echo $?
+    [[ a = a ]] && [[ a = aa ]]; echo $?
+    [[ a = a ]] || [[ a = aa ]]; echo $?
+    [[ ! -z $A ]]; echo $?
+
+daemon
+------
+.. module:: mavend
+.. code-block:: shell
+
+    #!/bin/bash
+    # chkconfig: - 80 20
+    # description: maven server
+    # /etc/init.d/mavend
+    CMD='java -jar /home/maven/maven-proxy-standalone-0.2-app.jar /home/maven/maven-proxy.properties'
+    LOCK=/var/lock/subsys/${0##*/}
+    PID=`pgrep -f "$CMD"`
+    start() {
+      echo "starting ${0##*/}"
+      $CMD > /dev/null 2>&1 &
+      touch $LOCK
+      return 0
+    }
+    stop() {
+      if [[ -f $LOCK ]]; then
+        rm -f $LOCK
+      fi
+      if [[ -z $PID ]]; then
+        echo "${0##*/} is not running"
+        return 1
+      fi
+      echo "stopping ${0##*/} (PID:${PID})"
+      kill -9 ${PID}
+      return 0
+    }
+    status() {
+      if [[ -z $PID ]]; then
+        echo "${0##*/} is stopped"
+        return 0
+      else
+        echo "${0##*/} is running (PID:${PID})"
+        return 1
+      fi
+    }
+    case "$1" in
+      start) start ;;
+      stop) stop ;;
+      restart) stop; start ;;
+      status) status ;;
+      *)
+        echo "Usage: $0 {start|stop|restart|status}"
+        exit 1 ;;
+    esac
+    exit $?
+
+::
+
+    chmod 775 /etc/init.d/mavend
+    chkconfig mavend on

@@ -10,7 +10,6 @@ SLMan
     data/index
     app/index
     box/index
-    temp/index
-    idea/index
     tip/index
     lang/index
+    idea/index

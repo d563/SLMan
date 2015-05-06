@@ -6,7 +6,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>7.2. shell &mdash; SLMan 0.0.1 documentation</title>
+    <title>8.4. shell &mdash; SLMan 0.0.1 documentation</title>
     
     <link rel="stylesheet" href="../_static/pyramid.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
@@ -25,9 +25,9 @@
     <script type="text/javascript" src="../_static/underscore.js"></script>
     <script type="text/javascript" src="../_static/doctools.js"></script>
     <link rel="top" title="SLMan 0.0.1 documentation" href="../index.html" />
-    <link rel="up" title="7. temp" href="index.html" />
-    <link rel="next" title="7.3. html" href="html.html" />
-    <link rel="prev" title="7.1. make" href="make.html" />
+    <link rel="up" title="8. lang" href="index.html" />
+    <link rel="next" title="8.5. make" href="make.html" />
+    <link rel="prev" title="8.3. groovy" href="groovy.html" />
 <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Neuton&amp;subset=latin" type="text/css" media="screen" charset="utf-8" />
 <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Nobile:regular,italic,bold,bolditalic&amp;subset=latin" type="text/css" media="screen" charset="utf-8" />
 <!--[if lte IE 6]>
@@ -47,13 +47,13 @@
           <a href="../py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
         <li class="right" >
-          <a href="html.html" title="7.3. html"
+          <a href="make.html" title="8.5. make"
              accesskey="N">next</a> |</li>
         <li class="right" >
-          <a href="make.html" title="7.1. make"
+          <a href="groovy.html" title="8.3. groovy"
              accesskey="P">previous</a> |</li>
         <li><a href="../index.html">SLMan 0.0.1 documentation</a> &raquo;</li>
-          <li><a href="index.html" accesskey="U">7. temp</a> &raquo;</li> 
+          <li><a href="index.html" accesskey="U">8. lang</a> &raquo;</li> 
       </ul>
     </div>  
 
@@ -62,8 +62,10 @@
         <div class="bodywrapper">
           <div class="body">
             
-  <div class="section" id="module-template.sh">
-<span id="shell"></span><h1>7.2. shell<a class="headerlink" href="#module-template.sh" title="Permalink to this headline">¶</a></h1>
+  <div class="section" id="shell">
+<h1>8.4. shell<a class="headerlink" href="#shell" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="module-template.sh">
+<span id="base"></span><h2>8.4.1. base<a class="headerlink" href="#module-template.sh" title="Permalink to this headline">¶</a></h2>
 <div class="highlight-shell"><div class="highlight"><pre><span class="c">#!/bin/bash</span>
 <span class="c"># template.sh</span>
 set_args<span class="o">()</span> <span class="o">{</span>
@@ -102,6 +104,60 @@ set_args <span class="s2">&quot;</span><span class="nv">$@</span><span class="s2
 </pre></div>
 </div>
 </div>
+<div class="section" id="module-mavend">
+<span id="daemon"></span><h2>8.4.2. daemon<a class="headerlink" href="#module-mavend" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-shell"><div class="highlight"><pre><span class="c">#!/bin/bash</span>
+<span class="c"># chkconfig: - 80 20</span>
+<span class="c"># description: maven server</span>
+<span class="c"># /etc/init.d/mavend</span>
+<span class="nv">CMD</span><span class="o">=</span><span class="s1">&#39;java -jar /home/maven/maven-proxy-standalone-0.2-app.jar /home/maven/maven-proxy.properties&#39;</span>
+<span class="nv">LOCK</span><span class="o">=</span>/var/lock/subsys/<span class="si">${</span><span class="nv">0</span><span class="p">##*/</span><span class="si">}</span>
+<span class="nv">PID</span><span class="o">=</span><span class="sb">`</span>pgrep -f <span class="s2">&quot;</span><span class="nv">$CMD</span><span class="s2">&quot;</span><span class="sb">`</span>
+start<span class="o">()</span> <span class="o">{</span>
+  <span class="nb">echo</span> <span class="s2">&quot;starting </span><span class="si">${</span><span class="nv">0</span><span class="p">##*/</span><span class="si">}</span><span class="s2">&quot;</span>
+  <span class="nv">$CMD</span> &gt; /dev/null 2&gt;<span class="p">&amp;</span><span class="m">1</span> <span class="p">&amp;</span>
+  touch <span class="nv">$LOCK</span>
+  <span class="k">return</span> 0
+<span class="o">}</span>
+stop<span class="o">()</span> <span class="o">{</span>
+  <span class="k">if</span> <span class="o">[[</span> -f <span class="nv">$LOCK</span> <span class="o">]]</span><span class="p">;</span> <span class="k">then</span>
+    rm -f <span class="nv">$LOCK</span>
+  <span class="k">fi</span>
+  <span class="k">if</span> <span class="o">[[</span> -z <span class="nv">$PID</span> <span class="o">]]</span><span class="p">;</span> <span class="k">then</span>
+    <span class="nb">echo</span> <span class="s2">&quot;</span><span class="si">${</span><span class="nv">0</span><span class="p">##*/</span><span class="si">}</span><span class="s2"> is not running&quot;</span>
+    <span class="k">return</span> 1
+  <span class="k">fi</span>
+  <span class="nb">echo</span> <span class="s2">&quot;stopping </span><span class="si">${</span><span class="nv">0</span><span class="p">##*/</span><span class="si">}</span><span class="s2"> (PID:</span><span class="si">${</span><span class="nv">PID</span><span class="si">}</span><span class="s2">)&quot;</span>
+  <span class="nb">kill</span> -9 <span class="si">${</span><span class="nv">PID</span><span class="si">}</span>
+  <span class="k">return</span> 0
+<span class="o">}</span>
+status<span class="o">()</span> <span class="o">{</span>
+  <span class="k">if</span> <span class="o">[[</span> -z <span class="nv">$PID</span> <span class="o">]]</span><span class="p">;</span> <span class="k">then</span>
+    <span class="nb">echo</span> <span class="s2">&quot;</span><span class="si">${</span><span class="nv">0</span><span class="p">##*/</span><span class="si">}</span><span class="s2"> is stopped&quot;</span>
+    <span class="k">return</span> 0
+  <span class="k">else</span>
+    <span class="nb">echo</span> <span class="s2">&quot;</span><span class="si">${</span><span class="nv">0</span><span class="p">##*/</span><span class="si">}</span><span class="s2"> is running (PID:</span><span class="si">${</span><span class="nv">PID</span><span class="si">}</span><span class="s2">)&quot;</span>
+    <span class="k">return</span> 1
+  <span class="k">fi</span>
+<span class="o">}</span>
+<span class="k">case</span> <span class="s2">&quot;</span><span class="nv">$1</span><span class="s2">&quot;</span> in
+  start<span class="o">)</span> start <span class="p">;;</span>
+  stop<span class="o">)</span> stop <span class="p">;;</span>
+  restart<span class="o">)</span> stop<span class="p">;</span> start <span class="p">;;</span>
+  status<span class="o">)</span> status <span class="p">;;</span>
+  *<span class="o">)</span>
+    <span class="nb">echo</span> <span class="s2">&quot;Usage: </span><span class="nv">$0</span><span class="s2"> {start|stop|restart|status}&quot;</span>
+    <span class="nb">exit </span><span class="m">1</span> <span class="p">;;</span>
+<span class="k">esac</span>
+<span class="nb">exit</span> <span class="nv">$?</span>
+</pre></div>
+</div>
+<div class="highlight-python"><div class="highlight"><pre>chmod 775 /etc/init.d/mavend
+chkconfig mavend on
+</pre></div>
+</div>
+</div>
+</div>
 
 
           </div>
@@ -109,12 +165,21 @@ set_args <span class="s2">&quot;</span><span class="nv">$@</span><span class="s2
       </div>
       <div class="sphinxsidebar">
         <div class="sphinxsidebarwrapper">
+  <h3><a href="../index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">8.4. shell</a><ul>
+<li><a class="reference internal" href="#module-template.sh">8.4.1. base</a></li>
+<li><a class="reference internal" href="#module-mavend">8.4.2. daemon</a></li>
+</ul>
+</li>
+</ul>
+
   <h4>Previous topic</h4>
-  <p class="topless"><a href="make.html"
-                        title="previous chapter">7.1. make</a></p>
+  <p class="topless"><a href="groovy.html"
+                        title="previous chapter">8.3. groovy</a></p>
   <h4>Next topic</h4>
-  <p class="topless"><a href="html.html"
-                        title="next chapter">7.3. html</a></p>
+  <p class="topless"><a href="make.html"
+                        title="next chapter">8.5. make</a></p>
 <div id="searchbox" style="display: none">
   <h3>Quick search</h3>
     <form class="search" action="../search.html" method="get">
@@ -142,13 +207,13 @@ set_args <span class="s2">&quot;</span><span class="nv">$@</span><span class="s2
           <a href="../py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
         <li class="right" >
-          <a href="html.html" title="7.3. html"
+          <a href="make.html" title="8.5. make"
              >next</a> |</li>
         <li class="right" >
-          <a href="make.html" title="7.1. make"
+          <a href="groovy.html" title="8.3. groovy"
              >previous</a> |</li>
         <li><a href="../index.html">SLMan 0.0.1 documentation</a> &raquo;</li>
-          <li><a href="index.html" >7. temp</a> &raquo;</li> 
+          <li><a href="index.html" >8. lang</a> &raquo;</li> 
       </ul>
     </div>
     <div class="footer">
