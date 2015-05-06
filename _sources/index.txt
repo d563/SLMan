@@ -13,3 +13,4 @@ SLMan
     temp/index
     idea/index
     tip/index
+    lang/index
