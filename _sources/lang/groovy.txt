@@ -1,7 +1,7 @@
-mail
-====
 groovy
-------
+======
+mail
+----
 .. module:: mail.groovy
 .. code-block:: groovy
 

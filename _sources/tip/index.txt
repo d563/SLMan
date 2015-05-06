@@ -4,4 +4,3 @@ tip
     windows
     linux
     performance
-    mail
