@@ -112,57 +112,6 @@ useradd d563
 [EOF]
 </pre></div>
 </div>
-<span class="target" id="module-Krb5.groovy"></span><div class="highlight-groovy"><div class="highlight"><pre><span class="kn">import</span> <span class="nn">javax.security.auth.callback.Callback</span>
-<span class="kn">import</span> <span class="nn">javax.security.auth.callback.CallbackHandler</span>
-<span class="kn">import</span> <span class="nn">javax.security.auth.callback.NameCallback</span>
-<span class="kn">import</span> <span class="nn">javax.security.auth.callback.PasswordCallback</span>
-<span class="kn">import</span> <span class="nn">javax.security.auth.login.AppConfigurationEntry</span>
-<span class="kn">import</span> <span class="nn">javax.security.auth.login.AppConfigurationEntry.LoginModuleControlFlag</span>
-<span class="kn">import</span> <span class="nn">javax.security.auth.login.Configuration</span>
-<span class="kn">import</span> <span class="nn">javax.security.auth.login.LoginContext</span>
-<span class="c1">// Krb5.groovy</span>
-<span class="n">System</span><span class="o">.</span><span class="na">setProperty</span><span class="o">(</span><span class="s1">&#39;java.security.krb5.realm&#39;</span><span class="o">,</span> <span class="s1">&#39;EXAMPLE.COM&#39;</span><span class="o">)</span>
-<span class="n">System</span><span class="o">.</span><span class="na">setProperty</span><span class="o">(</span><span class="s1">&#39;java.security.krb5.kdc&#39;</span><span class="o">,</span> <span class="s1">&#39;localhost.localdomain&#39;</span><span class="o">)</span>
-<span class="kd">class</span> <span class="nc">CBHandler</span> <span class="kd">implements</span> <span class="n">CallbackHandler</span> <span class="o">{</span>
-  <span class="n">String</span> <span class="n">id</span><span class="o">,</span> <span class="n">pw</span>
-  <span class="n">CBHandler</span><span class="o">(</span><span class="n">String</span> <span class="n">id</span><span class="o">,</span> <span class="n">String</span> <span class="n">pw</span><span class="o">)</span> <span class="o">{</span>
-    <span class="k">this</span><span class="o">.</span><span class="na">id</span> <span class="o">=</span> <span class="n">id</span>
-    <span class="k">this</span><span class="o">.</span><span class="na">pw</span> <span class="o">=</span> <span class="n">pw</span>
-  <span class="o">}</span>
-  <span class="kt">void</span> <span class="nf">handle</span><span class="o">(</span><span class="n">Callback</span><span class="o">[]</span> <span class="n">cbs</span><span class="o">)</span> <span class="o">{</span>
-    <span class="n">cbs</span><span class="o">.</span><span class="na">each</span> <span class="o">{</span>
-      <span class="k">if</span> <span class="o">(</span><span class="n">it</span> <span class="k">instanceof</span> <span class="n">NameCallback</span><span class="o">)</span> <span class="n">it</span><span class="o">.</span><span class="na">name</span> <span class="o">=</span> <span class="n">id</span>
-      <span class="k">if</span> <span class="o">(</span><span class="n">it</span> <span class="k">instanceof</span> <span class="n">PasswordCallback</span><span class="o">)</span> <span class="n">it</span><span class="o">.</span><span class="na">password</span> <span class="o">=</span> <span class="n">pw</span><span class="o">.</span><span class="na">toCharArray</span><span class="o">()</span>
-    <span class="o">}</span>
-  <span class="o">}</span>
-<span class="o">}</span>
-<span class="kd">class</span> <span class="nc">Conf</span> <span class="kd">extends</span> <span class="n">Configuration</span> <span class="o">{</span>
-  <span class="nd">@Override</span>
-  <span class="n">AppConfigurationEntry</span><span class="o">[]</span> <span class="nf">getAppConfigurationEntry</span><span class="o">(</span><span class="n">String</span> <span class="n">name</span><span class="o">)</span> <span class="o">{</span>
-    <span class="o">[</span>
-      <span class="k">new</span> <span class="nf">AppConfigurationEntry</span><span class="o">(</span>
-        <span class="s1">&#39;com.sun.security.auth.module.Krb5LoginModule&#39;</span><span class="o">,</span>
-        <span class="n">LoginModuleControlFlag</span><span class="o">.</span><span class="na">REQUIRED</span><span class="o">,</span>
-        <span class="o">[</span><span class="nl">useTicketCache:</span> <span class="s1">&#39;false&#39;</span><span class="o">,</span> <span class="nl">debug:</span> <span class="s1">&#39;false&#39;</span><span class="o">]</span>
-      <span class="o">)</span>
-    <span class="o">]</span>
-  <span class="o">}</span>
-<span class="o">}</span>
-<span class="k">try</span> <span class="o">{</span>
-  <span class="k">new</span> <span class="nf">LoginContext</span><span class="o">(</span>
-    <span class="s1">&#39;SLMan&#39;</span><span class="o">,</span>
-    <span class="kc">null</span><span class="o">,</span>
-    <span class="k">new</span> <span class="nf">CBHandler</span><span class="o">(</span><span class="s1">&#39;d563&#39;</span><span class="o">,</span> <span class="s1">&#39;d563&#39;</span><span class="o">),</span>
-    <span class="k">new</span> <span class="nf">Conf</span><span class="o">()</span>
-  <span class="o">).</span><span class="na">login</span><span class="o">()</span>
-  <span class="s1">&#39;OK&#39;</span>
-<span class="o">}</span>
-<span class="k">catch</span> <span class="o">(</span><span class="n">Exception</span> <span class="n">e</span><span class="o">)</span> <span class="o">{</span>
-  <span class="n">e</span><span class="o">.</span><span class="na">printStackTrace</span><span class="o">()</span>
-  <span class="s1">&#39;NG&#39;</span>
-<span class="o">}</span>
-</pre></div>
-</div>
 </div>
 </div>
 
