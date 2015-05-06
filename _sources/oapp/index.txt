@@ -1,8 +1,6 @@
-app
-===
+oapp
+====
 .. toctree::
     wsgi
     sphinx
-    fabric
     tomcat
-    ant

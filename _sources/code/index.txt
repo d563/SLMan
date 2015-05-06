@@ -1,8 +1,7 @@
-lang
+code
 ====
 .. toctree::
    html
    python
    groovy
    shell
-   make

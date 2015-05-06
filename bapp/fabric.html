@@ -6,7 +6,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>5.3. fabric &mdash; SLMan 0.0.1 documentation</title>
+    <title>5.1. fabric &mdash; SLMan 0.0.1 documentation</title>
     
     <link rel="stylesheet" href="../_static/pyramid.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
@@ -25,9 +25,9 @@
     <script type="text/javascript" src="../_static/underscore.js"></script>
     <script type="text/javascript" src="../_static/doctools.js"></script>
     <link rel="top" title="SLMan 0.0.1 documentation" href="../index.html" />
-    <link rel="up" title="5. app" href="index.html" />
-    <link rel="next" title="5.4. tomcat" href="tomcat.html" />
-    <link rel="prev" title="5.2. sphinx" href="sphinx.html" />
+    <link rel="up" title="5. bapp" href="index.html" />
+    <link rel="next" title="5.2. ant" href="ant.html" />
+    <link rel="prev" title="5. bapp" href="index.html" />
 <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Neuton&amp;subset=latin" type="text/css" media="screen" charset="utf-8" />
 <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Nobile:regular,italic,bold,bolditalic&amp;subset=latin" type="text/css" media="screen" charset="utf-8" />
 <!--[if lte IE 6]>
@@ -47,13 +47,13 @@
           <a href="../py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
         <li class="right" >
-          <a href="tomcat.html" title="5.4. tomcat"
+          <a href="ant.html" title="5.2. ant"
              accesskey="N">next</a> |</li>
         <li class="right" >
-          <a href="sphinx.html" title="5.2. sphinx"
+          <a href="index.html" title="5. bapp"
              accesskey="P">previous</a> |</li>
         <li><a href="../index.html">SLMan 0.0.1 documentation</a> &raquo;</li>
-          <li><a href="index.html" accesskey="U">5. app</a> &raquo;</li> 
+          <li><a href="index.html" accesskey="U">5. bapp</a> &raquo;</li> 
       </ul>
     </div>  
 
@@ -63,7 +63,7 @@
           <div class="body">
             
   <div class="section" id="fabric">
-<h1>5.3. fabric<a class="headerlink" href="#fabric" title="Permalink to this headline">¶</a></h1>
+<h1>5.1. fabric<a class="headerlink" href="#fabric" title="Permalink to this headline">¶</a></h1>
 <div class="highlight-python"><div class="highlight"><pre>pip install virtualenv virtualenvwrapper
 </pre></div>
 </div>
@@ -137,7 +137,7 @@ mkdir fabfile
 </pre></div>
 </div>
 <div class="section" id="tips">
-<h2>5.3.1. tips<a class="headerlink" href="#tips" title="Permalink to this headline">¶</a></h2>
+<h2>5.1.1. tips<a class="headerlink" href="#tips" title="Permalink to this headline">¶</a></h2>
 <div class="highlight-python"><div class="highlight"><pre><span class="n">cmd</span> <span class="o">=</span> <span class="s">&#39;ls -al; echo&#39;</span>
 <span class="n">s1</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">run</span><span class="p">(</span><span class="n">cmd</span><span class="p">))</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s">&#39;</span><span class="se">\r</span><span class="s">&#39;</span><span class="p">,</span> <span class="s">&#39;&#39;</span><span class="p">)</span>
 <span class="n">s2</span> <span class="o">=</span> <span class="n">local</span><span class="p">(</span><span class="n">cmd</span><span class="p">,</span> <span class="n">capture</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
@@ -159,18 +159,18 @@ mkdir fabfile
         <div class="sphinxsidebarwrapper">
   <h3><a href="../index.html">Table Of Contents</a></h3>
   <ul>
-<li><a class="reference internal" href="#">5.3. fabric</a><ul>
-<li><a class="reference internal" href="#tips">5.3.1. tips</a></li>
+<li><a class="reference internal" href="#">5.1. fabric</a><ul>
+<li><a class="reference internal" href="#tips">5.1.1. tips</a></li>
 </ul>
 </li>
 </ul>
 
   <h4>Previous topic</h4>
-  <p class="topless"><a href="sphinx.html"
-                        title="previous chapter">5.2. sphinx</a></p>
+  <p class="topless"><a href="index.html"
+                        title="previous chapter">5. bapp</a></p>
   <h4>Next topic</h4>
-  <p class="topless"><a href="tomcat.html"
-                        title="next chapter">5.4. tomcat</a></p>
+  <p class="topless"><a href="ant.html"
+                        title="next chapter">5.2. ant</a></p>
 <div id="searchbox" style="display: none">
   <h3>Quick search</h3>
     <form class="search" action="../search.html" method="get">
@@ -198,13 +198,13 @@ mkdir fabfile
           <a href="../py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
         <li class="right" >
-          <a href="tomcat.html" title="5.4. tomcat"
+          <a href="ant.html" title="5.2. ant"
              >next</a> |</li>
         <li class="right" >
-          <a href="sphinx.html" title="5.2. sphinx"
+          <a href="index.html" title="5. bapp"
              >previous</a> |</li>
         <li><a href="../index.html">SLMan 0.0.1 documentation</a> &raquo;</li>
-          <li><a href="index.html" >5. app</a> &raquo;</li> 
+          <li><a href="index.html" >5. bapp</a> &raquo;</li> 
       </ul>
     </div>
     <div class="footer">

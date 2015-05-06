@@ -8,8 +8,9 @@ SLMan
     repo/index
     data/index
     auto/index
-    app/index
-    lang/index
-    box/index
+    bapp/index
+    oapp/index
+    code/index
+    cont/index
     tool/index
     idea/index
