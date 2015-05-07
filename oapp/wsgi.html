@@ -65,71 +65,27 @@
   <div class="section" id="wsgi">
 <h1>6.1. wsgi<a class="headerlink" href="#wsgi" title="Permalink to this headline">¶</a></h1>
 <div class="highlight-python"><div class="highlight"><pre>yum -y install mod_wsgi
-
-pip install pymongo
 </pre></div>
 </div>
 <span class="target" id="module-json.py"></span><div class="highlight-python"><div class="highlight"><pre><span class="c">#!/usr/bin/python</span>
 <span class="c"># -*- coding: utf-8 -*-</span>
 <span class="c"># /var/www/cgi-bin/json.py</span>
-
 <span class="kn">import</span> <span class="nn">json</span>
 <span class="kn">import</span> <span class="nn">logging</span>
-<span class="kn">from</span> <span class="nn">pymongo</span> <span class="kn">import</span> <span class="n">Connection</span>
 
 <span class="n">logging</span><span class="o">.</span><span class="n">basicConfig</span><span class="p">(</span>
   <span class="n">filename</span><span class="o">=</span><span class="s">&#39;/var/tmp/json.log&#39;</span><span class="p">,</span>
   <span class="n">level</span><span class="o">=</span><span class="n">logging</span><span class="o">.</span><span class="n">DEBUG</span><span class="p">,</span>
   <span class="n">format</span><span class="o">=</span><span class="s">&#39;</span><span class="si">%(asctime)s</span><span class="s"> </span><span class="si">%(message)s</span><span class="s">&#39;</span><span class="p">)</span>
+
 <span class="k">def</span> <span class="nf">application</span><span class="p">(</span><span class="n">environ</span><span class="p">,</span> <span class="n">start_response</span><span class="p">):</span>
-  <span class="n">dat</span> <span class="o">=</span> <span class="n">environ</span><span class="p">[</span><span class="s">&#39;wsgi.input&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">read</span><span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="n">environ</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s">&#39;CONTENT_LENGTH&#39;</span><span class="p">,</span> <span class="mi">0</span><span class="p">)))</span>
-  <span class="n">logging</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="n">dat</span><span class="p">)</span>
+  <span class="n">logging</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="n">environ</span><span class="p">)</span>
+  <span class="n">logging</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="n">environ</span><span class="p">[</span><span class="s">&#39;PATH_INFO&#39;</span><span class="p">])</span>
+  <span class="n">logging</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="n">environ</span><span class="p">[</span><span class="s">&#39;QUERY_STRING&#39;</span><span class="p">])</span>
+  <span class="n">logging</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="n">environ</span><span class="p">[</span><span class="s">&#39;REQUEST_METHOD&#39;</span><span class="p">])</span>
+  <span class="n">logging</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="n">environ</span><span class="p">[</span><span class="s">&#39;wsgi.input&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">read</span><span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="n">environ</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s">&#39;CONTENT_LENGTH&#39;</span><span class="p">,</span> <span class="mi">0</span><span class="p">))))</span>
   <span class="n">start_response</span><span class="p">(</span><span class="s">&#39;200 OK&#39;</span><span class="p">,</span> <span class="p">[(</span><span class="s">&#39;Content-type&#39;</span><span class="p">,</span> <span class="s">&#39;text/plain&#39;</span><span class="p">)])</span>
-  <span class="k">return</span> <span class="n">json</span><span class="o">.</span><span class="n">dumps</span><span class="p">(</span><span class="n">Main</span><span class="p">()</span><span class="o">.</span><span class="n">gene</span><span class="p">(</span><span class="n">json</span><span class="o">.</span><span class="n">loads</span><span class="p">(</span><span class="n">dat</span><span class="p">)))</span>
-
-<span class="k">def</span> <span class="nf">deco</span><span class="p">(</span><span class="n">func</span><span class="p">):</span>
-  <span class="k">def</span> <span class="nf">_deco</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">):</span>
-    <span class="k">return</span> <span class="p">[</span><span class="n">i</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">func</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">)</span> <span class="k">if</span> <span class="n">i</span><span class="p">]</span>
-  <span class="k">return</span> <span class="n">_deco</span>
-
-<span class="k">class</span> <span class="nc">Main</span><span class="p">():</span>
-  <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span> <span class="bp">self</span><span class="o">.</span><span class="n">key</span> <span class="o">=</span> <span class="s">&#39;val&#39;</span>
-  <span class="nd">@deco</span>
-  <span class="k">def</span> <span class="nf">gene</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">inp</span><span class="p">):</span>
-    <span class="n">con</span> <span class="o">=</span> <span class="n">Connection</span><span class="p">(</span><span class="s">&#39;localhost&#39;</span><span class="p">,</span> <span class="mi">27017</span><span class="p">)</span>
-    <span class="n">con</span><span class="o">.</span><span class="n">testdb</span><span class="o">.</span><span class="n">testcol</span><span class="o">.</span><span class="n">save</span><span class="p">(</span><span class="n">inp</span><span class="p">)</span>
-    <span class="k">for</span> <span class="n">dat</span> <span class="ow">in</span> <span class="n">con</span><span class="o">.</span><span class="n">testdb</span><span class="o">.</span><span class="n">testcol</span><span class="o">.</span><span class="n">find</span><span class="p">():</span>
-      <span class="k">del</span> <span class="n">dat</span><span class="p">[</span><span class="s">&#39;_id&#39;</span><span class="p">]</span>
-      <span class="k">yield</span> <span class="n">dat</span>
-</pre></div>
-</div>
-<span class="target" id="module-json.html"></span><div class="highlight-html"><div class="highlight"><pre><span class="cp">&lt;!doctype html&gt;</span>
-<span class="c">&lt;!-- /var/www/cgi-bin/json.html --&gt;</span>
-<span class="c">&lt;!-- /var/lib/git/tomcat/target/tomcat/json.html --&gt;</span>
-<span class="nt">&lt;html&gt;</span>
-<span class="nt">&lt;head&gt;</span>
-  <span class="nt">&lt;title&gt;</span>json<span class="nt">&lt;/title&gt;</span>
-  <span class="nt">&lt;meta</span> <span class="na">http-equiv=</span><span class="s">&quot;Content-Type&quot;</span> <span class="na">content=</span><span class="s">&quot;text/html; charset=UTF-8&quot;</span><span class="nt">&gt;</span>
-  <span class="nt">&lt;script </span><span class="na">type=</span><span class="s">&quot;text/javascript&quot;</span> <span class="na">src=</span><span class="s">&quot;http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js&quot;</span><span class="nt">&gt;&lt;/script&gt;</span>
-  <span class="nt">&lt;script&gt;</span>
-  <span class="nx">$</span><span class="p">(</span><span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
-    <span class="s2">&quot;use strict&quot;</span><span class="p">;</span>
-    <span class="nx">$</span><span class="p">.</span><span class="nx">ajax</span><span class="p">({</span>
-      <span class="nx">type</span><span class="o">:</span> <span class="s2">&quot;POST&quot;</span><span class="p">,</span>
-      <span class="nx">url</span><span class="o">:</span> <span class="s2">&quot;json&quot;</span><span class="p">,</span>
-      <span class="nx">data</span><span class="o">:</span> <span class="nx">JSON</span><span class="p">.</span><span class="nx">stringify</span><span class="p">({</span><span class="nx">post_key</span><span class="o">:</span> <span class="s2">&quot;post_val&quot;</span><span class="p">}),</span>
-      <span class="nx">dataType</span><span class="o">:</span> <span class="s2">&quot;json&quot;</span><span class="p">,</span>
-      <span class="nx">success</span><span class="o">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">ls</span><span class="p">)</span> <span class="p">{</span>
-        <span class="nx">$</span><span class="p">(</span><span class="s2">&quot;#main&quot;</span><span class="p">).</span><span class="nx">html</span><span class="p">(</span><span class="nx">JSON</span><span class="p">.</span><span class="nx">stringify</span><span class="p">(</span><span class="nx">ls</span><span class="p">));</span>
-      <span class="p">}</span>
-    <span class="p">});</span>
-  <span class="p">});</span>
-  <span class="nt">&lt;/script&gt;</span>
-<span class="nt">&lt;/head&gt;</span>
-<span class="nt">&lt;body&gt;</span>
-  <span class="nt">&lt;div</span> <span class="na">id=</span><span class="s">&quot;main&quot;</span><span class="nt">&gt;&lt;/div&gt;</span>
-<span class="nt">&lt;/body&gt;</span>
-<span class="nt">&lt;/html&gt;</span>
+  <span class="k">return</span> <span class="n">json</span><span class="o">.</span><span class="n">dumps</span><span class="p">({</span><span class="s">&#39;ret&#39;</span><span class="p">:</span> <span class="s">&#39;val&#39;</span><span class="p">})</span>
 </pre></div>
 </div>
 <div class="highlight-python"><div class="highlight"><pre>git init /var/www/cgi-bin
@@ -139,7 +95,10 @@ ln -s /var/www/cgi-bin /var/lib/git/app
 <div class="highlight-python" id="index-0"><div class="highlight"><pre>echo &#39;WSGIScriptAlias /json /var/www/cgi-bin/json.py
 Alias /app /var/www/cgi-bin&#39; &gt;&gt; /etc/httpd/conf.d/wsgi.conf
 
-/etc/init.d/httpd restart
+service httpd restart
+</pre></div>
+</div>
+<div class="highlight-python"><div class="highlight"><pre>curl -d &#39;{&quot;post&quot;: &quot;val&quot;}&#39; http://localhost/json/d563?get=val
 </pre></div>
 </div>
 </div>

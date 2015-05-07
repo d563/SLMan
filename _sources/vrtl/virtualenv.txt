@@ -1,0 +1,24 @@
+virtualenv
+==========
+::
+
+    pip install virtualenv virtualenvwrapper
+
+.. index:: /etc/profile.d/virtualenv.sh
+
+::
+
+    mkdir /usr/local/lib/virtualenv
+    echo "WORKON_HOME=/usr/local/lib/virtualenv
+    . $(which virtualenvwrapper.sh)" > /etc/profile.d/virtualenv.sh
+
+::
+
+    . /etc/profile.d/virtualenv.sh
+
+::
+
+    mkvirtualenv d563
+    workon d563
+    deactivate
+    rmvirtualenv d563

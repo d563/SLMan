@@ -1,5 +1,6 @@
 vrtl
 ====
 .. toctree::
+    virtualenv
     aws
     docker

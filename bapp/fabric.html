@@ -64,26 +64,6 @@
             
   <div class="section" id="fabric">
 <h1>5.1. fabric<a class="headerlink" href="#fabric" title="Permalink to this headline">¶</a></h1>
-<div class="highlight-python"><div class="highlight"><pre>pip install virtualenv virtualenvwrapper
-</pre></div>
-</div>
-<div class="highlight-python" id="index-0"><div class="highlight"><pre>mkdir /usr/local/lib/virtualenv
-echo &#39;WORKON_HOME=/usr/local/lib/virtualenv
-. /usr/bin/virtualenvwrapper.sh&#39; &gt; /etc/profile.d/virtualenv.sh
-</pre></div>
-</div>
-<div class="highlight-python"><div class="highlight"><pre>. /etc/profile.d/virtualenv.sh
-</pre></div>
-</div>
-<div class="highlight-python"><div class="highlight"><pre>mkvirtualenv fabric
-workon fabric
-deactivate
-rmvirtualenv fabric
-</pre></div>
-</div>
-<div class="highlight-python"><div class="highlight"><pre>pip install fabric nose mock
-</pre></div>
-</div>
 <div class="highlight-python"><div class="highlight"><pre>mkdir /var/lib/git/fabric
 cd /var/lib/git/fabric
 git init .
@@ -119,7 +99,7 @@ mkdir fabfile
 <span class="target" id="module-fabmodule-test.py"></span><div class="highlight-python"><div class="highlight"><pre><span class="c"># -*- coding: utf-8 -*-</span>
 <span class="c"># fabmodule-test.py</span>
 <span class="kn">from</span> <span class="nn">mock</span> <span class="kn">import</span> <span class="n">patch</span><span class="p">,</span> <span class="n">call</span>
-<span class="kn">import</span> <span class="nn">fabfile</span> <span class="kn">as</span> <span class="nn">f</span>
+<span class="kn">import</span> <span class="nn">fabmodule</span> <span class="kn">as</span> <span class="nn">f</span>
 
 <span class="k">class</span> <span class="nc">TestFabfile</span><span class="p">():</span>
   <span class="nd">@patch</span><span class="p">(</span><span class="s">&#39;fabric.api.sudo&#39;</span><span class="p">)</span>
@@ -136,19 +116,6 @@ mkdir fabfile
 <div class="highlight-python"><div class="highlight"><pre><span class="n">nosetests</span> <span class="o">-</span><span class="n">v</span>
 </pre></div>
 </div>
-<div class="section" id="tips">
-<h2>5.1.1. tips<a class="headerlink" href="#tips" title="Permalink to this headline">¶</a></h2>
-<div class="highlight-python"><div class="highlight"><pre><span class="n">cmd</span> <span class="o">=</span> <span class="s">&#39;ls -al; echo&#39;</span>
-<span class="n">s1</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">run</span><span class="p">(</span><span class="n">cmd</span><span class="p">))</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s">&#39;</span><span class="se">\r</span><span class="s">&#39;</span><span class="p">,</span> <span class="s">&#39;&#39;</span><span class="p">)</span>
-<span class="n">s2</span> <span class="o">=</span> <span class="n">local</span><span class="p">(</span><span class="n">cmd</span><span class="p">,</span> <span class="n">capture</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
-<span class="k">if</span> <span class="n">s1</span> <span class="o">!=</span> <span class="n">s2</span><span class="p">:</span>
-  <span class="k">print</span> <span class="s">&#39;Error!&#39;</span>
-</pre></div>
-</div>
-<div class="highlight-python"><div class="highlight"><pre><span class="n">put</span><span class="p">(</span><span class="s">&#39;dat&#39;</span><span class="p">,</span> <span class="s">&#39;.&#39;</span><span class="p">,</span> <span class="n">use_sudo</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
 </div>
 
 
@@ -157,14 +124,6 @@ mkdir fabfile
       </div>
       <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
         <div class="sphinxsidebarwrapper">
-  <h3><a href="../index.html">Table Of Contents</a></h3>
-  <ul>
-<li><a class="reference internal" href="#">5.1. fabric</a><ul>
-<li><a class="reference internal" href="#tips">5.1.1. tips</a></li>
-</ul>
-</li>
-</ul>
-
   <h4>Previous topic</h4>
   <p class="topless"><a href="index.html"
                         title="previous chapter">5. bapp</a></p>

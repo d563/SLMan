@@ -1,5 +1,36 @@
 html
 ====
+.. module:: json.html
+.. code-block:: html
+
+    <!doctype html>
+    <!-- /var/www/cgi-bin/json.html -->
+    <!-- /var/lib/git/tomcat/target/tomcat/json.html -->
+    <html>
+    <head>
+      <title>json</title>
+      <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+      <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+      <script>
+      $(function() {
+        "use strict";
+        $.ajax({
+          type: "POST",
+          url: "json",
+          data: JSON.stringify({post_key: "post_val"}),
+          dataType: "json",
+          success: function(ls) {
+            $("#main").html(JSON.stringify(ls));
+          }
+        });
+      });
+      </script>
+    </head>
+    <body>
+      <div id="main"></div>
+    </body>
+    </html>
+
 .. module:: template.html
 .. code-block:: html
 

@@ -6,7 +6,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>8.3. docker &mdash; SLMan 0.0.2 documentation</title>
+    <title>8.1. virtualenv &mdash; SLMan 0.0.2 documentation</title>
     
     <link rel="stylesheet" href="../_static/pyramid.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
@@ -26,8 +26,8 @@
     <script type="text/javascript" src="../_static/doctools.js"></script>
     <link rel="top" title="SLMan 0.0.2 documentation" href="../index.html" />
     <link rel="up" title="8. vrtl" href="index.html" />
-    <link rel="next" title="9. tool" href="../tool/index.html" />
-    <link rel="prev" title="8.2. aws" href="aws.html" />
+    <link rel="next" title="8.2. aws" href="aws.html" />
+    <link rel="prev" title="8. vrtl" href="index.html" />
 <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Neuton&amp;subset=latin" type="text/css" media="screen" charset="utf-8" />
 <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Nobile:regular,italic,bold,bolditalic&amp;subset=latin" type="text/css" media="screen" charset="utf-8" />
 <!--[if lte IE 6]>
@@ -47,10 +47,10 @@
           <a href="../py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
         <li class="right" >
-          <a href="../tool/index.html" title="9. tool"
+          <a href="aws.html" title="8.2. aws"
              accesskey="N">next</a> |</li>
         <li class="right" >
-          <a href="aws.html" title="8.2. aws"
+          <a href="index.html" title="8. vrtl"
              accesskey="P">previous</a> |</li>
         <li class="nav-item nav-item-0"><a href="../index.html">SLMan 0.0.2 documentation</a> &raquo;</li>
           <li class="nav-item nav-item-1"><a href="index.html" accesskey="U">8. vrtl</a> &raquo;</li> 
@@ -62,73 +62,23 @@
         <div class="bodywrapper">
           <div class="body" role="main">
             
-  <div class="section" id="docker">
-<h1>8.3. docker<a class="headerlink" href="#docker" title="Permalink to this headline">¶</a></h1>
-<div class="highlight-python"><div class="highlight"><pre>yum -y install docker
+  <div class="section" id="virtualenv">
+<h1>8.1. virtualenv<a class="headerlink" href="#virtualenv" title="Permalink to this headline">¶</a></h1>
+<div class="highlight-python"><div class="highlight"><pre>pip install virtualenv virtualenvwrapper
 </pre></div>
 </div>
-<div class="highlight-python"><div class="highlight"><pre>systemctl enable docker
-systemctl start docker
+<div class="highlight-python" id="index-0"><div class="highlight"><pre>mkdir /usr/local/lib/virtualenv
+echo &quot;WORKON_HOME=/usr/local/lib/virtualenv
+. $(which virtualenvwrapper.sh)&quot; &gt; /etc/profile.d/virtualenv.sh
 </pre></div>
 </div>
-<div class="highlight-python"><div class="highlight"><pre>docker pull centos:6
-docker images
+<div class="highlight-python"><div class="highlight"><pre>. /etc/profile.d/virtualenv.sh
 </pre></div>
 </div>
-<span class="target" id="module-Dockerfile"></span><div class="highlight-python"><div class="highlight"><pre>cat &lt;&lt; &#39;[EOF]&#39; &gt; Dockerfile
-FROM centos:6
-MAINTAINER d563
-RUN\
- yum -y install wget tar java-1.6.0-openjdk &amp;&amp;\
- yum -y reinstall glibc-common &amp;&amp;\
- yum clean all
-RUN\
- wget http://archive.apache.org/dist/tomcat/tomcat-7/v7.0.59/bin/apache-tomcat-7.0.59.tar.gz &amp;&amp;\
- tar xvzf apache-tomcat-7.0.59.tar.gz &amp;&amp;\
- rm -f apache-tomcat-7.0.59.tar.gz &amp;&amp;\
- mv apache-tomcat-7.0.59 tomcat
-ENV LANG ja_JP.UTF-8
-ENV CATALINA_OPTS\
- -server\
- -Xms1024m\
- -Xmx1024m\
- -XX:PermSize=256m\
- -XX:MaxPermSize=512m\
- -Duser.timezone=JST\
- -Xloggc:tomcat/logs/GC.log\
- -XX:+PrintGCDetails\
- -XX:+PrintGCDateStamps\
- -XX:MaxTenuringThreshold=32\
- -XX:SurvivorRatio=2\
- -XX:TargetSurvivorRatio=90\
- -XX:+UseParNewGC\
- -XX:+UseConcMarkSweepGC\
- -XX:+CMSParallelRemarkEnabled\
- -XX:+CMSClassUnloadingEnabled\
- -XX:+DisableExplicitGC\
- -XX:+PrintTenuringDistribution\
- -XX:-Inline
-CMD tomcat/bin/catalina.sh start &amp;&amp; tail -f /dev/null
-[EOF]
-</pre></div>
-</div>
-<div class="highlight-python"><div class="highlight"><pre>docker build -t d563/co6:1 .
-
-docker run -d \
-  -p 8888:8080 \
-  -v ~/logs:/tomcat/logs:rw \
-  -v ~/webapps:/tomcat/webapps:rw \
-  --name co6 \
-  d563/co6:1
-
-docker run -it d563/co6:1 /bin/bash
-</pre></div>
-</div>
-<div class="highlight-python"><div class="highlight"><pre>iptables -t nat -L
-
-docker ps -a
-docker rm -f co6
-docker rmi d563/co6:1
+<div class="highlight-python"><div class="highlight"><pre>mkvirtualenv d563
+workon d563
+deactivate
+rmvirtualenv d563
 </pre></div>
 </div>
 </div>
@@ -140,11 +90,11 @@ docker rmi d563/co6:1
       <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
         <div class="sphinxsidebarwrapper">
   <h4>Previous topic</h4>
-  <p class="topless"><a href="aws.html"
-                        title="previous chapter">8.2. aws</a></p>
+  <p class="topless"><a href="index.html"
+                        title="previous chapter">8. vrtl</a></p>
   <h4>Next topic</h4>
-  <p class="topless"><a href="../tool/index.html"
-                        title="next chapter">9. tool</a></p>
+  <p class="topless"><a href="aws.html"
+                        title="next chapter">8.2. aws</a></p>
 <div id="searchbox" style="display: none" role="search">
   <h3>Quick search</h3>
     <form class="search" action="../search.html" method="get">
@@ -172,10 +122,10 @@ docker rmi d563/co6:1
           <a href="../py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
         <li class="right" >
-          <a href="../tool/index.html" title="9. tool"
+          <a href="aws.html" title="8.2. aws"
              >next</a> |</li>
         <li class="right" >
-          <a href="aws.html" title="8.2. aws"
+          <a href="index.html" title="8. vrtl"
              >previous</a> |</li>
         <li class="nav-item nav-item-0"><a href="../index.html">SLMan 0.0.2 documentation</a> &raquo;</li>
           <li class="nav-item nav-item-1"><a href="index.html" >8. vrtl</a> &raquo;</li> 
