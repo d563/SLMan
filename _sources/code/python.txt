@@ -1,6 +1,16 @@
 python
 ======
-base
+file
+----
+.. code-block:: python
+
+    with open('d563.txt') as f:
+      print f.read()
+
+    with open('d563.txt', 'w') as f:
+      f.write('d563')
+
+date
 ----
 .. code-block:: python
 
@@ -87,8 +97,8 @@ mysql
 
     json.dumps(lst)
 
-wsgi
-----
+decorator
+---------
 .. module:: json.py
 .. code-block:: python
 

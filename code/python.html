@@ -64,8 +64,18 @@
             
   <div class="section" id="python">
 <h1>7.2. python<a class="headerlink" href="#python" title="Permalink to this headline">¶</a></h1>
-<div class="section" id="base">
-<h2>7.2.1. base<a class="headerlink" href="#base" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="file">
+<h2>7.2.1. file<a class="headerlink" href="#file" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-python"><div class="highlight"><pre><span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s">&#39;d563.txt&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+  <span class="k">print</span> <span class="n">f</span><span class="o">.</span><span class="n">read</span><span class="p">()</span>
+
+<span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s">&#39;d563.txt&#39;</span><span class="p">,</span> <span class="s">&#39;w&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+  <span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s">&#39;d563&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="date">
+<h2>7.2.2. date<a class="headerlink" href="#date" title="Permalink to this headline">¶</a></h2>
 <div class="highlight-python"><div class="highlight"><pre><span class="kn">from</span> <span class="nn">datetime</span> <span class="kn">import</span> <span class="n">date</span><span class="p">,</span> <span class="n">datetime</span><span class="p">,</span> <span class="n">timedelta</span>
 <span class="n">SQL</span> <span class="o">=</span> <span class="s">&#39;&#39;&#39;</span>
 <span class="s">SELECT *</span>
@@ -79,7 +89,7 @@
 </div>
 </div>
 <div class="section" id="mongodb">
-<h2>7.2.2. mongodb<a class="headerlink" href="#mongodb" title="Permalink to this headline">¶</a></h2>
+<h2>7.2.3. mongodb<a class="headerlink" href="#mongodb" title="Permalink to this headline">¶</a></h2>
 <div class="highlight-python"><div class="highlight"><pre>pip install pymongo
 </pre></div>
 </div>
@@ -95,7 +105,7 @@
 </div>
 </div>
 <div class="section" id="oracle">
-<h2>7.2.3. oracle<a class="headerlink" href="#oracle" title="Permalink to this headline">¶</a></h2>
+<h2>7.2.4. oracle<a class="headerlink" href="#oracle" title="Permalink to this headline">¶</a></h2>
 <div class="highlight-python"><div class="highlight"><pre>pip install cx_Oracle
 </pre></div>
 </div>
@@ -121,7 +131,7 @@
 </div>
 </div>
 <div class="section" id="mysql">
-<h2>7.2.4. mysql<a class="headerlink" href="#mysql" title="Permalink to this headline">¶</a></h2>
+<h2>7.2.5. mysql<a class="headerlink" href="#mysql" title="Permalink to this headline">¶</a></h2>
 <div class="highlight-python"><div class="highlight"><pre>yum -y install mysql-devel
 
 pip install MySQL-python
@@ -149,7 +159,7 @@ pip install MySQL-python
 </div>
 </div>
 <div class="section" id="module-json.py">
-<span id="wsgi"></span><h2>7.2.5. wsgi<a class="headerlink" href="#module-json.py" title="Permalink to this headline">¶</a></h2>
+<span id="decorator"></span><h2>7.2.6. decorator<a class="headerlink" href="#module-json.py" title="Permalink to this headline">¶</a></h2>
 <div class="highlight-python"><div class="highlight"><pre><span class="c">#!/usr/bin/python</span>
 <span class="c"># -*- coding: utf-8 -*-</span>
 <span class="c"># /var/www/cgi-bin/json.py</span>
@@ -186,7 +196,7 @@ pip install MySQL-python
 </div>
 </div>
 <div class="section" id="fabric">
-<h2>7.2.6. fabric<a class="headerlink" href="#fabric" title="Permalink to this headline">¶</a></h2>
+<h2>7.2.7. fabric<a class="headerlink" href="#fabric" title="Permalink to this headline">¶</a></h2>
 <div class="highlight-python"><div class="highlight"><pre><span class="c"># -*- coding: utf-8 -*-</span>
 <span class="c"># __init__.py</span>
 <span class="kn">import</span> <span class="nn">fabmodule</span>
@@ -245,7 +255,7 @@ pip install MySQL-python
 </div>
 </div>
 <div class="section" id="module-mail.py">
-<span id="mail"></span><h2>7.2.7. mail<a class="headerlink" href="#module-mail.py" title="Permalink to this headline">¶</a></h2>
+<span id="mail"></span><h2>7.2.8. mail<a class="headerlink" href="#module-mail.py" title="Permalink to this headline">¶</a></h2>
 <div class="highlight-python"><div class="highlight"><pre><span class="c">#!/usr/bin/python</span>
 <span class="c"># -*- coding: utf-8 -*-</span>
 <span class="c"># mail.py</span>
@@ -277,13 +287,14 @@ pip install MySQL-python
   <h3><a href="../index.html">Table Of Contents</a></h3>
   <ul>
 <li><a class="reference internal" href="#">7.2. python</a><ul>
-<li><a class="reference internal" href="#base">7.2.1. base</a></li>
-<li><a class="reference internal" href="#mongodb">7.2.2. mongodb</a></li>
-<li><a class="reference internal" href="#oracle">7.2.3. oracle</a></li>
-<li><a class="reference internal" href="#mysql">7.2.4. mysql</a></li>
-<li><a class="reference internal" href="#module-json.py">7.2.5. wsgi</a></li>
-<li><a class="reference internal" href="#fabric">7.2.6. fabric</a></li>
-<li><a class="reference internal" href="#module-mail.py">7.2.7. mail</a></li>
+<li><a class="reference internal" href="#file">7.2.1. file</a></li>
+<li><a class="reference internal" href="#date">7.2.2. date</a></li>
+<li><a class="reference internal" href="#mongodb">7.2.3. mongodb</a></li>
+<li><a class="reference internal" href="#oracle">7.2.4. oracle</a></li>
+<li><a class="reference internal" href="#mysql">7.2.5. mysql</a></li>
+<li><a class="reference internal" href="#module-json.py">7.2.6. decorator</a></li>
+<li><a class="reference internal" href="#fabric">7.2.7. fabric</a></li>
+<li><a class="reference internal" href="#module-mail.py">7.2.8. mail</a></li>
 </ul>
 </li>
 </ul>

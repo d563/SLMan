@@ -1,13 +1,24 @@
 groovy
 ======
-base
-----
 ::
 
     cd /usr/local/lib
     wget http://dl.bintray.com/groovy/maven/groovy-binary-2.4.3.zip
     unzip groovy-binary-2.4.3.zip
     ln -nfs /usr/local/lib/groovy-2.4.3/bin/groovy /usr/local/bin/groovy
+
+file
+----
+.. code-block:: groovy
+
+
+    new URL('http://d563.github.io/SLMan/_static/template.html').text
+
+    new File('/Windows/System32/drivers/etc/hosts').text
+
+    new File('.').listFiles({it.isFile()} as FileFilter).collect{it.canonicalPath}
+
+    new XmlSlurper().parseText('<a><b>1</b><b>2</b></a>').b.collect()
 
 mongodb
 -------
