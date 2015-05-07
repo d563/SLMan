@@ -2,6 +2,10 @@ fabric
 ======
 ::
 
+    pip install fabric nose mock
+
+::
+
     mkdir /var/lib/git/fabric
     cd /var/lib/git/fabric
     git init .

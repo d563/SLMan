@@ -111,11 +111,6 @@ mkdir -p src/test/java
       <span class="nt">&lt;artifactId&gt;</span>groovy-all<span class="nt">&lt;/artifactId&gt;</span>
       <span class="nt">&lt;version&gt;</span>2.3.9<span class="nt">&lt;/version&gt;</span>
     <span class="nt">&lt;/dependency&gt;</span>
-    <span class="nt">&lt;dependency&gt;</span>
-      <span class="nt">&lt;groupId&gt;</span>com.gmongo<span class="nt">&lt;/groupId&gt;</span>
-      <span class="nt">&lt;artifactId&gt;</span>gmongo<span class="nt">&lt;/artifactId&gt;</span>
-      <span class="nt">&lt;version&gt;</span>1.3<span class="nt">&lt;/version&gt;</span>
-    <span class="nt">&lt;/dependency&gt;</span>
   <span class="nt">&lt;/dependencies&gt;</span>
   <span class="nt">&lt;build&gt;</span>
     <span class="nt">&lt;finalName&gt;</span>tomcat<span class="nt">&lt;/finalName&gt;</span>
@@ -171,7 +166,6 @@ mkdir -p src/test/java
 </pre></div>
 </div>
 <span class="target" id="module-Json.groovy"></span><div class="highlight-groovy"><div class="highlight"><pre><span class="kn">package</span> <span class="n">d563</span><span class="o">;</span>
-<span class="kn">import</span> <span class="nn">com.gmongo.GMongo</span>
 <span class="kn">import</span> <span class="nn">groovy.json.JsonBuilder</span>
 <span class="kn">import</span> <span class="nn">groovy.json.JsonSlurper</span>
 <span class="kn">import</span> <span class="nn">javax.servlet.ServletException</span>
@@ -181,16 +175,13 @@ mkdir -p src/test/java
 
 <span class="c1">// /var/lib/git/tomcat/src/main/groovy/d563/Json.groovy</span>
 <span class="kd">class</span> <span class="nc">Json</span> <span class="kd">extends</span> <span class="n">HttpServlet</span> <span class="o">{</span>
-  <span class="kt">void</span> <span class="nf">doPost</span><span class="o">(</span><span class="n">HttpServletRequest</span> <span class="n">req</span><span class="o">,</span> <span class="n">HttpServletResponse</span> <span class="n">res</span><span class="o">)</span>
-    <span class="kd">throws</span> <span class="n">IOException</span><span class="o">,</span> <span class="n">ServletException</span> <span class="o">{</span>
-
-    <span class="kt">def</span> <span class="n">inp</span> <span class="o">=</span> <span class="k">new</span> <span class="n">JsonSlurper</span><span class="o">().</span><span class="na">parseText</span><span class="o">(</span><span class="n">req</span><span class="o">.</span><span class="na">reader</span><span class="o">.</span><span class="na">text</span><span class="o">)</span>
-    <span class="n">inp</span><span class="o">.</span><span class="na">ret_key</span> <span class="o">=</span> <span class="s1">&#39;ret_val&#39;</span>
-    <span class="k">new</span> <span class="nf">GMongo</span><span class="o">().</span><span class="na">getDB</span><span class="o">(</span><span class="s1">&#39;testdb&#39;</span><span class="o">).</span><span class="na">testcol</span><span class="o">.</span><span class="na">save</span><span class="o">(</span><span class="n">inp</span><span class="o">)</span>
-
-    <span class="n">res</span><span class="o">.</span><span class="na">contentType</span> <span class="o">=</span> <span class="s1">&#39;text/html; charset=UTF-8&#39;</span>
+  <span class="kt">void</span> <span class="nf">doPost</span><span class="o">(</span><span class="n">HttpServletRequest</span> <span class="n">req</span><span class="o">,</span> <span class="n">HttpServletResponse</span> <span class="n">res</span><span class="o">)</span> <span class="kd">throws</span> <span class="n">IOException</span><span class="o">,</span> <span class="n">ServletException</span> <span class="o">{</span>
+    <span class="n">println</span><span class="o">(</span><span class="n">req</span><span class="o">.</span><span class="na">reader</span><span class="o">.</span><span class="na">text</span><span class="o">)</span>
+    <span class="kt">def</span> <span class="n">inp</span> <span class="o">=</span> <span class="k">new</span> <span class="n">JsonSlurper</span><span class="o">().</span><span class="na">parseText</span><span class="o">(</span><span class="s1">&#39;{&quot;inp&quot;: &quot;val&quot;}&#39;</span><span class="o">)</span>
+    <span class="n">inp</span><span class="o">.</span><span class="na">add_key</span> <span class="o">=</span> <span class="s1">&#39;add_val&#39;</span>
+    <span class="n">res</span><span class="o">.</span><span class="na">contentType</span> <span class="o">=</span> <span class="s1">&#39;text/plain; charset=UTF-8&#39;</span>
     <span class="kt">def</span> <span class="n">out</span> <span class="o">=</span> <span class="n">res</span><span class="o">.</span><span class="na">writer</span>
-    <span class="n">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="k">new</span> <span class="n">JsonBuilder</span><span class="o">(</span><span class="k">new</span> <span class="n">GMongo</span><span class="o">().</span><span class="na">getDB</span><span class="o">(</span><span class="s1">&#39;testdb&#39;</span><span class="o">).</span><span class="na">testcol</span><span class="o">.</span><span class="na">find</span><span class="o">()))</span>
+    <span class="n">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="k">new</span> <span class="n">JsonBuilder</span><span class="o">(</span><span class="n">inp</span><span class="o">))</span>
     <span class="n">out</span><span class="o">.</span><span class="na">close</span><span class="o">()</span>
   <span class="o">}</span>
 <span class="o">}</span>

@@ -1,5 +1,14 @@
 groovy
 ======
+base
+----
+::
+
+    cd /usr/local/lib
+    wget http://dl.bintray.com/groovy/maven/groovy-binary-2.4.3.zip
+    unzip groovy-binary-2.4.3.zip
+    ln -nfs /usr/local/lib/groovy-2.4.3/bin/groovy /usr/local/bin/groovy
+
 mongodb
 -------
 .. code-block:: groovy

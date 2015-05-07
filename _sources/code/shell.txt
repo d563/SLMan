@@ -41,6 +41,11 @@ base
     [[ a = a ]] || [[ a = aa ]]; echo $?
     [[ ! -z $A ]]; echo $?
 
+::
+
+    chmod +x ./template.sh
+    ./template.sh -a AATESTBB -v
+
 daemon
 ------
 .. module:: mavend

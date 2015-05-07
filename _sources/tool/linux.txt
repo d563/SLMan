@@ -39,3 +39,9 @@ search
     alternatives --display java
     alternatives --config java
     update-alternatives --auto java
+
+scp
+---
+::
+
+    scp -rp local_dir remote_host:
