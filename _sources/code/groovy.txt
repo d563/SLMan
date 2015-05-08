@@ -16,9 +16,9 @@ file
 
     new File('/Windows/System32/drivers/etc/hosts').text
 
-    new File('.').listFiles({it.isFile()} as FileFilter).collect{it.canonicalPath}
+    new File('.').listFiles({it.file} as FileFilter).sort().collect{it.canonicalPath}
 
-    new XmlSlurper().parseText('<a><b>1</b><b>2</b></a>').b.collect()
+    new XmlSlurper().parseText('<a><b>1</b><b>2</b></a>').b.findAll{new Integer(it.text()) > 1} as List
 
 mongodb
 -------
@@ -31,7 +31,6 @@ mongodb
 
 krb5
 ----
-.. module:: Krb5.groovy
 .. code-block:: groovy
 
     import javax.security.auth.callback.Callback
@@ -86,7 +85,6 @@ krb5
 
 mail
 ----
-.. module:: mail.groovy
 .. code-block:: groovy
 
     @Grab(group='javax.mail', module='mail', version='1.4.7')

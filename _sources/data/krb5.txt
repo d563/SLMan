@@ -26,7 +26,7 @@ kdc
     kdb5_util create -s
 
     chkconfig krb5kdc on
-    /etc/init.d/krb5kdc start
+    service krb5kdc start
 
 ::
 

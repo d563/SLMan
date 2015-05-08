@@ -28,7 +28,7 @@ subversion
 
 ::
 
-    /etc/init.d/httpd restart
+    service httpd restart
 
 ::
 

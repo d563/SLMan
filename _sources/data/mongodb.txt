@@ -28,7 +28,7 @@ server
     -e '$arest=true' \
     /etc/mongod.conf
 
-    /etc/init.d/mongod start
+    service mongod start
 
 rest
 ----

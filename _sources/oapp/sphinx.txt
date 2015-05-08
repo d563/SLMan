@@ -27,7 +27,7 @@ sphinx
 ::
 
     echo 'Alias /sphinx /var/lib/git/sphinx/_build/html' > /etc/httpd/conf.d/sphinx.conf
-    /etc/init.d/httpd restart
+    service httpd restart
 
 ::
 

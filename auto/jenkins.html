@@ -88,11 +88,11 @@ git init jenkins
 <div class="highlight-python"><div class="highlight"><pre>echo &#39;ProxyPass /jenkins ajp://localhost:8009/jenkins
 ProxyPassReverse /jenkins ajp://localhost:8009/jenkins&#39; &gt; /etc/httpd/conf.d/jenkins.conf
 
-/etc/init.d/httpd restart
+service httpd restart
 </pre></div>
 </div>
 <div class="highlight-python"><div class="highlight"><pre>chkconfig jenkins on
-/etc/init.d/jenkins start
+service jenkins start
 </pre></div>
 </div>
 <div class="highlight-python"><div class="highlight"><pre>cd /var/lib/git/jenkins

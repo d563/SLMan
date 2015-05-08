@@ -83,7 +83,7 @@ echo &quot;def setup(app):
 </pre></div>
 </div>
 <div class="highlight-python" id="index-0"><div class="highlight"><pre>echo &#39;Alias /sphinx /var/lib/git/sphinx/_build/html&#39; &gt; /etc/httpd/conf.d/sphinx.conf
-/etc/init.d/httpd restart
+service httpd restart
 </pre></div>
 </div>
 <div class="highlight-python"><div class="highlight"><pre>cat &lt;&lt; &#39;[EOF]&#39; &gt; _static/SLMan.css

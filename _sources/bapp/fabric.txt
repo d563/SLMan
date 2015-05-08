@@ -11,57 +11,64 @@ fabric
     git init .
     mkdir fabfile
 
+.. module:: fabfile/__init__.py
 .. code-block:: python
 
     # -*- coding: utf-8 -*-
-    # __init__.py
+    # fabfile/__init__.py
+    from fabric.api import env
     import fabmodule
+    env.hosts = ['localhost']
+    # env.user = 'd563'
+    # env.password = 'pass'
 
-    env.hosts = ['hostname']
-    env.user = 'd563'
-    env.password = 'pass'
-
-.. module:: fabmodule.py
-
-::
+.. module:: fabfile/fabmodule.py
+.. code-block:: python
 
     # -*- coding: utf-8 -*-
-    # fabmodule.py
+    # fabfile/fabmodule.py
     from fabric.api import env, local, lcd, put, run, sudo, cd
     from fabric.contrib.files import exists
     from fabric.decorators import task
 
     @task
-    def ls_bin():
+    def tmpPut():
       print env.host_string
-      if exists('/usr/bin'):
-        with cd('/usr/bin'):
-          sudo('ls -al')
+      if exists('/usr/tmp'):
+        with cd('/usr/tmp'):
+          put('fabfile/fabmodule.py', '.', use_sudo=True)
+          check()
+          sudo('rm -rf fabmodule.py')
+
+    def check()
+      s1 = str(run('cat fabmodule.py')).replace('\r', '')
+      s2 = local('cat fabfile/fabmodule.py', capture=True)
+      assert s1 == s2
 
 ::
 
-    fab ls_bin
+    fab -l
+    fab fabmodule.tmpPut
 
-.. module:: fabmodule-test.py
-
-::
+.. module:: fabfile/fabmodule-test.py
+.. code-block:: python
 
     # -*- coding: utf-8 -*-
-    # fabmodule-test.py
+    # fabfile/fabmodule-test.py
     from mock import patch, call
     import fabmodule as f
-
-    class TestFabfile():
-      @patch('fabric.api.sudo')
-      @patch('fabric.contrib.files.exists')
-      def test_ls_bin(self, exists, sudo):
-        exists.return_value = True
-        # exists.side_effect = [True]
+    class TestFabmodule():
+      @patch('fabric.api.local')
+      @patch('fabric.api.run')
+      def test_ls_bin(self, run, local):
+        run.return_value = 'd563\r\nSLMan'
+        local.side_effect = ['d563\nSLMan']
         reload(f)
-        f.ls_bin()
-        assert exists.mock_calls == [call('/usr/bin')]
-        assert sudo.mock_calls == [call('ls -al')]
+        f.check()
+        assert run.mock_calls == [call('cat fabmodule.py')]
+        assert local.mock_calls == [call('cat fabfile/fabmodule.py', capture=True)]
 
 ::
 
+    nosetests -s
     nosetests -v

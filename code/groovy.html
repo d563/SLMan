@@ -76,9 +76,9 @@ ln -nfs /usr/local/lib/groovy-2.4.3/bin/groovy /usr/local/bin/groovy
 
 <span class="k">new</span> <span class="nf">File</span><span class="o">(</span><span class="s1">&#39;/Windows/System32/drivers/etc/hosts&#39;</span><span class="o">).</span><span class="na">text</span>
 
-<span class="k">new</span> <span class="nf">File</span><span class="o">(</span><span class="s1">&#39;.&#39;</span><span class="o">).</span><span class="na">listFiles</span><span class="o">({</span><span class="n">it</span><span class="o">.</span><span class="na">isFile</span><span class="o">()}</span> <span class="k">as</span> <span class="n">FileFilter</span><span class="o">).</span><span class="na">collect</span><span class="o">{</span><span class="n">it</span><span class="o">.</span><span class="na">canonicalPath</span><span class="o">}</span>
+<span class="k">new</span> <span class="nf">File</span><span class="o">(</span><span class="s1">&#39;.&#39;</span><span class="o">).</span><span class="na">listFiles</span><span class="o">({</span><span class="n">it</span><span class="o">.</span><span class="na">file</span><span class="o">}</span> <span class="k">as</span> <span class="n">FileFilter</span><span class="o">).</span><span class="na">sort</span><span class="o">().</span><span class="na">collect</span><span class="o">{</span><span class="n">it</span><span class="o">.</span><span class="na">canonicalPath</span><span class="o">}</span>
 
-<span class="k">new</span> <span class="nf">XmlSlurper</span><span class="o">().</span><span class="na">parseText</span><span class="o">(</span><span class="s1">&#39;&lt;a&gt;&lt;b&gt;1&lt;/b&gt;&lt;b&gt;2&lt;/b&gt;&lt;/a&gt;&#39;</span><span class="o">).</span><span class="na">b</span><span class="o">.</span><span class="na">collect</span><span class="o">()</span>
+<span class="k">new</span> <span class="nf">XmlSlurper</span><span class="o">().</span><span class="na">parseText</span><span class="o">(</span><span class="s1">&#39;&lt;a&gt;&lt;b&gt;1&lt;/b&gt;&lt;b&gt;2&lt;/b&gt;&lt;/a&gt;&#39;</span><span class="o">).</span><span class="na">b</span><span class="o">.</span><span class="na">findAll</span><span class="o">{</span><span class="k">new</span> <span class="n">Integer</span><span class="o">(</span><span class="n">it</span><span class="o">.</span><span class="na">text</span><span class="o">())</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="o">}</span> <span class="k">as</span> <span class="n">List</span>
 </pre></div>
 </div>
 </div>
@@ -91,8 +91,8 @@ ln -nfs /usr/local/lib/groovy-2.4.3/bin/groovy /usr/local/bin/groovy
 </pre></div>
 </div>
 </div>
-<div class="section" id="module-Krb5.groovy">
-<span id="krb5"></span><h2>7.3.3. krb5<a class="headerlink" href="#module-Krb5.groovy" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="krb5">
+<h2>7.3.3. krb5<a class="headerlink" href="#krb5" title="Permalink to this headline">¶</a></h2>
 <div class="highlight-groovy"><div class="highlight"><pre><span class="kn">import</span> <span class="nn">javax.security.auth.callback.Callback</span>
 <span class="kn">import</span> <span class="nn">javax.security.auth.callback.CallbackHandler</span>
 <span class="kn">import</span> <span class="nn">javax.security.auth.callback.NameCallback</span>
@@ -145,8 +145,8 @@ ln -nfs /usr/local/lib/groovy-2.4.3/bin/groovy /usr/local/bin/groovy
 </pre></div>
 </div>
 </div>
-<div class="section" id="module-mail.groovy">
-<span id="mail"></span><h2>7.3.4. mail<a class="headerlink" href="#module-mail.groovy" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="mail">
+<h2>7.3.4. mail<a class="headerlink" href="#mail" title="Permalink to this headline">¶</a></h2>
 <div class="highlight-groovy"><div class="highlight"><pre><span class="nd">@Grab</span><span class="o">(</span><span class="n">group</span><span class="o">=</span><span class="s1">&#39;javax.mail&#39;</span><span class="o">,</span> <span class="n">module</span><span class="o">=</span><span class="s1">&#39;mail&#39;</span><span class="o">,</span> <span class="n">version</span><span class="o">=</span><span class="s1">&#39;1.4.7&#39;</span><span class="o">)</span>
 <span class="kn">import</span> <span class="nn">javax.mail.Authenticator</span>
 <span class="kn">import</span> <span class="nn">javax.mail.Message.RecipientType</span>
@@ -195,8 +195,8 @@ ln -nfs /usr/local/lib/groovy-2.4.3/bin/groovy /usr/local/bin/groovy
 <li><a class="reference internal" href="#">7.3. groovy</a><ul>
 <li><a class="reference internal" href="#file">7.3.1. file</a></li>
 <li><a class="reference internal" href="#mongodb">7.3.2. mongodb</a></li>
-<li><a class="reference internal" href="#module-Krb5.groovy">7.3.3. krb5</a></li>
-<li><a class="reference internal" href="#module-mail.groovy">7.3.4. mail</a></li>
+<li><a class="reference internal" href="#krb5">7.3.3. krb5</a></li>
+<li><a class="reference internal" href="#mail">7.3.4. mail</a></li>
 </ul>
 </li>
 </ul>

@@ -80,7 +80,7 @@ vi /etc/munin/munin.conf
     address 127.0.0.1
     use_node_name yes
 
-/etc/init.d/httpd start
+service httpd start
 </pre></div>
 </div>
 </div>
@@ -92,7 +92,7 @@ vi /etc/munin/munin-node.conf
   allow ^127\.0\.0\.1$
 
 chkconfig munin-node on
-/etc/init.d/munin-node start
+service munin-node start
 </pre></div>
 </div>
 </div>
@@ -101,7 +101,7 @@ chkconfig munin-node on
 <div class="highlight-python"><div class="highlight"><pre>cd /usr/share/tomcat6/webapps
 http://woontai.dip.jp/muninwardownload/munin.war
 
-/etc/init.d/tomcat6 start
+service tomcat6 start
 
 cd /usr/share/munin/plugins
 cp /usr/share/tomcat6/webapps/munin/sh/catalina_* .
@@ -112,7 +112,7 @@ chmod +x catalina_*
 # [catalina_8080_*]
 #   env.url http://localhost:8080/munin/plugins
 
-/etc/init.d/munin-node restart
+service munin-node restart
 </pre></div>
 </div>
 </div>

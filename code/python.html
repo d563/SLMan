@@ -66,7 +66,9 @@
 <h1>7.2. python<a class="headerlink" href="#python" title="Permalink to this headline">¶</a></h1>
 <div class="section" id="file">
 <h2>7.2.1. file<a class="headerlink" href="#file" title="Permalink to this headline">¶</a></h2>
-<div class="highlight-python"><div class="highlight"><pre><span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s">&#39;d563.txt&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+<div class="highlight-python"><div class="highlight"><pre><span class="c">#!/usr/bin/env python</span>
+<span class="c"># -*- coding: utf-8 -*-</span>
+<span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s">&#39;d563.txt&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
   <span class="k">print</span> <span class="n">f</span><span class="o">.</span><span class="n">read</span><span class="p">()</span>
 
 <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s">&#39;d563.txt&#39;</span><span class="p">,</span> <span class="s">&#39;w&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
@@ -158,108 +160,25 @@ pip install MySQL-python
 </pre></div>
 </div>
 </div>
-<div class="section" id="module-json.py">
-<span id="decorator"></span><h2>7.2.6. decorator<a class="headerlink" href="#module-json.py" title="Permalink to this headline">¶</a></h2>
-<div class="highlight-python"><div class="highlight"><pre><span class="c">#!/usr/bin/python</span>
-<span class="c"># -*- coding: utf-8 -*-</span>
-<span class="c"># /var/www/cgi-bin/json.py</span>
-
-<span class="kn">import</span> <span class="nn">json</span>
-<span class="kn">import</span> <span class="nn">logging</span>
-<span class="kn">from</span> <span class="nn">pymongo</span> <span class="kn">import</span> <span class="n">Connection</span>
-
-<span class="n">logging</span><span class="o">.</span><span class="n">basicConfig</span><span class="p">(</span>
-  <span class="n">filename</span><span class="o">=</span><span class="s">&#39;/var/tmp/json.log&#39;</span><span class="p">,</span>
-  <span class="n">level</span><span class="o">=</span><span class="n">logging</span><span class="o">.</span><span class="n">DEBUG</span><span class="p">,</span>
-  <span class="n">format</span><span class="o">=</span><span class="s">&#39;</span><span class="si">%(asctime)s</span><span class="s"> </span><span class="si">%(message)s</span><span class="s">&#39;</span><span class="p">)</span>
-<span class="k">def</span> <span class="nf">application</span><span class="p">(</span><span class="n">environ</span><span class="p">,</span> <span class="n">start_response</span><span class="p">):</span>
-  <span class="n">dat</span> <span class="o">=</span> <span class="n">environ</span><span class="p">[</span><span class="s">&#39;wsgi.input&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">read</span><span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="n">environ</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s">&#39;CONTENT_LENGTH&#39;</span><span class="p">,</span> <span class="mi">0</span><span class="p">)))</span>
-  <span class="n">logging</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="n">dat</span><span class="p">)</span>
-  <span class="n">start_response</span><span class="p">(</span><span class="s">&#39;200 OK&#39;</span><span class="p">,</span> <span class="p">[(</span><span class="s">&#39;Content-type&#39;</span><span class="p">,</span> <span class="s">&#39;text/plain&#39;</span><span class="p">)])</span>
-  <span class="k">return</span> <span class="n">json</span><span class="o">.</span><span class="n">dumps</span><span class="p">(</span><span class="n">Main</span><span class="p">()</span><span class="o">.</span><span class="n">gene</span><span class="p">(</span><span class="n">json</span><span class="o">.</span><span class="n">loads</span><span class="p">(</span><span class="n">dat</span><span class="p">)))</span>
-
-<span class="k">def</span> <span class="nf">deco</span><span class="p">(</span><span class="n">func</span><span class="p">):</span>
+<div class="section" id="decorator">
+<h2>7.2.6. decorator<a class="headerlink" href="#decorator" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-python"><div class="highlight"><pre><span class="k">def</span> <span class="nf">deco</span><span class="p">(</span><span class="n">func</span><span class="p">):</span>
   <span class="k">def</span> <span class="nf">_deco</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">):</span>
     <span class="k">return</span> <span class="p">[</span><span class="n">i</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">func</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">)</span> <span class="k">if</span> <span class="n">i</span><span class="p">]</span>
   <span class="k">return</span> <span class="n">_deco</span>
 
-<span class="k">class</span> <span class="nc">Main</span><span class="p">():</span>
-  <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span> <span class="bp">self</span><span class="o">.</span><span class="n">key</span> <span class="o">=</span> <span class="s">&#39;val&#39;</span>
-  <span class="nd">@deco</span>
-  <span class="k">def</span> <span class="nf">gene</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">inp</span><span class="p">):</span>
-    <span class="n">con</span> <span class="o">=</span> <span class="n">Connection</span><span class="p">(</span><span class="s">&#39;localhost&#39;</span><span class="p">,</span> <span class="mi">27017</span><span class="p">)</span>
-    <span class="n">con</span><span class="o">.</span><span class="n">testdb</span><span class="o">.</span><span class="n">testcol</span><span class="o">.</span><span class="n">save</span><span class="p">(</span><span class="n">inp</span><span class="p">)</span>
-    <span class="k">for</span> <span class="n">dat</span> <span class="ow">in</span> <span class="n">con</span><span class="o">.</span><span class="n">testdb</span><span class="o">.</span><span class="n">testcol</span><span class="o">.</span><span class="n">find</span><span class="p">():</span>
-      <span class="k">del</span> <span class="n">dat</span><span class="p">[</span><span class="s">&#39;_id&#39;</span><span class="p">]</span>
-      <span class="k">yield</span> <span class="n">dat</span>
-</pre></div>
-</div>
-</div>
-<div class="section" id="fabric">
-<h2>7.2.7. fabric<a class="headerlink" href="#fabric" title="Permalink to this headline">¶</a></h2>
-<div class="highlight-python"><div class="highlight"><pre><span class="c"># -*- coding: utf-8 -*-</span>
-<span class="c"># __init__.py</span>
-<span class="kn">import</span> <span class="nn">fabmodule</span>
+<span class="nd">@deco</span>
+<span class="k">def</span> <span class="nf">gene</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">inp</span><span class="p">):</span>
+  <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">inp</span><span class="p">:</span> <span class="k">yield</span> <span class="n">i</span>
 
-<span class="n">env</span><span class="o">.</span><span class="n">hosts</span> <span class="o">=</span> <span class="p">[</span><span class="s">&#39;hostname&#39;</span><span class="p">]</span>
-<span class="n">env</span><span class="o">.</span><span class="n">user</span> <span class="o">=</span> <span class="s">&#39;d563&#39;</span>
-<span class="n">env</span><span class="o">.</span><span class="n">password</span> <span class="o">=</span> <span class="s">&#39;pass&#39;</span>
-</pre></div>
-</div>
-<span class="target" id="module-fabmodule.py"></span><div class="highlight-python"><div class="highlight"><pre><span class="c"># -*- coding: utf-8 -*-</span>
-<span class="c"># fabmodule.py</span>
-<span class="kn">from</span> <span class="nn">fabric.api</span> <span class="kn">import</span> <span class="n">env</span><span class="p">,</span> <span class="n">local</span><span class="p">,</span> <span class="n">lcd</span><span class="p">,</span> <span class="n">put</span><span class="p">,</span> <span class="n">run</span><span class="p">,</span> <span class="n">sudo</span><span class="p">,</span> <span class="n">cd</span>
-<span class="kn">from</span> <span class="nn">fabric.contrib.files</span> <span class="kn">import</span> <span class="n">exists</span>
-<span class="kn">from</span> <span class="nn">fabric.decorators</span> <span class="kn">import</span> <span class="n">task</span>
-
-<span class="nd">@task</span>
-<span class="k">def</span> <span class="nf">ls_bin</span><span class="p">():</span>
-  <span class="k">print</span> <span class="n">env</span><span class="o">.</span><span class="n">host_string</span>
-  <span class="k">if</span> <span class="n">exists</span><span class="p">(</span><span class="s">&#39;/usr/bin&#39;</span><span class="p">):</span>
-    <span class="k">with</span> <span class="n">cd</span><span class="p">(</span><span class="s">&#39;/usr/bin&#39;</span><span class="p">):</span>
-      <span class="n">sudo</span><span class="p">(</span><span class="s">&#39;ls -al&#39;</span><span class="p">)</span>
-</pre></div>
-</div>
-<div class="highlight-python"><div class="highlight"><pre>fab ls_bin
-</pre></div>
-</div>
-<span class="target" id="module-fabmodule-test.py"></span><div class="highlight-python"><div class="highlight"><pre><span class="c"># -*- coding: utf-8 -*-</span>
-<span class="c"># fabmodule-test.py</span>
-<span class="kn">from</span> <span class="nn">mock</span> <span class="kn">import</span> <span class="n">patch</span><span class="p">,</span> <span class="n">call</span>
-<span class="kn">import</span> <span class="nn">fabfile</span> <span class="kn">as</span> <span class="nn">f</span>
-
-<span class="k">class</span> <span class="nc">TestFabfile</span><span class="p">():</span>
-  <span class="nd">@patch</span><span class="p">(</span><span class="s">&#39;fabric.api.sudo&#39;</span><span class="p">)</span>
-  <span class="nd">@patch</span><span class="p">(</span><span class="s">&#39;fabric.contrib.files.exists&#39;</span><span class="p">)</span>
-  <span class="k">def</span> <span class="nf">test_ls_bin</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">exists</span><span class="p">,</span> <span class="n">sudo</span><span class="p">):</span>
-    <span class="n">exists</span><span class="o">.</span><span class="n">return_value</span> <span class="o">=</span> <span class="bp">True</span>
-    <span class="c"># exists.side_effect = [True]</span>
-    <span class="nb">reload</span><span class="p">(</span><span class="n">f</span><span class="p">)</span>
-    <span class="n">f</span><span class="o">.</span><span class="n">ls_bin</span><span class="p">()</span>
-    <span class="k">assert</span> <span class="n">exists</span><span class="o">.</span><span class="n">mock_calls</span> <span class="o">==</span> <span class="p">[</span><span class="n">call</span><span class="p">(</span><span class="s">&#39;/usr/bin&#39;</span><span class="p">)]</span>
-    <span class="k">assert</span> <span class="n">sudo</span><span class="o">.</span><span class="n">mock_calls</span> <span class="o">==</span> <span class="p">[</span><span class="n">call</span><span class="p">(</span><span class="s">&#39;ls -al&#39;</span><span class="p">)]</span>
-</pre></div>
-</div>
-<div class="highlight-python"><div class="highlight"><pre><span class="n">nosetests</span> <span class="o">-</span><span class="n">v</span>
-</pre></div>
-</div>
-<div class="highlight-python"><div class="highlight"><pre><span class="n">cmd</span> <span class="o">=</span> <span class="s">&#39;ls -al; echo&#39;</span>
-<span class="n">s1</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">run</span><span class="p">(</span><span class="n">cmd</span><span class="p">))</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s">&#39;</span><span class="se">\r</span><span class="s">&#39;</span><span class="p">,</span> <span class="s">&#39;&#39;</span><span class="p">)</span>
-<span class="n">s2</span> <span class="o">=</span> <span class="n">local</span><span class="p">(</span><span class="n">cmd</span><span class="p">,</span> <span class="n">capture</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
-<span class="k">if</span> <span class="n">s1</span> <span class="o">!=</span> <span class="n">s2</span><span class="p">:</span>
-  <span class="k">print</span> <span class="s">&#39;Error!&#39;</span>
-</pre></div>
-</div>
-<div class="highlight-python"><div class="highlight"><pre><span class="n">put</span><span class="p">(</span><span class="s">&#39;dat&#39;</span><span class="p">,</span> <span class="s">&#39;.&#39;</span><span class="p">,</span> <span class="n">use_sudo</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+<span class="k">if</span> <span class="n">__name__</span> <span class="o">==</span> <span class="s">&#39;__main__&#39;</span><span class="p">:</span>
+  <span class="k">print</span> <span class="n">gene</span><span class="p">([</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">])</span>
 </pre></div>
 </div>
 </div>
-<div class="section" id="module-mail.py">
-<span id="mail"></span><h2>7.2.8. mail<a class="headerlink" href="#module-mail.py" title="Permalink to this headline">¶</a></h2>
-<div class="highlight-python"><div class="highlight"><pre><span class="c">#!/usr/bin/python</span>
-<span class="c"># -*- coding: utf-8 -*-</span>
-<span class="c"># mail.py</span>
-<span class="kn">import</span> <span class="nn">smtplib</span>
+<div class="section" id="mail">
+<h2>7.2.7. mail<a class="headerlink" href="#mail" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-python"><div class="highlight"><pre><span class="kn">import</span> <span class="nn">smtplib</span>
 <span class="kn">from</span> <span class="nn">email.MIMEText</span> <span class="kn">import</span> <span class="n">MIMEText</span>
 <span class="n">u</span> <span class="o">=</span> <span class="s">&#39;user&#39;</span>
 <span class="n">p</span> <span class="o">=</span> <span class="s">&#39;pass&#39;</span>
@@ -292,9 +211,8 @@ pip install MySQL-python
 <li><a class="reference internal" href="#mongodb">7.2.3. mongodb</a></li>
 <li><a class="reference internal" href="#oracle">7.2.4. oracle</a></li>
 <li><a class="reference internal" href="#mysql">7.2.5. mysql</a></li>
-<li><a class="reference internal" href="#module-json.py">7.2.6. decorator</a></li>
-<li><a class="reference internal" href="#fabric">7.2.7. fabric</a></li>
-<li><a class="reference internal" href="#module-mail.py">7.2.8. mail</a></li>
+<li><a class="reference internal" href="#decorator">7.2.6. decorator</a></li>
+<li><a class="reference internal" href="#mail">7.2.7. mail</a></li>
 </ul>
 </li>
 </ul>

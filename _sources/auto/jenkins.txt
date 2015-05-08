@@ -34,12 +34,12 @@ jenkins
     echo 'ProxyPass /jenkins ajp://localhost:8009/jenkins
     ProxyPassReverse /jenkins ajp://localhost:8009/jenkins' > /etc/httpd/conf.d/jenkins.conf
 
-    /etc/init.d/httpd restart
+    service httpd restart
 
 ::
 
     chkconfig jenkins on
-    /etc/init.d/jenkins start
+    service jenkins start
 
 ::
 

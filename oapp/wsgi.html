@@ -89,7 +89,7 @@
 </pre></div>
 </div>
 <div class="highlight-python"><div class="highlight"><pre>git init /var/www/cgi-bin
-ln -s /var/www/cgi-bin /var/lib/git/app
+ln -nfs /var/www/cgi-bin /var/lib/git/app
 </pre></div>
 </div>
 <div class="highlight-python" id="index-0"><div class="highlight"><pre>echo &#39;WSGIScriptAlias /json /var/www/cgi-bin/json.py

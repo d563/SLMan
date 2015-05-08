@@ -4,6 +4,8 @@ file
 ----
 .. code-block:: python
 
+    #!/usr/bin/env python
+    # -*- coding: utf-8 -*-
     with open('d563.txt') as f:
       print f.read()
 
@@ -99,119 +101,24 @@ mysql
 
 decorator
 ---------
-.. module:: json.py
 .. code-block:: python
-
-    #!/usr/bin/python
-    # -*- coding: utf-8 -*-
-    # /var/www/cgi-bin/json.py
-
-    import json
-    import logging
-    from pymongo import Connection
-
-    logging.basicConfig(
-      filename='/var/tmp/json.log',
-      level=logging.DEBUG,
-      format='%(asctime)s %(message)s')
-    def application(environ, start_response):
-      dat = environ['wsgi.input'].read(int(environ.get('CONTENT_LENGTH', 0)))
-      logging.debug(dat)
-      start_response('200 OK', [('Content-type', 'text/plain')])
-      return json.dumps(Main().gene(json.loads(dat)))
 
     def deco(func):
       def _deco(*args):
         return [i for i in func(*args) if i]
       return _deco
 
-    class Main():
-      def __init__(self): self.key = 'val'
-      @deco
-      def gene(self, inp):
-        con = Connection('localhost', 27017)
-        con.testdb.testcol.save(inp)
-        for dat in con.testdb.testcol.find():
-          del dat['_id']
-          yield dat
+    @deco
+    def gene(self, inp):
+      for i in inp: yield i
 
-fabric
-------
-.. code-block:: python
-
-    # -*- coding: utf-8 -*-
-    # __init__.py
-    import fabmodule
-
-    env.hosts = ['hostname']
-    env.user = 'd563'
-    env.password = 'pass'
-
-.. module:: fabmodule.py
-
-::
-
-    # -*- coding: utf-8 -*-
-    # fabmodule.py
-    from fabric.api import env, local, lcd, put, run, sudo, cd
-    from fabric.contrib.files import exists
-    from fabric.decorators import task
-
-    @task
-    def ls_bin():
-      print env.host_string
-      if exists('/usr/bin'):
-        with cd('/usr/bin'):
-          sudo('ls -al')
-
-::
-
-    fab ls_bin
-
-.. module:: fabmodule-test.py
-
-::
-
-    # -*- coding: utf-8 -*-
-    # fabmodule-test.py
-    from mock import patch, call
-    import fabfile as f
-
-    class TestFabfile():
-      @patch('fabric.api.sudo')
-      @patch('fabric.contrib.files.exists')
-      def test_ls_bin(self, exists, sudo):
-        exists.return_value = True
-        # exists.side_effect = [True]
-        reload(f)
-        f.ls_bin()
-        assert exists.mock_calls == [call('/usr/bin')]
-        assert sudo.mock_calls == [call('ls -al')]
-
-::
-
-    nosetests -v
-
-::
-
-    cmd = 'ls -al; echo'
-    s1 = str(run(cmd)).replace('\r', '')
-    s2 = local(cmd, capture=True)
-    if s1 != s2:
-      print 'Error!'
-
-::
-
-    put('dat', '.', use_sudo=True)
+    if __name__ == '__main__':
+      print gene([-1, 0, 1])
 
 mail
 ----
-.. module:: mail.py
 .. code-block:: python
 
-    #!/usr/bin/python
-    # -*- coding: utf-8 -*-
-    # mail.py
     import smtplib
     from email.MIMEText import MIMEText
     u = 'user'

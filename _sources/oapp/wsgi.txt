@@ -30,7 +30,7 @@ wsgi
 ::
 
     git init /var/www/cgi-bin
-    ln -s /var/www/cgi-bin /var/lib/git/app
+    ln -nfs /var/www/cgi-bin /var/lib/git/app
 
 .. index:: /etc/httpd/conf.d/wsgi.conf
 
