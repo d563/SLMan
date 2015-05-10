@@ -89,9 +89,9 @@ $(function() {
   $('#btn1').click(function() { $('#dlg1').dialog('open'); return false; });
   $('#btn2').click(function() {
     $.ajax({
-      type: "POST",
+      type: "GET",
       url: "template.json",
-      data: JSON.stringify({post_key: "post_val"}),
+      // data: JSON.stringify({post_key: "post_val"}),
       dataType: "json",
       success: function(dat) {
         alert(JSON.stringify(dat));
