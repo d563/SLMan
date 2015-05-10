@@ -1,35 +1,17 @@
 html
 ====
-.. module:: json.html
-.. code-block:: html
+.. module:: template.json
 
-    <!doctype html>
-    <!-- /var/www/cgi-bin/json.html -->
-    <!-- /var/lib/git/tomcat/target/tomcat/json.html -->
-    <html>
-    <head>
-      <title>json</title>
-      <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-      <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
-      <script>
-      $(function() {
-        "use strict";
-        $.ajax({
-          type: "POST",
-          url: "json",
-          data: JSON.stringify({post_key: "post_val"}),
-          dataType: "json",
-          success: function(ls) {
-            $("#main").html(JSON.stringify(ls));
-          }
-        });
-      });
-      </script>
-    </head>
-    <body>
-      <div id="main"></div>
-    </body>
-    </html>
+::
+
+    [{
+      "def" : "ヘッダ１",
+      "val" : "コンテンツ１"
+    },
+    {
+      "def" : "ヘッダ２",
+      "val" : "コンテンツ２"
+    }]
 
 .. module:: template.html
 .. code-block:: html
@@ -43,7 +25,6 @@ html
       <meta name="description" content="説明">
       <meta name="keywords" content="key1,key2">
       <title>SLMan</title>
-      <!-- template.html -->
       <link rel="stylesheet" href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.11.1/themes/smoothness/jquery-ui.css" />
       <style>
     html,body,div,h1,p,a,
@@ -124,6 +105,20 @@ html
       });
       $('aside').dialog({ autoOpen: false, modal: true });
       $('#btn1').click(function() { $('#dlg1').dialog('open'); return false; });
+      $('#btn2').click(function() {
+        $.ajax({
+          type: 'GET',
+          url: 'template.json',
+          // data: JSON.stringify({post_key: 'post_val'}),
+          dataType: 'json',
+          success: function(dat) {
+            for (var i = 0; i < dat.length; i++) {
+              $('#tbl1').append('<tr><th>' + dat[i].def + '</th><td>' + dat[i].val + '</td></tr>');
+            }
+          }
+        });
+        return false;
+      });
     });
       </script>
     </head>
@@ -163,7 +158,7 @@ html
         <section>
           <h1>セクションヘッダ３</h1>
           <form>
-            <table>
+            <table id='tbl1'>
               <tr>
                 <th>テキスト</th>
                 <td><input value="テキスト" /></td>
@@ -174,7 +169,10 @@ html
               </tr>
               <tr>
                 <th>ボタン</th>
-                <td><button id="btn1">ボタン</button></td>
+                <td>
+                  <button id="btn1">ボタン１</button>
+                  <button id="btn2">ボタン２</button>
+                </td>
               </tr>
               <tr>
                 <th>テキストエリア</th>

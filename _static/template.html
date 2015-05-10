@@ -89,13 +89,14 @@ $(function() {
   $('#btn1').click(function() { $('#dlg1').dialog('open'); return false; });
   $('#btn2').click(function() {
     $.ajax({
-      type: "GET",
-      url: "template.json",
-      // data: JSON.stringify({post_key: "post_val"}),
-      dataType: "json",
+      type: 'GET',
+      url: 'template.json',
+      // data: JSON.stringify({post_key: 'post_val'}),
+      dataType: 'json',
       success: function(dat) {
-        alert(JSON.stringify(dat));
-        $("#def1").html(JSON.stringify(dat));
+        for (var i = 0; i < dat.length; i++) {
+          $('#tbl1').append('<tr><th>' + dat[i].def + '</th><td>' + dat[i].val + '</td></tr>');
+        }
       }
     });
     return false;
@@ -129,7 +130,7 @@ $(function() {
     </section>
     <section>
       <h1>セクションヘッダ２</h1>
-      <dl id='def1'>
+      <dl>
         <dt>定義１</dt><dd>説明１</dd>
         <dt>定義２</dt><dd>説明２</dd>
         <dt>定義３</dt><dd>説明３</dd>
@@ -139,7 +140,7 @@ $(function() {
     <section>
       <h1>セクションヘッダ３</h1>
       <form>
-        <table>
+        <table id='tbl1'>
           <tr>
             <th>テキスト</th>
             <td><input value="テキスト" /></td>

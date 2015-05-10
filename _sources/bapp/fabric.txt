@@ -60,7 +60,7 @@ fabric
     class TestFabmodule():
       @patch('fabric.api.local')
       @patch('fabric.api.run')
-      def test_ls_bin(self, run, local):
+      def testCheck(self, run, local):
         run.return_value = 'd563\r\nSLMan'
         local.side_effect = ['d563\nSLMan']
         reload(f)

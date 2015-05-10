@@ -114,7 +114,7 @@ fab fabmodule.tmpPut
 <span class="k">class</span> <span class="nc">TestFabmodule</span><span class="p">():</span>
   <span class="nd">@patch</span><span class="p">(</span><span class="s">&#39;fabric.api.local&#39;</span><span class="p">)</span>
   <span class="nd">@patch</span><span class="p">(</span><span class="s">&#39;fabric.api.run&#39;</span><span class="p">)</span>
-  <span class="k">def</span> <span class="nf">test_ls_bin</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">run</span><span class="p">,</span> <span class="n">local</span><span class="p">):</span>
+  <span class="k">def</span> <span class="nf">testCheck</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">run</span><span class="p">,</span> <span class="n">local</span><span class="p">):</span>
     <span class="n">run</span><span class="o">.</span><span class="n">return_value</span> <span class="o">=</span> <span class="s">&#39;d563</span><span class="se">\r\n</span><span class="s">SLMan&#39;</span>
     <span class="n">local</span><span class="o">.</span><span class="n">side_effect</span> <span class="o">=</span> <span class="p">[</span><span class="s">&#39;d563</span><span class="se">\n</span><span class="s">SLMan&#39;</span><span class="p">]</span>
     <span class="nb">reload</span><span class="p">(</span><span class="n">f</span><span class="p">)</span>
