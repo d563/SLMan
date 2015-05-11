@@ -6,7 +6,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>9.3. performance &mdash; SLMan 0.0.2 documentation</title>
+    <title>10.3. performance &mdash; SLMan 0.0.2 documentation</title>
     
     <link rel="stylesheet" href="../_static/pyramid.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
@@ -25,9 +25,9 @@
     <script type="text/javascript" src="../_static/underscore.js"></script>
     <script type="text/javascript" src="../_static/doctools.js"></script>
     <link rel="top" title="SLMan 0.0.2 documentation" href="../index.html" />
-    <link rel="up" title="9. tool" href="index.html" />
-    <link rel="next" title="9.4. jasper" href="jasper.html" />
-    <link rel="prev" title="9.2. linux" href="linux.html" />
+    <link rel="up" title="10. tool" href="index.html" />
+    <link rel="next" title="11. idea" href="../idea/index.html" />
+    <link rel="prev" title="10.2. linux" href="linux.html" />
 <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Neuton&amp;subset=latin" type="text/css" media="screen" charset="utf-8" />
 <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Nobile:regular,italic,bold,bolditalic&amp;subset=latin" type="text/css" media="screen" charset="utf-8" />
 <!--[if lte IE 6]>
@@ -47,13 +47,13 @@
           <a href="../py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
         <li class="right" >
-          <a href="jasper.html" title="9.4. jasper"
+          <a href="../idea/index.html" title="11. idea"
              accesskey="N">next</a> |</li>
         <li class="right" >
-          <a href="linux.html" title="9.2. linux"
+          <a href="linux.html" title="10.2. linux"
              accesskey="P">previous</a> |</li>
         <li class="nav-item nav-item-0"><a href="../index.html">SLMan 0.0.2 documentation</a> &raquo;</li>
-          <li class="nav-item nav-item-1"><a href="index.html" accesskey="U">9. tool</a> &raquo;</li> 
+          <li class="nav-item nav-item-1"><a href="index.html" accesskey="U">10. tool</a> &raquo;</li> 
       </ul>
     </div>  
 
@@ -63,18 +63,18 @@
           <div class="body" role="main">
             
   <div class="section" id="performance">
-<h1>9.3. performance<a class="headerlink" href="#performance" title="Permalink to this headline">¶</a></h1>
+<h1>10.3. performance<a class="headerlink" href="#performance" title="Permalink to this headline">¶</a></h1>
 <div class="highlight-python"><div class="highlight"><pre>cat /proc/cpuinfo     CPU情報
 </pre></div>
 </div>
 <div class="section" id="coreutils">
-<h2>9.3.1. coreutils<a class="headerlink" href="#coreutils" title="Permalink to this headline">¶</a></h2>
+<h2>10.3.1. coreutils<a class="headerlink" href="#coreutils" title="Permalink to this headline">¶</a></h2>
 <div class="highlight-python"><div class="highlight"><pre>uname -a              システム情報
 </pre></div>
 </div>
 </div>
 <div class="section" id="procps">
-<h2>9.3.2. procps<a class="headerlink" href="#procps" title="Permalink to this headline">¶</a></h2>
+<h2>10.3.2. procps<a class="headerlink" href="#procps" title="Permalink to this headline">¶</a></h2>
 <div class="highlight-python"><div class="highlight"><pre>top
   -u tomcat           ユーザ指定
   -H                  スレッド表示
@@ -99,7 +99,7 @@ free
 </div>
 </div>
 <div class="section" id="net-tools-6-x">
-<h2>9.3.3. net-tools (6.X)<a class="headerlink" href="#net-tools-6-x" title="Permalink to this headline">¶</a></h2>
+<h2>10.3.3. net-tools (6.X)<a class="headerlink" href="#net-tools-6-x" title="Permalink to this headline">¶</a></h2>
 <div class="highlight-python"><div class="highlight"><pre>yum -y install net-tools
 
 netstat
@@ -109,7 +109,7 @@ netstat
 </div>
 </div>
 <div class="section" id="iproute-7-x">
-<h2>9.3.4. iproute (7.X)<a class="headerlink" href="#iproute-7-x" title="Permalink to this headline">¶</a></h2>
+<h2>10.3.4. iproute (7.X)<a class="headerlink" href="#iproute-7-x" title="Permalink to this headline">¶</a></h2>
 <div class="highlight-python"><div class="highlight"><pre>yum -y install iproute
 
 ss
@@ -119,7 +119,7 @@ ss
 </div>
 </div>
 <div class="section" id="strace">
-<h2>9.3.5. strace<a class="headerlink" href="#strace" title="Permalink to this headline">¶</a></h2>
+<h2>10.3.5. strace<a class="headerlink" href="#strace" title="Permalink to this headline">¶</a></h2>
 <div class="highlight-python"><div class="highlight"><pre>yum -y install strace
 
 strace                システムコール出力
@@ -128,7 +128,7 @@ strace                システムコール出力
 </div>
 </div>
 <div class="section" id="sysstat">
-<h2>9.3.6. sysstat<a class="headerlink" href="#sysstat" title="Permalink to this headline">¶</a></h2>
+<h2>10.3.6. sysstat<a class="headerlink" href="#sysstat" title="Permalink to this headline">¶</a></h2>
 <div class="highlight-python"><div class="highlight"><pre>yum -y install sysstat
 
 sar
@@ -154,23 +154,23 @@ pidstat
         <div class="sphinxsidebarwrapper">
   <h3><a href="../index.html">Table Of Contents</a></h3>
   <ul>
-<li><a class="reference internal" href="#">9.3. performance</a><ul>
-<li><a class="reference internal" href="#coreutils">9.3.1. coreutils</a></li>
-<li><a class="reference internal" href="#procps">9.3.2. procps</a></li>
-<li><a class="reference internal" href="#net-tools-6-x">9.3.3. net-tools (6.X)</a></li>
-<li><a class="reference internal" href="#iproute-7-x">9.3.4. iproute (7.X)</a></li>
-<li><a class="reference internal" href="#strace">9.3.5. strace</a></li>
-<li><a class="reference internal" href="#sysstat">9.3.6. sysstat</a></li>
+<li><a class="reference internal" href="#">10.3. performance</a><ul>
+<li><a class="reference internal" href="#coreutils">10.3.1. coreutils</a></li>
+<li><a class="reference internal" href="#procps">10.3.2. procps</a></li>
+<li><a class="reference internal" href="#net-tools-6-x">10.3.3. net-tools (6.X)</a></li>
+<li><a class="reference internal" href="#iproute-7-x">10.3.4. iproute (7.X)</a></li>
+<li><a class="reference internal" href="#strace">10.3.5. strace</a></li>
+<li><a class="reference internal" href="#sysstat">10.3.6. sysstat</a></li>
 </ul>
 </li>
 </ul>
 
   <h4>Previous topic</h4>
   <p class="topless"><a href="linux.html"
-                        title="previous chapter">9.2. linux</a></p>
+                        title="previous chapter">10.2. linux</a></p>
   <h4>Next topic</h4>
-  <p class="topless"><a href="jasper.html"
-                        title="next chapter">9.4. jasper</a></p>
+  <p class="topless"><a href="../idea/index.html"
+                        title="next chapter">11. idea</a></p>
 <div id="searchbox" style="display: none" role="search">
   <h3>Quick search</h3>
     <form class="search" action="../search.html" method="get">
@@ -198,13 +198,13 @@ pidstat
           <a href="../py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
         <li class="right" >
-          <a href="jasper.html" title="9.4. jasper"
+          <a href="../idea/index.html" title="11. idea"
              >next</a> |</li>
         <li class="right" >
-          <a href="linux.html" title="9.2. linux"
+          <a href="linux.html" title="10.2. linux"
              >previous</a> |</li>
         <li class="nav-item nav-item-0"><a href="../index.html">SLMan 0.0.2 documentation</a> &raquo;</li>
-          <li class="nav-item nav-item-1"><a href="index.html" >9. tool</a> &raquo;</li> 
+          <li class="nav-item nav-item-1"><a href="index.html" >10. tool</a> &raquo;</li> 
       </ul>
     </div>
     <div class="footer" role="contentinfo">

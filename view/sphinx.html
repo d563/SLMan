@@ -6,7 +6,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>9.1. virtualenv &mdash; SLMan 0.0.2 documentation</title>
+    <title>7.1. sphinx &mdash; SLMan 0.0.2 documentation</title>
     
     <link rel="stylesheet" href="../_static/pyramid.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
@@ -25,9 +25,9 @@
     <script type="text/javascript" src="../_static/underscore.js"></script>
     <script type="text/javascript" src="../_static/doctools.js"></script>
     <link rel="top" title="SLMan 0.0.2 documentation" href="../index.html" />
-    <link rel="up" title="9. vrtl" href="index.html" />
-    <link rel="next" title="9.2. aws" href="aws.html" />
-    <link rel="prev" title="9. vrtl" href="index.html" />
+    <link rel="up" title="7. view" href="index.html" />
+    <link rel="next" title="7.2. jasper" href="jasper.html" />
+    <link rel="prev" title="7. view" href="index.html" />
 <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Neuton&amp;subset=latin" type="text/css" media="screen" charset="utf-8" />
 <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Nobile:regular,italic,bold,bolditalic&amp;subset=latin" type="text/css" media="screen" charset="utf-8" />
 <!--[if lte IE 6]>
@@ -47,13 +47,13 @@
           <a href="../py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
         <li class="right" >
-          <a href="aws.html" title="9.2. aws"
+          <a href="jasper.html" title="7.2. jasper"
              accesskey="N">next</a> |</li>
         <li class="right" >
-          <a href="index.html" title="9. vrtl"
+          <a href="index.html" title="7. view"
              accesskey="P">previous</a> |</li>
         <li class="nav-item nav-item-0"><a href="../index.html">SLMan 0.0.2 documentation</a> &raquo;</li>
-          <li class="nav-item nav-item-1"><a href="index.html" accesskey="U">9. vrtl</a> &raquo;</li> 
+          <li class="nav-item nav-item-1"><a href="index.html" accesskey="U">7. view</a> &raquo;</li> 
       </ul>
     </div>  
 
@@ -62,24 +62,82 @@
         <div class="bodywrapper">
           <div class="body" role="main">
             
-  <div class="section" id="virtualenv">
-<h1>9.1. virtualenv<a class="headerlink" href="#virtualenv" title="Permalink to this headline">¶</a></h1>
-<div class="highlight-python"><div class="highlight"><pre>pip install virtualenv virtualenvwrapper
+  <div class="section" id="sphinx">
+<h1>7.1. sphinx<a class="headerlink" href="#sphinx" title="Permalink to this headline">¶</a></h1>
+<div class="highlight-python"><div class="highlight"><pre>pip install sphinx
 </pre></div>
 </div>
-<div class="highlight-python" id="index-0"><div class="highlight"><pre>mkdir /usr/local/lib/virtualenv
-echo &quot;WORKON_HOME=/usr/local/lib/virtualenv
-. $(which virtualenvwrapper.sh)&quot; &gt; /etc/profile.d/virtualenv.sh
+<div class="highlight-python"><div class="highlight"><pre><span class="n">mkdir</span> <span class="o">/</span><span class="n">var</span><span class="o">/</span><span class="n">lib</span><span class="o">/</span><span class="n">git</span><span class="o">/</span><span class="n">sphinx</span>
+<span class="n">cd</span> <span class="o">/</span><span class="n">var</span><span class="o">/</span><span class="n">lib</span><span class="o">/</span><span class="n">git</span><span class="o">/</span><span class="n">sphinx</span>
+<span class="n">sphinx</span><span class="o">-</span><span class="n">quickstart</span>
 </pre></div>
 </div>
-<div class="highlight-python"><div class="highlight"><pre>. /etc/profile.d/virtualenv.sh
+<div class="highlight-python"><div class="highlight"><pre>Project name: SLMan
+Author name(s): Daisuke Maeda
+Project version: 0.0.1
 </pre></div>
 </div>
-<div class="highlight-python"><div class="highlight"><pre>mkvirtualenv d563
-workon d563
-deactivate
-rmvirtualenv d563
+<div class="highlight-python"><div class="highlight"><pre>sed -i.org -e &quot;s/html_theme =.*/html_theme = &#39;pyramid&#39;/&quot; conf.py
+echo &quot;def setup(app):
+  app.add_stylesheet(&#39;SLMan.css&#39;)&quot; &gt;&gt; conf.py
 </pre></div>
+</div>
+<div class="highlight-python" id="index-0"><div class="highlight"><pre>echo &#39;Alias /sphinx /var/lib/git/sphinx/_build/html&#39; &gt; /etc/httpd/conf.d/sphinx.conf
+service httpd restart
+</pre></div>
+</div>
+<div class="highlight-python"><div class="highlight"><pre>cat &lt;&lt; &#39;[EOF]&#39; &gt; _static/SLMan.css
+body {background-color: #fff;}
+dd {margin-left: 0px;}
+div.body h1 {background-color: #eee; border: 2px solid #ddd; margin-top: 10pt; padding-left: 10px;}
+div.body h2 {margin-left: 10pt;}
+div.body p, div.body pre {margin-left: 10pt; margin-right: 10pt;}
+div.footer {color: #000; border-top: 2px solid #ddd;}
+div.footer a {color: #1b61b6;}
+[EOF]
+</pre></div>
+</div>
+<div class="highlight-python"><div class="highlight"><pre>cat &lt;&lt; &#39;[EOF]&#39; &gt; pull.sh
+cp -rf /var/www/html/_sources/* .
+for f in `find -name &#39;*.txt&#39;`; do
+  mv -f $f ${f%.txt}.rst
+done
+[EOF]
+
+cat &lt;&lt; &#39;[EOF]&#39; &gt; push.sh
+rm -rf /var/www/html/*
+cp -rf _build/html/* /var/www/html
+d=`pwd`
+cd /var/www/html
+git add -A
+git commit -mupdate
+git push
+cd $d
+[EOF]
+
+chmod u+x pull.sh push.sh
+</pre></div>
+</div>
+<div class="highlight-python"><div class="highlight"><pre>make clean html
+</pre></div>
+</div>
+<div class="section" id="theme">
+<h2>7.1.1. theme<a class="headerlink" href="#theme" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-python"><div class="highlight"><pre>vi conf.py
+  html_theme = &#39;SLMan&#39;
+  html_theme_path = [&#39;.&#39;]
+
+mkdir -p SLMan/static
+cat &lt;&lt; &#39;[EOF]&#39; &gt; SLMan/theme.conf
+[theme]
+inherit = basic
+stylesheet = main.css
+pygments_style = sphinx
+[EOF]
+
+echo &#39;{% extends &quot;!layout.html&quot; %}&#39; &gt; SLMan/layout.html
+</pre></div>
+</div>
 </div>
 </div>
 
@@ -89,12 +147,20 @@ rmvirtualenv d563
       </div>
       <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
         <div class="sphinxsidebarwrapper">
+  <h3><a href="../index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">7.1. sphinx</a><ul>
+<li><a class="reference internal" href="#theme">7.1.1. theme</a></li>
+</ul>
+</li>
+</ul>
+
   <h4>Previous topic</h4>
   <p class="topless"><a href="index.html"
-                        title="previous chapter">9. vrtl</a></p>
+                        title="previous chapter">7. view</a></p>
   <h4>Next topic</h4>
-  <p class="topless"><a href="aws.html"
-                        title="next chapter">9.2. aws</a></p>
+  <p class="topless"><a href="jasper.html"
+                        title="next chapter">7.2. jasper</a></p>
 <div id="searchbox" style="display: none" role="search">
   <h3>Quick search</h3>
     <form class="search" action="../search.html" method="get">
@@ -122,13 +188,13 @@ rmvirtualenv d563
           <a href="../py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
         <li class="right" >
-          <a href="aws.html" title="9.2. aws"
+          <a href="jasper.html" title="7.2. jasper"
              >next</a> |</li>
         <li class="right" >
-          <a href="index.html" title="9. vrtl"
+          <a href="index.html" title="7. view"
              >previous</a> |</li>
         <li class="nav-item nav-item-0"><a href="../index.html">SLMan 0.0.2 documentation</a> &raquo;</li>
-          <li class="nav-item nav-item-1"><a href="index.html" >9. vrtl</a> &raquo;</li> 
+          <li class="nav-item nav-item-1"><a href="index.html" >7. view</a> &raquo;</li> 
       </ul>
     </div>
     <div class="footer" role="contentinfo">

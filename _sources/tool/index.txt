@@ -4,4 +4,3 @@ tool
     windows
     linux
     performance
-    jasper

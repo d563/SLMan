@@ -6,7 +6,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>6.2. sphinx &mdash; SLMan 0.0.2 documentation</title>
+    <title>7.2. jasper &mdash; SLMan 0.0.2 documentation</title>
     
     <link rel="stylesheet" href="../_static/pyramid.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
@@ -25,9 +25,9 @@
     <script type="text/javascript" src="../_static/underscore.js"></script>
     <script type="text/javascript" src="../_static/doctools.js"></script>
     <link rel="top" title="SLMan 0.0.2 documentation" href="../index.html" />
-    <link rel="up" title="6. oapp" href="index.html" />
-    <link rel="next" title="6.3. tomcat" href="tomcat.html" />
-    <link rel="prev" title="6.1. wsgi" href="wsgi.html" />
+    <link rel="up" title="7. view" href="index.html" />
+    <link rel="next" title="8. code" href="../code/index.html" />
+    <link rel="prev" title="7.1. sphinx" href="sphinx.html" />
 <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Neuton&amp;subset=latin" type="text/css" media="screen" charset="utf-8" />
 <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Nobile:regular,italic,bold,bolditalic&amp;subset=latin" type="text/css" media="screen" charset="utf-8" />
 <!--[if lte IE 6]>
@@ -47,13 +47,13 @@
           <a href="../py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
         <li class="right" >
-          <a href="tomcat.html" title="6.3. tomcat"
+          <a href="../code/index.html" title="8. code"
              accesskey="N">next</a> |</li>
         <li class="right" >
-          <a href="wsgi.html" title="6.1. wsgi"
+          <a href="sphinx.html" title="7.1. sphinx"
              accesskey="P">previous</a> |</li>
         <li class="nav-item nav-item-0"><a href="../index.html">SLMan 0.0.2 documentation</a> &raquo;</li>
-          <li class="nav-item nav-item-1"><a href="index.html" accesskey="U">6. oapp</a> &raquo;</li> 
+          <li class="nav-item nav-item-1"><a href="index.html" accesskey="U">7. view</a> &raquo;</li> 
       </ul>
     </div>  
 
@@ -62,82 +62,43 @@
         <div class="bodywrapper">
           <div class="body" role="main">
             
-  <div class="section" id="sphinx">
-<h1>6.2. sphinx<a class="headerlink" href="#sphinx" title="Permalink to this headline">¶</a></h1>
-<div class="highlight-python"><div class="highlight"><pre>pip install sphinx
+  <div class="section" id="jasper">
+<h1>7.2. jasper<a class="headerlink" href="#jasper" title="Permalink to this headline">¶</a></h1>
+<div class="highlight-python"><div class="highlight"><pre>http://jaist.dl.sourceforge.net/project/jasperstudio/JaspersoftStudio-6.0.4/TIBCOJaspersoftStudio-6.0.4.final-windows-installer-x86.exe
+http://jaist.dl.sourceforge.net/project/jasperstudio/JaspersoftStudio-6.0.4/TIBCOJaspersoftStudio-6.0.4.final-windows-installer-x86_64.exe
 </pre></div>
 </div>
-<div class="highlight-python"><div class="highlight"><pre><span class="n">mkdir</span> <span class="o">/</span><span class="n">var</span><span class="o">/</span><span class="n">lib</span><span class="o">/</span><span class="n">git</span><span class="o">/</span><span class="n">sphinx</span>
-<span class="n">cd</span> <span class="o">/</span><span class="n">var</span><span class="o">/</span><span class="n">lib</span><span class="o">/</span><span class="n">git</span><span class="o">/</span><span class="n">sphinx</span>
-<span class="n">sphinx</span><span class="o">-</span><span class="n">quickstart</span>
+<div class="highlight-python"><div class="highlight"><pre>@Grapes(
+  @Grab(group=&#39;jasperreports&#39;, module=&#39;jasperreports&#39;, version=&#39;3.5.3&#39;)
+)
 </pre></div>
 </div>
-<div class="highlight-python"><div class="highlight"><pre>Project name: SLMan
-Author name(s): Daisuke Maeda
-Project version: 0.0.1
+<div class="highlight-python"><div class="highlight"><pre>vi ~/.groovy/grapeConfig.xml
+&lt;ivysettings&gt;
+  &lt;settings defaultResolver=&quot;downloadGrapes&quot;/&gt;
+  &lt;resolvers&gt;
+    &lt;chain name=&quot;downloadGrapes&quot;&gt;
+      &lt;filesystem name=&quot;cachedGrapes&quot;&gt;
+        &lt;ivy pattern=&quot;${user.home}/.groovy/grapes/[organisation]/[module]/ivy-[revision].xml&quot;/&gt;
+        &lt;artifact pattern=&quot;${user.home}/.groovy/grapes/[organisation]/[module]/[type]s/[artifact]-[revision].[ext]&quot;/&gt;
+      &lt;/filesystem&gt;
+      &lt;!-- todo add &#39;endorsed groovy extensions&#39; resolver here --&gt;
+      &lt;ibiblio name=&quot;codehaus&quot; root=&quot;http://repository.codehaus.org/&quot; m2compatible=&quot;true&quot;/&gt;
+      &lt;ibiblio name=&quot;ibiblio&quot; m2compatible=&quot;true&quot;/&gt;
+      &lt;ibiblio name=&quot;java.net2&quot; root=&quot;http://download.java.net/maven/2/&quot; m2compatible=&quot;true&quot;/&gt;
+      &lt;ibiblio name=&quot;jasperreports&quot; root=&quot;http://jasperreports.sourceforge.net/maven2/&quot; m2compatible=&quot;true&quot;/&gt;
+    &lt;/chain&gt;
+  &lt;/resolvers&gt;
+&lt;/ivysettings&gt;
 </pre></div>
 </div>
-<div class="highlight-python"><div class="highlight"><pre>sed -i.org -e &quot;s/html_theme =.*/html_theme = &#39;pyramid&#39;/&quot; conf.py
-echo &quot;def setup(app):
-  app.add_stylesheet(&#39;SLMan.css&#39;)&quot; &gt;&gt; conf.py
+<div class="highlight-python"><div class="highlight"><pre>@Grapes([
+  @Grab(group=&#39;net.sf.jasperreports&#39;, module=&#39;jasperreports&#39;, version=&#39;5.0.1&#39;),
+  @Grab(group=&#39;com.lowagie&#39;, module=&#39;itext&#39;, version=&#39;2.1.7.js2&#39;)
+])
+import net.sf.jasperreports.engine.JasperRunManager
+JasperRunManager
 </pre></div>
-</div>
-<div class="highlight-python" id="index-0"><div class="highlight"><pre>echo &#39;Alias /sphinx /var/lib/git/sphinx/_build/html&#39; &gt; /etc/httpd/conf.d/sphinx.conf
-service httpd restart
-</pre></div>
-</div>
-<div class="highlight-python"><div class="highlight"><pre>cat &lt;&lt; &#39;[EOF]&#39; &gt; _static/SLMan.css
-body {background-color: #fff;}
-dd {margin-left: 0px;}
-div.body h1 {background-color: #eee; border: 2px solid #ddd; margin-top: 10pt; padding-left: 10px;}
-div.body h2 {margin-left: 10pt;}
-div.body p, div.body pre {margin-left: 10pt; margin-right: 10pt;}
-div.footer {color: #000; border-top: 2px solid #ddd;}
-div.footer a {color: #1b61b6;}
-[EOF]
-</pre></div>
-</div>
-<div class="highlight-python"><div class="highlight"><pre>cat &lt;&lt; &#39;[EOF]&#39; &gt; pull.sh
-cp -rf /var/www/html/_sources/* .
-for f in `find -name &#39;*.txt&#39;`; do
-  mv -f $f ${f%.txt}.rst
-done
-[EOF]
-
-cat &lt;&lt; &#39;[EOF]&#39; &gt; push.sh
-rm -rf /var/www/html/*
-cp -rf _build/html/* /var/www/html
-d=`pwd`
-cd /var/www/html
-git add -A
-git commit -mupdate
-git push
-cd $d
-[EOF]
-
-chmod u+x pull.sh push.sh
-</pre></div>
-</div>
-<div class="highlight-python"><div class="highlight"><pre>make clean html
-</pre></div>
-</div>
-<div class="section" id="theme">
-<h2>6.2.1. theme<a class="headerlink" href="#theme" title="Permalink to this headline">¶</a></h2>
-<div class="highlight-python"><div class="highlight"><pre>vi conf.py
-  html_theme = &#39;SLMan&#39;
-  html_theme_path = [&#39;.&#39;]
-
-mkdir -p SLMan/static
-cat &lt;&lt; &#39;[EOF]&#39; &gt; SLMan/theme.conf
-[theme]
-inherit = basic
-stylesheet = main.css
-pygments_style = sphinx
-[EOF]
-
-echo &#39;{% extends &quot;!layout.html&quot; %}&#39; &gt; SLMan/layout.html
-</pre></div>
-</div>
 </div>
 </div>
 
@@ -147,20 +108,12 @@ echo &#39;{% extends &quot;!layout.html&quot; %}&#39; &gt; SLMan/layout.html
       </div>
       <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
         <div class="sphinxsidebarwrapper">
-  <h3><a href="../index.html">Table Of Contents</a></h3>
-  <ul>
-<li><a class="reference internal" href="#">6.2. sphinx</a><ul>
-<li><a class="reference internal" href="#theme">6.2.1. theme</a></li>
-</ul>
-</li>
-</ul>
-
   <h4>Previous topic</h4>
-  <p class="topless"><a href="wsgi.html"
-                        title="previous chapter">6.1. wsgi</a></p>
+  <p class="topless"><a href="sphinx.html"
+                        title="previous chapter">7.1. sphinx</a></p>
   <h4>Next topic</h4>
-  <p class="topless"><a href="tomcat.html"
-                        title="next chapter">6.3. tomcat</a></p>
+  <p class="topless"><a href="../code/index.html"
+                        title="next chapter">8. code</a></p>
 <div id="searchbox" style="display: none" role="search">
   <h3>Quick search</h3>
     <form class="search" action="../search.html" method="get">
@@ -188,13 +141,13 @@ echo &#39;{% extends &quot;!layout.html&quot; %}&#39; &gt; SLMan/layout.html
           <a href="../py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
         <li class="right" >
-          <a href="tomcat.html" title="6.3. tomcat"
+          <a href="../code/index.html" title="8. code"
              >next</a> |</li>
         <li class="right" >
-          <a href="wsgi.html" title="6.1. wsgi"
+          <a href="sphinx.html" title="7.1. sphinx"
              >previous</a> |</li>
         <li class="nav-item nav-item-0"><a href="../index.html">SLMan 0.0.2 documentation</a> &raquo;</li>
-          <li class="nav-item nav-item-1"><a href="index.html" >6. oapp</a> &raquo;</li> 
+          <li class="nav-item nav-item-1"><a href="index.html" >7. view</a> &raquo;</li> 
       </ul>
     </div>
     <div class="footer" role="contentinfo">

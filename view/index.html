@@ -6,7 +6,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>9.4. jasper &mdash; SLMan 0.0.2 documentation</title>
+    <title>7. view &mdash; SLMan 0.0.2 documentation</title>
     
     <link rel="stylesheet" href="../_static/pyramid.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
@@ -25,9 +25,8 @@
     <script type="text/javascript" src="../_static/underscore.js"></script>
     <script type="text/javascript" src="../_static/doctools.js"></script>
     <link rel="top" title="SLMan 0.0.2 documentation" href="../index.html" />
-    <link rel="up" title="9. tool" href="index.html" />
-    <link rel="next" title="10. idea" href="../idea/index.html" />
-    <link rel="prev" title="9.3. performance" href="performance.html" />
+    <link rel="next" title="7.1. sphinx" href="sphinx.html" />
+    <link rel="prev" title="6.2. tomcat" href="../oapp/tomcat.html" />
 <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Neuton&amp;subset=latin" type="text/css" media="screen" charset="utf-8" />
 <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Nobile:regular,italic,bold,bolditalic&amp;subset=latin" type="text/css" media="screen" charset="utf-8" />
 <!--[if lte IE 6]>
@@ -47,13 +46,12 @@
           <a href="../py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
         <li class="right" >
-          <a href="../idea/index.html" title="10. idea"
+          <a href="sphinx.html" title="7.1. sphinx"
              accesskey="N">next</a> |</li>
         <li class="right" >
-          <a href="performance.html" title="9.3. performance"
+          <a href="../oapp/tomcat.html" title="6.2. tomcat"
              accesskey="P">previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../index.html">SLMan 0.0.2 documentation</a> &raquo;</li>
-          <li class="nav-item nav-item-1"><a href="index.html" accesskey="U">9. tool</a> &raquo;</li> 
+        <li class="nav-item nav-item-0"><a href="../index.html">SLMan 0.0.2 documentation</a> &raquo;</li> 
       </ul>
     </div>  
 
@@ -62,43 +60,16 @@
         <div class="bodywrapper">
           <div class="body" role="main">
             
-  <div class="section" id="jasper">
-<h1>9.4. jasper<a class="headerlink" href="#jasper" title="Permalink to this headline">¶</a></h1>
-<div class="highlight-python"><div class="highlight"><pre>http://jaist.dl.sourceforge.net/project/jasperstudio/JaspersoftStudio-6.0.4/TIBCOJaspersoftStudio-6.0.4.final-windows-installer-x86.exe
-http://jaist.dl.sourceforge.net/project/jasperstudio/JaspersoftStudio-6.0.4/TIBCOJaspersoftStudio-6.0.4.final-windows-installer-x86_64.exe
-</pre></div>
-</div>
-<div class="highlight-python"><div class="highlight"><pre>@Grapes(
-  @Grab(group=&#39;jasperreports&#39;, module=&#39;jasperreports&#39;, version=&#39;3.5.3&#39;)
-)
-</pre></div>
-</div>
-<div class="highlight-python"><div class="highlight"><pre>vi ~/.groovy/grapeConfig.xml
-&lt;ivysettings&gt;
-  &lt;settings defaultResolver=&quot;downloadGrapes&quot;/&gt;
-  &lt;resolvers&gt;
-    &lt;chain name=&quot;downloadGrapes&quot;&gt;
-      &lt;filesystem name=&quot;cachedGrapes&quot;&gt;
-        &lt;ivy pattern=&quot;${user.home}/.groovy/grapes/[organisation]/[module]/ivy-[revision].xml&quot;/&gt;
-        &lt;artifact pattern=&quot;${user.home}/.groovy/grapes/[organisation]/[module]/[type]s/[artifact]-[revision].[ext]&quot;/&gt;
-      &lt;/filesystem&gt;
-      &lt;!-- todo add &#39;endorsed groovy extensions&#39; resolver here --&gt;
-      &lt;ibiblio name=&quot;codehaus&quot; root=&quot;http://repository.codehaus.org/&quot; m2compatible=&quot;true&quot;/&gt;
-      &lt;ibiblio name=&quot;ibiblio&quot; m2compatible=&quot;true&quot;/&gt;
-      &lt;ibiblio name=&quot;java.net2&quot; root=&quot;http://download.java.net/maven/2/&quot; m2compatible=&quot;true&quot;/&gt;
-      &lt;ibiblio name=&quot;jasperreports&quot; root=&quot;http://jasperreports.sourceforge.net/maven2/&quot; m2compatible=&quot;true&quot;/&gt;
-    &lt;/chain&gt;
-  &lt;/resolvers&gt;
-&lt;/ivysettings&gt;
-</pre></div>
-</div>
-<div class="highlight-python"><div class="highlight"><pre>@Grapes([
-  @Grab(group=&#39;net.sf.jasperreports&#39;, module=&#39;jasperreports&#39;, version=&#39;5.0.1&#39;),
-  @Grab(group=&#39;com.lowagie&#39;, module=&#39;itext&#39;, version=&#39;2.1.7.js2&#39;)
-])
-import net.sf.jasperreports.engine.JasperRunManager
-JasperRunManager
-</pre></div>
+  <div class="section" id="view">
+<h1>7. view<a class="headerlink" href="#view" title="Permalink to this headline">¶</a></h1>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="sphinx.html">7.1. sphinx</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="sphinx.html#theme">7.1.1. theme</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="jasper.html">7.2. jasper</a></li>
+</ul>
 </div>
 </div>
 
@@ -109,11 +80,11 @@ JasperRunManager
       <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
         <div class="sphinxsidebarwrapper">
   <h4>Previous topic</h4>
-  <p class="topless"><a href="performance.html"
-                        title="previous chapter">9.3. performance</a></p>
+  <p class="topless"><a href="../oapp/tomcat.html"
+                        title="previous chapter">6.2. tomcat</a></p>
   <h4>Next topic</h4>
-  <p class="topless"><a href="../idea/index.html"
-                        title="next chapter">10. idea</a></p>
+  <p class="topless"><a href="sphinx.html"
+                        title="next chapter">7.1. sphinx</a></p>
 <div id="searchbox" style="display: none" role="search">
   <h3>Quick search</h3>
     <form class="search" action="../search.html" method="get">
@@ -141,13 +112,12 @@ JasperRunManager
           <a href="../py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
         <li class="right" >
-          <a href="../idea/index.html" title="10. idea"
+          <a href="sphinx.html" title="7.1. sphinx"
              >next</a> |</li>
         <li class="right" >
-          <a href="performance.html" title="9.3. performance"
+          <a href="../oapp/tomcat.html" title="6.2. tomcat"
              >previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../index.html">SLMan 0.0.2 documentation</a> &raquo;</li>
-          <li class="nav-item nav-item-1"><a href="index.html" >9. tool</a> &raquo;</li> 
+        <li class="nav-item nav-item-0"><a href="../index.html">SLMan 0.0.2 documentation</a> &raquo;</li> 
       </ul>
     </div>
     <div class="footer" role="contentinfo">

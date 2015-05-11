@@ -10,6 +10,7 @@ SLMan
     auto/index
     bapp/index
     oapp/index
+    view/index
     code/index
     vrtl/index
     tool/index
