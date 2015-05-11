@@ -1,0 +1,41 @@
+jasper
+======
+::
+
+    http://jaist.dl.sourceforge.net/project/jasperstudio/JaspersoftStudio-6.0.4/TIBCOJaspersoftStudio-6.0.4.final-windows-installer-x86.exe
+    http://jaist.dl.sourceforge.net/project/jasperstudio/JaspersoftStudio-6.0.4/TIBCOJaspersoftStudio-6.0.4.final-windows-installer-x86_64.exe
+
+::
+
+    @Grapes(
+      @Grab(group='jasperreports', module='jasperreports', version='3.5.3')
+    )
+
+::
+
+    vi ~/.groovy/grapeConfig.xml
+    <ivysettings>
+      <settings defaultResolver="downloadGrapes"/>
+      <resolvers>
+        <chain name="downloadGrapes">
+          <filesystem name="cachedGrapes">
+            <ivy pattern="${user.home}/.groovy/grapes/[organisation]/[module]/ivy-[revision].xml"/>
+            <artifact pattern="${user.home}/.groovy/grapes/[organisation]/[module]/[type]s/[artifact]-[revision].[ext]"/>
+          </filesystem>
+          <!-- todo add 'endorsed groovy extensions' resolver here -->
+          <ibiblio name="codehaus" root="http://repository.codehaus.org/" m2compatible="true"/>
+          <ibiblio name="ibiblio" m2compatible="true"/>
+          <ibiblio name="java.net2" root="http://download.java.net/maven/2/" m2compatible="true"/>
+          <ibiblio name="jasperreports" root="http://jasperreports.sourceforge.net/maven2/" m2compatible="true"/>
+        </chain>
+      </resolvers>
+    </ivysettings>
+
+::
+
+    @Grapes([
+      @Grab(group='net.sf.jasperreports', module='jasperreports', version='5.0.1'),
+      @Grab(group='com.lowagie', module='itext', version='2.1.7.js2')
+    ])
+    import net.sf.jasperreports.engine.JasperRunManager
+    JasperRunManager
