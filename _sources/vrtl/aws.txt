@@ -23,16 +23,16 @@ aws
     from boto import ec2
     import time
 
-    env.user = 'ec2-user'
+    env.user = 'centos'
 
     @task
     def create():
       conn = ec2.connect_to_region('us-west-2')
       resv = conn.run_instances(
-        'ami-4dbf9e7d',
+        'ami-c7d092f7',
         instance_type='t2.micro',
         key_name='d563',
-        security_groups=['launch-wizard-1']
+        security_groups=['CentOS7']
       )
       while len(env.hosts) == 0:
         time.sleep(5)
@@ -58,10 +58,10 @@ aws
     def delete():
       conn = ec2.connect_to_region('us-west-2')
       conn.terminate_instances(instance_ids=[i.id for r in conn.get_all_reservations() for i in r.instances])
-    [EOF]
+        [EOF]
 
 ::
 
     fab -i ~/.ssh/d563-tokyo.pem create init
 
-    ssh -i ~/.ssh/d563-tokyo.pem ec2-user@XX.XX.XX.XX
+    ssh -i ~/.ssh/d563-tokyo.pem centos@XX.XX.XX.XX
