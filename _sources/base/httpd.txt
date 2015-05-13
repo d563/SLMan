@@ -25,3 +25,19 @@ httpd
 
     firewall-cmd --permanent --add-service=http
     firewall-cmd --reload
+
+.. index:: /etc/httpd/conf.d/htdigest.conf
+
+::
+
+    cat << '[EOF]' > /etc/httpd/conf.d/htdigest.conf
+    <Directory "/var/www/html">
+        AuthType Digest
+        AuthName "SLMan"
+        AuthUserFile /etc/httpd/.htdigest
+        Require valid-user
+    </Directory>
+    [EOF]
+
+    htdigest -c /etc/httpd/.htdigest SLMan d563
+    htdigest /etc/httpd/.htdigest SLMan d564

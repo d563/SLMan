@@ -87,6 +87,19 @@ firewall-cmd --permanent --add-service=http
 firewall-cmd --reload
 </pre></div>
 </div>
+<div class="highlight-python" id="index-0"><div class="highlight"><pre>cat &lt;&lt; &#39;[EOF]&#39; &gt; /etc/httpd/conf.d/htdigest.conf
+&lt;Directory &quot;/var/www/html&quot;&gt;
+    AuthType Digest
+    AuthName &quot;SLMan&quot;
+    AuthUserFile /etc/httpd/.htdigest
+    Require valid-user
+&lt;/Directory&gt;
+[EOF]
+
+htdigest -c /etc/httpd/.htdigest SLMan d563
+htdigest /etc/httpd/.htdigest SLMan d564
+</pre></div>
+</div>
 </div>
 
 
