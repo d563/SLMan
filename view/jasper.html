@@ -68,36 +68,122 @@
 http://jaist.dl.sourceforge.net/project/jasperstudio/JaspersoftStudio-6.0.4/TIBCOJaspersoftStudio-6.0.4.final-windows-installer-x86_64.exe
 </pre></div>
 </div>
-<div class="highlight-python"><div class="highlight"><pre>@Grapes(
-  @Grab(group=&#39;jasperreports&#39;, module=&#39;jasperreports&#39;, version=&#39;3.5.3&#39;)
-)
+<div class="highlight-python"><div class="highlight"><pre>http://dl.ipafont.ipa.go.jp/IPAexfont/IPAexfont00201.zip
 </pre></div>
 </div>
-<div class="highlight-python"><div class="highlight"><pre>vi ~/.groovy/grapeConfig.xml
-&lt;ivysettings&gt;
-  &lt;settings defaultResolver=&quot;downloadGrapes&quot;/&gt;
-  &lt;resolvers&gt;
-    &lt;chain name=&quot;downloadGrapes&quot;&gt;
-      &lt;filesystem name=&quot;cachedGrapes&quot;&gt;
-        &lt;ivy pattern=&quot;${user.home}/.groovy/grapes/[organisation]/[module]/ivy-[revision].xml&quot;/&gt;
-        &lt;artifact pattern=&quot;${user.home}/.groovy/grapes/[organisation]/[module]/[type]s/[artifact]-[revision].[ext]&quot;/&gt;
-      &lt;/filesystem&gt;
-      &lt;!-- todo add &#39;endorsed groovy extensions&#39; resolver here --&gt;
-      &lt;ibiblio name=&quot;codehaus&quot; root=&quot;http://repository.codehaus.org/&quot; m2compatible=&quot;true&quot;/&gt;
-      &lt;ibiblio name=&quot;ibiblio&quot; m2compatible=&quot;true&quot;/&gt;
-      &lt;ibiblio name=&quot;java.net2&quot; root=&quot;http://download.java.net/maven/2/&quot; m2compatible=&quot;true&quot;/&gt;
-      &lt;ibiblio name=&quot;jasperreports&quot; root=&quot;http://jasperreports.sourceforge.net/maven2/&quot; m2compatible=&quot;true&quot;/&gt;
-    &lt;/chain&gt;
-  &lt;/resolvers&gt;
-&lt;/ivysettings&gt;
+<div class="highlight-none"><div class="highlight"><pre>cat &lt;&lt; &#39;[EOF]&#39; &gt; jasperreports_extension.properties
+net.sf.jasperreports.extension.registry.factory.fonts=net.sf.jasperreports.engine.fonts.SimpleFontExtensionsRegistryFactory
+net.sf.jasperreports.extension.simple.font.families.ipaex=ipaex.xml
+[EOF]
 </pre></div>
 </div>
-<div class="highlight-python"><div class="highlight"><pre>@Grapes([
-  @Grab(group=&#39;net.sf.jasperreports&#39;, module=&#39;jasperreports&#39;, version=&#39;5.0.1&#39;),
-  @Grab(group=&#39;com.lowagie&#39;, module=&#39;itext&#39;, version=&#39;2.1.7.js2&#39;)
-])
-import net.sf.jasperreports.engine.JasperRunManager
-JasperRunManager
+<span class="target" id="module-ipaex.xml"></span><div class="highlight-xml"><div class="highlight"><pre><span class="cp">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;</span>
+<span class="c">&lt;!-- ipaex.xml --&gt;</span>
+<span class="nt">&lt;fontFamilies&gt;</span>
+  <span class="nt">&lt;fontFamily</span> <span class="na">name=</span><span class="s">&quot;IPAex&quot;</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;normal&gt;</span>ipaexg.ttf<span class="nt">&lt;/normal&gt;</span>
+    <span class="nt">&lt;pdfEncoding&gt;</span>Identity-H<span class="nt">&lt;/pdfEncoding&gt;</span>
+    <span class="nt">&lt;pdfEmbedded&gt;</span>true<span class="nt">&lt;/pdfEmbedded&gt;</span>
+  <span class="nt">&lt;/fontFamily&gt;</span>
+<span class="nt">&lt;/fontFamilies&gt;</span>
+</pre></div>
+</div>
+<span class="target" id="module-SLMan.jrxml"></span><div class="highlight-xml"><div class="highlight"><pre><span class="cp">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;</span>
+<span class="c">&lt;!-- SLMan.jrxml --&gt;</span>
+<span class="nt">&lt;jasperReport</span> <span class="na">xmlns=</span><span class="s">&quot;http://jasperreports.sourceforge.net/jasperreports&quot;</span> <span class="na">xmlns:xsi=</span><span class="s">&quot;http://www.w3.org/2001/XMLSchema-instance&quot;</span> <span class="na">xsi:schemaLocation=</span><span class="s">&quot;http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd&quot;</span> <span class="na">name=</span><span class="s">&quot;SLMan&quot;</span> <span class="na">pageWidth=</span><span class="s">&quot;595&quot;</span> <span class="na">pageHeight=</span><span class="s">&quot;842&quot;</span> <span class="na">columnWidth=</span><span class="s">&quot;555&quot;</span> <span class="na">leftMargin=</span><span class="s">&quot;20&quot;</span> <span class="na">rightMargin=</span><span class="s">&quot;20&quot;</span> <span class="na">topMargin=</span><span class="s">&quot;20&quot;</span> <span class="na">bottomMargin=</span><span class="s">&quot;20&quot;</span> <span class="na">uuid=</span><span class="s">&quot;2763c98e-b632-4b09-91cf-a9a3eda07531&quot;</span><span class="nt">&gt;</span>
+  <span class="nt">&lt;parameter</span> <span class="na">name=</span><span class="s">&quot;title&quot;</span> <span class="na">class=</span><span class="s">&quot;java.lang.String&quot;</span><span class="nt">/&gt;</span>
+  <span class="nt">&lt;parameter</span> <span class="na">name=</span><span class="s">&quot;dataList&quot;</span> <span class="na">class=</span><span class="s">&quot;java.util.List&quot;</span><span class="nt">/&gt;</span>
+  <span class="nt">&lt;background&gt;</span>
+    <span class="nt">&lt;band</span> <span class="na">splitType=</span><span class="s">&quot;Stretch&quot;</span><span class="nt">/&gt;</span>
+  <span class="nt">&lt;/background&gt;</span>
+  <span class="nt">&lt;title&gt;</span>
+    <span class="nt">&lt;band</span> <span class="na">height=</span><span class="s">&quot;50&quot;</span> <span class="na">splitType=</span><span class="s">&quot;Stretch&quot;</span><span class="nt">&gt;</span>
+      <span class="nt">&lt;textField&gt;</span>
+        <span class="nt">&lt;reportElement</span> <span class="na">x=</span><span class="s">&quot;230&quot;</span> <span class="na">y=</span><span class="s">&quot;10&quot;</span> <span class="na">width=</span><span class="s">&quot;100&quot;</span> <span class="na">height=</span><span class="s">&quot;30&quot;</span> <span class="na">uuid=</span><span class="s">&quot;6efe2231-3827-433d-be3e-9b02ed4f167b&quot;</span><span class="nt">/&gt;</span>
+        <span class="nt">&lt;textElement</span> <span class="na">textAlignment=</span><span class="s">&quot;Center&quot;</span><span class="nt">&gt;</span>
+          <span class="nt">&lt;font</span> <span class="na">fontName=</span><span class="s">&quot;IPAex&quot;</span><span class="nt">/&gt;</span>
+        <span class="nt">&lt;/textElement&gt;</span>
+        <span class="nt">&lt;textFieldExpression&gt;</span><span class="cp">&lt;![CDATA[$P{title}]]&gt;</span><span class="nt">&lt;/textFieldExpression&gt;</span>
+      <span class="nt">&lt;/textField&gt;</span>
+    <span class="nt">&lt;/band&gt;</span>
+  <span class="nt">&lt;/title&gt;</span>
+  <span class="nt">&lt;detail&gt;</span>
+    <span class="nt">&lt;band</span> <span class="na">height=</span><span class="s">&quot;50&quot;</span> <span class="na">splitType=</span><span class="s">&quot;Stretch&quot;</span><span class="nt">&gt;</span>
+      <span class="nt">&lt;subreport&gt;</span>
+        <span class="nt">&lt;reportElement</span> <span class="na">x=</span><span class="s">&quot;-20&quot;</span> <span class="na">y=</span><span class="s">&quot;0&quot;</span> <span class="na">width=</span><span class="s">&quot;595&quot;</span> <span class="na">height=</span><span class="s">&quot;50&quot;</span> <span class="na">uuid=</span><span class="s">&quot;19bd97fe-3a8c-42bd-be93-37d98ceca6c0&quot;</span><span class="nt">/&gt;</span>
+        <span class="nt">&lt;dataSourceExpression&gt;</span><span class="cp">&lt;![CDATA[new net.sf.jasperreports.engine.data.JRBeanCollectionDataSource($P{dataList})]]&gt;</span><span class="nt">&lt;/dataSourceExpression&gt;</span>
+        <span class="nt">&lt;subreportExpression&gt;</span><span class="cp">&lt;![CDATA[&quot;Sub.jasper&quot;]]&gt;</span><span class="nt">&lt;/subreportExpression&gt;</span>
+      <span class="nt">&lt;/subreport&gt;</span>
+    <span class="nt">&lt;/band&gt;</span>
+  <span class="nt">&lt;/detail&gt;</span>
+<span class="nt">&lt;/jasperReport&gt;</span>
+</pre></div>
+</div>
+<span class="target" id="module-Sub.jrxml"></span><div class="highlight-xml"><div class="highlight"><pre><span class="cp">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;</span>
+<span class="c">&lt;!-- Sub.jrxml --&gt;</span>
+<span class="nt">&lt;jasperReport</span> <span class="na">xmlns=</span><span class="s">&quot;http://jasperreports.sourceforge.net/jasperreports&quot;</span> <span class="na">xmlns:xsi=</span><span class="s">&quot;http://www.w3.org/2001/XMLSchema-instance&quot;</span> <span class="na">xsi:schemaLocation=</span><span class="s">&quot;http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd&quot;</span> <span class="na">name=</span><span class="s">&quot;Sub&quot;</span> <span class="na">pageWidth=</span><span class="s">&quot;595&quot;</span> <span class="na">pageHeight=</span><span class="s">&quot;842&quot;</span> <span class="na">columnWidth=</span><span class="s">&quot;555&quot;</span> <span class="na">leftMargin=</span><span class="s">&quot;20&quot;</span> <span class="na">rightMargin=</span><span class="s">&quot;20&quot;</span> <span class="na">topMargin=</span><span class="s">&quot;20&quot;</span> <span class="na">bottomMargin=</span><span class="s">&quot;20&quot;</span> <span class="na">uuid=</span><span class="s">&quot;87583fbb-8a72-4b3c-982f-467e42e22526&quot;</span><span class="nt">&gt;</span>
+  <span class="nt">&lt;property</span> <span class="na">name=</span><span class="s">&quot;com.jaspersoft.studio.data.defaultdataadapter&quot;</span> <span class="na">value=</span><span class="s">&quot;One Empty Record&quot;</span><span class="nt">/&gt;</span>
+  <span class="nt">&lt;field</span> <span class="na">name=</span><span class="s">&quot;data&quot;</span> <span class="na">class=</span><span class="s">&quot;java.lang.String&quot;</span><span class="nt">/&gt;</span>
+  <span class="nt">&lt;background&gt;</span>
+    <span class="nt">&lt;band</span> <span class="na">splitType=</span><span class="s">&quot;Stretch&quot;</span><span class="nt">/&gt;</span>
+  <span class="nt">&lt;/background&gt;</span>
+  <span class="nt">&lt;detail&gt;</span>
+    <span class="nt">&lt;band</span> <span class="na">height=</span><span class="s">&quot;30&quot;</span> <span class="na">splitType=</span><span class="s">&quot;Stretch&quot;</span><span class="nt">&gt;</span>
+      <span class="nt">&lt;textField&gt;</span>
+        <span class="nt">&lt;reportElement</span> <span class="na">x=</span><span class="s">&quot;0&quot;</span> <span class="na">y=</span><span class="s">&quot;0&quot;</span> <span class="na">width=</span><span class="s">&quot;100&quot;</span> <span class="na">height=</span><span class="s">&quot;30&quot;</span> <span class="na">uuid=</span><span class="s">&quot;a172332d-0cdb-4e6b-99a2-df1b184cbb02&quot;</span><span class="nt">/&gt;</span>
+        <span class="nt">&lt;box&gt;</span>
+          <span class="nt">&lt;topPen</span> <span class="na">lineWidth=</span><span class="s">&quot;1.0&quot;</span> <span class="na">lineStyle=</span><span class="s">&quot;Solid&quot;</span> <span class="na">lineColor=</span><span class="s">&quot;#000000&quot;</span><span class="nt">/&gt;</span>
+          <span class="nt">&lt;leftPen</span> <span class="na">lineWidth=</span><span class="s">&quot;1.0&quot;</span> <span class="na">lineStyle=</span><span class="s">&quot;Solid&quot;</span> <span class="na">lineColor=</span><span class="s">&quot;#000000&quot;</span><span class="nt">/&gt;</span>
+          <span class="nt">&lt;bottomPen</span> <span class="na">lineWidth=</span><span class="s">&quot;1.0&quot;</span> <span class="na">lineStyle=</span><span class="s">&quot;Solid&quot;</span> <span class="na">lineColor=</span><span class="s">&quot;#000000&quot;</span><span class="nt">/&gt;</span>
+          <span class="nt">&lt;rightPen</span> <span class="na">lineWidth=</span><span class="s">&quot;1.0&quot;</span> <span class="na">lineStyle=</span><span class="s">&quot;Solid&quot;</span> <span class="na">lineColor=</span><span class="s">&quot;#000000&quot;</span><span class="nt">/&gt;</span>
+        <span class="nt">&lt;/box&gt;</span>
+        <span class="nt">&lt;textElement&gt;</span>
+          <span class="nt">&lt;font</span> <span class="na">fontName=</span><span class="s">&quot;IPAex&quot;</span><span class="nt">/&gt;</span>
+        <span class="nt">&lt;/textElement&gt;</span>
+        <span class="nt">&lt;textFieldExpression&gt;</span><span class="cp">&lt;![CDATA[$F{data}]]&gt;</span><span class="nt">&lt;/textFieldExpression&gt;</span>
+      <span class="nt">&lt;/textField&gt;</span>
+    <span class="nt">&lt;/band&gt;</span>
+  <span class="nt">&lt;/detail&gt;</span>
+<span class="nt">&lt;/jasperReport&gt;</span>
+</pre></div>
+</div>
+<div class="highlight-xml" id="index-0"><div class="highlight"><pre><span class="cp">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;</span>
+<span class="c">&lt;!-- ~/.groovy/grapeConfig.xml --&gt;</span>
+<span class="nt">&lt;ivysettings&gt;</span>
+  <span class="nt">&lt;settings</span> <span class="na">defaultResolver=</span><span class="s">&quot;downloadGrapes&quot;</span><span class="nt">/&gt;</span>
+  <span class="nt">&lt;resolvers&gt;</span>
+    <span class="nt">&lt;chain</span> <span class="na">name=</span><span class="s">&quot;downloadGrapes&quot;</span><span class="nt">&gt;</span>
+      <span class="nt">&lt;filesystem</span> <span class="na">name=</span><span class="s">&quot;cachedGrapes&quot;</span><span class="nt">&gt;</span>
+        <span class="nt">&lt;ivy</span> <span class="na">pattern=</span><span class="s">&quot;${user.home}/.groovy/grapes/[organisation]/[module]/ivy-[revision].xml&quot;</span><span class="nt">/&gt;</span>
+        <span class="nt">&lt;artifact</span> <span class="na">pattern=</span><span class="s">&quot;${user.home}/.groovy/grapes/[organisation]/[module]/[type]s/[artifact]-[revision].[ext]&quot;</span><span class="nt">/&gt;</span>
+      <span class="nt">&lt;/filesystem&gt;</span>
+      <span class="nt">&lt;ibiblio</span> <span class="na">name=</span><span class="s">&quot;codehaus&quot;</span> <span class="na">root=</span><span class="s">&quot;http://repository.codehaus.org/&quot;</span> <span class="na">m2compatible=</span><span class="s">&quot;true&quot;</span><span class="nt">/&gt;</span>
+      <span class="nt">&lt;ibiblio</span> <span class="na">name=</span><span class="s">&quot;ibiblio&quot;</span> <span class="na">m2compatible=</span><span class="s">&quot;true&quot;</span><span class="nt">/&gt;</span>
+      <span class="nt">&lt;ibiblio</span> <span class="na">name=</span><span class="s">&quot;java.net2&quot;</span> <span class="na">root=</span><span class="s">&quot;http://download.java.net/maven/2/&quot;</span> <span class="na">m2compatible=</span><span class="s">&quot;true&quot;</span><span class="nt">/&gt;</span>
+      <span class="nt">&lt;ibiblio</span> <span class="na">name=</span><span class="s">&quot;jasperreports&quot;</span> <span class="na">root=</span><span class="s">&quot;http://jasperreports.sourceforge.net/maven2/&quot;</span> <span class="na">m2compatible=</span><span class="s">&quot;true&quot;</span><span class="nt">/&gt;</span>
+    <span class="nt">&lt;/chain&gt;</span>
+  <span class="nt">&lt;/resolvers&gt;</span>
+<span class="nt">&lt;/ivysettings&gt;</span>
+</pre></div>
+</div>
+<span class="target" id="module-jasperreports.groovy"></span><div class="highlight-groovy"><div class="highlight"><pre><span class="cp">#!/usr/bin/env groovy</span>
+<span class="c1">// jasperreports.groovy</span>
+<span class="nd">@Grapes</span><span class="o">([</span>
+  <span class="nd">@Grab</span><span class="o">(</span><span class="n">group</span><span class="o">=</span><span class="s1">&#39;net.sf.jasperreports&#39;</span><span class="o">,</span> <span class="n">module</span><span class="o">=</span><span class="s1">&#39;jasperreports&#39;</span><span class="o">,</span> <span class="n">version</span><span class="o">=</span><span class="s1">&#39;5.0.1&#39;</span><span class="o">),</span>
+  <span class="nd">@Grab</span><span class="o">(</span><span class="n">group</span><span class="o">=</span><span class="s1">&#39;com.lowagie&#39;</span><span class="o">,</span> <span class="n">module</span><span class="o">=</span><span class="s1">&#39;itext&#39;</span><span class="o">,</span> <span class="n">version</span><span class="o">=</span><span class="s1">&#39;2.1.7.js2&#39;</span><span class="o">)</span>
+<span class="o">])</span>
+<span class="kn">import</span> <span class="nn">net.sf.jasperreports.engine.JREmptyDataSource</span>
+<span class="kn">import</span> <span class="nn">net.sf.jasperreports.engine.JasperCompileManager</span>
+<span class="kn">import</span> <span class="nn">net.sf.jasperreports.engine.JasperExportManager</span>
+<span class="kn">import</span> <span class="nn">net.sf.jasperreports.engine.JasperFillManager</span>
+<span class="k">new</span> <span class="nf">File</span><span class="o">(</span><span class="s1">&#39;.&#39;</span><span class="o">).</span><span class="na">listFiles</span><span class="o">({</span><span class="n">it</span><span class="o">.</span><span class="na">name</span><span class="o">.</span><span class="na">endsWith</span><span class="o">(</span><span class="s1">&#39;jrxml&#39;</span><span class="o">)}</span> <span class="k">as</span> <span class="n">FileFilter</span><span class="o">).</span><span class="na">each</span> <span class="o">{</span>
+  <span class="n">JasperCompileManager</span><span class="o">.</span><span class="na">compileReportToFile</span><span class="o">(</span><span class="n">it</span><span class="o">.</span><span class="na">name</span><span class="o">,</span> <span class="n">it</span><span class="o">.</span><span class="na">name</span><span class="o">.</span><span class="na">replace</span><span class="o">(</span><span class="s1">&#39;jrxml&#39;</span><span class="o">,</span> <span class="s1">&#39;jasper&#39;</span><span class="o">))</span>
+<span class="o">}</span>
+<span class="kt">def</span> <span class="n">p</span> <span class="o">=</span> <span class="n">JasperFillManager</span><span class="o">.</span><span class="na">fillReport</span><span class="o">(</span>
+  <span class="s1">&#39;SLMan.jasper&#39;</span><span class="o">,</span>
+  <span class="o">[</span><span class="nl">title:</span> <span class="s1">&#39;タイトル&#39;</span><span class="o">,</span> <span class="nl">dataList:</span> <span class="o">[[</span><span class="nl">data:</span> <span class="s1">&#39;データ１&#39;</span><span class="o">],</span> <span class="o">[</span><span class="nl">data:</span> <span class="s1">&#39;データ２&#39;</span><span class="o">]]],</span>
+  <span class="k">new</span> <span class="nf">JREmptyDataSource</span><span class="o">())</span>
+<span class="n">JasperExportManager</span><span class="o">.</span><span class="na">exportReportToPdfFile</span><span class="o">(</span><span class="n">p</span><span class="o">,</span> <span class="s1">&#39;SLMan.pdf&#39;</span><span class="o">)</span>
 </pre></div>
 </div>
 </div>

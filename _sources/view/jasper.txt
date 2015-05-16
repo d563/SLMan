@@ -7,13 +7,96 @@ jasper
 
 ::
 
-    @Grapes(
-      @Grab(group='jasperreports', module='jasperreports', version='3.5.3')
-    )
+    http://dl.ipafont.ipa.go.jp/IPAexfont/IPAexfont00201.zip
 
-::
+.. code-block:: none
 
-    vi ~/.groovy/grapeConfig.xml
+    cat << '[EOF]' > jasperreports_extension.properties
+    net.sf.jasperreports.extension.registry.factory.fonts=net.sf.jasperreports.engine.fonts.SimpleFontExtensionsRegistryFactory
+    net.sf.jasperreports.extension.simple.font.families.ipaex=ipaex.xml
+    [EOF]
+
+.. module:: ipaex.xml
+.. code-block:: xml
+
+    <?xml version="1.0" encoding="UTF-8"?>
+    <!-- ipaex.xml -->
+    <fontFamilies>
+      <fontFamily name="IPAex">
+        <normal>ipaexg.ttf</normal>
+        <pdfEncoding>Identity-H</pdfEncoding>
+        <pdfEmbedded>true</pdfEmbedded>
+      </fontFamily>
+    </fontFamilies>
+
+.. module:: SLMan.jrxml
+.. code-block:: xml
+
+    <?xml version="1.0" encoding="UTF-8"?>
+    <!-- SLMan.jrxml -->
+    <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="SLMan" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="2763c98e-b632-4b09-91cf-a9a3eda07531">
+      <parameter name="title" class="java.lang.String"/>
+      <parameter name="dataList" class="java.util.List"/>
+      <background>
+        <band splitType="Stretch"/>
+      </background>
+      <title>
+        <band height="50" splitType="Stretch">
+          <textField>
+            <reportElement x="230" y="10" width="100" height="30" uuid="6efe2231-3827-433d-be3e-9b02ed4f167b"/>
+            <textElement textAlignment="Center">
+              <font fontName="IPAex"/>
+            </textElement>
+            <textFieldExpression><![CDATA[$P{title}]]></textFieldExpression>
+          </textField>
+        </band>
+      </title>
+      <detail>
+        <band height="50" splitType="Stretch">
+          <subreport>
+            <reportElement x="-20" y="0" width="595" height="50" uuid="19bd97fe-3a8c-42bd-be93-37d98ceca6c0"/>
+            <dataSourceExpression><![CDATA[new net.sf.jasperreports.engine.data.JRBeanCollectionDataSource($P{dataList})]]></dataSourceExpression>
+            <subreportExpression><![CDATA["Sub.jasper"]]></subreportExpression>
+          </subreport>
+        </band>
+      </detail>
+    </jasperReport>
+
+.. module:: Sub.jrxml
+.. code-block:: xml
+
+    <?xml version="1.0" encoding="UTF-8"?>
+    <!-- Sub.jrxml -->
+    <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="Sub" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="87583fbb-8a72-4b3c-982f-467e42e22526">
+      <property name="com.jaspersoft.studio.data.defaultdataadapter" value="One Empty Record"/>
+      <field name="data" class="java.lang.String"/>
+      <background>
+        <band splitType="Stretch"/>
+      </background>
+      <detail>
+        <band height="30" splitType="Stretch">
+          <textField>
+            <reportElement x="0" y="0" width="100" height="30" uuid="a172332d-0cdb-4e6b-99a2-df1b184cbb02"/>
+            <box>
+              <topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+              <leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+              <bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+              <rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+            </box>
+            <textElement>
+              <font fontName="IPAex"/>
+            </textElement>
+            <textFieldExpression><![CDATA[$F{data}]]></textFieldExpression>
+          </textField>
+        </band>
+      </detail>
+    </jasperReport>
+
+.. index:: ~/.groovy/grapeConfig.xml
+.. code-block:: xml
+
+    <?xml version="1.0" encoding="UTF-8"?>
+    <!-- ~/.groovy/grapeConfig.xml -->
     <ivysettings>
       <settings defaultResolver="downloadGrapes"/>
       <resolvers>
@@ -22,7 +105,6 @@ jasper
             <ivy pattern="${user.home}/.groovy/grapes/[organisation]/[module]/ivy-[revision].xml"/>
             <artifact pattern="${user.home}/.groovy/grapes/[organisation]/[module]/[type]s/[artifact]-[revision].[ext]"/>
           </filesystem>
-          <!-- todo add 'endorsed groovy extensions' resolver here -->
           <ibiblio name="codehaus" root="http://repository.codehaus.org/" m2compatible="true"/>
           <ibiblio name="ibiblio" m2compatible="true"/>
           <ibiblio name="java.net2" root="http://download.java.net/maven/2/" m2compatible="true"/>
@@ -31,11 +113,24 @@ jasper
       </resolvers>
     </ivysettings>
 
-::
+.. module:: jasperreports.groovy
+.. code-block:: groovy
 
+    #!/usr/bin/env groovy
+    // jasperreports.groovy
     @Grapes([
       @Grab(group='net.sf.jasperreports', module='jasperreports', version='5.0.1'),
       @Grab(group='com.lowagie', module='itext', version='2.1.7.js2')
     ])
-    import net.sf.jasperreports.engine.JasperRunManager
-    JasperRunManager
+    import net.sf.jasperreports.engine.JREmptyDataSource
+    import net.sf.jasperreports.engine.JasperCompileManager
+    import net.sf.jasperreports.engine.JasperExportManager
+    import net.sf.jasperreports.engine.JasperFillManager
+    new File('.').listFiles({it.name.endsWith('jrxml')} as FileFilter).each {
+      JasperCompileManager.compileReportToFile(it.name, it.name.replace('jrxml', 'jasper'))
+    }
+    def p = JasperFillManager.fillReport(
+      'SLMan.jasper',
+      [title: 'タイトル', dataList: [[data: 'データ１'], [data: 'データ２']]],
+      new JREmptyDataSource())
+    JasperExportManager.exportReportToPdfFile(p, 'SLMan.pdf')
