@@ -64,11 +64,18 @@
             
   <div class="section" id="jasper">
 <h1>7.2. jasper<a class="headerlink" href="#jasper" title="Permalink to this headline">¶</a></h1>
+<div class="highlight-python"><div class="highlight"><pre>cd /usr/local/lib
+wget http://dl.bintray.com/groovy/maven/groovy-binary-2.4.0.zip
+unzip groovy-binary-2.4.0.zip
+ln -nfs /usr/local/lib/groovy-2.4.0/bin/groovy /usr/local/bin/groovy
+</pre></div>
+</div>
 <div class="highlight-python"><div class="highlight"><pre>http://jaist.dl.sourceforge.net/project/jasperstudio/JaspersoftStudio-6.0.4/TIBCOJaspersoftStudio-6.0.4.final-windows-installer-x86.exe
 http://jaist.dl.sourceforge.net/project/jasperstudio/JaspersoftStudio-6.0.4/TIBCOJaspersoftStudio-6.0.4.final-windows-installer-x86_64.exe
 </pre></div>
 </div>
-<div class="highlight-python"><div class="highlight"><pre>http://dl.ipafont.ipa.go.jp/IPAexfont/IPAexfont00201.zip
+<div class="highlight-python"><div class="highlight"><pre>wget http://dl.ipafont.ipa.go.jp/IPAexfont/IPAexfont00201.zip
+unzip IPAexfont00201.zip
 </pre></div>
 </div>
 <div class="highlight-none"><div class="highlight"><pre>cat &lt;&lt; &#39;[EOF]&#39; &gt; jasperreports_extension.properties
@@ -81,7 +88,7 @@ net.sf.jasperreports.extension.simple.font.families.ipaex=ipaex.xml
 <span class="c">&lt;!-- ipaex.xml --&gt;</span>
 <span class="nt">&lt;fontFamilies&gt;</span>
   <span class="nt">&lt;fontFamily</span> <span class="na">name=</span><span class="s">&quot;IPAex&quot;</span><span class="nt">&gt;</span>
-    <span class="nt">&lt;normal&gt;</span>ipaexg.ttf<span class="nt">&lt;/normal&gt;</span>
+    <span class="nt">&lt;normal&gt;</span>IPAexfont00201/ipaexg.ttf<span class="nt">&lt;/normal&gt;</span>
     <span class="nt">&lt;pdfEncoding&gt;</span>Identity-H<span class="nt">&lt;/pdfEncoding&gt;</span>
     <span class="nt">&lt;pdfEmbedded&gt;</span>true<span class="nt">&lt;/pdfEmbedded&gt;</span>
   <span class="nt">&lt;/fontFamily&gt;</span>
