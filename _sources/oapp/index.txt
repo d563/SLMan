@@ -1,5 +1,6 @@
 oapp
 ====
 .. toctree::
+    sphinx
     wsgi
     tomcat

@@ -1,12 +1,5 @@
-jasper
-======
-::
-
-    cd /usr/local/lib
-    wget http://dl.bintray.com/groovy/maven/groovy-binary-2.4.0.zip
-    unzip groovy-binary-2.4.0.zip
-    ln -nfs /usr/local/lib/groovy-2.4.0/bin/groovy /usr/local/bin/groovy
-
+jrxml
+=====
 ::
 
     http://jaist.dl.sourceforge.net/project/jasperstudio/JaspersoftStudio-6.0.4/TIBCOJaspersoftStudio-6.0.4.final-windows-installer-x86.exe
