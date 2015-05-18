@@ -99,7 +99,7 @@ net.sf.jasperreports.extension.simple.font.families.ipaex=ipaex.xml
   <span class="nt">&lt;/background&gt;</span>
   <span class="nt">&lt;title&gt;</span>
     <span class="nt">&lt;band</span> <span class="na">height=</span><span class="s">&quot;50&quot;</span> <span class="na">splitType=</span><span class="s">&quot;Stretch&quot;</span><span class="nt">&gt;</span>
-      <span class="nt">&lt;textField&gt;</span>
+      <span class="nt">&lt;textField</span> <span class="na">isStretchWithOverflow=</span><span class="s">&quot;true&quot;</span><span class="nt">&gt;</span>
         <span class="nt">&lt;reportElement</span> <span class="na">x=</span><span class="s">&quot;230&quot;</span> <span class="na">y=</span><span class="s">&quot;10&quot;</span> <span class="na">width=</span><span class="s">&quot;100&quot;</span> <span class="na">height=</span><span class="s">&quot;30&quot;</span> <span class="na">uuid=</span><span class="s">&quot;6efe2231-3827-433d-be3e-9b02ed4f167b&quot;</span><span class="nt">/&gt;</span>
         <span class="nt">&lt;textElement</span> <span class="na">textAlignment=</span><span class="s">&quot;Center&quot;</span><span class="nt">&gt;</span>
           <span class="nt">&lt;font</span> <span class="na">fontName=</span><span class="s">&quot;IPAex&quot;</span><span class="nt">/&gt;</span>
@@ -117,6 +117,18 @@ net.sf.jasperreports.extension.simple.font.families.ipaex=ipaex.xml
       <span class="nt">&lt;/subreport&gt;</span>
     <span class="nt">&lt;/band&gt;</span>
   <span class="nt">&lt;/detail&gt;</span>
+  <span class="nt">&lt;pageFooter&gt;</span>
+    <span class="nt">&lt;band</span> <span class="na">height=</span><span class="s">&quot;30&quot;</span><span class="nt">&gt;</span>
+      <span class="nt">&lt;textField&gt;</span>
+        <span class="nt">&lt;reportElement</span> <span class="na">x=</span><span class="s">&quot;0&quot;</span> <span class="na">y=</span><span class="s">&quot;0&quot;</span> <span class="na">width=</span><span class="s">&quot;100&quot;</span> <span class="na">height=</span><span class="s">&quot;30&quot;</span> <span class="na">uuid=</span><span class="s">&quot;b46affe6-cddd-4d33-901f-257dea1c541d&quot;</span><span class="nt">/&gt;</span>
+        <span class="nt">&lt;textFieldExpression&gt;</span><span class="cp">&lt;![CDATA[$V{PAGE_NUMBER}]]&gt;</span><span class="nt">&lt;/textFieldExpression&gt;</span>
+      <span class="nt">&lt;/textField&gt;</span>
+      <span class="nt">&lt;textField</span> <span class="na">evaluationTime=</span><span class="s">&quot;Report&quot;</span><span class="nt">&gt;</span>
+        <span class="nt">&lt;reportElement</span> <span class="na">x=</span><span class="s">&quot;100&quot;</span> <span class="na">y=</span><span class="s">&quot;0&quot;</span> <span class="na">width=</span><span class="s">&quot;100&quot;</span> <span class="na">height=</span><span class="s">&quot;30&quot;</span> <span class="na">uuid=</span><span class="s">&quot;d8e7bd00-3adf-4feb-bbbf-bbfb2701fc43&quot;</span><span class="nt">/&gt;</span>
+        <span class="nt">&lt;textFieldExpression&gt;</span><span class="cp">&lt;![CDATA[$V{PAGE_NUMBER}]]&gt;</span><span class="nt">&lt;/textFieldExpression&gt;</span>
+      <span class="nt">&lt;/textField&gt;</span>
+    <span class="nt">&lt;/band&gt;</span>
+  <span class="nt">&lt;/pageFooter&gt;</span>
 <span class="nt">&lt;/jasperReport&gt;</span>
 </pre></div>
 </div>
@@ -124,13 +136,14 @@ net.sf.jasperreports.extension.simple.font.families.ipaex=ipaex.xml
 <span class="c">&lt;!-- Sub.jrxml --&gt;</span>
 <span class="nt">&lt;jasperReport</span> <span class="na">xmlns=</span><span class="s">&quot;http://jasperreports.sourceforge.net/jasperreports&quot;</span> <span class="na">xmlns:xsi=</span><span class="s">&quot;http://www.w3.org/2001/XMLSchema-instance&quot;</span> <span class="na">xsi:schemaLocation=</span><span class="s">&quot;http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd&quot;</span> <span class="na">name=</span><span class="s">&quot;Sub&quot;</span> <span class="na">pageWidth=</span><span class="s">&quot;595&quot;</span> <span class="na">pageHeight=</span><span class="s">&quot;842&quot;</span> <span class="na">columnWidth=</span><span class="s">&quot;555&quot;</span> <span class="na">leftMargin=</span><span class="s">&quot;20&quot;</span> <span class="na">rightMargin=</span><span class="s">&quot;20&quot;</span> <span class="na">topMargin=</span><span class="s">&quot;20&quot;</span> <span class="na">bottomMargin=</span><span class="s">&quot;20&quot;</span> <span class="na">uuid=</span><span class="s">&quot;87583fbb-8a72-4b3c-982f-467e42e22526&quot;</span><span class="nt">&gt;</span>
   <span class="nt">&lt;property</span> <span class="na">name=</span><span class="s">&quot;com.jaspersoft.studio.data.defaultdataadapter&quot;</span> <span class="na">value=</span><span class="s">&quot;One Empty Record&quot;</span><span class="nt">/&gt;</span>
-  <span class="nt">&lt;field</span> <span class="na">name=</span><span class="s">&quot;data&quot;</span> <span class="na">class=</span><span class="s">&quot;java.lang.String&quot;</span><span class="nt">/&gt;</span>
+  <span class="nt">&lt;field</span> <span class="na">name=</span><span class="s">&quot;str&quot;</span> <span class="na">class=</span><span class="s">&quot;java.lang.String&quot;</span><span class="nt">/&gt;</span>
+  <span class="nt">&lt;field</span> <span class="na">name=</span><span class="s">&quot;date&quot;</span> <span class="na">class=</span><span class="s">&quot;java.util.Date&quot;</span><span class="nt">/&gt;</span>
   <span class="nt">&lt;background&gt;</span>
     <span class="nt">&lt;band</span> <span class="na">splitType=</span><span class="s">&quot;Stretch&quot;</span><span class="nt">/&gt;</span>
   <span class="nt">&lt;/background&gt;</span>
   <span class="nt">&lt;detail&gt;</span>
     <span class="nt">&lt;band</span> <span class="na">height=</span><span class="s">&quot;30&quot;</span> <span class="na">splitType=</span><span class="s">&quot;Stretch&quot;</span><span class="nt">&gt;</span>
-      <span class="nt">&lt;textField&gt;</span>
+      <span class="nt">&lt;textField</span> <span class="na">isStretchWithOverflow=</span><span class="s">&quot;true&quot;</span><span class="nt">&gt;</span>
         <span class="nt">&lt;reportElement</span> <span class="na">x=</span><span class="s">&quot;0&quot;</span> <span class="na">y=</span><span class="s">&quot;0&quot;</span> <span class="na">width=</span><span class="s">&quot;100&quot;</span> <span class="na">height=</span><span class="s">&quot;30&quot;</span> <span class="na">uuid=</span><span class="s">&quot;a172332d-0cdb-4e6b-99a2-df1b184cbb02&quot;</span><span class="nt">/&gt;</span>
         <span class="nt">&lt;box&gt;</span>
           <span class="nt">&lt;topPen</span> <span class="na">lineWidth=</span><span class="s">&quot;1.0&quot;</span> <span class="na">lineStyle=</span><span class="s">&quot;Solid&quot;</span> <span class="na">lineColor=</span><span class="s">&quot;#000000&quot;</span><span class="nt">/&gt;</span>
@@ -141,7 +154,14 @@ net.sf.jasperreports.extension.simple.font.families.ipaex=ipaex.xml
         <span class="nt">&lt;textElement&gt;</span>
           <span class="nt">&lt;font</span> <span class="na">fontName=</span><span class="s">&quot;IPAex&quot;</span><span class="nt">/&gt;</span>
         <span class="nt">&lt;/textElement&gt;</span>
-        <span class="nt">&lt;textFieldExpression&gt;</span><span class="cp">&lt;![CDATA[$F{data}]]&gt;</span><span class="nt">&lt;/textFieldExpression&gt;</span>
+        <span class="nt">&lt;textFieldExpression&gt;</span><span class="cp">&lt;![CDATA[$F{str}]]&gt;</span><span class="nt">&lt;/textFieldExpression&gt;</span>
+      <span class="nt">&lt;/textField&gt;</span>
+      <span class="nt">&lt;textField</span> <span class="na">isStretchWithOverflow=</span><span class="s">&quot;true&quot;</span> <span class="na">pattern=</span><span class="s">&quot;yyyy-MM-dd HH:mm:ss.SSS&quot;</span><span class="nt">&gt;</span>
+        <span class="nt">&lt;reportElement</span> <span class="na">x=</span><span class="s">&quot;100&quot;</span> <span class="na">y=</span><span class="s">&quot;0&quot;</span> <span class="na">width=</span><span class="s">&quot;100&quot;</span> <span class="na">height=</span><span class="s">&quot;30&quot;</span> <span class="na">uuid=</span><span class="s">&quot;222bd04d-b32d-4754-8af3-37926e002afa&quot;</span><span class="nt">/&gt;</span>
+        <span class="nt">&lt;textElement&gt;</span>
+          <span class="nt">&lt;font</span> <span class="na">fontName=</span><span class="s">&quot;IPAex&quot;</span><span class="nt">/&gt;</span>
+        <span class="nt">&lt;/textElement&gt;</span>
+        <span class="nt">&lt;textFieldExpression&gt;</span><span class="cp">&lt;![CDATA[$F{date}]]&gt;</span><span class="nt">&lt;/textFieldExpression&gt;</span>
       <span class="nt">&lt;/textField&gt;</span>
     <span class="nt">&lt;/band&gt;</span>
   <span class="nt">&lt;/detail&gt;</span>
@@ -182,7 +202,10 @@ net.sf.jasperreports.extension.simple.font.families.ipaex=ipaex.xml
 <span class="o">}</span>
 <span class="kt">def</span> <span class="n">p</span> <span class="o">=</span> <span class="n">JasperFillManager</span><span class="o">.</span><span class="na">fillReport</span><span class="o">(</span>
   <span class="s1">&#39;SLMan.jasper&#39;</span><span class="o">,</span>
-  <span class="o">[</span><span class="nl">title:</span> <span class="s1">&#39;タイトル&#39;</span><span class="o">,</span> <span class="nl">dataList:</span> <span class="o">[[</span><span class="nl">data:</span> <span class="s1">&#39;データ１&#39;</span><span class="o">],</span> <span class="o">[</span><span class="nl">data:</span> <span class="s1">&#39;データ２&#39;</span><span class="o">]]],</span>
+  <span class="o">[</span><span class="nl">title:</span> <span class="s1">&#39;タイトル&#39;</span><span class="o">,</span> <span class="nl">dataList:</span> <span class="o">[</span>
+    <span class="o">[</span><span class="nl">str:</span> <span class="s1">&#39;文字１&#39;</span><span class="o">,</span> <span class="nl">date:</span> <span class="k">new</span> <span class="n">Date</span><span class="o">()],</span>
+    <span class="o">[</span><span class="nl">str:</span> <span class="s1">&#39;文字２&#39;</span><span class="o">,</span> <span class="nl">date:</span> <span class="k">new</span> <span class="n">Date</span><span class="o">()],</span>
+  <span class="o">]],</span>
   <span class="k">new</span> <span class="nf">JREmptyDataSource</span><span class="o">())</span>
 <span class="n">JasperExportManager</span><span class="o">.</span><span class="na">exportReportToPdfFile</span><span class="o">(</span><span class="n">p</span><span class="o">,</span> <span class="s1">&#39;SLMan.pdf&#39;</span><span class="o">)</span>
 </pre></div>

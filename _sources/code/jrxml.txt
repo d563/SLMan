@@ -43,7 +43,7 @@ jrxml
       </background>
       <title>
         <band height="50" splitType="Stretch">
-          <textField>
+          <textField isStretchWithOverflow="true">
             <reportElement x="230" y="10" width="100" height="30" uuid="6efe2231-3827-433d-be3e-9b02ed4f167b"/>
             <textElement textAlignment="Center">
               <font fontName="IPAex"/>
@@ -61,6 +61,18 @@ jrxml
           </subreport>
         </band>
       </detail>
+      <pageFooter>
+        <band height="30">
+          <textField>
+            <reportElement x="0" y="0" width="100" height="30" uuid="b46affe6-cddd-4d33-901f-257dea1c541d"/>
+            <textFieldExpression><![CDATA[$V{PAGE_NUMBER}]]></textFieldExpression>
+          </textField>
+          <textField evaluationTime="Report">
+            <reportElement x="100" y="0" width="100" height="30" uuid="d8e7bd00-3adf-4feb-bbbf-bbfb2701fc43"/>
+            <textFieldExpression><![CDATA[$V{PAGE_NUMBER}]]></textFieldExpression>
+          </textField>
+        </band>
+      </pageFooter>
     </jasperReport>
 
 .. module:: Sub.jrxml
@@ -70,13 +82,14 @@ jrxml
     <!-- Sub.jrxml -->
     <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="Sub" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="87583fbb-8a72-4b3c-982f-467e42e22526">
       <property name="com.jaspersoft.studio.data.defaultdataadapter" value="One Empty Record"/>
-      <field name="data" class="java.lang.String"/>
+      <field name="str" class="java.lang.String"/>
+      <field name="date" class="java.util.Date"/>
       <background>
         <band splitType="Stretch"/>
       </background>
       <detail>
         <band height="30" splitType="Stretch">
-          <textField>
+          <textField isStretchWithOverflow="true">
             <reportElement x="0" y="0" width="100" height="30" uuid="a172332d-0cdb-4e6b-99a2-df1b184cbb02"/>
             <box>
               <topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
@@ -87,7 +100,14 @@ jrxml
             <textElement>
               <font fontName="IPAex"/>
             </textElement>
-            <textFieldExpression><![CDATA[$F{data}]]></textFieldExpression>
+            <textFieldExpression><![CDATA[$F{str}]]></textFieldExpression>
+          </textField>
+          <textField isStretchWithOverflow="true" pattern="yyyy-MM-dd HH:mm:ss.SSS">
+            <reportElement x="100" y="0" width="100" height="30" uuid="222bd04d-b32d-4754-8af3-37926e002afa"/>
+            <textElement>
+              <font fontName="IPAex"/>
+            </textElement>
+            <textFieldExpression><![CDATA[$F{date}]]></textFieldExpression>
           </textField>
         </band>
       </detail>
@@ -132,6 +152,9 @@ jrxml
     }
     def p = JasperFillManager.fillReport(
       'SLMan.jasper',
-      [title: 'タイトル', dataList: [[data: 'データ１'], [data: 'データ２']]],
+      [title: 'タイトル', dataList: [
+        [str: '文字１', date: new Date()],
+        [str: '文字２', date: new Date()],
+      ]],
       new JREmptyDataSource())
     JasperExportManager.exportReportToPdfFile(p, 'SLMan.pdf')
