@@ -65,10 +65,16 @@ jrxml
         <band height="30">
           <textField>
             <reportElement x="0" y="0" width="100" height="30" uuid="b46affe6-cddd-4d33-901f-257dea1c541d"/>
+            <textElement>
+              <font fontName="IPAex"/>
+            </textElement>
             <textFieldExpression><![CDATA[$V{PAGE_NUMBER}]]></textFieldExpression>
           </textField>
           <textField evaluationTime="Report">
             <reportElement x="100" y="0" width="100" height="30" uuid="d8e7bd00-3adf-4feb-bbbf-bbfb2701fc43"/>
+            <textElement>
+              <font fontName="IPAex"/>
+            </textElement>
             <textFieldExpression><![CDATA[$V{PAGE_NUMBER}]]></textFieldExpression>
           </textField>
         </band>
@@ -154,7 +160,7 @@ jrxml
       'SLMan.jasper',
       [title: 'タイトル', dataList: [
         [str: '文字１', date: new Date()],
-        [str: '文字２', date: new Date()],
+        [str: '文字２', date: new Date()]
       ]],
       new JREmptyDataSource())
     JasperExportManager.exportReportToPdfFile(p, 'SLMan.pdf')
