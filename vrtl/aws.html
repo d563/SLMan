@@ -106,12 +106,15 @@ chmod 600 ~/.ssh/d563.pem
   <span class="n">sudo</span><span class="p">(</span><span class="s">&#39;unalias cp mv rm&#39;</span><span class="p">)</span>
   <span class="n">sudo</span><span class="p">(</span><span class="s">&#39;echo LANG=ja_JP.UTF-8 &gt; /etc/locale.conf&#39;</span><span class="p">)</span>
   <span class="n">sudo</span><span class="p">(</span><span class="s">&#39;cp -pf /usr/share/zoneinfo/Asia/Tokyo /etc/localtime&#39;</span><span class="p">)</span>
-  <span class="n">sudo</span><span class="p">(</span><span class="s">&quot;sed -i.org -e &#39;s/debuglevel=2/debuglevel=1/&#39; /etc/yum.conf&quot;</span><span class="p">)</span>
+  <span class="n">sudo</span><span class="p">(</span><span class="s">&#39;setenforce 0&#39;</span><span class="p">)</span>
+  <span class="n">sudo</span><span class="p">(</span><span class="s">&quot;sed -i.org -e &#39;s/debuglevel=2/debuglevel=0/&#39; /etc/yum.conf&quot;</span><span class="p">)</span>
   <span class="n">sudo</span><span class="p">(</span><span class="s">&#39;yum -y install wget unzip gcc gcc-c++ java-1.7.0-openjdk-devel python-devel&#39;</span><span class="p">)</span>
   <span class="n">sudo</span><span class="p">(</span><span class="s">&#39;yum -y update&#39;</span><span class="p">)</span>
   <span class="n">sudo</span><span class="p">(</span><span class="s">&#39;easy_install pip&#39;</span><span class="p">)</span>
   <span class="n">sudo</span><span class="p">(</span><span class="s">&#39;pip install -U pip&#39;</span><span class="p">)</span>
   <span class="n">sudo</span><span class="p">(</span><span class="s">&#39;pip install -U setuptools&#39;</span><span class="p">)</span>
+  <span class="n">sudo</span><span class="p">(</span><span class="s">&quot;sed -i.org -e &#39;/#Port 22/aPort 443&#39; /etc/ssh/sshd_config&quot;</span><span class="p">)</span>
+  <span class="n">sudo</span><span class="p">(</span><span class="s">&#39;service sshd restart&#39;</span><span class="p">)</span>
 
 <span class="nd">@task</span>
 <span class="k">def</span> <span class="nf">delete</span><span class="p">():</span>

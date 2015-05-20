@@ -47,12 +47,15 @@ aws
       sudo('unalias cp mv rm')
       sudo('echo LANG=ja_JP.UTF-8 > /etc/locale.conf')
       sudo('cp -pf /usr/share/zoneinfo/Asia/Tokyo /etc/localtime')
-      sudo("sed -i.org -e 's/debuglevel=2/debuglevel=1/' /etc/yum.conf")
+      sudo('setenforce 0')
+      sudo("sed -i.org -e 's/debuglevel=2/debuglevel=0/' /etc/yum.conf")
       sudo('yum -y install wget unzip gcc gcc-c++ java-1.7.0-openjdk-devel python-devel')
       sudo('yum -y update')
       sudo('easy_install pip')
       sudo('pip install -U pip')
       sudo('pip install -U setuptools')
+      sudo("sed -i.org -e '/#Port 22/aPort 443' /etc/ssh/sshd_config")
+      sudo('service sshd restart')
 
     @task
     def delete():
