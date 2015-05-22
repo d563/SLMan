@@ -69,8 +69,15 @@ docker
 
 ::
 
-    iptables -t nat -L
-
     docker ps -a
     docker rm -f co6
     docker rmi d563/co6:1
+
+::
+
+    iptables -t nat -L -n --line-numbers
+    iptables -t nat -D DOCKER 1
+
+    iptables -t nat -F PREROUTING
+    iptables -t nat -F POSTROUTING
+    iptables -t nat -F DOCKER

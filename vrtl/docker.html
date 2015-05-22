@@ -124,11 +124,17 @@ docker run -d \
 docker run -it d563/co6:1 /bin/bash
 </pre></div>
 </div>
-<div class="highlight-python"><div class="highlight"><pre>iptables -t nat -L
-
-docker ps -a
+<div class="highlight-python"><div class="highlight"><pre>docker ps -a
 docker rm -f co6
 docker rmi d563/co6:1
+</pre></div>
+</div>
+<div class="highlight-python"><div class="highlight"><pre>iptables -t nat -L -n --line-numbers
+iptables -t nat -D DOCKER 1
+
+iptables -t nat -F PREROUTING
+iptables -t nat -F POSTROUTING
+iptables -t nat -F DOCKER
 </pre></div>
 </div>
 </div>
