@@ -4,3 +4,4 @@ oapp
     sphinx
     wsgi
     tomcat
+    meteor

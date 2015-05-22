@@ -1,0 +1,30 @@
+meteor
+======
+::
+
+    curl https://install.meteor.com/ | sh
+
+::
+
+    cd /root/.meteor/packages/meteor-tool/*/*/dev_bundle/mongodb/bin
+    mv mongod mongod_org
+    cat << '[EOF]' > mongod
+    $(cd $(dirname $0); pwd)/mongod_org $(echo $@ | sed -e 's/--bind_ip 127.0.0.1//')
+    [EOF]
+    chmod 775 mongod
+
+::
+
+    cd ~
+    meteor create --list
+    meteor create --example leaderboard
+    cd leaderboard
+    meteor
+
+::
+
+    mkdir server client lib
+    meteor list
+    meteor add meteorhacks:npm
+    meteor add iron:router
+    meteor
