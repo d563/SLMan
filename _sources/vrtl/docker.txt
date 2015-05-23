@@ -76,8 +76,10 @@ docker
 ::
 
     iptables -t nat -L -n --line-numbers
-    iptables -t nat -D DOCKER 1
 
-    iptables -t nat -F PREROUTING
+    # iptables -t nat -D POSTROUTING 1
     iptables -t nat -F POSTROUTING
     iptables -t nat -F DOCKER
+
+    iptables -t nat -A POSTROUTING -j MASQUERADE -p tcp --dport 8081 -s 172.17.0.4 -d 172.17.0.4
+    iptables -t nat -A DOCKER -j DNAT -p tcp --dport 81 --to-destination 172.17.0.4:8081
