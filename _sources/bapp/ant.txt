@@ -4,20 +4,31 @@ ant
 
     yum -y install ant
 
+::
+
+    wget http://central.maven.org/maven2/org/codehaus/groovy/groovy-all/2.4.3/groovy-all-2.4.3.jar
+
 .. module:: build.xml
 .. code-block:: xml
 
     <project name="SLMan" default="main">
       <!-- build.xml -->
       <property file="SLMan.properties" />
+      <taskdef name="groovy"
+        classname="org.codehaus.groovy.ant.Groovy"
+        classpath="groovy-all-2.4.3.jar" />
       <taskdef resource="tasks.properties" classpath=".:lib" />
       <target name="init">
       </target>
       <target name="main" depends="init">
         <SLMan KEY="${key1}" />
         <echo message="${key2}" />
+        <groovy><![CDATA[
+          System.properties.each{println it}
+        ]]></groovy>
       </target>
     </project>
+
 
 ::
 
@@ -28,11 +39,12 @@ ant
 
     echo 'SLMan=d563.SLManTask' > tasks.properties
 
+.. module:: SLManTask.java
+
 ::
 
     mkdir d563
-    cd d563
-    cat << '[EOF]' > SLManTask.java
+    cat << '[EOF]' > d563/SLManTask.java
     package d563;
     import org.apache.tools.ant.Task;
     import org.apache.tools.ant.BuildException;
