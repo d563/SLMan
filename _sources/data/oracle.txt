@@ -4,7 +4,7 @@ server
 ------
 ::
 
-    yum -y install libaio bc
+    yum -y install libaio bc ld-linux.so.2
 
 ::
 
@@ -29,6 +29,8 @@ server
 
     echo '. /usr/lib/oracle/xe/app/oracle/product/10.2.0/server/bin/oracle_env.sh' \
     > /etc/profile.d/oracle.sh
+
+    . /usr/lib/oracle/xe/app/oracle/product/10.2.0/server/bin/oracle_env.sh
 
 setting
 -------
