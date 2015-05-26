@@ -4,14 +4,12 @@ server
 ------
 ::
 
-    yum -y install libaio bc ld-linux.so.2
+    yum -y install libaio bc
 
 ::
 
     cd /usr/local/lib
     wget http://ftp.cs.stanford.edu/pub/fedora/6/i386/oracle-xe-univ-10.2.0.1-1.0.i386.rpm
-
-    rpm -ivh oracle-xe-univ-10.2.0.1-1.0.i386.rpm
 
 ::
 
@@ -20,6 +18,10 @@ server
     chmod 660 /tmp/swapfile
     mkswap /tmp/swapfile
     swapon /tmp/swapfile
+
+::
+
+    rpm -ivh oracle-xe-univ-10.2.0.1-1.0.i386.rpm
 
 .. index:: /etc/profile.d/oracle.sh
 
@@ -40,37 +42,42 @@ setting
       failed_login_attempts unlimited
       password_lock_time unlimited
       password_life_time unlimited
-      password_grace_time unlimited;
-
-    create user d563 identified by d563 default tablespace users;
-
-    grant connect to d563;
-    grant resource to d563;
-    grant dba to d563;
-
-    grant select,insert,update,delete on user1.table1 to d563;
-
-    create or replace synonym d563.table1 for user1.table1;
-
-    create table table1(
-      id number(9.0),
-      name varchar2(6),
-      image blob, 
-      date_created timestamp(6),
-      last_updated timestamp(6),
-      constraint pk_table1 primary key(id, name)
+      password_grace_time unlimited
+    /
+    create user d563 identified by d563 default tablespace users
+    /
+    grant connect to d563
+    /
+    grant resource to d563
+    /
+    grant dba to d563
+    /
+    /* grant select,insert,update,delete on user1.tbl1 to d563 */
+    /* create or replace synonym d563.tbl1 for user1.tbl1 */
+    create table tbl1(
+      name varchar2(32) not null,
+      constraint pk_tbl1 primary key(name)
       using index tablespace users
     )
-    comment on table table1 is 'comment';
-
-    drop user d563 cascade;
+    /
+    alter table d563.tbl1 add score number(8.0)
+    /
+    alter table d563.tbl1 add created date
+    /
+    comment on table d563.tbl1 is 'tbl1'
+    /
+    alter table d563.tbl1 rename to tbl2
+    /
+    insert into d563.tbl1 select * from d563.tbl2
+    /
+    /* drop user d563 cascade */
 
 backup
 ------
 ::
 
-    expdp d563/d563 dumpfile=SLMan.dmp logfile=SLMan.log schemas=users
-    impdp sys/pass dumpfile=SLMan.dmp logfile=SLMan.log remap_tablespace=users:users
+    expdp d563/d563 dumpfile=SLMan.dmp logfile=SLMan.log schemas=d563
+    impdp d563/d563 dumpfile=SLMan.dmp logfile=SLMan.log remap_tablespace=users:users
 
 client
 ------
