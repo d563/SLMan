@@ -35,7 +35,7 @@ meteor
 
     vi leaderboard.js
 
-::
+.. code-block:: javascript
 
     Players = new Mongo.Collection(
       'players',

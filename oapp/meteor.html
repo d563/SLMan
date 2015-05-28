@@ -94,35 +94,35 @@ meteor
 vi leaderboard.js
 </pre></div>
 </div>
-<div class="highlight-python"><div class="highlight"><pre>Players = new Mongo.Collection(
-  &#39;players&#39;,
-  {_driver: new MongoInternals.RemoteCollectionDriver(&#39;mongodb://localhost:27017/testdb&#39;)}
-);
+<div class="highlight-javascript"><div class="highlight"><pre><span class="nx">Players</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Mongo</span><span class="p">.</span><span class="nx">Collection</span><span class="p">(</span>
+  <span class="s1">&#39;players&#39;</span><span class="p">,</span>
+  <span class="p">{</span><span class="nx">_driver</span><span class="o">:</span> <span class="k">new</span> <span class="nx">MongoInternals</span><span class="p">.</span><span class="nx">RemoteCollectionDriver</span><span class="p">(</span><span class="s1">&#39;mongodb://localhost:27017/testdb&#39;</span><span class="p">)}</span>
+<span class="p">);</span>
 
-if (Meteor.isServer) {
-  Meteor.methods({
-    &#39;reflesh&#39;: function(lst) {
-      Players.remove({});
-      _.each(lst, function(data) {
-        Players.insert(data);
-      });
-    }
-  });
-  Meteor.startup(function() {
-    console.log(&#39;start up&#39;);
-    var mysql = Meteor.npmRequire(&#39;mysql&#39;);
-    var con = mysql.createConnection({
-      host: &#39;localhost&#39;,
-      database: &#39;d563&#39;,
-      user: &#39;SLMan&#39;,
-      password: &#39;SLManPass&#39;
-    });
-    con.query(&#39;select * from tbl1&#39;, Meteor.bindEnvironment(function(err, lst) {
-      if (err) throw err;
-      Meteor.call(&#39;reflesh&#39;, lst);
-    }));
-  });
-}
+<span class="k">if</span> <span class="p">(</span><span class="nx">Meteor</span><span class="p">.</span><span class="nx">isServer</span><span class="p">)</span> <span class="p">{</span>
+  <span class="nx">Meteor</span><span class="p">.</span><span class="nx">methods</span><span class="p">({</span>
+    <span class="s1">&#39;reflesh&#39;</span><span class="o">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">lst</span><span class="p">)</span> <span class="p">{</span>
+      <span class="nx">Players</span><span class="p">.</span><span class="nx">remove</span><span class="p">({});</span>
+      <span class="nx">_</span><span class="p">.</span><span class="nx">each</span><span class="p">(</span><span class="nx">lst</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">data</span><span class="p">)</span> <span class="p">{</span>
+        <span class="nx">Players</span><span class="p">.</span><span class="nx">insert</span><span class="p">(</span><span class="nx">data</span><span class="p">);</span>
+      <span class="p">});</span>
+    <span class="p">}</span>
+  <span class="p">});</span>
+  <span class="nx">Meteor</span><span class="p">.</span><span class="nx">startup</span><span class="p">(</span><span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">&#39;start up&#39;</span><span class="p">);</span>
+    <span class="kd">var</span> <span class="nx">mysql</span> <span class="o">=</span> <span class="nx">Meteor</span><span class="p">.</span><span class="nx">npmRequire</span><span class="p">(</span><span class="s1">&#39;mysql&#39;</span><span class="p">);</span>
+    <span class="kd">var</span> <span class="nx">con</span> <span class="o">=</span> <span class="nx">mysql</span><span class="p">.</span><span class="nx">createConnection</span><span class="p">({</span>
+      <span class="nx">host</span><span class="o">:</span> <span class="s1">&#39;localhost&#39;</span><span class="p">,</span>
+      <span class="nx">database</span><span class="o">:</span> <span class="s1">&#39;d563&#39;</span><span class="p">,</span>
+      <span class="nx">user</span><span class="o">:</span> <span class="s1">&#39;SLMan&#39;</span><span class="p">,</span>
+      <span class="nx">password</span><span class="o">:</span> <span class="s1">&#39;SLManPass&#39;</span>
+    <span class="p">});</span>
+    <span class="nx">con</span><span class="p">.</span><span class="nx">query</span><span class="p">(</span><span class="s1">&#39;select * from tbl1&#39;</span><span class="p">,</span> <span class="nx">Meteor</span><span class="p">.</span><span class="nx">bindEnvironment</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">err</span><span class="p">,</span> <span class="nx">lst</span><span class="p">)</span> <span class="p">{</span>
+      <span class="k">if</span> <span class="p">(</span><span class="nx">err</span><span class="p">)</span> <span class="k">throw</span> <span class="nx">err</span><span class="p">;</span>
+      <span class="nx">Meteor</span><span class="p">.</span><span class="nx">call</span><span class="p">(</span><span class="s1">&#39;reflesh&#39;</span><span class="p">,</span> <span class="nx">lst</span><span class="p">);</span>
+    <span class="p">}));</span>
+  <span class="p">});</span>
+<span class="p">}</span>
 </pre></div>
 </div>
 </div>
