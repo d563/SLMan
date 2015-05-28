@@ -52,23 +52,27 @@ oracle
 .. code-block:: python
 
     import cx_Oracle
-    def getDual():
+    def getData():
       con = cx_Oracle.connect(
         'd563',
         'd563',
-        '(DESCRIPTION=(ADDRESS_LIST=(ADDRESS=(PROTOCOL=TCP)(HOST=localhost)(PORT=1521)(CONNECT_DATA=(SERVICE_NAME=XE)))'
+        '(DESCRIPTION=(ADDRESS_LIST=(ADDRESS=(PROTOCOL=TCP)(HOST=localhost)(PORT=1521)))(CONNECT_DATA=(SERVICE_NAME=XE)))'
       )
       cur = con.cursor()
-      cur.execute('select * from dual')
+      cur.execute('select * from tbl1 where score > :score', {'score': 1})
       lst = cur.fetchall()
       cur.close()
       con.close()
       for low in lst:
-        yield Dual(low)
+        yield Data(low)
 
-    class Dual:
+    class Data:
       def __init__(self, low):
-        self.dummy = low[0]
+        self.name = low[0]
+
+    if __name__ == '__main__':
+      for d in getData():
+        print d.name
 
 mysql
 -----
@@ -88,14 +92,13 @@ mysql
       user='SLMan',
       passwd='SLManPass')
     cur = con.cursor(MySQLdb.cursors.DictCursor)
-    cur.execute('select * from table1')
+    cur.execute('select * from tbl1')
     lst = list(cur.fetchall())
     cur.close()
     con.close()
 
     for dat in lst:
-      dat['data_created'] = str(dat.get('data_created', ''))
-      dat['last_updated'] = str(dat.get('last_updated', ''))
+      dat['created'] = str(dat.get('created', ''))
 
     json.dumps(lst)
 

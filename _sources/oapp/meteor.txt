@@ -28,3 +28,36 @@ meteor
     meteor add meteorhacks:npm
     meteor add iron:router
     meteor
+
+::
+
+    echo '{ "mysql": "2.7.0"}' > packages.json
+
+    vi leaderboard.js
+
+::
+
+    if (Meteor.isServer) {
+      Meteor.methods({
+        'reflesh': function(lst) {
+          Players.remove({});
+          _.each(lst, function(data) {
+            Players.insert(data);
+          });
+        }
+      });
+      Meteor.startup(function() {
+        console.log('start up');
+        var mysql = Meteor.npmRequire('mysql');
+        var con = mysql.createConnection({
+          host: 'localhost',
+          database: 'd563',
+          user: 'SLMan',
+          password: 'SLManPass'
+        });
+        con.query('select * from tbl1', Meteor.bindEnvironment(function(err, lst) {
+          if (err) throw err;
+          Meteor.call('reflesh', lst);
+        }));
+      });
+    }
