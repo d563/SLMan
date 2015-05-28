@@ -37,6 +37,11 @@ meteor
 
 ::
 
+    Players = new Mongo.Collection(
+      'players',
+      {_driver: new MongoInternals.RemoteCollectionDriver('mongodb://localhost:27017/testdb')}
+    );
+
     if (Meteor.isServer) {
       Meteor.methods({
         'reflesh': function(lst) {

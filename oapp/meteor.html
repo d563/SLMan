@@ -94,7 +94,12 @@ meteor
 vi leaderboard.js
 </pre></div>
 </div>
-<div class="highlight-python"><div class="highlight"><pre>if (Meteor.isServer) {
+<div class="highlight-python"><div class="highlight"><pre>Players = new Mongo.Collection(
+  &#39;players&#39;,
+  {_driver: new MongoInternals.RemoteCollectionDriver(&#39;mongodb://localhost:27017/testdb&#39;)}
+);
+
+if (Meteor.isServer) {
   Meteor.methods({
     &#39;reflesh&#39;: function(lst) {
       Players.remove({});
