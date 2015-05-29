@@ -31,7 +31,8 @@ meteor
 
 ::
 
-    echo '{ "mysql": "2.7.0"}' > packages.json
+    echo '{ "mysql": "2.7.0" }' > packages.json
+    # echo '{ "oracle": "0.3.8" }' > packages.json
 
     vi leaderboard.js
 
@@ -65,4 +66,42 @@ meteor
           Meteor.call('reflesh', lst);
         }));
       });
+    /*
+      Meteor.startup(function() {
+        console.log('start up');
+        var oracle = Meteor.npmRequire('oracle');
+        var con = oracle.connectSync({
+          hostname: 'localhost',
+          port: 1521,
+          database: 'XE',
+          user: 'd563',
+          password: 'd563'
+        });
+        Meteor.call('reflesh', con.executeSync('select * from tbl1', []));
+        con.close();
+      });
+    */
+      Router.configure({ layoutTemplate: 'layout' });
+      Router.map(function() {
+        this.route('leaderboard', { path: '/' });
+        this.route('d563', { path: '/d563' });
+      });
     }
+
+::
+
+    vi leaderboard.html
+
+.. code-block:: html
+
+    <template name="layout">
+      <div class="outer">
+        <div class="logo"></div>
+        <h1 class="title">Leaderboard</h1>
+        <div class="subtitle">Select a scientist to give them points</div>
+        {{> yield}}
+      </div>
+    </template>
+    <template name="d563">
+      <h1 class="title">d563</h1>
+    </template>

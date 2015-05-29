@@ -102,19 +102,21 @@ show databases;
 show variables like &#39;char%&#39;;
 use d563;
 
-create table table1(
-  id int unsigned auto_increment,
-  name varchar(6),
-  image blob,
-  date_created timestamp default 0,
-  last_updated timestamp default current_timestamp on update current_timestamp,
-  constraint pk_table1 primary key(id, name)
-);
+create table d563.tbl1(
+  name varchar(32) not null,
+  constraint pk_tbl1 primary key(name)
+) engine = innodb;
 
-show create table table1;
+alter table d563.tbl1 add score int(8);
+alter table d563.tbl1 add created date;
+
+alter table d563.tbl1 rename to tbl2;
+insert into d563.tbl1 select * from d563.tbl2;
+
+show create table tbl1;
 show tables;
 
-drop table table1;
+drop table tbl1;
 drop database SLMan;
 </pre></div>
 </div>

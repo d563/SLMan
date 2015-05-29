@@ -110,7 +110,7 @@ grant dba to d563
 /
 /* grant select,insert,update,delete on user1.tbl1 to d563 */
 /* create or replace synonym d563.tbl1 for user1.tbl1 */
-create table tbl1(
+create table d563.tbl1(
   name varchar2(32) not null,
   constraint pk_tbl1 primary key(name)
   using index tablespace users
@@ -144,10 +144,17 @@ rpm -ivh oracle-instantclient11.2-devel-11.2.0.4.0-1.i386.rpm
 </pre></div>
 </div>
 <div class="highlight-python"><div class="highlight"><pre>export ORACLE_HOME=/usr/lib/oracle/11.2/client
+export NLS_LANG=Japanese_Japan.UTF8
 export PATH=$PATH:$ORACLE_HOME/bin
+
 export LD_LIBRARY_PATH=/usr/lib/oracle/11.2/client/lib
 
-sudo ln -s /usr/include/oracle/11.2/client /usr/lib/oracle/11.2/client/include
+export OCI_HOME=$ORACLE_HOME
+export OCI_INCLUDE_DIR=$ORACLE_HOME
+export OCI_LIB_DIR=$LD_LIBRARY_PATH
+export OCI_VERSION=11
+
+sudo ln -nfs /usr/include/oracle/11.2/client /usr/lib/oracle/11.2/client/include
 echo &#39;/usr/lib/oracle/11.2/client/lib/&#39; &gt; /etc/ld.so.conf.d/oracle.conf
 ldconfig
 </pre></div>
