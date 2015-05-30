@@ -89,6 +89,10 @@ http://jaist.dl.sourceforge.jp/hinemos/61878/HinemosClientInstaller-4.1.2_win64.
 <div class="section" id="agent">
 <h2>4.2.3. agent<a class="headerlink" href="#agent" title="Permalink to this headline">¶</a></h2>
 <div class="highlight-python"><div class="highlight"><pre>yum -y install net-snmp net-snmp-libs expect krb5-workstation openssh-clients
+
+# 7
+systemctl start snmpd.service
+systemctl enable snmpd.service
 </pre></div>
 </div>
 <div class="highlight-python"><div class="highlight"><pre>cd /usr/local/lib
@@ -99,6 +103,10 @@ cd Hinemos_Agent-4.1.2_rhel5-rhel6
 </pre></div>
 </div>
 <div class="highlight-python"><div class="highlight"><pre>/opt/hinemos_agent/bin/agent_start.sh
+
+# AWS
+vi /opt/hinemos_agent/conf/Agent.properties
+facilityId=XXX
 </pre></div>
 </div>
 </div>

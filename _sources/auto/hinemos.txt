@@ -30,6 +30,10 @@ agent
 
     yum -y install net-snmp net-snmp-libs expect krb5-workstation openssh-clients
 
+    # 7
+    systemctl start snmpd.service
+    systemctl enable snmpd.service
+
 ::
 
     cd /usr/local/lib
@@ -41,3 +45,7 @@ agent
 ::
 
     /opt/hinemos_agent/bin/agent_start.sh
+
+    # AWS
+    vi /opt/hinemos_agent/conf/Agent.properties
+    facilityId=XXX
