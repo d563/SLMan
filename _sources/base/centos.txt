@@ -45,8 +45,8 @@ hostname
 
 ::
 
+    vi /etc/sysconfig/network
     hostname SLMan
-    echo SLMan > /etc/hostname
 
 location
 --------
