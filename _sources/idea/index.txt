@@ -1,6 +1,0 @@
-idea
-====
-.. toctree::
-    essence
-    flow
-    strategy

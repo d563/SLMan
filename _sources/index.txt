@@ -13,4 +13,3 @@ SLMan
     code/index
     vrtl/index
     tool/index
-    idea/index
