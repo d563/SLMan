@@ -27,6 +27,7 @@ meteor
     meteor list
     meteor add meteorhacks:npm
     meteor add iron:router
+    meteor remove autopublish insecure
     meteor
 
 ::
@@ -42,8 +43,19 @@ meteor
       'players',
       {_driver: new MongoInternals.RemoteCollectionDriver('mongodb://localhost:27017/testdb')}
     );
-
+    if (Meteor.isClient) {
+      Meteor.subscribe('all-players');
+    }
     if (Meteor.isServer) {
+      Meteor.publish('all-players', function () {
+        return Players.find();
+      });
+      Players.allow({
+        insert: function(userId, doc) { return true; },
+        update: function(userId, docs, fields, modifier) { return true; },
+        remove: function(userId, docs) { return true; },
+        fetch: undefined
+      });
       Meteor.methods({
         'reflesh': function(lst) {
           Players.remove({});

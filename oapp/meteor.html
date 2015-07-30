@@ -86,6 +86,7 @@ meteor
 meteor list
 meteor add meteorhacks:npm
 meteor add iron:router
+meteor remove autopublish insecure
 meteor
 </pre></div>
 </div>
@@ -99,8 +100,19 @@ vi leaderboard.js
   <span class="s1">&#39;players&#39;</span><span class="p">,</span>
   <span class="p">{</span><span class="nx">_driver</span><span class="o">:</span> <span class="k">new</span> <span class="nx">MongoInternals</span><span class="p">.</span><span class="nx">RemoteCollectionDriver</span><span class="p">(</span><span class="s1">&#39;mongodb://localhost:27017/testdb&#39;</span><span class="p">)}</span>
 <span class="p">);</span>
-
+<span class="k">if</span> <span class="p">(</span><span class="nx">Meteor</span><span class="p">.</span><span class="nx">isClient</span><span class="p">)</span> <span class="p">{</span>
+  <span class="nx">Meteor</span><span class="p">.</span><span class="nx">subscribe</span><span class="p">(</span><span class="s1">&#39;all-players&#39;</span><span class="p">);</span>
+<span class="p">}</span>
 <span class="k">if</span> <span class="p">(</span><span class="nx">Meteor</span><span class="p">.</span><span class="nx">isServer</span><span class="p">)</span> <span class="p">{</span>
+  <span class="nx">Meteor</span><span class="p">.</span><span class="nx">publish</span><span class="p">(</span><span class="s1">&#39;all-players&#39;</span><span class="p">,</span> <span class="kd">function</span> <span class="p">()</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="nx">Players</span><span class="p">.</span><span class="nx">find</span><span class="p">();</span>
+  <span class="p">});</span>
+  <span class="nx">Players</span><span class="p">.</span><span class="nx">allow</span><span class="p">({</span>
+    <span class="nx">insert</span><span class="o">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">userId</span><span class="p">,</span> <span class="nx">doc</span><span class="p">)</span> <span class="p">{</span> <span class="k">return</span> <span class="kc">true</span><span class="p">;</span> <span class="p">},</span>
+    <span class="nx">update</span><span class="o">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">userId</span><span class="p">,</span> <span class="nx">docs</span><span class="p">,</span> <span class="nx">fields</span><span class="p">,</span> <span class="nx">modifier</span><span class="p">)</span> <span class="p">{</span> <span class="k">return</span> <span class="kc">true</span><span class="p">;</span> <span class="p">},</span>
+    <span class="nx">remove</span><span class="o">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">userId</span><span class="p">,</span> <span class="nx">docs</span><span class="p">)</span> <span class="p">{</span> <span class="k">return</span> <span class="kc">true</span><span class="p">;</span> <span class="p">},</span>
+    <span class="nx">fetch</span><span class="o">:</span> <span class="kc">undefined</span>
+  <span class="p">});</span>
   <span class="nx">Meteor</span><span class="p">.</span><span class="nx">methods</span><span class="p">({</span>
     <span class="s1">&#39;reflesh&#39;</span><span class="o">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">lst</span><span class="p">)</span> <span class="p">{</span>
       <span class="nx">Players</span><span class="p">.</span><span class="nx">remove</span><span class="p">({});</span>
