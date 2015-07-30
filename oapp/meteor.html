@@ -135,25 +135,30 @@ vi leaderboard.js
       <span class="nx">Meteor</span><span class="p">.</span><span class="nx">call</span><span class="p">(</span><span class="s1">&#39;reflesh&#39;</span><span class="p">,</span> <span class="nx">lst</span><span class="p">);</span>
     <span class="p">}));</span>
   <span class="p">});</span>
-<span class="cm">/*</span>
-<span class="cm">  Meteor.startup(function() {</span>
-<span class="cm">    console.log(&#39;start up&#39;);</span>
-<span class="cm">    var oracle = Meteor.npmRequire(&#39;oracle&#39;);</span>
-<span class="cm">    var con = oracle.connectSync({</span>
-<span class="cm">      hostname: &#39;localhost&#39;,</span>
-<span class="cm">      port: 1521,</span>
-<span class="cm">      database: &#39;XE&#39;,</span>
-<span class="cm">      user: &#39;d563&#39;,</span>
-<span class="cm">      password: &#39;d563&#39;</span>
-<span class="cm">    });</span>
-<span class="cm">    Meteor.call(&#39;reflesh&#39;, con.executeSync(&#39;select * from tbl1&#39;, []));</span>
-<span class="cm">    con.close();</span>
-<span class="cm">  });</span>
-<span class="cm">*/</span>
-  <span class="nx">Router</span><span class="p">.</span><span class="nx">configure</span><span class="p">({</span> <span class="nx">layoutTemplate</span><span class="o">:</span> <span class="s1">&#39;layout&#39;</span> <span class="p">});</span>
+  <span class="c1">//Meteor.startup(function() {</span>
+  <span class="c1">//  console.log(&#39;start up&#39;);</span>
+  <span class="c1">//  var oracle = Meteor.npmRequire(&#39;oracle&#39;);</span>
+  <span class="c1">//  var con = oracle.connectSync({</span>
+  <span class="c1">//    hostname: &#39;localhost&#39;,</span>
+  <span class="c1">//    port: 1521,</span>
+  <span class="c1">//    database: &#39;XE&#39;,</span>
+  <span class="c1">//    user: &#39;d563&#39;,</span>
+  <span class="c1">//    password: &#39;d563&#39;</span>
+  <span class="c1">//  });</span>
+  <span class="c1">//  Meteor.call(&#39;reflesh&#39;, con.executeSync(&#39;select * from tbl1&#39;, []));</span>
+  <span class="c1">//  con.close();</span>
+  <span class="c1">//});</span>
+  <span class="nx">Router</span><span class="p">.</span><span class="nx">configure</span><span class="p">({</span>
+    <span class="nx">layoutTemplate</span><span class="o">:</span> <span class="s1">&#39;layout&#39;</span><span class="p">,</span>
+    <span class="nx">notFoundTemplate</span><span class="o">:</span> <span class="s1">&#39;notFound&#39;</span>
+  <span class="p">});</span>
   <span class="nx">Router</span><span class="p">.</span><span class="nx">map</span><span class="p">(</span><span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
     <span class="k">this</span><span class="p">.</span><span class="nx">route</span><span class="p">(</span><span class="s1">&#39;leaderboard&#39;</span><span class="p">,</span> <span class="p">{</span> <span class="nx">path</span><span class="o">:</span> <span class="s1">&#39;/&#39;</span> <span class="p">});</span>
     <span class="k">this</span><span class="p">.</span><span class="nx">route</span><span class="p">(</span><span class="s1">&#39;d563&#39;</span><span class="p">,</span> <span class="p">{</span> <span class="nx">path</span><span class="o">:</span> <span class="s1">&#39;/d563&#39;</span> <span class="p">});</span>
+    <span class="k">this</span><span class="p">.</span><span class="nx">route</span><span class="p">(</span><span class="s1">&#39;show&#39;</span><span class="p">,</span> <span class="p">{</span>
+      <span class="nx">path</span><span class="o">:</span> <span class="s1">&#39;/show/:_id&#39;</span><span class="p">,</span>
+      <span class="nx">data</span><span class="o">:</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span> <span class="k">return</span> <span class="k">this</span><span class="p">.</span><span class="nx">params</span><span class="p">.</span><span class="nx">_id</span><span class="p">;</span> <span class="p">}</span>
+    <span class="p">});</span>
   <span class="p">});</span>
 <span class="p">}</span>
 </pre></div>
@@ -171,6 +176,12 @@ vi leaderboard.js
 <span class="nt">&lt;/template&gt;</span>
 <span class="nt">&lt;template</span> <span class="na">name=</span><span class="s">&quot;d563&quot;</span><span class="nt">&gt;</span>
   <span class="nt">&lt;h1</span> <span class="na">class=</span><span class="s">&quot;title&quot;</span><span class="nt">&gt;</span>d563<span class="nt">&lt;/h1&gt;</span>
+<span class="nt">&lt;/template&gt;</span>
+<span class="nt">&lt;template</span> <span class="na">name=</span><span class="s">&quot;notFound&quot;</span><span class="nt">&gt;</span>
+  <span class="nt">&lt;h1&gt;</span>not found<span class="nt">&lt;/h1&gt;</span>
+<span class="nt">&lt;/template&gt;</span>
+<span class="nt">&lt;template</span> <span class="na">name=</span><span class="s">&quot;show&quot;</span><span class="nt">&gt;</span>
+  <span class="nt">&lt;h1&gt;</span>{{.}}<span class="nt">&lt;/h1&gt;</span>
 <span class="nt">&lt;/template&gt;</span>
 </pre></div>
 </div>

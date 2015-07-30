@@ -78,25 +78,30 @@ meteor
           Meteor.call('reflesh', lst);
         }));
       });
-    /*
-      Meteor.startup(function() {
-        console.log('start up');
-        var oracle = Meteor.npmRequire('oracle');
-        var con = oracle.connectSync({
-          hostname: 'localhost',
-          port: 1521,
-          database: 'XE',
-          user: 'd563',
-          password: 'd563'
-        });
-        Meteor.call('reflesh', con.executeSync('select * from tbl1', []));
-        con.close();
+      //Meteor.startup(function() {
+      //  console.log('start up');
+      //  var oracle = Meteor.npmRequire('oracle');
+      //  var con = oracle.connectSync({
+      //    hostname: 'localhost',
+      //    port: 1521,
+      //    database: 'XE',
+      //    user: 'd563',
+      //    password: 'd563'
+      //  });
+      //  Meteor.call('reflesh', con.executeSync('select * from tbl1', []));
+      //  con.close();
+      //});
+      Router.configure({
+        layoutTemplate: 'layout',
+        notFoundTemplate: 'notFound'
       });
-    */
-      Router.configure({ layoutTemplate: 'layout' });
       Router.map(function() {
         this.route('leaderboard', { path: '/' });
         this.route('d563', { path: '/d563' });
+        this.route('show', {
+          path: '/show/:_id',
+          data: function() { return this.params._id; }
+        });
       });
     }
 
@@ -116,4 +121,10 @@ meteor
     </template>
     <template name="d563">
       <h1 class="title">d563</h1>
+    </template>
+    <template name="notFound">
+      <h1>not found</h1>
+    </template>
+    <template name="show">
+      <h1>{{.}}</h1>
     </template>
