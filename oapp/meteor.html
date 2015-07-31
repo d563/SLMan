@@ -86,6 +86,9 @@ meteor
 meteor list
 meteor add meteorhacks:npm
 meteor add iron:router
+meteor add mizzao:bootstrap-3
+meteor add mrt:cron
+meteor add udondan:bulk-collection-update
 meteor remove autopublish insecure
 meteor
 </pre></div>
@@ -96,90 +99,218 @@ meteor
 vi leaderboard.js
 </pre></div>
 </div>
-<div class="highlight-javascript"><div class="highlight"><pre><span class="nx">Players</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Mongo</span><span class="p">.</span><span class="nx">Collection</span><span class="p">(</span>
-  <span class="s1">&#39;players&#39;</span><span class="p">,</span>
-  <span class="p">{</span><span class="nx">_driver</span><span class="o">:</span> <span class="k">new</span> <span class="nx">MongoInternals</span><span class="p">.</span><span class="nx">RemoteCollectionDriver</span><span class="p">(</span><span class="s1">&#39;mongodb://localhost:27017/testdb&#39;</span><span class="p">)}</span>
-<span class="p">);</span>
+<div class="highlight-javascript"><div class="highlight"><pre><span class="nx">Players</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Mongo</span><span class="p">.</span><span class="nx">Collection</span><span class="p">(</span><span class="s2">&quot;players&quot;</span><span class="p">);</span>
+
 <span class="k">if</span> <span class="p">(</span><span class="nx">Meteor</span><span class="p">.</span><span class="nx">isClient</span><span class="p">)</span> <span class="p">{</span>
-  <span class="nx">Meteor</span><span class="p">.</span><span class="nx">subscribe</span><span class="p">(</span><span class="s1">&#39;all-players&#39;</span><span class="p">);</span>
-<span class="p">}</span>
-<span class="k">if</span> <span class="p">(</span><span class="nx">Meteor</span><span class="p">.</span><span class="nx">isServer</span><span class="p">)</span> <span class="p">{</span>
-  <span class="nx">Meteor</span><span class="p">.</span><span class="nx">publish</span><span class="p">(</span><span class="s1">&#39;all-players&#39;</span><span class="p">,</span> <span class="kd">function</span> <span class="p">()</span> <span class="p">{</span>
-    <span class="k">return</span> <span class="nx">Players</span><span class="p">.</span><span class="nx">find</span><span class="p">();</span>
-  <span class="p">});</span>
-  <span class="nx">Players</span><span class="p">.</span><span class="nx">allow</span><span class="p">({</span>
-    <span class="nx">insert</span><span class="o">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">userId</span><span class="p">,</span> <span class="nx">doc</span><span class="p">)</span> <span class="p">{</span> <span class="k">return</span> <span class="kc">true</span><span class="p">;</span> <span class="p">},</span>
-    <span class="nx">update</span><span class="o">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">userId</span><span class="p">,</span> <span class="nx">docs</span><span class="p">,</span> <span class="nx">fields</span><span class="p">,</span> <span class="nx">modifier</span><span class="p">)</span> <span class="p">{</span> <span class="k">return</span> <span class="kc">true</span><span class="p">;</span> <span class="p">},</span>
-    <span class="nx">remove</span><span class="o">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">userId</span><span class="p">,</span> <span class="nx">docs</span><span class="p">)</span> <span class="p">{</span> <span class="k">return</span> <span class="kc">true</span><span class="p">;</span> <span class="p">},</span>
-    <span class="nx">fetch</span><span class="o">:</span> <span class="kc">undefined</span>
-  <span class="p">});</span>
-  <span class="nx">Meteor</span><span class="p">.</span><span class="nx">methods</span><span class="p">({</span>
-    <span class="s1">&#39;reflesh&#39;</span><span class="o">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">lst</span><span class="p">)</span> <span class="p">{</span>
-      <span class="nx">Players</span><span class="p">.</span><span class="nx">remove</span><span class="p">({});</span>
-      <span class="nx">_</span><span class="p">.</span><span class="nx">each</span><span class="p">(</span><span class="nx">lst</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">data</span><span class="p">)</span> <span class="p">{</span>
-        <span class="nx">Players</span><span class="p">.</span><span class="nx">insert</span><span class="p">(</span><span class="nx">data</span><span class="p">);</span>
-      <span class="p">});</span>
+  <span class="nx">Template</span><span class="p">.</span><span class="nx">leaderboard</span><span class="p">.</span><span class="nx">rendered</span> <span class="o">=</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+    <span class="nx">Meteor</span><span class="p">.</span><span class="nx">subscribe</span><span class="p">(</span><span class="s1">&#39;all-players&#39;</span><span class="p">);</span>
+  <span class="p">};</span>
+
+  <span class="nx">Template</span><span class="p">.</span><span class="nx">leaderboard</span><span class="p">.</span><span class="nx">helpers</span><span class="p">({</span>
+    <span class="nx">players</span><span class="o">:</span> <span class="kd">function</span> <span class="p">()</span> <span class="p">{</span>
+      <span class="k">return</span> <span class="nx">Players</span><span class="p">.</span><span class="nx">find</span><span class="p">({},</span> <span class="p">{</span> <span class="nx">sort</span><span class="o">:</span> <span class="p">{</span> <span class="nx">score</span><span class="o">:</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="nx">name</span><span class="o">:</span> <span class="mi">1</span> <span class="p">}</span> <span class="p">});</span>
+    <span class="p">},</span>
+    <span class="nx">selectedName</span><span class="o">:</span> <span class="kd">function</span> <span class="p">()</span> <span class="p">{</span>
+      <span class="kd">var</span> <span class="nx">player</span> <span class="o">=</span> <span class="nx">Players</span><span class="p">.</span><span class="nx">findOne</span><span class="p">(</span><span class="nx">Session</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s2">&quot;selectedPlayer&quot;</span><span class="p">));</span>
+      <span class="k">return</span> <span class="nx">player</span> <span class="o">&amp;&amp;</span> <span class="nx">player</span><span class="p">.</span><span class="nx">name</span><span class="p">;</span>
     <span class="p">}</span>
   <span class="p">});</span>
-  <span class="nx">Meteor</span><span class="p">.</span><span class="nx">startup</span><span class="p">(</span><span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
-    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">&#39;start up&#39;</span><span class="p">);</span>
-    <span class="kd">var</span> <span class="nx">mysql</span> <span class="o">=</span> <span class="nx">Meteor</span><span class="p">.</span><span class="nx">npmRequire</span><span class="p">(</span><span class="s1">&#39;mysql&#39;</span><span class="p">);</span>
-    <span class="kd">var</span> <span class="nx">con</span> <span class="o">=</span> <span class="nx">mysql</span><span class="p">.</span><span class="nx">createConnection</span><span class="p">({</span>
-      <span class="nx">host</span><span class="o">:</span> <span class="s1">&#39;localhost&#39;</span><span class="p">,</span>
-      <span class="nx">database</span><span class="o">:</span> <span class="s1">&#39;d563&#39;</span><span class="p">,</span>
-      <span class="nx">user</span><span class="o">:</span> <span class="s1">&#39;SLMan&#39;</span><span class="p">,</span>
-      <span class="nx">password</span><span class="o">:</span> <span class="s1">&#39;SLManPass&#39;</span>
-    <span class="p">});</span>
-    <span class="nx">con</span><span class="p">.</span><span class="nx">query</span><span class="p">(</span><span class="s1">&#39;select * from tbl1&#39;</span><span class="p">,</span> <span class="nx">Meteor</span><span class="p">.</span><span class="nx">bindEnvironment</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">err</span><span class="p">,</span> <span class="nx">lst</span><span class="p">)</span> <span class="p">{</span>
-      <span class="k">if</span> <span class="p">(</span><span class="nx">err</span><span class="p">)</span> <span class="k">throw</span> <span class="nx">err</span><span class="p">;</span>
-      <span class="nx">Meteor</span><span class="p">.</span><span class="nx">call</span><span class="p">(</span><span class="s1">&#39;reflesh&#39;</span><span class="p">,</span> <span class="nx">lst</span><span class="p">);</span>
-    <span class="p">}));</span>
+
+  <span class="nx">Template</span><span class="p">.</span><span class="nx">leaderboard</span><span class="p">.</span><span class="nx">events</span><span class="p">({</span>
+    <span class="s1">&#39;click .inc&#39;</span><span class="o">:</span> <span class="kd">function</span> <span class="p">()</span> <span class="p">{</span>
+      <span class="nx">Players</span><span class="p">.</span><span class="nx">update</span><span class="p">(</span><span class="nx">Session</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s2">&quot;selectedPlayer&quot;</span><span class="p">),</span> <span class="p">{</span><span class="nx">$inc</span><span class="o">:</span> <span class="p">{</span><span class="nx">score</span><span class="o">:</span> <span class="mi">5</span><span class="p">}});</span>
+    <span class="p">}</span>
   <span class="p">});</span>
-  <span class="c1">//Meteor.startup(function() {</span>
-  <span class="c1">//  console.log(&#39;start up&#39;);</span>
-  <span class="c1">//  var oracle = Meteor.npmRequire(&#39;oracle&#39;);</span>
-  <span class="c1">//  var con = oracle.connectSync({</span>
-  <span class="c1">//    hostname: &#39;localhost&#39;,</span>
-  <span class="c1">//    port: 1521,</span>
-  <span class="c1">//    database: &#39;XE&#39;,</span>
-  <span class="c1">//    user: &#39;d563&#39;,</span>
-  <span class="c1">//    password: &#39;d563&#39;</span>
-  <span class="c1">//  });</span>
-  <span class="c1">//  Meteor.call(&#39;reflesh&#39;, con.executeSync(&#39;select * from tbl1&#39;, []));</span>
-  <span class="c1">//  con.close();</span>
-  <span class="c1">//});</span>
+
+  <span class="nx">Template</span><span class="p">.</span><span class="nx">player</span><span class="p">.</span><span class="nx">helpers</span><span class="p">({</span>
+    <span class="nx">selected</span><span class="o">:</span> <span class="kd">function</span> <span class="p">()</span> <span class="p">{</span>
+      <span class="k">return</span> <span class="nx">Session</span><span class="p">.</span><span class="nx">equals</span><span class="p">(</span><span class="s2">&quot;selectedPlayer&quot;</span><span class="p">,</span> <span class="k">this</span><span class="p">.</span><span class="nx">_id</span><span class="p">)</span> <span class="o">?</span> <span class="s2">&quot;selected&quot;</span> <span class="o">:</span> <span class="s1">&#39;&#39;</span><span class="p">;</span>
+    <span class="p">}</span>
+  <span class="p">});</span>
+
+  <span class="nx">Template</span><span class="p">.</span><span class="nx">player</span><span class="p">.</span><span class="nx">events</span><span class="p">({</span>
+    <span class="s1">&#39;click&#39;</span><span class="o">:</span> <span class="kd">function</span> <span class="p">()</span> <span class="p">{</span>
+      <span class="nx">Session</span><span class="p">.</span><span class="nx">set</span><span class="p">(</span><span class="s2">&quot;selectedPlayer&quot;</span><span class="p">,</span> <span class="k">this</span><span class="p">.</span><span class="nx">_id</span><span class="p">);</span>
+    <span class="p">}</span>
+  <span class="p">});</span>
+
   <span class="nx">Router</span><span class="p">.</span><span class="nx">configure</span><span class="p">({</span>
     <span class="nx">layoutTemplate</span><span class="o">:</span> <span class="s1">&#39;layout&#39;</span><span class="p">,</span>
     <span class="nx">notFoundTemplate</span><span class="o">:</span> <span class="s1">&#39;notFound&#39;</span>
   <span class="p">});</span>
+
   <span class="nx">Router</span><span class="p">.</span><span class="nx">map</span><span class="p">(</span><span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
-    <span class="k">this</span><span class="p">.</span><span class="nx">route</span><span class="p">(</span><span class="s1">&#39;leaderboard&#39;</span><span class="p">,</span> <span class="p">{</span> <span class="nx">path</span><span class="o">:</span> <span class="s1">&#39;/&#39;</span> <span class="p">});</span>
-    <span class="k">this</span><span class="p">.</span><span class="nx">route</span><span class="p">(</span><span class="s1">&#39;d563&#39;</span><span class="p">,</span> <span class="p">{</span> <span class="nx">path</span><span class="o">:</span> <span class="s1">&#39;/d563&#39;</span> <span class="p">});</span>
+    <span class="k">this</span><span class="p">.</span><span class="nx">route</span><span class="p">(</span><span class="s1">&#39;leaderboard&#39;</span><span class="p">,</span> <span class="p">{</span><span class="nx">path</span><span class="o">:</span> <span class="s1">&#39;/&#39;</span><span class="p">});</span>
+    <span class="k">this</span><span class="p">.</span><span class="nx">route</span><span class="p">(</span><span class="s1">&#39;d563&#39;</span><span class="p">,</span> <span class="p">{</span><span class="nx">path</span><span class="o">:</span> <span class="s1">&#39;/d563&#39;</span><span class="p">});</span>
     <span class="k">this</span><span class="p">.</span><span class="nx">route</span><span class="p">(</span><span class="s1">&#39;show&#39;</span><span class="p">,</span> <span class="p">{</span>
       <span class="nx">path</span><span class="o">:</span> <span class="s1">&#39;/show/:_id&#39;</span><span class="p">,</span>
       <span class="nx">data</span><span class="o">:</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span> <span class="k">return</span> <span class="k">this</span><span class="p">.</span><span class="nx">params</span><span class="p">.</span><span class="nx">_id</span><span class="p">;</span> <span class="p">}</span>
     <span class="p">});</span>
   <span class="p">});</span>
 <span class="p">}</span>
+
+<span class="k">if</span> <span class="p">(</span><span class="nx">Meteor</span><span class="p">.</span><span class="nx">isServer</span><span class="p">)</span> <span class="p">{</span>
+  <span class="nx">Meteor</span><span class="p">.</span><span class="nx">publish</span><span class="p">(</span><span class="s1">&#39;all-players&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="nx">Players</span><span class="p">.</span><span class="nx">find</span><span class="p">();</span>
+  <span class="p">});</span>
+
+  <span class="nx">Players</span><span class="p">.</span><span class="nx">allow</span><span class="p">({</span>
+    <span class="nx">insert</span><span class="o">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">userId</span><span class="p">,</span> <span class="nx">doc</span><span class="p">)</span> <span class="p">{</span> <span class="k">return</span> <span class="kc">true</span><span class="p">;</span> <span class="p">},</span>
+    <span class="nx">update</span><span class="o">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">userId</span><span class="p">,</span> <span class="nx">docs</span><span class="p">,</span> <span class="nx">fields</span><span class="p">,</span> <span class="nx">modifier</span><span class="p">)</span> <span class="p">{</span> <span class="k">return</span> <span class="kc">true</span><span class="p">;</span> <span class="p">},</span>
+    <span class="nx">remove</span><span class="o">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">userId</span><span class="p">,</span> <span class="nx">docs</span><span class="p">)</span> <span class="p">{</span> <span class="k">return</span> <span class="kc">true</span><span class="p">;</span> <span class="p">},</span>
+    <span class="nx">fetch</span><span class="o">:</span> <span class="kc">undefined</span>
+  <span class="p">});</span>
+
+  <span class="nx">Meteor</span><span class="p">.</span><span class="nx">startup</span><span class="p">(</span><span class="kd">function</span> <span class="p">()</span> <span class="p">{</span>
+    <span class="nx">Players</span><span class="p">.</span><span class="nx">remove</span><span class="p">({});</span>
+    <span class="k">if</span> <span class="p">(</span><span class="nx">Players</span><span class="p">.</span><span class="nx">find</span><span class="p">().</span><span class="nx">count</span><span class="p">()</span> <span class="o">===</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
+      <span class="kd">var</span> <span class="nx">names</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;Ada Lovelace&quot;</span><span class="p">,</span> <span class="s2">&quot;Grace Hopper&quot;</span><span class="p">,</span> <span class="s2">&quot;Marie Curie&quot;</span><span class="p">,</span>
+                   <span class="s2">&quot;Carl Friedrich Gauss&quot;</span><span class="p">,</span> <span class="s2">&quot;Nikola Tesla&quot;</span><span class="p">,</span> <span class="s2">&quot;Claude Shannon&quot;</span><span class="p">];</span>
+      <span class="kd">var</span> <span class="nx">data</span> <span class="o">=</span> <span class="p">[]</span>
+      <span class="nx">_</span><span class="p">.</span><span class="nx">each</span><span class="p">(</span><span class="nx">names</span><span class="p">,</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">name</span><span class="p">)</span> <span class="p">{</span>
+        <span class="c1">//Players.insert({</span>
+        <span class="nx">data</span><span class="p">.</span><span class="nx">push</span><span class="p">({</span>
+          <span class="nx">name</span><span class="o">:</span> <span class="nx">name</span><span class="p">,</span>
+          <span class="nx">score</span><span class="o">:</span> <span class="nb">Math</span><span class="p">.</span><span class="nx">floor</span><span class="p">(</span><span class="nx">Random</span><span class="p">.</span><span class="nx">fraction</span><span class="p">()</span> <span class="o">*</span> <span class="mi">10</span><span class="p">)</span> <span class="o">*</span> <span class="mi">5</span>
+        <span class="p">});</span>
+      <span class="p">});</span>
+      <span class="nx">bulkCollectionUpdate</span><span class="p">(</span><span class="nx">Players</span><span class="p">,</span> <span class="nx">data</span><span class="p">,</span> <span class="p">{</span><span class="nx">primaryKey</span><span class="o">:</span> <span class="s2">&quot;name&quot;</span><span class="p">});</span>
+
+      <span class="kd">var</span> <span class="nx">execSync</span> <span class="o">=</span> <span class="nx">Meteor</span><span class="p">.</span><span class="nx">wrapAsync</span><span class="p">(</span><span class="nx">Meteor</span><span class="p">.</span><span class="nx">npmRequire</span><span class="p">(</span><span class="s1">&#39;child_process&#39;</span><span class="p">).</span><span class="nx">exec</span><span class="p">);</span>
+      <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">execSync</span><span class="p">(</span><span class="s2">&quot;echo init!&quot;</span><span class="p">).</span><span class="nx">replace</span><span class="p">(</span><span class="sr">/\n/g</span><span class="p">,</span> <span class="s1">&#39;&#39;</span><span class="p">));</span>
+
+      <span class="kd">var</span> <span class="nx">cron</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Meteor</span><span class="p">.</span><span class="nx">Cron</span><span class="p">({</span>
+        <span class="nx">events</span><span class="o">:</span> <span class="p">{</span>
+          <span class="s2">&quot;* * * * * &quot;</span><span class="o">:</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span> <span class="nx">Meteor</span><span class="p">.</span><span class="nx">call</span><span class="p">(</span><span class="s2">&quot;direct1&quot;</span><span class="p">,</span> <span class="s2">&quot;test&quot;</span><span class="p">);</span> <span class="p">}</span>
+        <span class="p">}</span>
+      <span class="p">});</span>
+    <span class="p">}</span>
+  <span class="p">});</span>
+
+  <span class="nx">Meteor</span><span class="p">.</span><span class="nx">methods</span><span class="p">({</span>
+    <span class="s1">&#39;direct1&#39;</span><span class="o">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">arg</span><span class="p">)</span> <span class="p">{</span><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">arg</span><span class="p">)},</span>
+    <span class="s1">&#39;direct2&#39;</span><span class="o">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">arg</span><span class="p">)</span> <span class="p">{</span><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">arg</span><span class="p">)}</span>
+  <span class="p">});</span>
+
+  <span class="nx">Router</span><span class="p">.</span><span class="nx">map</span><span class="p">(</span><span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+    <span class="k">this</span><span class="p">.</span><span class="nx">route</span><span class="p">(</span><span class="s1">&#39;direct&#39;</span><span class="p">,</span> <span class="p">{</span>
+      <span class="nx">path</span><span class="o">:</span> <span class="p">[</span><span class="s1">&#39;/direct1&#39;</span><span class="p">,</span> <span class="s1">&#39;/direct2&#39;</span><span class="p">],</span>
+      <span class="nx">where</span><span class="o">:</span> <span class="s1">&#39;server&#39;</span><span class="p">,</span>
+      <span class="nx">action</span><span class="o">:</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+        <span class="kd">var</span> <span class="nx">name</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">request</span><span class="p">.</span><span class="nx">url</span><span class="p">.</span><span class="nx">replace</span><span class="p">(</span><span class="s2">&quot;/&quot;</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">);</span>
+        <span class="nx">Meteor</span><span class="p">.</span><span class="nx">call</span><span class="p">(</span><span class="nx">name</span><span class="p">,</span> <span class="k">this</span><span class="p">.</span><span class="nx">request</span><span class="p">.</span><span class="nx">body</span><span class="p">);</span>
+        <span class="k">this</span><span class="p">.</span><span class="nx">response</span><span class="p">.</span><span class="nx">setHeader</span><span class="p">(</span><span class="s1">&#39;Content-Type&#39;</span><span class="p">,</span> <span class="s1">&#39;application/json&#39;</span><span class="p">);</span>
+        <span class="k">this</span><span class="p">.</span><span class="nx">response</span><span class="p">.</span><span class="nx">end</span><span class="p">(</span><span class="s2">&quot;{&#39;ret&#39;: &#39;OK&#39;}&quot;</span><span class="p">);</span>
+        <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">name</span> <span class="o">+</span> <span class="s2">&quot;Called!&quot;</span><span class="p">);</span>
+      <span class="p">}</span>
+    <span class="p">});</span>
+  <span class="p">});</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<div class="highlight-javascript"><div class="highlight"><pre><span class="nx">Players</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Mongo</span><span class="p">.</span><span class="nx">Collection</span><span class="p">(</span>
+  <span class="s1">&#39;players&#39;</span><span class="p">,</span>
+  <span class="p">{</span><span class="nx">_driver</span><span class="o">:</span> <span class="k">new</span> <span class="nx">MongoInternals</span><span class="p">.</span><span class="nx">RemoteCollectionDriver</span><span class="p">(</span><span class="s1">&#39;mongodb://localhost:27017/testdb&#39;</span><span class="p">)}</span>
+<span class="p">);</span>
+</pre></div>
+</div>
+<div class="highlight-javascript"><div class="highlight"><pre><span class="nx">Meteor</span><span class="p">.</span><span class="nx">methods</span><span class="p">({</span>
+  <span class="s1">&#39;reflesh&#39;</span><span class="o">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">lst</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">Players</span><span class="p">.</span><span class="nx">remove</span><span class="p">({});</span>
+    <span class="nx">_</span><span class="p">.</span><span class="nx">each</span><span class="p">(</span><span class="nx">lst</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">data</span><span class="p">)</span> <span class="p">{</span>
+      <span class="nx">Players</span><span class="p">.</span><span class="nx">insert</span><span class="p">(</span><span class="nx">data</span><span class="p">);</span>
+    <span class="p">});</span>
+  <span class="p">}</span>
+<span class="p">});</span>
+
+<span class="nx">Meteor</span><span class="p">.</span><span class="nx">startup</span><span class="p">(</span><span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">&#39;start up&#39;</span><span class="p">);</span>
+  <span class="kd">var</span> <span class="nx">mysql</span> <span class="o">=</span> <span class="nx">Meteor</span><span class="p">.</span><span class="nx">npmRequire</span><span class="p">(</span><span class="s1">&#39;mysql&#39;</span><span class="p">);</span>
+  <span class="kd">var</span> <span class="nx">con</span> <span class="o">=</span> <span class="nx">mysql</span><span class="p">.</span><span class="nx">createConnection</span><span class="p">({</span>
+    <span class="nx">host</span><span class="o">:</span> <span class="s1">&#39;localhost&#39;</span><span class="p">,</span>
+    <span class="nx">database</span><span class="o">:</span> <span class="s1">&#39;d563&#39;</span><span class="p">,</span>
+    <span class="nx">user</span><span class="o">:</span> <span class="s1">&#39;SLMan&#39;</span><span class="p">,</span>
+    <span class="nx">password</span><span class="o">:</span> <span class="s1">&#39;SLManPass&#39;</span>
+  <span class="p">});</span>
+  <span class="nx">con</span><span class="p">.</span><span class="nx">query</span><span class="p">(</span><span class="s1">&#39;select * from tbl1&#39;</span><span class="p">,</span> <span class="nx">Meteor</span><span class="p">.</span><span class="nx">bindEnvironment</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">err</span><span class="p">,</span> <span class="nx">lst</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">if</span> <span class="p">(</span><span class="nx">err</span><span class="p">)</span> <span class="k">throw</span> <span class="nx">err</span><span class="p">;</span>
+    <span class="nx">Meteor</span><span class="p">.</span><span class="nx">call</span><span class="p">(</span><span class="s1">&#39;reflesh&#39;</span><span class="p">,</span> <span class="nx">lst</span><span class="p">);</span>
+  <span class="p">}));</span>
+<span class="p">});</span>
+
+<span class="nx">Meteor</span><span class="p">.</span><span class="nx">startup</span><span class="p">(</span><span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">&#39;start up&#39;</span><span class="p">);</span>
+  <span class="kd">var</span> <span class="nx">oracle</span> <span class="o">=</span> <span class="nx">Meteor</span><span class="p">.</span><span class="nx">npmRequire</span><span class="p">(</span><span class="s1">&#39;oracle&#39;</span><span class="p">);</span>
+  <span class="kd">var</span> <span class="nx">con</span> <span class="o">=</span> <span class="nx">oracle</span><span class="p">.</span><span class="nx">connectSync</span><span class="p">({</span>
+    <span class="nx">hostname</span><span class="o">:</span> <span class="s1">&#39;localhost&#39;</span><span class="p">,</span>
+    <span class="nx">port</span><span class="o">:</span> <span class="mi">1521</span><span class="p">,</span>
+    <span class="nx">database</span><span class="o">:</span> <span class="s1">&#39;XE&#39;</span><span class="p">,</span>
+    <span class="nx">user</span><span class="o">:</span> <span class="s1">&#39;d563&#39;</span><span class="p">,</span>
+    <span class="nx">password</span><span class="o">:</span> <span class="s1">&#39;d563&#39;</span>
+  <span class="p">});</span>
+  <span class="nx">Meteor</span><span class="p">.</span><span class="nx">call</span><span class="p">(</span><span class="s1">&#39;reflesh&#39;</span><span class="p">,</span> <span class="nx">con</span><span class="p">.</span><span class="nx">executeSync</span><span class="p">(</span><span class="s1">&#39;select * from tbl1&#39;</span><span class="p">,</span> <span class="p">[]));</span>
+  <span class="nx">con</span><span class="p">.</span><span class="nx">close</span><span class="p">();</span>
+<span class="p">});</span>
 </pre></div>
 </div>
 <div class="highlight-python"><div class="highlight"><pre>vi leaderboard.html
 </pre></div>
 </div>
-<div class="highlight-html"><div class="highlight"><pre><span class="nt">&lt;template</span> <span class="na">name=</span><span class="s">&quot;layout&quot;</span><span class="nt">&gt;</span>
-  <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">&quot;outer&quot;</span><span class="nt">&gt;</span>
-    <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">&quot;logo&quot;</span><span class="nt">&gt;&lt;/div&gt;</span>
-    <span class="nt">&lt;h1</span> <span class="na">class=</span><span class="s">&quot;title&quot;</span><span class="nt">&gt;</span>Leaderboard<span class="nt">&lt;/h1&gt;</span>
-    <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">&quot;subtitle&quot;</span><span class="nt">&gt;</span>Select a scientist to give them points<span class="nt">&lt;/div&gt;</span>
+<div class="highlight-html"><div class="highlight"><pre><span class="nt">&lt;head&gt;</span>
+  <span class="nt">&lt;title&gt;</span>Leaderboard<span class="nt">&lt;/title&gt;</span>
+  <span class="nt">&lt;meta</span> <span class="na">http-equiv=</span><span class="s">&quot;X-UA-Compatible&quot;</span> <span class="na">content=</span><span class="s">&quot;IE=edge&quot;</span> <span class="nt">/&gt;</span>
+<span class="nt">&lt;/head&gt;</span>
+
+<span class="nt">&lt;template</span> <span class="na">name=</span><span class="s">&quot;layout&quot;</span><span class="nt">&gt;</span>
+  {{&gt; navigation}}
+  <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">&quot;container&quot;</span><span class="nt">&gt;</span>
     {{&gt; yield}}
   <span class="nt">&lt;/div&gt;</span>
 <span class="nt">&lt;/template&gt;</span>
-<span class="nt">&lt;template</span> <span class="na">name=</span><span class="s">&quot;d563&quot;</span><span class="nt">&gt;</span>
-  <span class="nt">&lt;h1</span> <span class="na">class=</span><span class="s">&quot;title&quot;</span><span class="nt">&gt;</span>d563<span class="nt">&lt;/h1&gt;</span>
+
+<span class="nt">&lt;template</span> <span class="na">name=</span><span class="s">&quot;navigation&quot;</span><span class="nt">&gt;</span>
+  <span class="nt">&lt;nav</span> <span class="na">class=</span><span class="s">&quot;navbar navbar-default navbar-static-top&quot;</span> <span class="na">role=</span><span class="s">&quot;navigation&quot;</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">&quot;container&quot;</span><span class="nt">&gt;</span>
+      <span class="nt">&lt;ul</span> <span class="na">class=</span><span class="s">&quot;nav navbar-nav&quot;</span><span class="nt">&gt;</span>
+        <span class="nt">&lt;li&gt;&lt;a</span> <span class="na">href=</span><span class="s">&quot;{{pathFor &#39;d563&#39;}}&quot;</span><span class="nt">&gt;</span>d563<span class="nt">&lt;/a&gt;&lt;/li&gt;</span>
+        <span class="nt">&lt;li&gt;&lt;a</span> <span class="na">href=</span><span class="s">&quot;{{pathFor &#39;leaderboard&#39;}}&quot;</span><span class="nt">&gt;</span>leaderboard<span class="nt">&lt;/a&gt;&lt;/li&gt;</span>
+      <span class="nt">&lt;/ul&gt;</span>
+    <span class="nt">&lt;/div&gt;</span>
+  <span class="nt">&lt;/nav&gt;</span>
 <span class="nt">&lt;/template&gt;</span>
+
+<span class="nt">&lt;template</span> <span class="na">name=</span><span class="s">&quot;leaderboard&quot;</span><span class="nt">&gt;</span>
+  <span class="nt">&lt;ol</span> <span class="na">class=</span><span class="s">&quot;leaderboard&quot;</span><span class="nt">&gt;</span>
+    {{#each players}}
+      {{&gt; player}}
+    {{/each}}
+  <span class="nt">&lt;/ol&gt;</span>
+
+  {{#if selectedName}}
+    <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">&quot;details&quot;</span><span class="nt">&gt;</span>
+      <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">&quot;name&quot;</span><span class="nt">&gt;</span>{{selectedName}}<span class="nt">&lt;/div&gt;</span>
+      <span class="nt">&lt;button</span> <span class="na">class=</span><span class="s">&quot;inc&quot;</span><span class="nt">&gt;</span>Add 5 points<span class="nt">&lt;/button&gt;</span>
+    <span class="nt">&lt;/div&gt;</span>
+  {{else}}
+    <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">&quot;message&quot;</span><span class="nt">&gt;</span>Click a player to select<span class="nt">&lt;/div&gt;</span>
+  {{/if}}
+<span class="nt">&lt;/template&gt;</span>
+
+<span class="nt">&lt;template</span> <span class="na">name=</span><span class="s">&quot;player&quot;</span><span class="nt">&gt;</span>
+  <span class="nt">&lt;li</span> <span class="na">class=</span><span class="s">&quot;player {{selected}}&quot;</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;span</span> <span class="na">class=</span><span class="s">&quot;name&quot;</span><span class="nt">&gt;</span>{{name}}<span class="nt">&lt;/span&gt;</span>
+    <span class="nt">&lt;span</span> <span class="na">class=</span><span class="s">&quot;score&quot;</span><span class="nt">&gt;</span>{{score}}<span class="nt">&lt;/span&gt;</span>
+  <span class="nt">&lt;/li&gt;</span>
+<span class="nt">&lt;/template&gt;</span>
+
 <span class="nt">&lt;template</span> <span class="na">name=</span><span class="s">&quot;notFound&quot;</span><span class="nt">&gt;</span>
   <span class="nt">&lt;h1&gt;</span>not found<span class="nt">&lt;/h1&gt;</span>
 <span class="nt">&lt;/template&gt;</span>
+
+<span class="nt">&lt;template</span> <span class="na">name=</span><span class="s">&quot;d563&quot;</span><span class="nt">&gt;</span>
+  <span class="nt">&lt;h1&gt;</span>d563<span class="nt">&lt;/h1&gt;</span>
+<span class="nt">&lt;/template&gt;</span>
+
 <span class="nt">&lt;template</span> <span class="na">name=</span><span class="s">&quot;show&quot;</span><span class="nt">&gt;</span>
   <span class="nt">&lt;h1&gt;</span>{{.}}<span class="nt">&lt;/h1&gt;</span>
 <span class="nt">&lt;/template&gt;</span>

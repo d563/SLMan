@@ -27,6 +27,9 @@ meteor
     meteor list
     meteor add meteorhacks:npm
     meteor add iron:router
+    meteor add mizzao:bootstrap-3
+    meteor add mrt:cron
+    meteor add udondan:bulk-collection-update
     meteor remove autopublish insecure
     meteor
 
@@ -39,23 +42,123 @@ meteor
 
 .. code-block:: javascript
 
-    Players = new Mongo.Collection(
-      'players',
-      {_driver: new MongoInternals.RemoteCollectionDriver('mongodb://localhost:27017/testdb')}
-    );
+    Players = new Mongo.Collection("players");
+
     if (Meteor.isClient) {
-      Meteor.subscribe('all-players');
+      Template.leaderboard.rendered = function() {
+        Meteor.subscribe('all-players');
+      };
+
+      Template.leaderboard.helpers({
+        players: function () {
+          return Players.find({}, { sort: { score: -1, name: 1 } });
+        },
+        selectedName: function () {
+          var player = Players.findOne(Session.get("selectedPlayer"));
+          return player && player.name;
+        }
+      });
+
+      Template.leaderboard.events({
+        'click .inc': function () {
+          Players.update(Session.get("selectedPlayer"), {$inc: {score: 5}});
+        }
+      });
+
+      Template.player.helpers({
+        selected: function () {
+          return Session.equals("selectedPlayer", this._id) ? "selected" : '';
+        }
+      });
+
+      Template.player.events({
+        'click': function () {
+          Session.set("selectedPlayer", this._id);
+        }
+      });
+
+      Router.configure({
+        layoutTemplate: 'layout',
+        notFoundTemplate: 'notFound'
+      });
+
+      Router.map(function() {
+        this.route('leaderboard', {path: '/'});
+        this.route('d563', {path: '/d563'});
+        this.route('show', {
+          path: '/show/:_id',
+          data: function() { return this.params._id; }
+        });
+      });
     }
+
     if (Meteor.isServer) {
-      Meteor.publish('all-players', function () {
+      Meteor.publish('all-players', function() {
         return Players.find();
       });
+
       Players.allow({
         insert: function(userId, doc) { return true; },
         update: function(userId, docs, fields, modifier) { return true; },
         remove: function(userId, docs) { return true; },
         fetch: undefined
       });
+
+      Meteor.startup(function () {
+        Players.remove({});
+        if (Players.find().count() === 0) {
+          var names = ["Ada Lovelace", "Grace Hopper", "Marie Curie",
+                       "Carl Friedrich Gauss", "Nikola Tesla", "Claude Shannon"];
+          var data = []
+          _.each(names, function (name) {
+            //Players.insert({
+            data.push({
+              name: name,
+              score: Math.floor(Random.fraction() * 10) * 5
+            });
+          });
+          bulkCollectionUpdate(Players, data, {primaryKey: "name"});
+
+          var execSync = Meteor.wrapAsync(Meteor.npmRequire('child_process').exec);
+          console.log(execSync("echo init!").replace(/\n/g, ''));
+
+          var cron = new Meteor.Cron({
+            events: {
+              "* * * * * ": function() { Meteor.call("direct1", "test"); }
+            }
+          });
+        }
+      });
+
+      Meteor.methods({
+        'direct1': function(arg) {console.log(arg)},
+        'direct2': function(arg) {console.log(arg)}
+      });
+
+      Router.map(function() {
+        this.route('direct', {
+          path: ['/direct1', '/direct2'],
+          where: 'server',
+          action: function() {
+            var name = this.request.url.replace("/", "");
+            Meteor.call(name, this.request.body);
+            this.response.setHeader('Content-Type', 'application/json');
+            this.response.end("{'ret': 'OK'}");
+            console.log(name + "Called!");
+          }
+        });
+      });
+    }
+
+.. code-block:: javascript
+
+    Players = new Mongo.Collection(
+      'players',
+      {_driver: new MongoInternals.RemoteCollectionDriver('mongodb://localhost:27017/testdb')}
+    );
+
+.. code-block:: javascript
+
       Meteor.methods({
         'reflesh': function(lst) {
           Players.remove({});
@@ -64,6 +167,7 @@ meteor
           });
         }
       });
+
       Meteor.startup(function() {
         console.log('start up');
         var mysql = Meteor.npmRequire('mysql');
@@ -78,32 +182,20 @@ meteor
           Meteor.call('reflesh', lst);
         }));
       });
-      //Meteor.startup(function() {
-      //  console.log('start up');
-      //  var oracle = Meteor.npmRequire('oracle');
-      //  var con = oracle.connectSync({
-      //    hostname: 'localhost',
-      //    port: 1521,
-      //    database: 'XE',
-      //    user: 'd563',
-      //    password: 'd563'
-      //  });
-      //  Meteor.call('reflesh', con.executeSync('select * from tbl1', []));
-      //  con.close();
-      //});
-      Router.configure({
-        layoutTemplate: 'layout',
-        notFoundTemplate: 'notFound'
-      });
-      Router.map(function() {
-        this.route('leaderboard', { path: '/' });
-        this.route('d563', { path: '/d563' });
-        this.route('show', {
-          path: '/show/:_id',
-          data: function() { return this.params._id; }
+
+      Meteor.startup(function() {
+        console.log('start up');
+        var oracle = Meteor.npmRequire('oracle');
+        var con = oracle.connectSync({
+          hostname: 'localhost',
+          port: 1521,
+          database: 'XE',
+          user: 'd563',
+          password: 'd563'
         });
+        Meteor.call('reflesh', con.executeSync('select * from tbl1', []));
+        con.close();
       });
-    }
 
 ::
 
@@ -111,20 +203,61 @@ meteor
 
 .. code-block:: html
 
+    <head>
+      <title>Leaderboard</title>
+      <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    </head>
+
     <template name="layout">
-      <div class="outer">
-        <div class="logo"></div>
-        <h1 class="title">Leaderboard</h1>
-        <div class="subtitle">Select a scientist to give them points</div>
+      {{> navigation}}
+      <div class="container">
         {{> yield}}
       </div>
     </template>
-    <template name="d563">
-      <h1 class="title">d563</h1>
+
+    <template name="navigation">
+      <nav class="navbar navbar-default navbar-static-top" role="navigation">
+        <div class="container">
+          <ul class="nav navbar-nav">
+            <li><a href="{{pathFor 'd563'}}">d563</a></li>
+            <li><a href="{{pathFor 'leaderboard'}}">leaderboard</a></li>
+          </ul>
+        </div>
+      </nav>
     </template>
+
+    <template name="leaderboard">
+      <ol class="leaderboard">
+        {{#each players}}
+          {{> player}}
+        {{/each}}
+      </ol>
+
+      {{#if selectedName}}
+        <div class="details">
+          <div class="name">{{selectedName}}</div>
+          <button class="inc">Add 5 points</button>
+        </div>
+      {{else}}
+        <div class="message">Click a player to select</div>
+      {{/if}}
+    </template>
+
+    <template name="player">
+      <li class="player {{selected}}">
+        <span class="name">{{name}}</span>
+        <span class="score">{{score}}</span>
+      </li>
+    </template>
+
     <template name="notFound">
       <h1>not found</h1>
     </template>
+
+    <template name="d563">
+      <h1>d563</h1>
+    </template>
+
     <template name="show">
       <h1>{{.}}</h1>
     </template>
