@@ -60,6 +60,10 @@ location
     echo LANG=ja_JP.UTF-8 > /etc/locale.conf
     cp -pf /usr/share/zoneinfo/Asia/Tokyo /etc/localtime
 
+    # 7
+    localectl
+    timedatectl
+
 selinux
 -------
 .. index:: /etc/selinux/config

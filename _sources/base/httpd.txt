@@ -16,12 +16,19 @@ httpd
 
     service iptables restart
 
+.. index:: /usr/lib/systemd/system/*.service
+.. index:: /etc/systemd/system/*
+
 ::
 
     # 7
-    systemctl list-unit-files
+    systemctl -t service
+    systemctl -t service list-unit-files
     systemctl enable httpd.service
     systemctl start httpd.service
+    systemctl show --all httpd
+    ll /usr/lib/systemd/system/*.service
+    ll /etc/systemd/system/*
 
     firewall-cmd --permanent --add-service=http
     firewall-cmd --reload
