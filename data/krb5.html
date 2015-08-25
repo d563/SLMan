@@ -6,7 +6,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>3.4. krb5 &mdash; SLMan 0.0.2 documentation</title>
+    <title>3.5. krb5 &mdash; SLMan 0.0.2 documentation</title>
     
     <link rel="stylesheet" href="../_static/pyramid.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
@@ -27,7 +27,7 @@
     <link rel="top" title="SLMan 0.0.2 documentation" href="../index.html" />
     <link rel="up" title="3. data" href="index.html" />
     <link rel="next" title="4. auto" href="../auto/index.html" />
-    <link rel="prev" title="3.3. mongodb" href="mongodb.html" />
+    <link rel="prev" title="3.4. mongodb" href="mongodb.html" />
 <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Neuton&amp;subset=latin" type="text/css" media="screen" charset="utf-8" />
 <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Nobile:regular,italic,bold,bolditalic&amp;subset=latin" type="text/css" media="screen" charset="utf-8" />
 <!--[if lte IE 6]>
@@ -50,7 +50,7 @@
           <a href="../auto/index.html" title="4. auto"
              accesskey="N">next</a> |</li>
         <li class="right" >
-          <a href="mongodb.html" title="3.3. mongodb"
+          <a href="mongodb.html" title="3.4. mongodb"
              accesskey="P">previous</a> |</li>
         <li class="nav-item nav-item-0"><a href="../index.html">SLMan 0.0.2 documentation</a> &raquo;</li>
           <li class="nav-item nav-item-1"><a href="index.html" accesskey="U">3. data</a> &raquo;</li> 
@@ -63,9 +63,9 @@
           <div class="body" role="main">
             
   <div class="section" id="krb5">
-<h1>3.4. krb5<a class="headerlink" href="#krb5" title="Permalink to this headline">¶</a></h1>
+<h1>3.5. krb5<a class="headerlink" href="#krb5" title="Permalink to this headline">¶</a></h1>
 <div class="section" id="kdc">
-<h2>3.4.1. kdc<a class="headerlink" href="#kdc" title="Permalink to this headline">¶</a></h2>
+<h2>3.5.1. kdc<a class="headerlink" href="#kdc" title="Permalink to this headline">¶</a></h2>
 <span class="target" id="index-0"></span><div class="highlight-python" id="index-1"><div class="highlight"><pre>yum -y install krb5-server krb5-workstation pam_krb5 authconfig
 cat /var/kerberos/krb5kdc/kdc.conf
 cat /var/kerberos/krb5kdc/kadm5.acl
@@ -93,7 +93,7 @@ kadmin.local -q &quot;delprinc d563&quot;
 </div>
 </div>
 <div class="section" id="workstation">
-<h2>3.4.2. workstation<a class="headerlink" href="#workstation" title="Permalink to this headline">¶</a></h2>
+<h2>3.5.2. workstation<a class="headerlink" href="#workstation" title="Permalink to this headline">¶</a></h2>
 <div class="highlight-python"><div class="highlight"><pre>yum -y install krb5-workstation pam_krb5 authconfig mod_auth_kerb
 authconfig --enablekrb5 --krb5kdc=localhost.localdomain --krb5adminserver=localhost.localdomain --krb5realm=EXAMPLE.COM --update
 useradd d563
@@ -123,16 +123,16 @@ useradd d563
         <div class="sphinxsidebarwrapper">
   <h3><a href="../index.html">Table Of Contents</a></h3>
   <ul>
-<li><a class="reference internal" href="#">3.4. krb5</a><ul>
-<li><a class="reference internal" href="#kdc">3.4.1. kdc</a></li>
-<li><a class="reference internal" href="#workstation">3.4.2. workstation</a></li>
+<li><a class="reference internal" href="#">3.5. krb5</a><ul>
+<li><a class="reference internal" href="#kdc">3.5.1. kdc</a></li>
+<li><a class="reference internal" href="#workstation">3.5.2. workstation</a></li>
 </ul>
 </li>
 </ul>
 
   <h4>Previous topic</h4>
   <p class="topless"><a href="mongodb.html"
-                        title="previous chapter">3.3. mongodb</a></p>
+                        title="previous chapter">3.4. mongodb</a></p>
   <h4>Next topic</h4>
   <p class="topless"><a href="../auto/index.html"
                         title="next chapter">4. auto</a></p>
@@ -166,7 +166,7 @@ useradd d563
           <a href="../auto/index.html" title="4. auto"
              >next</a> |</li>
         <li class="right" >
-          <a href="mongodb.html" title="3.3. mongodb"
+          <a href="mongodb.html" title="3.4. mongodb"
              >previous</a> |</li>
         <li class="nav-item nav-item-0"><a href="../index.html">SLMan 0.0.2 documentation</a> &raquo;</li>
           <li class="nav-item nav-item-1"><a href="index.html" >3. data</a> &raquo;</li> 

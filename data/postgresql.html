@@ -6,7 +6,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>4. auto &mdash; SLMan 0.0.2 documentation</title>
+    <title>3.3. postgresql &mdash; SLMan 0.0.2 documentation</title>
     
     <link rel="stylesheet" href="../_static/pyramid.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
@@ -25,8 +25,9 @@
     <script type="text/javascript" src="../_static/underscore.js"></script>
     <script type="text/javascript" src="../_static/doctools.js"></script>
     <link rel="top" title="SLMan 0.0.2 documentation" href="../index.html" />
-    <link rel="next" title="4.1. jenkins" href="jenkins.html" />
-    <link rel="prev" title="3.5. krb5" href="../data/krb5.html" />
+    <link rel="up" title="3. data" href="index.html" />
+    <link rel="next" title="3.4. mongodb" href="mongodb.html" />
+    <link rel="prev" title="3.2. mysql" href="mysql.html" />
 <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Neuton&amp;subset=latin" type="text/css" media="screen" charset="utf-8" />
 <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Nobile:regular,italic,bold,bolditalic&amp;subset=latin" type="text/css" media="screen" charset="utf-8" />
 <!--[if lte IE 6]>
@@ -46,12 +47,13 @@
           <a href="../py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
         <li class="right" >
-          <a href="jenkins.html" title="4.1. jenkins"
+          <a href="mongodb.html" title="3.4. mongodb"
              accesskey="N">next</a> |</li>
         <li class="right" >
-          <a href="../data/krb5.html" title="3.5. krb5"
+          <a href="mysql.html" title="3.2. mysql"
              accesskey="P">previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../index.html">SLMan 0.0.2 documentation</a> &raquo;</li> 
+        <li class="nav-item nav-item-0"><a href="../index.html">SLMan 0.0.2 documentation</a> &raquo;</li>
+          <li class="nav-item nav-item-1"><a href="index.html" accesskey="U">3. data</a> &raquo;</li> 
       </ul>
     </div>  
 
@@ -60,24 +62,65 @@
         <div class="bodywrapper">
           <div class="body" role="main">
             
-  <div class="section" id="auto">
-<h1>4. auto<a class="headerlink" href="#auto" title="Permalink to this headline">¶</a></h1>
-<div class="toctree-wrapper compound">
-<ul>
-<li class="toctree-l1"><a class="reference internal" href="jenkins.html">4.1. jenkins</a></li>
-<li class="toctree-l1"><a class="reference internal" href="hinemos.html">4.2. hinemos</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="hinemos.html#manager">4.2.1. manager</a></li>
-<li class="toctree-l2"><a class="reference internal" href="hinemos.html#client">4.2.2. client</a></li>
-<li class="toctree-l2"><a class="reference internal" href="hinemos.html#agent">4.2.3. agent</a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="munin.html">4.3. munin</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="munin.html#server">4.3.1. server</a></li>
-<li class="toctree-l2"><a class="reference internal" href="munin.html#client">4.3.2. client</a></li>
-<li class="toctree-l2"><a class="reference internal" href="munin.html#tomcat">4.3.3. tomcat</a></li>
-</ul>
-</li>
-</ul>
+  <div class="section" id="postgresql">
+<h1>3.3. postgresql<a class="headerlink" href="#postgresql" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="server">
+<h2>3.3.1. server<a class="headerlink" href="#server" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-python"><div class="highlight"><pre>yum -y install postgresql-server
+</pre></div>
+</div>
+<span class="target" id="index-0"></span><div class="highlight-python" id="index-1"><div class="highlight"><pre>/etc/init.d/postgresql initdb
+
+sed -i.org \
+-e &quot;s/^#listen_addresses.*/listen_addresses = &#39;*&#39;/&quot; \
+-e &quot;s/^#log_line_prefix.*/log_line_prefix = &#39;%t %u %d &#39;/&quot; \
+/var/lib/pgsql/data/postgresql.conf
+
+echo &#39;host all all 0.0.0.0/0 trust&#39; &gt;&gt; /var/lib/pgsql/data/pg_hba.conf
+
+/etc/init.d/postgresql start
+</pre></div>
+</div>
+</div>
+<div class="section" id="setting">
+<h2>3.3.2. setting<a class="headerlink" href="#setting" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-python"><div class="highlight"><pre>su - postgres
+psql -c &quot;alter user postgres with password &#39;postgres&#39;&quot;
+createuser d563
+psql -c &quot;\du&quot;
+dropuser d563
+</pre></div>
+</div>
+<div class="highlight-python"><div class="highlight"><pre>createdb SLMan
+psql -l
+psql SLMan
+
+create table tbl1(
+  name varchar(32) not null,
+  primary key(name)
+);
+
+alter table tbl1 add score int;
+alter table tbl1 add created date;
+
+alter table tbl1 rename to tbl2;
+insert into tbl1 select * from tbl2;
+
+\d tbl1
+
+drop table tbl1;
+\q
+
+dropdb SLMan
+</pre></div>
+</div>
+</div>
+<div class="section" id="backup">
+<h2>3.3.3. backup<a class="headerlink" href="#backup" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-python"><div class="highlight"><pre>pg_dump SLMan &gt; SLMan.dmp
+psql SLMan &lt; SLMan.dmp
+</pre></div>
+</div>
 </div>
 </div>
 
@@ -87,12 +130,22 @@
       </div>
       <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
         <div class="sphinxsidebarwrapper">
+  <h3><a href="../index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">3.3. postgresql</a><ul>
+<li><a class="reference internal" href="#server">3.3.1. server</a></li>
+<li><a class="reference internal" href="#setting">3.3.2. setting</a></li>
+<li><a class="reference internal" href="#backup">3.3.3. backup</a></li>
+</ul>
+</li>
+</ul>
+
   <h4>Previous topic</h4>
-  <p class="topless"><a href="../data/krb5.html"
-                        title="previous chapter">3.5. krb5</a></p>
+  <p class="topless"><a href="mysql.html"
+                        title="previous chapter">3.2. mysql</a></p>
   <h4>Next topic</h4>
-  <p class="topless"><a href="jenkins.html"
-                        title="next chapter">4.1. jenkins</a></p>
+  <p class="topless"><a href="mongodb.html"
+                        title="next chapter">3.4. mongodb</a></p>
 <div id="searchbox" style="display: none" role="search">
   <h3>Quick search</h3>
     <form class="search" action="../search.html" method="get">
@@ -120,12 +173,13 @@
           <a href="../py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
         <li class="right" >
-          <a href="jenkins.html" title="4.1. jenkins"
+          <a href="mongodb.html" title="3.4. mongodb"
              >next</a> |</li>
         <li class="right" >
-          <a href="../data/krb5.html" title="3.5. krb5"
+          <a href="mysql.html" title="3.2. mysql"
              >previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../index.html">SLMan 0.0.2 documentation</a> &raquo;</li> 
+        <li class="nav-item nav-item-0"><a href="../index.html">SLMan 0.0.2 documentation</a> &raquo;</li>
+          <li class="nav-item nav-item-1"><a href="index.html" >3. data</a> &raquo;</li> 
       </ul>
     </div>
     <div class="footer" role="contentinfo">

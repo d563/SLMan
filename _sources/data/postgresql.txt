@@ -1,0 +1,64 @@
+postgresql
+==========
+server
+------
+::
+
+    yum -y install postgresql-server
+
+.. index:: /var/lib/pgsql/data/postgresql.conf
+.. index:: /var/lib/pgsql/data/pg_hba.conf
+
+::
+
+    /etc/init.d/postgresql initdb
+
+    sed -i.org \
+    -e "s/^#listen_addresses.*/listen_addresses = '*'/" \
+    -e "s/^#log_line_prefix.*/log_line_prefix = '%t %u %d '/" \
+    /var/lib/pgsql/data/postgresql.conf
+
+    echo 'host all all 0.0.0.0/0 trust' >> /var/lib/pgsql/data/pg_hba.conf
+
+    /etc/init.d/postgresql start
+
+setting
+-------
+::
+
+    su - postgres 
+    psql -c "alter user postgres with password 'postgres'"
+    createuser d563
+    psql -c "\du"
+    dropuser d563
+
+::
+
+    createdb SLMan
+    psql -l
+    psql SLMan
+
+    create table tbl1(
+      name varchar(32) not null,
+      primary key(name)
+    );
+
+    alter table tbl1 add score int;
+    alter table tbl1 add created date;
+
+    alter table tbl1 rename to tbl2;
+    insert into tbl1 select * from tbl2;
+
+    \d tbl1
+
+    drop table tbl1;
+    \q
+
+    dropdb SLMan
+
+backup
+------
+::
+
+    pg_dump SLMan > SLMan.dmp
+    psql SLMan < SLMan.dmp

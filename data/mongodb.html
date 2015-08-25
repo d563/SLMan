@@ -6,7 +6,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>3.3. mongodb &mdash; SLMan 0.0.2 documentation</title>
+    <title>3.4. mongodb &mdash; SLMan 0.0.2 documentation</title>
     
     <link rel="stylesheet" href="../_static/pyramid.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
@@ -26,8 +26,8 @@
     <script type="text/javascript" src="../_static/doctools.js"></script>
     <link rel="top" title="SLMan 0.0.2 documentation" href="../index.html" />
     <link rel="up" title="3. data" href="index.html" />
-    <link rel="next" title="3.4. krb5" href="krb5.html" />
-    <link rel="prev" title="3.2. mysql" href="mysql.html" />
+    <link rel="next" title="3.5. krb5" href="krb5.html" />
+    <link rel="prev" title="3.3. postgresql" href="postgresql.html" />
 <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Neuton&amp;subset=latin" type="text/css" media="screen" charset="utf-8" />
 <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Nobile:regular,italic,bold,bolditalic&amp;subset=latin" type="text/css" media="screen" charset="utf-8" />
 <!--[if lte IE 6]>
@@ -47,10 +47,10 @@
           <a href="../py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
         <li class="right" >
-          <a href="krb5.html" title="3.4. krb5"
+          <a href="krb5.html" title="3.5. krb5"
              accesskey="N">next</a> |</li>
         <li class="right" >
-          <a href="mysql.html" title="3.2. mysql"
+          <a href="postgresql.html" title="3.3. postgresql"
              accesskey="P">previous</a> |</li>
         <li class="nav-item nav-item-0"><a href="../index.html">SLMan 0.0.2 documentation</a> &raquo;</li>
           <li class="nav-item nav-item-1"><a href="index.html" accesskey="U">3. data</a> &raquo;</li> 
@@ -63,9 +63,9 @@
           <div class="body" role="main">
             
   <div class="section" id="mongodb">
-<h1>3.3. mongodb<a class="headerlink" href="#mongodb" title="Permalink to this headline">¶</a></h1>
+<h1>3.4. mongodb<a class="headerlink" href="#mongodb" title="Permalink to this headline">¶</a></h1>
 <div class="section" id="server">
-<h2>3.3.1. server<a class="headerlink" href="#server" title="Permalink to this headline">¶</a></h2>
+<h2>3.4.1. server<a class="headerlink" href="#server" title="Permalink to this headline">¶</a></h2>
 <div class="highlight-python" id="index-0"><div class="highlight"><pre>cat &lt;&lt; &#39;[EOF]&#39; &gt; /etc/yum.repos.d/mongodb.repo
 [mongodb]
 name=MongoDB Repository
@@ -89,7 +89,7 @@ service mongod start
 </div>
 </div>
 <div class="section" id="rest">
-<h2>3.3.2. rest<a class="headerlink" href="#rest" title="Permalink to this headline">¶</a></h2>
+<h2>3.4.2. rest<a class="headerlink" href="#rest" title="Permalink to this headline">¶</a></h2>
 <div class="highlight-python"><div class="highlight"><pre>curl -d &#39;{&quot;key&quot;: &quot;val&quot;}&#39; http://localhost:28017/testdb/testcol/
 curl http://localhost:28017/testdb/testcol/
 </pre></div>
@@ -105,19 +105,19 @@ curl http://localhost:28017/testdb/testcol/
         <div class="sphinxsidebarwrapper">
   <h3><a href="../index.html">Table Of Contents</a></h3>
   <ul>
-<li><a class="reference internal" href="#">3.3. mongodb</a><ul>
-<li><a class="reference internal" href="#server">3.3.1. server</a></li>
-<li><a class="reference internal" href="#rest">3.3.2. rest</a></li>
+<li><a class="reference internal" href="#">3.4. mongodb</a><ul>
+<li><a class="reference internal" href="#server">3.4.1. server</a></li>
+<li><a class="reference internal" href="#rest">3.4.2. rest</a></li>
 </ul>
 </li>
 </ul>
 
   <h4>Previous topic</h4>
-  <p class="topless"><a href="mysql.html"
-                        title="previous chapter">3.2. mysql</a></p>
+  <p class="topless"><a href="postgresql.html"
+                        title="previous chapter">3.3. postgresql</a></p>
   <h4>Next topic</h4>
   <p class="topless"><a href="krb5.html"
-                        title="next chapter">3.4. krb5</a></p>
+                        title="next chapter">3.5. krb5</a></p>
 <div id="searchbox" style="display: none" role="search">
   <h3>Quick search</h3>
     <form class="search" action="../search.html" method="get">
@@ -145,10 +145,10 @@ curl http://localhost:28017/testdb/testcol/
           <a href="../py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
         <li class="right" >
-          <a href="krb5.html" title="3.4. krb5"
+          <a href="krb5.html" title="3.5. krb5"
              >next</a> |</li>
         <li class="right" >
-          <a href="mysql.html" title="3.2. mysql"
+          <a href="postgresql.html" title="3.3. postgresql"
              >previous</a> |</li>
         <li class="nav-item nav-item-0"><a href="../index.html">SLMan 0.0.2 documentation</a> &raquo;</li>
           <li class="nav-item nav-item-1"><a href="index.html" >3. data</a> &raquo;</li> 

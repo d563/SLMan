@@ -3,5 +3,6 @@ data
 .. toctree::
     oracle
     mysql
+    postgresql
     mongodb
     krb5
