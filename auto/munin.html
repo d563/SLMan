@@ -6,7 +6,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>4.3. munin &mdash; SLMan 0.0.2 documentation</title>
+    <title>4.4. munin &mdash; SLMan 0.0.2 documentation</title>
     
     <link rel="stylesheet" href="../_static/pyramid.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
@@ -27,7 +27,7 @@
     <link rel="top" title="SLMan 0.0.2 documentation" href="../index.html" />
     <link rel="up" title="4. auto" href="index.html" />
     <link rel="next" title="5. bapp" href="../bapp/index.html" />
-    <link rel="prev" title="4.2. hinemos" href="hinemos.html" />
+    <link rel="prev" title="4.3. krb5" href="krb5.html" />
 <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Neuton&amp;subset=latin" type="text/css" media="screen" charset="utf-8" />
 <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Nobile:regular,italic,bold,bolditalic&amp;subset=latin" type="text/css" media="screen" charset="utf-8" />
 <!--[if lte IE 6]>
@@ -50,7 +50,7 @@
           <a href="../bapp/index.html" title="5. bapp"
              accesskey="N">next</a> |</li>
         <li class="right" >
-          <a href="hinemos.html" title="4.2. hinemos"
+          <a href="krb5.html" title="4.3. krb5"
              accesskey="P">previous</a> |</li>
         <li class="nav-item nav-item-0"><a href="../index.html">SLMan 0.0.2 documentation</a> &raquo;</li>
           <li class="nav-item nav-item-1"><a href="index.html" accesskey="U">4. auto</a> &raquo;</li> 
@@ -63,13 +63,13 @@
           <div class="body" role="main">
             
   <div class="section" id="munin">
-<h1>4.3. munin<a class="headerlink" href="#munin" title="Permalink to this headline">¶</a></h1>
+<h1>4.4. munin<a class="headerlink" href="#munin" title="Permalink to this headline">¶</a></h1>
 <div class="highlight-python" id="index-0"><div class="highlight"><pre>rpm -Uvh http://dl.fedoraproject.org/pub/epel/6/x86_64/epel-release-6-8.noarch.rpm
 vi /etc/yum.repos.d/epel.repo
 </pre></div>
 </div>
 <div class="section" id="server">
-<h2>4.3.1. server<a class="headerlink" href="#server" title="Permalink to this headline">¶</a></h2>
+<h2>4.4.1. server<a class="headerlink" href="#server" title="Permalink to this headline">¶</a></h2>
 <span class="target" id="index-1"></span><div class="highlight-python" id="index-2"><div class="highlight"><pre># yum -y install httpd
 yum -y install munin --enablerepo=epel
 
@@ -85,7 +85,7 @@ service httpd start
 </div>
 </div>
 <div class="section" id="client">
-<h2>4.3.2. client<a class="headerlink" href="#client" title="Permalink to this headline">¶</a></h2>
+<h2>4.4.2. client<a class="headerlink" href="#client" title="Permalink to this headline">¶</a></h2>
 <div class="highlight-python" id="index-3"><div class="highlight"><pre>yum -y install munin-node --enablerepo=epel
 
 vi /etc/munin/munin-node.conf
@@ -97,7 +97,7 @@ service munin-node start
 </div>
 </div>
 <div class="section" id="tomcat">
-<h2>4.3.3. tomcat<a class="headerlink" href="#tomcat" title="Permalink to this headline">¶</a></h2>
+<h2>4.4.3. tomcat<a class="headerlink" href="#tomcat" title="Permalink to this headline">¶</a></h2>
 <div class="highlight-python"><div class="highlight"><pre>cd /usr/share/tomcat6/webapps
 http://woontai.dip.jp/muninwardownload/munin.war
 
@@ -126,17 +126,17 @@ service munin-node restart
         <div class="sphinxsidebarwrapper">
   <h3><a href="../index.html">Table Of Contents</a></h3>
   <ul>
-<li><a class="reference internal" href="#">4.3. munin</a><ul>
-<li><a class="reference internal" href="#server">4.3.1. server</a></li>
-<li><a class="reference internal" href="#client">4.3.2. client</a></li>
-<li><a class="reference internal" href="#tomcat">4.3.3. tomcat</a></li>
+<li><a class="reference internal" href="#">4.4. munin</a><ul>
+<li><a class="reference internal" href="#server">4.4.1. server</a></li>
+<li><a class="reference internal" href="#client">4.4.2. client</a></li>
+<li><a class="reference internal" href="#tomcat">4.4.3. tomcat</a></li>
 </ul>
 </li>
 </ul>
 
   <h4>Previous topic</h4>
-  <p class="topless"><a href="hinemos.html"
-                        title="previous chapter">4.2. hinemos</a></p>
+  <p class="topless"><a href="krb5.html"
+                        title="previous chapter">4.3. krb5</a></p>
   <h4>Next topic</h4>
   <p class="topless"><a href="../bapp/index.html"
                         title="next chapter">5. bapp</a></p>
@@ -170,7 +170,7 @@ service munin-node restart
           <a href="../bapp/index.html" title="5. bapp"
              >next</a> |</li>
         <li class="right" >
-          <a href="hinemos.html" title="4.2. hinemos"
+          <a href="krb5.html" title="4.3. krb5"
              >previous</a> |</li>
         <li class="nav-item nav-item-0"><a href="../index.html">SLMan 0.0.2 documentation</a> &raquo;</li>
           <li class="nav-item nav-item-1"><a href="index.html" >4. auto</a> &raquo;</li> 

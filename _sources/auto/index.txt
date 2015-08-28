@@ -3,4 +3,5 @@ auto
 .. toctree::
     jenkins
     hinemos
+    krb5
     munin

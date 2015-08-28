@@ -29,3 +29,48 @@ winshot
 * その他設定 - 自動保存時の拡張子 - ビットマップ - .png に変更
 * 品質/減色 - 減色 - 256色 に変更
 * ホット・キー - ビットマップで保存(範囲選択) - PrintScreen に変更
+
+eclipse
+-------
+::
+
+    http://ftp.jaist.ac.jp/pub/mergedoc/pleiades/4.4/pleiades-e4.4-java-32bit_20150310.zip
+
+* ヘルプ > 新規ソフトウェアのインストール
+    - http://dist.springsource.org/snapshot/GRECLIPSE/e4.4/
+
+* ウィンドウ > 設定 >
+    - 一般 > ワークスペース > 新規テキスト・ファイルの行区切り文字
+    - Java > インストール済みのJRE
+    - Java > コンパイラー
+
+* 新規 > 動的Webプロジェクト >
+    - 動的Webモジュールバージョン > 2.5
+    - 構成 > 変更 > Java > 1.6
+    - ビルド・パス上のソース・フォルダ > src > 除去
+    - ビルド・パス上のソース・フォルダ > フォルダーの追加
+        + src/main/java
+        + src/main/groovy
+        + src/main/resources
+        + src/test/java
+        + src/test/groovy
+        + src/test/resources
+    - コンテンツ・ディレクトリ > src/main/webapp
+
+* 構成 > Mavenプロジェクトへ変換
+
+* プロパティー > Javaのビルド・パス > ソース
+
+* サーバ > 新規サーバ >
+    - Apache > Tomcat v7.0サーバ
+    - Tomcatインストール／ディレクトリー
+    - JRE
+
+virtualbox
+----------
+
+* 設定 > ネットワーク >
+    - アダプター1 > NAT
+    - アダプター2 > ホストオンリーアダプタ
+
+* [*] System clock uses UTC

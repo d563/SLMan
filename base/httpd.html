@@ -87,6 +87,16 @@ systemctl show --all httpd
 ll /usr/lib/systemd/system/*.service
 ll /etc/systemd/system/*
 
+# cat &lt;&lt; &#39;[EOF]&#39; &gt; /etc/systemd/system/SLMan.service
+# [Unit]
+# Description = SLMan daemon
+#
+# [Service]
+# ExecStart = /opt/SLMan.sh
+#
+# [Install]
+# WantedBy = multi-user.target
+
 firewall-cmd --permanent --add-service=http
 firewall-cmd --reload
 </pre></div>
