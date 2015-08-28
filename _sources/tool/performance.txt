@@ -42,8 +42,8 @@ net-tools (6.X)
     yum -y install net-tools
 
     netstat
-      -antp               TCPポート
-      -anup               UDPポート
+      -lntp               TCPポート
+      -lnup               UDPポート
 
 iproute (7.X)
 -------------
@@ -52,8 +52,8 @@ iproute (7.X)
     yum -y install iproute
 
     ss
-      -antp               TCPポート
-      -anup               UDPポート
+      -lntp               TCPポート
+      -lnup               UDPポート
 
 strace
 ------

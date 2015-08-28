@@ -12,24 +12,42 @@ server
 .. index:: /etc/munin/munin-htpasswd
 .. index:: /etc/munin/munin.conf
 
-
 ::
 
-    # yum -y install httpd
+    # yum -y install httpd telnet openssh-clients
     yum -y install munin --enablerepo=epel
 
     htpasswd -b /etc/munin/munin-htpasswd d563 d563
 
     vi /etc/munin/munin.conf
-      [localhost-client]
-        address 127.0.0.1
+      [group;localhost]
+        address ssh://127.0.0.1/usr/bin/nc 127.0.0.1 4949
         use_node_name yes
 
     service httpd start
+    curl --user d563:d563 localhost/munin/
+
+.. index:: /etc/cron.d/munin
+.. index:: /etc/httpd/conf.d/munin.conf
+
+::
+
+    view /etc/cron.d/munin
+    view /etc/httpd/conf.d/munin.conf
+
+    sudo -u munin munin-cron
+
+    telnet localhost 4949
+    fetch cpu
+    puit
+
+    sudo -u munin ssh-keygen
+    sudo cat /var/lib/munin/.ssh/id_rsa.pub    
 
 client
 ------
 .. index:: /etc/munin/munin-node.conf
+.. index:: /etc/munin/plugins
 
 ::
 
@@ -41,22 +59,17 @@ client
     chkconfig munin-node on
     service munin-node start
 
-tomcat
-------
+    ll /etc/munin/plugins
+    munin-run cpu
+
 ::
 
-    cd /usr/share/tomcat6/webapps
-    http://woontai.dip.jp/muninwardownload/munin.war
+    yum -y install nc
 
-    service tomcat6 start
-
-    cd /usr/share/munin/plugins
-    cp /usr/share/tomcat6/webapps/munin/sh/catalina_* .
-    chmod +x catalina_*
-    # munin-node-configure --shell | grep catalina | sh
-
-    # /etc/munin/plugin-conf.d/catalina
-    # [catalina_8080_*]
-    #   env.url http://localhost:8080/munin/plugins
-
-    service munin-node restart
+    chsh -s /bin/bash munin
+    install -d -m 755 -o munin -g munin /var/lib/munin
+    su - munin
+    install -d -m 700 .ssh
+    cd .ssh
+    echo id_rsa.pub >> authorized_keys
+    chmod 600 authorized_keys

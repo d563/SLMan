@@ -70,49 +70,57 @@ vi /etc/yum.repos.d/epel.repo
 </div>
 <div class="section" id="server">
 <h2>4.4.1. server<a class="headerlink" href="#server" title="Permalink to this headline">¶</a></h2>
-<span class="target" id="index-1"></span><div class="highlight-python" id="index-2"><div class="highlight"><pre># yum -y install httpd
+<span class="target" id="index-1"></span><div class="highlight-python" id="index-2"><div class="highlight"><pre># yum -y install httpd telnet openssh-clients
 yum -y install munin --enablerepo=epel
 
 htpasswd -b /etc/munin/munin-htpasswd d563 d563
 
 vi /etc/munin/munin.conf
-  [localhost-client]
-    address 127.0.0.1
+  [group;localhost]
+    address ssh://127.0.0.1/usr/bin/nc 127.0.0.1 4949
     use_node_name yes
 
 service httpd start
+curl --user d563:d563 localhost/munin/
+</pre></div>
+</div>
+<span class="target" id="index-3"></span><div class="highlight-python" id="index-4"><div class="highlight"><pre>view /etc/cron.d/munin
+view /etc/httpd/conf.d/munin.conf
+
+sudo -u munin munin-cron
+
+telnet localhost 4949
+fetch cpu
+puit
+
+sudo -u munin ssh-keygen
+sudo cat /var/lib/munin/.ssh/id_rsa.pub
 </pre></div>
 </div>
 </div>
 <div class="section" id="client">
 <h2>4.4.2. client<a class="headerlink" href="#client" title="Permalink to this headline">¶</a></h2>
-<div class="highlight-python" id="index-3"><div class="highlight"><pre>yum -y install munin-node --enablerepo=epel
+<span class="target" id="index-5"></span><div class="highlight-python" id="index-6"><div class="highlight"><pre>yum -y install munin-node --enablerepo=epel
 
 vi /etc/munin/munin-node.conf
   allow ^127\.0\.0\.1$
 
 chkconfig munin-node on
 service munin-node start
+
+ll /etc/munin/plugins
+munin-run cpu
 </pre></div>
 </div>
-</div>
-<div class="section" id="tomcat">
-<h2>4.4.3. tomcat<a class="headerlink" href="#tomcat" title="Permalink to this headline">¶</a></h2>
-<div class="highlight-python"><div class="highlight"><pre>cd /usr/share/tomcat6/webapps
-http://woontai.dip.jp/muninwardownload/munin.war
+<div class="highlight-python"><div class="highlight"><pre>yum -y install nc
 
-service tomcat6 start
-
-cd /usr/share/munin/plugins
-cp /usr/share/tomcat6/webapps/munin/sh/catalina_* .
-chmod +x catalina_*
-# munin-node-configure --shell | grep catalina | sh
-
-# /etc/munin/plugin-conf.d/catalina
-# [catalina_8080_*]
-#   env.url http://localhost:8080/munin/plugins
-
-service munin-node restart
+chsh -s /bin/bash munin
+install -d -m 755 -o munin -g munin /var/lib/munin
+su - munin
+install -d -m 700 .ssh
+cd .ssh
+echo id_rsa.pub &gt;&gt; authorized_keys
+chmod 600 authorized_keys
 </pre></div>
 </div>
 </div>
@@ -129,7 +137,6 @@ service munin-node restart
 <li><a class="reference internal" href="#">4.4. munin</a><ul>
 <li><a class="reference internal" href="#server">4.4.1. server</a></li>
 <li><a class="reference internal" href="#client">4.4.2. client</a></li>
-<li><a class="reference internal" href="#tomcat">4.4.3. tomcat</a></li>
 </ul>
 </li>
 </ul>
