@@ -18,6 +18,8 @@ link
 
     chown -h user link
 
+    unlink link
+
 search
 ------
 ::
