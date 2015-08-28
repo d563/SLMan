@@ -6,7 +6,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>3.3. postgresql &mdash; SLMan 0.0.2 documentation</title>
+    <title>3.2. postgresql &mdash; SLMan 0.0.2 documentation</title>
     
     <link rel="stylesheet" href="../_static/pyramid.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
@@ -26,8 +26,8 @@
     <script type="text/javascript" src="../_static/doctools.js"></script>
     <link rel="top" title="SLMan 0.0.2 documentation" href="../index.html" />
     <link rel="up" title="3. data" href="index.html" />
-    <link rel="next" title="3.4. mongodb" href="mongodb.html" />
-    <link rel="prev" title="3.2. mysql" href="mysql.html" />
+    <link rel="next" title="3.3. mysql" href="mysql.html" />
+    <link rel="prev" title="3.1. oracle" href="oracle.html" />
 <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Neuton&amp;subset=latin" type="text/css" media="screen" charset="utf-8" />
 <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Nobile:regular,italic,bold,bolditalic&amp;subset=latin" type="text/css" media="screen" charset="utf-8" />
 <!--[if lte IE 6]>
@@ -47,10 +47,10 @@
           <a href="../py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
         <li class="right" >
-          <a href="mongodb.html" title="3.4. mongodb"
+          <a href="mysql.html" title="3.3. mysql"
              accesskey="N">next</a> |</li>
         <li class="right" >
-          <a href="mysql.html" title="3.2. mysql"
+          <a href="oracle.html" title="3.1. oracle"
              accesskey="P">previous</a> |</li>
         <li class="nav-item nav-item-0"><a href="../index.html">SLMan 0.0.2 documentation</a> &raquo;</li>
           <li class="nav-item nav-item-1"><a href="index.html" accesskey="U">3. data</a> &raquo;</li> 
@@ -63,9 +63,9 @@
           <div class="body" role="main">
             
   <div class="section" id="postgresql">
-<h1>3.3. postgresql<a class="headerlink" href="#postgresql" title="Permalink to this headline">¶</a></h1>
+<h1>3.2. postgresql<a class="headerlink" href="#postgresql" title="Permalink to this headline">¶</a></h1>
 <div class="section" id="server">
-<h2>3.3.1. server<a class="headerlink" href="#server" title="Permalink to this headline">¶</a></h2>
+<h2>3.2.1. server<a class="headerlink" href="#server" title="Permalink to this headline">¶</a></h2>
 <div class="highlight-python"><div class="highlight"><pre>yum -y install postgresql-server
 </pre></div>
 </div>
@@ -83,7 +83,7 @@ echo &#39;host all all 0.0.0.0/0 trust&#39; &gt;&gt; /var/lib/pgsql/data/pg_hba.
 </div>
 </div>
 <div class="section" id="setting">
-<h2>3.3.2. setting<a class="headerlink" href="#setting" title="Permalink to this headline">¶</a></h2>
+<h2>3.2.2. setting<a class="headerlink" href="#setting" title="Permalink to this headline">¶</a></h2>
 <div class="highlight-python"><div class="highlight"><pre>su - postgres
 psql -c &quot;alter user postgres with password &#39;postgres&#39;&quot;
 createuser d563
@@ -116,7 +116,7 @@ dropdb SLMan
 </div>
 </div>
 <div class="section" id="backup">
-<h2>3.3.3. backup<a class="headerlink" href="#backup" title="Permalink to this headline">¶</a></h2>
+<h2>3.2.3. backup<a class="headerlink" href="#backup" title="Permalink to this headline">¶</a></h2>
 <div class="highlight-python"><div class="highlight"><pre>pg_dump SLMan &gt; SLMan.dmp
 psql SLMan &lt; SLMan.dmp
 </pre></div>
@@ -132,20 +132,20 @@ psql SLMan &lt; SLMan.dmp
         <div class="sphinxsidebarwrapper">
   <h3><a href="../index.html">Table Of Contents</a></h3>
   <ul>
-<li><a class="reference internal" href="#">3.3. postgresql</a><ul>
-<li><a class="reference internal" href="#server">3.3.1. server</a></li>
-<li><a class="reference internal" href="#setting">3.3.2. setting</a></li>
-<li><a class="reference internal" href="#backup">3.3.3. backup</a></li>
+<li><a class="reference internal" href="#">3.2. postgresql</a><ul>
+<li><a class="reference internal" href="#server">3.2.1. server</a></li>
+<li><a class="reference internal" href="#setting">3.2.2. setting</a></li>
+<li><a class="reference internal" href="#backup">3.2.3. backup</a></li>
 </ul>
 </li>
 </ul>
 
   <h4>Previous topic</h4>
-  <p class="topless"><a href="mysql.html"
-                        title="previous chapter">3.2. mysql</a></p>
+  <p class="topless"><a href="oracle.html"
+                        title="previous chapter">3.1. oracle</a></p>
   <h4>Next topic</h4>
-  <p class="topless"><a href="mongodb.html"
-                        title="next chapter">3.4. mongodb</a></p>
+  <p class="topless"><a href="mysql.html"
+                        title="next chapter">3.3. mysql</a></p>
 <div id="searchbox" style="display: none" role="search">
   <h3>Quick search</h3>
     <form class="search" action="../search.html" method="get">
@@ -173,10 +173,10 @@ psql SLMan &lt; SLMan.dmp
           <a href="../py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
         <li class="right" >
-          <a href="mongodb.html" title="3.4. mongodb"
+          <a href="mysql.html" title="3.3. mysql"
              >next</a> |</li>
         <li class="right" >
-          <a href="mysql.html" title="3.2. mysql"
+          <a href="oracle.html" title="3.1. oracle"
              >previous</a> |</li>
         <li class="nav-item nav-item-0"><a href="../index.html">SLMan 0.0.2 documentation</a> &raquo;</li>
           <li class="nav-item nav-item-1"><a href="index.html" >3. data</a> &raquo;</li> 
