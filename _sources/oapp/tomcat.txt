@@ -132,6 +132,27 @@ tomcat
       }
     }
 
+.. module:: log4j.xml
+.. code-block:: xml
+
+    <?xml version="1.0" encoding="UTF-8" ?>
+    <!DOCTYPE log4j:configuration SYSTEM "log4j.dtd">
+    <!-- /var/lib/git/tomcat/src/main/webapp/WEB-INF/classes/log4j.xml -->
+    <log4j:configuration xmlns:log4j="http://jakarta.apache.org/log4j/" >
+      <appender name="STDOUT" class="org.apache.log4j.ConsoleAppender">
+         <layout class="org.apache.log4j.PatternLayout">
+            <param name="ConversionPattern" value="## %d{yyyy/MM/dd HH:mm:ss} %-5p (%F:%L) - %m %t %n" />
+         </layout>
+      </appender>
+      <category name="d563">
+        <priority value="INFO" />
+      </category>
+      <root>
+        <priority value="WARN" />
+        <appender-ref ref="stdout"/>
+      </root>
+    </log4j:configuration>
+
 ::
 
     echo '<Context path="/SLMan" docBase="/var/lib/git/tomcat/target/tomcat" reloadable="true"/>' \
