@@ -5,30 +5,30 @@ rlogin
 ------
 
 * スクリーン
-    - フォントサイズから一行あたりの文字数を決定 14
-    - ターミナル - 右クリックでペースト
+    - フォントサイズから一行あたりの文字数を決定 > 14
+    - ターミナル > 右クリックでペースト
 * クリップボード
     - 左クリックの範囲指定だけでクリップボードにコピーする
 * カラー
-    - 文字色 8
-    - 背景色 15
+    - 文字色 > 8
+    - 背景色 > 15
 
 winscp
 ------
 
-* Preferences - Preferences...
-    - Editors - Edit...
+* Preferences > Preferences...
+    - Editors > Edit...
         + (削除) Force text transfer mode for files edited in external editor
-    - Transfer - Edit...
+    - Transfer > Edit...
         + Binary
 
 winshot
 -------
 
-* 基本設定 - 保存先 - C:\work に変更
-* その他設定 - 自動保存時の拡張子 - ビットマップ - .png に変更
-* 品質/減色 - 減色 - 256色 に変更
-* ホット・キー - ビットマップで保存(範囲選択) - PrintScreen に変更
+* 基本設定 > 保存先
+* その他設定 > 自動保存時の拡張子 > ビットマップ > .png
+* 品質/減色 > 減色 > 256色
+* ホット・キー > ビットマップで保存(範囲選択) > PrintScreen
 
 eclipse
 -------
@@ -39,12 +39,12 @@ eclipse
 * ヘルプ > 新規ソフトウェアのインストール
     - http://dist.springsource.org/snapshot/GRECLIPSE/e4.4/
 
-* ウィンドウ > 設定 >
+* ウィンドウ > 設定
     - 一般 > ワークスペース > 新規テキスト・ファイルの行区切り文字
     - Java > インストール済みのJRE
     - Java > コンパイラー
 
-* 新規 > 動的Webプロジェクト >
+* 新規 > 動的Webプロジェクト
     - 動的Webモジュールバージョン > 2.5
     - 構成 > 変更 > Java > 1.6
     - ビルド・パス上のソース・フォルダ > src > 除去
@@ -61,7 +61,7 @@ eclipse
 
 * プロパティー > Javaのビルド・パス > ソース
 
-* サーバ > 新規サーバ >
+* サーバ > 新規サーバ
     - Apache > Tomcat v7.0サーバ
     - Tomcatインストール／ディレクトリー
     - JRE
@@ -69,7 +69,7 @@ eclipse
 virtualbox
 ----------
 
-* 設定 > ネットワーク >
+* 設定 > ネットワーク
     - アダプター1 > NAT
     - アダプター2 > ホストオンリーアダプタ
 

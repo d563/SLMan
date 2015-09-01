@@ -135,14 +135,10 @@ Defaults passprompt = &quot;%u@%h Password: &quot;
 </pre></div>
 </div>
 <div class="highlight-python"><div class="highlight"><pre># 6
-yum -y install wget unzip gcc gcc-c++ java-1.7.0-openjdk-devel python-setuptools python-devel
-</pre></div>
-</div>
-<div class="highlight-python" id="index-9"><div class="highlight"><pre># 7
-yum -y install wget unzip gcc gcc-c++ java-1.7.0-openjdk-devel python-devel bash-completion
+yum -y install wget unzip gcc gcc-c++ java-1.7.0-openjdk-devel python-devel python-setuptools
 
-cd /etc/bash_completion.d
-wget https://github.com/terralinux/systemd/raw/master/src/systemctl-bash-completion.sh
+# 7
+yum -y install wget unzip gcc gcc-c++ java-1.7.0-openjdk-devel python-devel
 </pre></div>
 </div>
 <div class="highlight-python"><div class="highlight"><pre>yum -y update
@@ -156,14 +152,14 @@ pip install -U setuptools
 </div>
 <div class="section" id="sshd">
 <h2>1.1.8. sshd<a class="headerlink" href="#sshd" title="Permalink to this headline">¶</a></h2>
-<div class="highlight-python" id="index-10"><div class="highlight"><pre>sed -i.org -e &#39;/#Port 22/aPort 443&#39; /etc/ssh/sshd_config
+<div class="highlight-python" id="index-9"><div class="highlight"><pre>sed -i.org -e &#39;/#Port 22/aPort 443&#39; /etc/ssh/sshd_config
 service sshd restart
 </pre></div>
 </div>
 </div>
 <div class="section" id="iptables">
 <h2>1.1.9. iptables<a class="headerlink" href="#iptables" title="Permalink to this headline">¶</a></h2>
-<div class="highlight-python" id="index-11"><div class="highlight"><pre># 6
+<div class="highlight-python" id="index-10"><div class="highlight"><pre># 6
 sed -i.org -e &#39;s/--dport 22/--dport 443/&#39; /etc/sysconfig/iptables
 service iptables restart
 

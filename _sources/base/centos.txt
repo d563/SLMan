@@ -91,17 +91,10 @@ package
 ::
 
     # 6
-    yum -y install wget unzip gcc gcc-c++ java-1.7.0-openjdk-devel python-setuptools python-devel
-
-.. index:: /etc/bash_completion.d/systemctl-bash-completion.sh
-
-::
+    yum -y install wget unzip gcc gcc-c++ java-1.7.0-openjdk-devel python-devel python-setuptools
 
     # 7
-    yum -y install wget unzip gcc gcc-c++ java-1.7.0-openjdk-devel python-devel bash-completion
-
-    cd /etc/bash_completion.d
-    wget https://github.com/terralinux/systemd/raw/master/src/systemctl-bash-completion.sh
+    yum -y install wget unzip gcc gcc-c++ java-1.7.0-openjdk-devel python-devel
 
 ::
 
