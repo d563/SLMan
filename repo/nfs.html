@@ -100,8 +100,8 @@ exportfs -ra
 <div class="highlight-python"><div class="highlight"><pre>/etc/init.d/netfs start
 </pre></div>
 </div>
-<div class="highlight-python" id="index-2"><div class="highlight"><pre>mount -t nfs -o auto,retry3,soft,intr,rsize=32768,wsize=32768,noatime 127.0.0.1:/var /opt
-# echo &#39;127.0.0.1:/var /opt nfs auto,retry3,soft,intr,rsize=32768,wsize=32768,noatime 0 0&#39; &gt;&gt; /etc/fstab
+<div class="highlight-python" id="index-2"><div class="highlight"><pre>mount -t nfs -o auto,retry=3,soft,intr,rsize=32768,wsize=32768,noatime 127.0.0.1:/var /opt
+# echo &#39;127.0.0.1:/var /opt nfs auto,retry=3,soft,intr,rsize=32768,wsize=32768,noatime 0 0&#39; &gt;&gt; /etc/fstab
 </pre></div>
 </div>
 </div>

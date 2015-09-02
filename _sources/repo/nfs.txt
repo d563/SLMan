@@ -49,5 +49,5 @@ client
 
 ::
 
-    mount -t nfs -o auto,retry3,soft,intr,rsize=32768,wsize=32768,noatime 127.0.0.1:/var /opt
-    # echo '127.0.0.1:/var /opt nfs auto,retry3,soft,intr,rsize=32768,wsize=32768,noatime 0 0' >> /etc/fstab
+    mount -t nfs -o auto,retry=3,soft,intr,rsize=32768,wsize=32768,noatime 127.0.0.1:/var /opt
+    # echo '127.0.0.1:/var /opt nfs auto,retry=3,soft,intr,rsize=32768,wsize=32768,noatime 0 0' >> /etc/fstab
