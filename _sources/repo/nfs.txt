@@ -1,0 +1,53 @@
+nfs
+===
+
+common
+------
+::
+
+    yum -y install nfs-utils
+
+.. index:: /etc/idmapd.conf
+
+::
+
+    sed -i.org \
+    -e 's/^#Verbosity.*/Verbosity = 0/' \
+    -e 's/^#Domain.*/Domain = localdomain/' \
+    /etc/idmapd.conf
+
+    chkconfig rpcidmapd on
+
+::
+
+    /etc/init.d/rpcbind start
+    /etc/init.d/rpcidmapd start
+    /etc/init.d/nfslock start
+
+server
+------
+::
+
+    /etc/init.d/nfs start
+
+.. index:: /etc/exports
+
+::
+
+    echo '/var 127.0.0.1/255.0.0.0(fsid=10,rw,no_root_squash,sync)' >> /etc/exports
+
+    exportfs -v
+    exportfs -ra
+
+client
+------
+::
+
+    /etc/init.d/netfs start
+
+.. index:: /etc/fstab
+
+::
+
+    mount -t nfs -o auto,retry3,soft,intr,rsize=32768,wsize=32768,noatime 127.0.0.1:/var /opt
+    # echo '127.0.0.1:/var /opt nfs auto,retry3,soft,intr,rsize=32768,wsize=32768,noatime 0 0' >> /etc/fstab

@@ -6,7 +6,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>3. data &mdash; SLMan 0.0.2 documentation</title>
+    <title>2.4. nfs &mdash; SLMan 0.0.2 documentation</title>
     
     <link rel="stylesheet" href="../_static/pyramid.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
@@ -25,8 +25,9 @@
     <script type="text/javascript" src="../_static/underscore.js"></script>
     <script type="text/javascript" src="../_static/doctools.js"></script>
     <link rel="top" title="SLMan 0.0.2 documentation" href="../index.html" />
-    <link rel="next" title="3.1. oracle" href="oracle.html" />
-    <link rel="prev" title="2.4. nfs" href="../repo/nfs.html" />
+    <link rel="up" title="2. repo" href="index.html" />
+    <link rel="next" title="3. data" href="../data/index.html" />
+    <link rel="prev" title="2.3. maven" href="maven.html" />
 <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Neuton&amp;subset=latin" type="text/css" media="screen" charset="utf-8" />
 <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Nobile:regular,italic,bold,bolditalic&amp;subset=latin" type="text/css" media="screen" charset="utf-8" />
 <!--[if lte IE 6]>
@@ -46,12 +47,13 @@
           <a href="../py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
         <li class="right" >
-          <a href="oracle.html" title="3.1. oracle"
+          <a href="../data/index.html" title="3. data"
              accesskey="N">next</a> |</li>
         <li class="right" >
-          <a href="../repo/nfs.html" title="2.4. nfs"
+          <a href="maven.html" title="2.3. maven"
              accesskey="P">previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../index.html">SLMan 0.0.2 documentation</a> &raquo;</li> 
+        <li class="nav-item nav-item-0"><a href="../index.html">SLMan 0.0.2 documentation</a> &raquo;</li>
+          <li class="nav-item nav-item-1"><a href="index.html" accesskey="U">2. repo</a> &raquo;</li> 
       </ul>
     </div>  
 
@@ -60,35 +62,48 @@
         <div class="bodywrapper">
           <div class="body" role="main">
             
-  <div class="section" id="data">
-<h1>3. data<a class="headerlink" href="#data" title="Permalink to this headline">¶</a></h1>
-<div class="toctree-wrapper compound">
-<ul>
-<li class="toctree-l1"><a class="reference internal" href="oracle.html">3.1. oracle</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="oracle.html#server">3.1.1. server</a></li>
-<li class="toctree-l2"><a class="reference internal" href="oracle.html#setting">3.1.2. setting</a></li>
-<li class="toctree-l2"><a class="reference internal" href="oracle.html#backup">3.1.3. backup</a></li>
-<li class="toctree-l2"><a class="reference internal" href="oracle.html#client">3.1.4. client</a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="postgresql.html">3.2. postgresql</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="postgresql.html#server">3.2.1. server</a></li>
-<li class="toctree-l2"><a class="reference internal" href="postgresql.html#setting">3.2.2. setting</a></li>
-<li class="toctree-l2"><a class="reference internal" href="postgresql.html#backup">3.2.3. backup</a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="mysql.html">3.3. mysql</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="mysql.html#server">3.3.1. server</a></li>
-<li class="toctree-l2"><a class="reference internal" href="mysql.html#setting">3.3.2. setting</a></li>
-<li class="toctree-l2"><a class="reference internal" href="mysql.html#backup">3.3.3. backup</a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="mongodb.html">3.4. mongodb</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="mongodb.html#server">3.4.1. server</a></li>
-<li class="toctree-l2"><a class="reference internal" href="mongodb.html#rest">3.4.2. rest</a></li>
-</ul>
-</li>
-</ul>
+  <div class="section" id="nfs">
+<h1>2.4. nfs<a class="headerlink" href="#nfs" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="common">
+<h2>2.4.1. common<a class="headerlink" href="#common" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-python"><div class="highlight"><pre>yum -y install nfs-utils
+</pre></div>
+</div>
+<div class="highlight-python" id="index-0"><div class="highlight"><pre>sed -i.org \
+-e &#39;s/^#Verbosity.*/Verbosity = 0/&#39; \
+-e &#39;s/^#Domain.*/Domain = localdomain/&#39; \
+/etc/idmapd.conf
+
+chkconfig rpcidmapd on
+</pre></div>
+</div>
+<div class="highlight-python"><div class="highlight"><pre>/etc/init.d/rpcbind start
+/etc/init.d/rpcidmapd start
+/etc/init.d/nfslock start
+</pre></div>
+</div>
+</div>
+<div class="section" id="server">
+<h2>2.4.2. server<a class="headerlink" href="#server" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-python"><div class="highlight"><pre>/etc/init.d/nfs start
+</pre></div>
+</div>
+<div class="highlight-python" id="index-1"><div class="highlight"><pre>echo &#39;/var 127.0.0.1/255.0.0.0(fsid=10,rw,no_root_squash,sync)&#39; &gt;&gt; /etc/exports
+
+exportfs -v
+exportfs -ra
+</pre></div>
+</div>
+</div>
+<div class="section" id="client">
+<h2>2.4.3. client<a class="headerlink" href="#client" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-python"><div class="highlight"><pre>/etc/init.d/netfs start
+</pre></div>
+</div>
+<div class="highlight-python" id="index-2"><div class="highlight"><pre>mount -t nfs -o auto,retry3,soft,intr,rsize=32768,wsize=32768,noatime 127.0.0.1:/var /opt
+# echo &#39;127.0.0.1:/var /opt nfs auto,retry3,soft,intr,rsize=32768,wsize=32768,noatime 0 0&#39; &gt;&gt; /etc/fstab
+</pre></div>
+</div>
 </div>
 </div>
 
@@ -98,12 +113,22 @@
       </div>
       <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
         <div class="sphinxsidebarwrapper">
+  <h3><a href="../index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">2.4. nfs</a><ul>
+<li><a class="reference internal" href="#common">2.4.1. common</a></li>
+<li><a class="reference internal" href="#server">2.4.2. server</a></li>
+<li><a class="reference internal" href="#client">2.4.3. client</a></li>
+</ul>
+</li>
+</ul>
+
   <h4>Previous topic</h4>
-  <p class="topless"><a href="../repo/nfs.html"
-                        title="previous chapter">2.4. nfs</a></p>
+  <p class="topless"><a href="maven.html"
+                        title="previous chapter">2.3. maven</a></p>
   <h4>Next topic</h4>
-  <p class="topless"><a href="oracle.html"
-                        title="next chapter">3.1. oracle</a></p>
+  <p class="topless"><a href="../data/index.html"
+                        title="next chapter">3. data</a></p>
 <div id="searchbox" style="display: none" role="search">
   <h3>Quick search</h3>
     <form class="search" action="../search.html" method="get">
@@ -131,12 +156,13 @@
           <a href="../py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
         <li class="right" >
-          <a href="oracle.html" title="3.1. oracle"
+          <a href="../data/index.html" title="3. data"
              >next</a> |</li>
         <li class="right" >
-          <a href="../repo/nfs.html" title="2.4. nfs"
+          <a href="maven.html" title="2.3. maven"
              >previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../index.html">SLMan 0.0.2 documentation</a> &raquo;</li> 
+        <li class="nav-item nav-item-0"><a href="../index.html">SLMan 0.0.2 documentation</a> &raquo;</li>
+          <li class="nav-item nav-item-1"><a href="index.html" >2. repo</a> &raquo;</li> 
       </ul>
     </div>
     <div class="footer" role="contentinfo">

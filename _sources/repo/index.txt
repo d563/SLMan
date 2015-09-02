@@ -4,3 +4,4 @@ repo
     git
     subversion
     maven
+    nfs
