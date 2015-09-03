@@ -119,3 +119,34 @@ mail
     m.setSubject('タイトル', 'UTF-8')
     m.setText('本文', 'UTF-8')
     Transport.send(m)
+
+spring
+------
+.. module:: applicationContext.xml
+.. code-block:: xml
+
+    <?xml version="1.0" encoding="UTF-8" ?>
+    <!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN//EN"
+        "http://www.springframework.org/dtd/spring-beans.dtd">
+    <!-- applicationContext.xml -->
+    <beans>
+      <bean id="dataSource"
+          class="org.springframework.jndi.JndiObjectFactoryBean">
+
+        <property name="jndiName" value="java:comp/env/d563-ds" />
+      </bean>
+    </beans>
+
+    <beans>
+      <bean id="dataSource"
+          class="org.apache.commons.dbcp.BasicDataSource"
+          destroy-method="close">
+
+      <property name="driverClassName" value="org.postgresql.Driver" />
+      <property name="url" value="jdbc:postgresql://127.0.0.1:5432/SLMan" />
+      <property name="username" value="postgres" />
+      <property name="password" value="postgres" />
+      <property name="maxActive" value="4" />
+      <property name="maxIdel" value="10" />
+      <property name="maxWait" value="-1" />
+    </bean>

@@ -182,6 +182,36 @@ ln -nfs /usr/local/lib/groovy-2.4.3/bin/groovy /usr/local/bin/groovy
 </pre></div>
 </div>
 </div>
+<div class="section" id="module-applicationContext.xml">
+<span id="spring"></span><h2>7.3.5. spring<a class="headerlink" href="#module-applicationContext.xml" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-xml"><div class="highlight"><pre><span class="cp">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot; ?&gt;</span>
+<span class="cp">&lt;!DOCTYPE beans PUBLIC &quot;-//SPRING//DTD BEAN//EN&quot;</span>
+<span class="cp">    &quot;http://www.springframework.org/dtd/spring-beans.dtd&quot;&gt;</span>
+<span class="c">&lt;!-- applicationContext.xml --&gt;</span>
+<span class="nt">&lt;beans&gt;</span>
+  <span class="nt">&lt;bean</span> <span class="na">id=</span><span class="s">&quot;dataSource&quot;</span>
+      <span class="na">class=</span><span class="s">&quot;org.springframework.jndi.JndiObjectFactoryBean&quot;</span><span class="nt">&gt;</span>
+
+    <span class="nt">&lt;property</span> <span class="na">name=</span><span class="s">&quot;jndiName&quot;</span> <span class="na">value=</span><span class="s">&quot;java:comp/env/d563-ds&quot;</span> <span class="nt">/&gt;</span>
+  <span class="nt">&lt;/bean&gt;</span>
+<span class="nt">&lt;/beans&gt;</span>
+
+<span class="nt">&lt;beans&gt;</span>
+  <span class="nt">&lt;bean</span> <span class="na">id=</span><span class="s">&quot;dataSource&quot;</span>
+      <span class="na">class=</span><span class="s">&quot;org.apache.commons.dbcp.BasicDataSource&quot;</span>
+      <span class="na">destroy-method=</span><span class="s">&quot;close&quot;</span><span class="nt">&gt;</span>
+
+  <span class="nt">&lt;property</span> <span class="na">name=</span><span class="s">&quot;driverClassName&quot;</span> <span class="na">value=</span><span class="s">&quot;org.postgresql.Driver&quot;</span> <span class="nt">/&gt;</span>
+  <span class="nt">&lt;property</span> <span class="na">name=</span><span class="s">&quot;url&quot;</span> <span class="na">value=</span><span class="s">&quot;jdbc:postgresql://127.0.0.1:5432/SLMan&quot;</span> <span class="nt">/&gt;</span>
+  <span class="nt">&lt;property</span> <span class="na">name=</span><span class="s">&quot;username&quot;</span> <span class="na">value=</span><span class="s">&quot;postgres&quot;</span> <span class="nt">/&gt;</span>
+  <span class="nt">&lt;property</span> <span class="na">name=</span><span class="s">&quot;password&quot;</span> <span class="na">value=</span><span class="s">&quot;postgres&quot;</span> <span class="nt">/&gt;</span>
+  <span class="nt">&lt;property</span> <span class="na">name=</span><span class="s">&quot;maxActive&quot;</span> <span class="na">value=</span><span class="s">&quot;4&quot;</span> <span class="nt">/&gt;</span>
+  <span class="nt">&lt;property</span> <span class="na">name=</span><span class="s">&quot;maxIdel&quot;</span> <span class="na">value=</span><span class="s">&quot;10&quot;</span> <span class="nt">/&gt;</span>
+  <span class="nt">&lt;property</span> <span class="na">name=</span><span class="s">&quot;maxWait&quot;</span> <span class="na">value=</span><span class="s">&quot;-1&quot;</span> <span class="nt">/&gt;</span>
+<span class="nt">&lt;/bean&gt;</span>
+</pre></div>
+</div>
+</div>
 </div>
 
 
@@ -197,6 +227,7 @@ ln -nfs /usr/local/lib/groovy-2.4.3/bin/groovy /usr/local/bin/groovy
 <li><a class="reference internal" href="#mongodb">7.3.2. mongodb</a></li>
 <li><a class="reference internal" href="#krb5">7.3.3. krb5</a></li>
 <li><a class="reference internal" href="#mail">7.3.4. mail</a></li>
+<li><a class="reference internal" href="#module-applicationContext.xml">7.3.5. spring</a></li>
 </ul>
 </li>
 </ul>
