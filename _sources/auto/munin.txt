@@ -14,7 +14,7 @@ server
 
 ::
 
-    # yum -y install httpd telnet openssh-clients
+    # yum -y install httpd telnet
     yum -y install munin --enablerepo=epel
 
     htpasswd -b /etc/munin/munin-htpasswd d563 d563

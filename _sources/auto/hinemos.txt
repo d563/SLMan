@@ -28,7 +28,7 @@ agent
 -----
 ::
 
-    yum -y install net-snmp net-snmp-libs expect krb5-workstation openssh-clients
+    yum -y install net-snmp net-snmp-libs expect krb5-workstation
 
     # 7
     systemctl start snmpd.service

@@ -91,7 +91,7 @@ package
 ::
 
     # 6
-    yum -y install wget unzip gcc gcc-c++ java-1.7.0-openjdk-devel python-devel python-setuptools
+    yum -y install wget unzip gcc gcc-c++ java-1.7.0-openjdk-devel python-devel python-setuptools openssh-clients
 
     # 7
     yum -y install wget unzip gcc gcc-c++ java-1.7.0-openjdk-devel python-devel
@@ -114,6 +114,17 @@ sshd
 
     sed -i.org -e '/#Port 22/aPort 443' /etc/ssh/sshd_config
     service sshd restart
+
+.. index:: ~/.ssh/id_rsa.pub
+.. index:: ~/.ssh/id_rsa
+.. index:: ~/.ssh/authorized_keys
+
+::
+
+    ssh-keygen -t rsa -C "mail.d563@gmail.com"
+    cd ~/.ssh
+    cat id_rsa.pub >> authorized_keys
+    chmod 600 authorized_keys
 
 iptables
 --------

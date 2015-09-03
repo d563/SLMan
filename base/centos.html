@@ -135,7 +135,7 @@ Defaults passprompt = &quot;%u@%h Password: &quot;
 </pre></div>
 </div>
 <div class="highlight-python"><div class="highlight"><pre># 6
-yum -y install wget unzip gcc gcc-c++ java-1.7.0-openjdk-devel python-devel python-setuptools
+yum -y install wget unzip gcc gcc-c++ java-1.7.0-openjdk-devel python-devel python-setuptools openssh-clients
 
 # 7
 yum -y install wget unzip gcc gcc-c++ java-1.7.0-openjdk-devel python-devel
@@ -156,10 +156,16 @@ pip install -U setuptools
 service sshd restart
 </pre></div>
 </div>
+<span class="target" id="index-10"></span><span class="target" id="index-11"></span><div class="highlight-python" id="index-12"><div class="highlight"><pre>ssh-keygen -t rsa -C &quot;mail.d563@gmail.com&quot;
+cd ~/.ssh
+cat id_rsa.pub &gt;&gt; authorized_keys
+chmod 600 authorized_keys
+</pre></div>
+</div>
 </div>
 <div class="section" id="iptables">
 <h2>1.1.9. iptables<a class="headerlink" href="#iptables" title="Permalink to this headline">¶</a></h2>
-<div class="highlight-python" id="index-10"><div class="highlight"><pre># 6
+<div class="highlight-python" id="index-13"><div class="highlight"><pre># 6
 sed -i.org -e &#39;s/--dport 22/--dport 443/&#39; /etc/sysconfig/iptables
 service iptables restart
 
