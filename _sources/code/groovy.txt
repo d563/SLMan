@@ -150,3 +150,25 @@ spring
       <property name="maxIdel" value="10" />
       <property name="maxWait" value="-1" />
     </bean>
+
+.. module:: DataSource.groovy
+.. code-block:: groovy
+
+    @Grapes([
+      @Grab(group='org.springframework', module='spring-context-support', version='4.2.0.RELEASE'),
+      @Grab(group='postgresql', module='postgresql', version='9.1-901-1.jdbc4'),
+      @Grab(group='commons-dbcp', module='commons-dbcp', version='1.4'),
+      @GrabConfig(systemClassLoader=true) 
+    ])
+    import org.springframework.context.support.ClassPathXmlApplicationContext
+    // DataSource.groovy
+    ct = new ClassPathXmlApplicationContext('applicationContext.xml')
+    ds = ct.getBean('dataSource')
+    conn = ds.connection
+    res = conn.prepareStatement('select current_timestamp').executeQuery()
+    while(res.next()) { println res.getString(1) }
+    conn.cloase()
+
+::
+
+    groovy -cp . DataSource.groovy
