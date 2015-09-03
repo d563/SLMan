@@ -119,7 +119,7 @@ install -d -m 755 -o munin -g munin /var/lib/munin
 su - munin
 install -d -m 700 .ssh
 cd .ssh
-echo id_rsa.pub &gt;&gt; authorized_keys
+cat id_rsa.pub &gt;&gt; authorized_keys
 chmod 600 authorized_keys
 </pre></div>
 </div>

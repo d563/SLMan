@@ -71,5 +71,5 @@ client
     su - munin
     install -d -m 700 .ssh
     cd .ssh
-    echo id_rsa.pub >> authorized_keys
+    cat id_rsa.pub >> authorized_keys
     chmod 600 authorized_keys

@@ -206,6 +206,28 @@ mkdir -p src/test/java
 <span class="nt">&lt;/log4j:configuration&gt;</span>
 </pre></div>
 </div>
+<span class="target" id="module-context.xml"></span><div class="highlight-xml"><div class="highlight"><pre><span class="cp">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot; ?&gt;</span>
+<span class="c">&lt;!-- /var/lib/git/tomcat/src/main/webapp/META-INF/context.xml --&gt;</span>
+<span class="nt">&lt;Context</span>
+    <span class="na">crossContext=</span><span class="s">&quot;true&quot;</span>
+    <span class="na">reloadable=</span><span class="s">&quot;false&quot;</span>
+    <span class="na">useHttpOnly=</span><span class="s">&quot;false&quot;</span>
+    <span class="na">path=</span><span class="s">&quot;/d563&quot;</span><span class="nt">&gt;</span>
+
+  <span class="nt">&lt;Resource</span>
+    <span class="na">name=</span><span class="s">&quot;d563-ds&quot;</span>
+    <span class="na">auth=</span><span class="s">&quot;Container&quot;</span>
+    <span class="na">type=</span><span class="s">&quot;javax.sql.DataSource&quot;</span>
+    <span class="na">driverClassName=</span><span class="s">&quot;org.postgresql.Driver&quot;</span>
+    <span class="na">url=</span><span class="s">&quot;jdbc:postgresql://127.0.0.1:5432/SLMan&quot;</span>
+    <span class="na">username=</span><span class="s">&quot;postgres&quot;</span>
+    <span class="na">password=</span><span class="s">&quot;postgres&quot;</span>
+    <span class="na">maxActive=</span><span class="s">&quot;4&quot;</span>
+    <span class="na">maxIdel=</span><span class="s">&quot;10&quot;</span>
+    <span class="na">maxWait=</span><span class="s">&quot;-1&quot;</span> <span class="nt">/&gt;</span>
+<span class="nt">&lt;/Context&gt;</span>
+</pre></div>
+</div>
 <div class="highlight-python"><div class="highlight"><pre>echo &#39;&lt;Context path=&quot;/SLMan&quot; docBase=&quot;/var/lib/git/tomcat/target/tomcat&quot; reloadable=&quot;true&quot;/&gt;&#39; \
 &gt; /usr/share/tomcat6/conf/Catalina/localhost/SLMan.xml
 </pre></div>
