@@ -64,6 +64,8 @@
             
   <div class="section" id="ant">
 <h1>5.2. ant<a class="headerlink" href="#ant" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="base">
+<h2>5.2.1. base<a class="headerlink" href="#base" title="Permalink to this headline">¶</a></h2>
 <div class="highlight-python"><div class="highlight"><pre>yum -y install ant
 </pre></div>
 </div>
@@ -119,6 +121,40 @@ ant
 </pre></div>
 </div>
 </div>
+<div class="section" id="module-jsper.xml">
+<span id="jsper"></span><h2>5.2.2. jsper<a class="headerlink" href="#module-jsper.xml" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-xml"><div class="highlight"><pre><span class="nt">&lt;project</span> <span class="na">name=</span><span class="s">&quot;JSP Precompilation&quot;</span> <span class="na">default=</span><span class="s">&quot;all&quot;</span> <span class="na">basedir=</span><span class="s">&quot;.&quot;</span><span class="nt">&gt;</span>
+  <span class="c">&lt;!-- jsper.xml --&gt;</span>
+  <span class="nt">&lt;target</span> <span class="na">name=</span><span class="s">&quot;all&quot;</span> <span class="na">depends=</span><span class="s">&quot;clean,jspc&quot;</span><span class="nt">&gt;</span>
+  <span class="nt">&lt;target</span> <span class="na">name=</span><span class="s">&quot;jspc&quot;</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;taskdef</span> <span class="na">classname=</span><span class="s">&quot;org.apache.jasper.JspC&quot;</span> <span class="na">name=</span><span class="s">&quot;jasper2&quot;</span> <span class="nt">&gt;</span>
+      <span class="nt">&lt;classpath</span> <span class="na">id=</span><span class="s">&quot;jspc.classpath&quot;</span><span class="nt">&gt;</span>
+        <span class="nt">&lt;fileset</span> <span class="na">dir=</span><span class="s">&quot;${tomcat.base}/bin&quot;</span><span class="nt">&gt;</span>
+          <span class="nt">&lt;include</span> <span class="na">name=</span><span class="s">&quot;*.jar&quot;</span><span class="nt">/&gt;</span>
+        <span class="nt">&lt;/fileset&gt;</span>
+        <span class="nt">&lt;fileset</span> <span class="na">dir=</span><span class="s">&quot;${tomcat.base}/lib&quot;</span><span class="nt">&gt;</span>
+          <span class="nt">&lt;include</span> <span class="na">name=</span><span class="s">&quot;*.jar&quot;</span><span class="nt">/&gt;</span>
+        <span class="nt">&lt;/fileset&gt;</span>
+      <span class="nt">&lt;/classpath&gt;</span>
+    <span class="nt">&lt;/taskdef&gt;</span>
+    <span class="nt">&lt;jasper2</span>
+        <span class="na">uriroot=</span><span class="s">&quot;${webapps.dir}&quot;</span>
+        <span class="na">outputDir=</span><span class="s">&quot;${work.dir}&quot;</span>
+        <span class="na">compile=</span><span class="s">&quot;true&quot;</span> <span class="nt">/&gt;</span>
+  <span class="nt">&lt;/target&gt;</span>
+  <span class="nt">&lt;target</span> <span class="na">name=</span><span class="s">&quot;clean&quot;</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;delete</span> <span class="na">dir=</span><span class="s">&quot;${work.dir}&quot;</span> <span class="nt">/&gt;</span>
+  <span class="nt">&lt;/target&gt;</span>
+<span class="nt">&lt;/project&gt;</span>
+</pre></div>
+</div>
+<div class="highlight-python"><div class="highlight"><pre>ant -Dtomcat.base=/usr/share/tomcat6 \
+    -Dwebapps.dir=/usr/share/tomcat6/webapps/d563 \
+    -Dwork.dir=/usr/share/tomcat6/work/Catalina/localhost/d563
+</pre></div>
+</div>
+</div>
+</div>
 
 
           </div>
@@ -126,6 +162,15 @@ ant
       </div>
       <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
         <div class="sphinxsidebarwrapper">
+  <h3><a href="../index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">5.2. ant</a><ul>
+<li><a class="reference internal" href="#base">5.2.1. base</a></li>
+<li><a class="reference internal" href="#module-jsper.xml">5.2.2. jsper</a></li>
+</ul>
+</li>
+</ul>
+
   <h4>Previous topic</h4>
   <p class="topless"><a href="fabric.html"
                         title="previous chapter">5.1. fabric</a></p>
