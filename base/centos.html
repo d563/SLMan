@@ -79,30 +79,29 @@ http://ftp.riken.jp/Linux/centos/7/os/x86_64/
 </div>
 <div class="section" id="network">
 <h2>1.1.2. network<a class="headerlink" href="#network" title="Permalink to this headline">¶</a></h2>
-<span class="target" id="index-0"></span><div class="highlight-none" id="index-1"><div class="highlight"><pre># 6
+<span class="target" id="index-0"></span><span class="target" id="index-1"></span><div class="highlight-none" id="index-2"><div class="highlight"><pre>vi /etc/udev/rules.d/70-persistent-net.rules
+
+# 6
 vi /etc/sysconfig/network-scripts/ifcfg-eth0
-vi /etc/udev/rules.d/70-persistent-net.rules
-</pre></div>
-</div>
-<span class="target" id="index-2"></span><div class="highlight-none" id="index-3"><div class="highlight"><pre># 7
+
+# 7
 vi /etc/sysconfig/network-scripts/ifcfg-enp0s3
-vi /etc/udev/rules.d/98-kexec.rules
 </pre></div>
 </div>
-<div class="highlight-python" id="index-4"><div class="highlight"><pre><span class="n">vi</span> <span class="o">/</span><span class="n">etc</span><span class="o">/</span><span class="n">sysconfig</span><span class="o">/</span><span class="n">network</span>
+<div class="highlight-python" id="index-3"><div class="highlight"><pre><span class="n">vi</span> <span class="o">/</span><span class="n">etc</span><span class="o">/</span><span class="n">sysconfig</span><span class="o">/</span><span class="n">network</span>
 </pre></div>
 </div>
 </div>
 <div class="section" id="hostname">
 <h2>1.1.3. hostname<a class="headerlink" href="#hostname" title="Permalink to this headline">¶</a></h2>
-<div class="highlight-python" id="index-5"><div class="highlight"><pre>vi /etc/sysconfig/network
+<div class="highlight-python" id="index-4"><div class="highlight"><pre>vi /etc/sysconfig/network
 hostname SLMan
 </pre></div>
 </div>
 </div>
 <div class="section" id="location">
 <h2>1.1.4. location<a class="headerlink" href="#location" title="Permalink to this headline">¶</a></h2>
-<span class="target" id="index-6"></span><div class="highlight-python" id="index-7"><div class="highlight"><pre># AWS
+<span class="target" id="index-5"></span><div class="highlight-python" id="index-6"><div class="highlight"><pre># AWS
 unalias cp mv rm
 echo LANG=ja_JP.UTF-8 &gt; /etc/locale.conf
 cp -pf /usr/share/zoneinfo/Asia/Tokyo /etc/localtime
@@ -115,7 +114,7 @@ timedatectl
 </div>
 <div class="section" id="selinux">
 <h2>1.1.5. selinux<a class="headerlink" href="#selinux" title="Permalink to this headline">¶</a></h2>
-<div class="highlight-python" id="index-8"><div class="highlight"><pre>sed -i.org -e &#39;s/^SELINUX=.*/SELINUX=disabled/&#39; /etc/selinux/config
+<div class="highlight-python" id="index-7"><div class="highlight"><pre>sed -i.org -e &#39;s/^SELINUX=.*/SELINUX=disabled/&#39; /etc/selinux/config
 setenforce 0
 </pre></div>
 </div>
@@ -131,7 +130,7 @@ Defaults passprompt = &quot;%u@%h Password: &quot;
 </div>
 <div class="section" id="package">
 <h2>1.1.7. package<a class="headerlink" href="#package" title="Permalink to this headline">¶</a></h2>
-<div class="highlight-python"><div class="highlight"><pre>sed -i.org -e &#39;s/debuglevel=2/debuglevel=1/&#39; /etc/yum.conf
+<div class="highlight-python" id="index-8"><div class="highlight"><pre>sed -i.org -e &#39;s/debuglevel=2/debuglevel=1/&#39; /etc/yum.conf
 </pre></div>
 </div>
 <div class="highlight-python"><div class="highlight"><pre># 6
@@ -187,7 +186,7 @@ COMMIT
 </div>
 <div class="section" id="firewalld">
 <h2>1.1.10. firewalld<a class="headerlink" href="#firewalld" title="Permalink to this headline">¶</a></h2>
-<div class="highlight-none"><div class="highlight"><pre># 7
+<div class="highlight-none" id="index-14"><div class="highlight"><pre># 7
 cat /usr/lib/firewalld/services/ssh.xml
 cat /usr/lib/firewalld/services/https.xml
 firewall-cmd --list-all
@@ -199,7 +198,7 @@ firewall-cmd --reload
 </div>
 <div class="section" id="bash-completion">
 <h2>1.1.11. bash-completion<a class="headerlink" href="#bash-completion" title="Permalink to this headline">¶</a></h2>
-<div class="highlight-python" id="index-14"><div class="highlight"><pre>rpm -Uvh http://dl.fedoraproject.org/pub/epel/6/x86_64/epel-release-6-8.noarch.rpm
+<div class="highlight-python" id="index-15"><div class="highlight"><pre>rpm -Uvh http://dl.fedoraproject.org/pub/epel/6/x86_64/epel-release-6-8.noarch.rpm
 sed -i -e &#39;s/^enabled.*/enabled=0/&#39; /etc/yum.repos.d/epel.repo
 </pre></div>
 </div>

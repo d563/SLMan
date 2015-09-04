@@ -40,7 +40,7 @@ server
 client
 ------
 .. index:: /etc/munin/munin-node.conf
-.. index:: /etc/munin/plugins
+.. index:: /etc/munin/plugins/*
 
 ::
 

@@ -23,6 +23,13 @@ find
       -perm 664 \
       -exec echo {} \; | xargs echo
 
+egrep
+-----
+::
+
+    egrep -r 'str1|str2' dir
+    egrep -rv 'exclude' dir
+
 rpm
 ---
 ::
