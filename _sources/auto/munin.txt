@@ -1,12 +1,5 @@
 munin
 =====
-.. index:: /etc/yum.repos.d/epel.repo
-
-::
-
-    rpm -Uvh http://dl.fedoraproject.org/pub/epel/6/x86_64/epel-release-6-8.noarch.rpm
-    vi /etc/yum.repos.d/epel.repo
-
 server
 ------
 .. index:: /etc/munin/munin-htpasswd

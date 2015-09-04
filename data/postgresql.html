@@ -76,6 +76,7 @@ sed -i.org \
 -e &quot;s/^#log_line_prefix.*/log_line_prefix = &#39;%t %u %d &#39;/&quot; \
 /var/lib/pgsql/data/postgresql.conf
 
+sed -i.org -e &#39;s/^host/#host/&#39; /var/lib/pgsql/data/pg_hba.conf
 echo &#39;host all all 0.0.0.0/0 trust&#39; &gt;&gt; /var/lib/pgsql/data/pg_hba.conf
 
 /etc/init.d/postgresql start

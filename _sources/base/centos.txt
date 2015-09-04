@@ -161,3 +161,16 @@ firewalld
     firewall-cmd --permanent --add-service=https
     firewall-cmd --permanent --remove-service=ssh
     firewall-cmd --reload
+
+bash-completion
+---------------
+.. index:: /etc/yum.repos.d/epel.repo
+
+::
+
+    rpm -Uvh http://dl.fedoraproject.org/pub/epel/6/x86_64/epel-release-6-8.noarch.rpm
+    sed -i -e 's/^enabled.*/enabled=0/' /etc/yum.repos.d/epel.repo
+
+::
+
+    yum -y install bash-completion --enablerepo=epel

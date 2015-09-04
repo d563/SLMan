@@ -201,14 +201,15 @@ ln -nfs /usr/local/lib/groovy-2.4.3/bin/groovy /usr/local/bin/groovy
       <span class="na">class=</span><span class="s">&quot;org.apache.commons.dbcp.BasicDataSource&quot;</span>
       <span class="na">destroy-method=</span><span class="s">&quot;close&quot;</span><span class="nt">&gt;</span>
 
-  <span class="nt">&lt;property</span> <span class="na">name=</span><span class="s">&quot;driverClassName&quot;</span> <span class="na">value=</span><span class="s">&quot;org.postgresql.Driver&quot;</span> <span class="nt">/&gt;</span>
-  <span class="nt">&lt;property</span> <span class="na">name=</span><span class="s">&quot;url&quot;</span> <span class="na">value=</span><span class="s">&quot;jdbc:postgresql://127.0.0.1:5432/SLMan&quot;</span> <span class="nt">/&gt;</span>
-  <span class="nt">&lt;property</span> <span class="na">name=</span><span class="s">&quot;username&quot;</span> <span class="na">value=</span><span class="s">&quot;postgres&quot;</span> <span class="nt">/&gt;</span>
-  <span class="nt">&lt;property</span> <span class="na">name=</span><span class="s">&quot;password&quot;</span> <span class="na">value=</span><span class="s">&quot;postgres&quot;</span> <span class="nt">/&gt;</span>
-  <span class="nt">&lt;property</span> <span class="na">name=</span><span class="s">&quot;maxActive&quot;</span> <span class="na">value=</span><span class="s">&quot;4&quot;</span> <span class="nt">/&gt;</span>
-  <span class="nt">&lt;property</span> <span class="na">name=</span><span class="s">&quot;maxIdel&quot;</span> <span class="na">value=</span><span class="s">&quot;10&quot;</span> <span class="nt">/&gt;</span>
-  <span class="nt">&lt;property</span> <span class="na">name=</span><span class="s">&quot;maxWait&quot;</span> <span class="na">value=</span><span class="s">&quot;-1&quot;</span> <span class="nt">/&gt;</span>
-<span class="nt">&lt;/bean&gt;</span>
+    <span class="nt">&lt;property</span> <span class="na">name=</span><span class="s">&quot;driverClassName&quot;</span> <span class="na">value=</span><span class="s">&quot;org.postgresql.Driver&quot;</span> <span class="nt">/&gt;</span>
+    <span class="nt">&lt;property</span> <span class="na">name=</span><span class="s">&quot;url&quot;</span> <span class="na">value=</span><span class="s">&quot;jdbc:postgresql://127.0.0.1:5432/SLMan&quot;</span> <span class="nt">/&gt;</span>
+    <span class="nt">&lt;property</span> <span class="na">name=</span><span class="s">&quot;username&quot;</span> <span class="na">value=</span><span class="s">&quot;postgres&quot;</span> <span class="nt">/&gt;</span>
+    <span class="nt">&lt;property</span> <span class="na">name=</span><span class="s">&quot;password&quot;</span> <span class="na">value=</span><span class="s">&quot;postgres&quot;</span> <span class="nt">/&gt;</span>
+    <span class="nt">&lt;property</span> <span class="na">name=</span><span class="s">&quot;maxActive&quot;</span> <span class="na">value=</span><span class="s">&quot;4&quot;</span> <span class="nt">/&gt;</span>
+    <span class="nt">&lt;property</span> <span class="na">name=</span><span class="s">&quot;maxIdle&quot;</span> <span class="na">value=</span><span class="s">&quot;10&quot;</span> <span class="nt">/&gt;</span>
+    <span class="nt">&lt;property</span> <span class="na">name=</span><span class="s">&quot;maxWait&quot;</span> <span class="na">value=</span><span class="s">&quot;-1&quot;</span> <span class="nt">/&gt;</span>
+  <span class="nt">&lt;/bean&gt;</span>
+<span class="nt">&lt;/beans&gt;</span>
 </pre></div>
 </div>
 <span class="target" id="module-DataSource.groovy"></span><div class="highlight-groovy"><div class="highlight"><pre><span class="nd">@Grapes</span><span class="o">([</span>
@@ -224,10 +225,10 @@ ln -nfs /usr/local/lib/groovy-2.4.3/bin/groovy /usr/local/bin/groovy
 <span class="n">conn</span> <span class="o">=</span> <span class="n">ds</span><span class="o">.</span><span class="na">connection</span>
 <span class="n">res</span> <span class="o">=</span> <span class="n">conn</span><span class="o">.</span><span class="na">prepareStatement</span><span class="o">(</span><span class="s1">&#39;select current_timestamp&#39;</span><span class="o">).</span><span class="na">executeQuery</span><span class="o">()</span>
 <span class="k">while</span><span class="o">(</span><span class="n">res</span><span class="o">.</span><span class="na">next</span><span class="o">())</span> <span class="o">{</span> <span class="n">println</span> <span class="n">res</span><span class="o">.</span><span class="na">getString</span><span class="o">(</span><span class="mi">1</span><span class="o">)</span> <span class="o">}</span>
-<span class="n">conn</span><span class="o">.</span><span class="na">cloase</span><span class="o">()</span>
+<span class="n">conn</span><span class="o">.</span><span class="na">close</span><span class="o">()</span>
 </pre></div>
 </div>
-<div class="highlight-python"><div class="highlight"><pre><span class="n">groovy</span> <span class="o">-</span><span class="n">cp</span> <span class="o">.</span> <span class="n">DataSource</span><span class="o">.</span><span class="n">groovy</span>
+<div class="highlight-python"><div class="highlight"><pre>groovy DataSource.groovy
 </pre></div>
 </div>
 </div>

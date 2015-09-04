@@ -71,11 +71,11 @@
 name=MongoDB Repository
 baseurl=http://downloads-distro.mongodb.org/repo/redhat/os/i686/
 gpgcheck=0
-enabled=1
+enabled=0
 [EOF]
 </pre></div>
 </div>
-<div class="highlight-python"><div class="highlight"><pre>yum -y install mongodb-org mongodb-org-server
+<div class="highlight-python"><div class="highlight"><pre>yum -y install mongodb-org mongodb-org-server --enablerepo=mongodb
 </pre></div>
 </div>
 <div class="highlight-python" id="index-1"><div class="highlight"><pre>sed -i.org \

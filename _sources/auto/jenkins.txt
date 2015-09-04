@@ -6,11 +6,13 @@ jenkins
 
     cd /etc/yum.repos.d/
     wget http://pkg.jenkins-ci.org/redhat/jenkins.repo
+    echo 'enabled=0' >> jenkins.repo
+
     rpm --import http://pkg.jenkins-ci.org/redhat/jenkins-ci.org.key
 
 ::
 
-    yum -y install jenkins
+    yum -y install jenkins --enablerepo=jenkins
 
 .. index:: /etc/sysconfig/jenkins
 

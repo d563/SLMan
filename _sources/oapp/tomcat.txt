@@ -149,7 +149,7 @@ tomcat
       </category>
       <root>
         <priority value="WARN" />
-        <appender-ref ref="stdout"/>
+        <appender-ref ref="STDOUT"/>
       </root>
     </log4j:configuration>
 
@@ -173,7 +173,7 @@ tomcat
         username="postgres"
         password="postgres"
         maxActive="4"
-        maxIdel="10"
+        maxIdle="10"
         maxWait="-1" />
     </Context>
 

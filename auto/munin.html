@@ -64,13 +64,9 @@
             
   <div class="section" id="munin">
 <h1>4.4. munin<a class="headerlink" href="#munin" title="Permalink to this headline">¶</a></h1>
-<div class="highlight-python" id="index-0"><div class="highlight"><pre>rpm -Uvh http://dl.fedoraproject.org/pub/epel/6/x86_64/epel-release-6-8.noarch.rpm
-vi /etc/yum.repos.d/epel.repo
-</pre></div>
-</div>
 <div class="section" id="server">
 <h2>4.4.1. server<a class="headerlink" href="#server" title="Permalink to this headline">¶</a></h2>
-<span class="target" id="index-1"></span><div class="highlight-python" id="index-2"><div class="highlight"><pre># yum -y install httpd telnet
+<span class="target" id="index-0"></span><div class="highlight-python" id="index-1"><div class="highlight"><pre># yum -y install httpd telnet
 yum -y install munin --enablerepo=epel
 
 htpasswd -b /etc/munin/munin-htpasswd d563 d563
@@ -84,7 +80,7 @@ service httpd start
 curl --user d563:d563 localhost/munin/
 </pre></div>
 </div>
-<span class="target" id="index-3"></span><div class="highlight-python" id="index-4"><div class="highlight"><pre>view /etc/cron.d/munin
+<span class="target" id="index-2"></span><div class="highlight-python" id="index-3"><div class="highlight"><pre>view /etc/cron.d/munin
 view /etc/httpd/conf.d/munin.conf
 
 sudo -u munin munin-cron
@@ -100,7 +96,7 @@ sudo cat /var/lib/munin/.ssh/id_rsa.pub
 </div>
 <div class="section" id="client">
 <h2>4.4.2. client<a class="headerlink" href="#client" title="Permalink to this headline">¶</a></h2>
-<span class="target" id="index-5"></span><div class="highlight-python" id="index-6"><div class="highlight"><pre>yum -y install munin-node --enablerepo=epel
+<span class="target" id="index-4"></span><div class="highlight-python" id="index-5"><div class="highlight"><pre>yum -y install munin-node --enablerepo=epel
 
 vi /etc/munin/munin-node.conf
   allow ^127\.0\.0\.1$

@@ -11,12 +11,12 @@ server
     name=MongoDB Repository
     baseurl=http://downloads-distro.mongodb.org/repo/redhat/os/i686/
     gpgcheck=0
-    enabled=1
+    enabled=0
     [EOF]
 
 ::
 
-    yum -y install mongodb-org mongodb-org-server
+    yum -y install mongodb-org mongodb-org-server --enablerepo=mongodb
 
 .. index:: /etc/mongod.conf
 

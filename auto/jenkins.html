@@ -66,10 +66,12 @@
 <h1>4.1. jenkins<a class="headerlink" href="#jenkins" title="Permalink to this headline">¶</a></h1>
 <div class="highlight-python" id="index-0"><div class="highlight"><pre>cd /etc/yum.repos.d/
 wget http://pkg.jenkins-ci.org/redhat/jenkins.repo
+echo &#39;enabled=0&#39; &gt;&gt; jenkins.repo
+
 rpm --import http://pkg.jenkins-ci.org/redhat/jenkins-ci.org.key
 </pre></div>
 </div>
-<div class="highlight-python"><div class="highlight"><pre>yum -y install jenkins
+<div class="highlight-python"><div class="highlight"><pre>yum -y install jenkins --enablerepo=jenkins
 </pre></div>
 </div>
 <div class="highlight-python" id="index-1"><div class="highlight"><pre>sed -i.org \
