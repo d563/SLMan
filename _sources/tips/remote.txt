@@ -1,0 +1,36 @@
+remote
+======
+scp
+---
+::
+
+    scp -rp local_dir 127.0.0.1:
+
+rsync (ssh)
+-----------
+::
+
+    rsync \
+      -rlpvz \
+      -e ssh \
+      --checksum \
+      --delete \
+      --include-from='list.txt' \
+      --exclude='**/.svn**' \
+      ~/from/ \
+      root@127.0.0.1:~/to/
+
+::
+
+    -r : --recursive
+    -l : --links
+    -p : --perms
+
+    -t : --times
+    -g : --group
+    -o : --owner
+    -D : --devices --specials
+
+    -v : --verbose
+    -z : --compress (zip)
+    -n : --dry-run

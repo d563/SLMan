@@ -6,7 +6,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>8.3. docker &mdash; SLMan 0.0.2 documentation</title>
+    <title>9. tips &mdash; SLMan 0.0.2 documentation</title>
     
     <link rel="stylesheet" href="../_static/pyramid.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
@@ -25,9 +25,8 @@
     <script type="text/javascript" src="../_static/underscore.js"></script>
     <script type="text/javascript" src="../_static/doctools.js"></script>
     <link rel="top" title="SLMan 0.0.2 documentation" href="../index.html" />
-    <link rel="up" title="8. vrtl" href="index.html" />
-    <link rel="next" title="9. tips" href="../tips/index.html" />
-    <link rel="prev" title="8.2. aws" href="aws.html" />
+    <link rel="next" title="9.1. windows" href="windows.html" />
+    <link rel="prev" title="8.3. docker" href="../vrtl/docker.html" />
 <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Neuton&amp;subset=latin" type="text/css" media="screen" charset="utf-8" />
 <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Nobile:regular,italic,bold,bolditalic&amp;subset=latin" type="text/css" media="screen" charset="utf-8" />
 <!--[if lte IE 6]>
@@ -47,13 +46,12 @@
           <a href="../py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
         <li class="right" >
-          <a href="../tips/index.html" title="9. tips"
+          <a href="windows.html" title="9.1. windows"
              accesskey="N">next</a> |</li>
         <li class="right" >
-          <a href="aws.html" title="8.2. aws"
+          <a href="../vrtl/docker.html" title="8.3. docker"
              accesskey="P">previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../index.html">SLMan 0.0.2 documentation</a> &raquo;</li>
-          <li class="nav-item nav-item-1"><a href="index.html" accesskey="U">8. vrtl</a> &raquo;</li> 
+        <li class="nav-item nav-item-0"><a href="../index.html">SLMan 0.0.2 documentation</a> &raquo;</li> 
       </ul>
     </div>  
 
@@ -62,82 +60,40 @@
         <div class="bodywrapper">
           <div class="body" role="main">
             
-  <div class="section" id="docker">
-<h1>8.3. docker<a class="headerlink" href="#docker" title="Permalink to this headline">¶</a></h1>
-<div class="highlight-python"><div class="highlight"><pre>yum -y install docker
-</pre></div>
-</div>
-<div class="highlight-python"><div class="highlight"><pre>systemctl enable docker
-systemctl start docker
-</pre></div>
-</div>
-<div class="highlight-python"><div class="highlight"><pre>docker pull centos:6
-docker images
-</pre></div>
-</div>
-<span class="target" id="module-Dockerfile"></span><div class="highlight-python"><div class="highlight"><pre>cat &lt;&lt; &#39;[EOF]&#39; &gt; Dockerfile
-FROM centos:6
-MAINTAINER d563
-RUN\
- yum -y install wget tar java-1.6.0-openjdk &amp;&amp;\
- yum -y reinstall glibc-common &amp;&amp;\
- yum clean all
-RUN\
- wget http://archive.apache.org/dist/tomcat/tomcat-7/v7.0.59/bin/apache-tomcat-7.0.59.tar.gz &amp;&amp;\
- tar xvzf apache-tomcat-7.0.59.tar.gz &amp;&amp;\
- rm -f apache-tomcat-7.0.59.tar.gz &amp;&amp;\
- mv apache-tomcat-7.0.59 tomcat
-ENV LANG ja_JP.UTF-8
-ENV CATALINA_OPTS\
- -server\
- -Xms1024m\
- -Xmx1024m\
- -XX:PermSize=256m\
- -XX:MaxPermSize=512m\
- -Duser.timezone=JST\
- -Xloggc:tomcat/logs/GC.log\
- -XX:+PrintGCDetails\
- -XX:+PrintGCDateStamps\
- -XX:MaxTenuringThreshold=32\
- -XX:SurvivorRatio=2\
- -XX:TargetSurvivorRatio=90\
- -XX:+UseParNewGC\
- -XX:+UseConcMarkSweepGC\
- -XX:+CMSParallelRemarkEnabled\
- -XX:+CMSClassUnloadingEnabled\
- -XX:+DisableExplicitGC\
- -XX:+PrintTenuringDistribution\
- -XX:-Inline
-CMD tomcat/bin/catalina.sh start &amp;&amp; tail -f /dev/null
-[EOF]
-</pre></div>
-</div>
-<div class="highlight-python"><div class="highlight"><pre>docker build -t d563/co6:1 .
-
-docker run -d \
-  -p 8888:8080 \
-  -v ~/logs:/tomcat/logs:rw \
-  -v ~/webapps:/tomcat/webapps:rw \
-  --name co6 \
-  d563/co6:1
-
-docker run -it d563/co6:1 /bin/bash
-</pre></div>
-</div>
-<div class="highlight-python"><div class="highlight"><pre>docker ps -a
-docker rm -f co6
-docker rmi d563/co6:1
-</pre></div>
-</div>
-<div class="highlight-python"><div class="highlight"><pre>iptables -t nat -L -n --line-numbers
-
-# iptables -t nat -D DOCKER 1
-iptables -t nat -F DOCKER
-iptables -t nat -F POSTROUTING
-
-iptables -t nat -A DOCKER -j DNAT -p tcp --dport 80 --to-destination 172.17.0.4:8080
-iptables -t nat -A POSTROUTING -j MASQUERADE -p tcp --dport 8080 -s 172.17.0.4 -d 172.17.0.4
-</pre></div>
+  <div class="section" id="tips">
+<h1>9. tips<a class="headerlink" href="#tips" title="Permalink to this headline">¶</a></h1>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="windows.html">9.1. windows</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="windows.html#rlogin">9.1.1. rlogin</a></li>
+<li class="toctree-l2"><a class="reference internal" href="windows.html#winscp">9.1.2. winscp</a></li>
+<li class="toctree-l2"><a class="reference internal" href="windows.html#winshot">9.1.3. winshot</a></li>
+<li class="toctree-l2"><a class="reference internal" href="windows.html#eclipse">9.1.4. eclipse</a></li>
+<li class="toctree-l2"><a class="reference internal" href="windows.html#virtualbox">9.1.5. virtualbox</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="remote.html">9.2. remote</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="remote.html#scp">9.2.1. scp</a></li>
+<li class="toctree-l2"><a class="reference internal" href="remote.html#rsync-ssh">9.2.2. rsync (ssh)</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="performance.html">9.3. performance</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="performance.html#coreutils">9.3.1. coreutils</a></li>
+<li class="toctree-l2"><a class="reference internal" href="performance.html#procps">9.3.2. procps</a></li>
+<li class="toctree-l2"><a class="reference internal" href="performance.html#net-tools-6-x">9.3.3. net-tools (6.X)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="performance.html#iproute-7-x">9.3.4. iproute (7.X)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="performance.html#strace">9.3.5. strace</a></li>
+<li class="toctree-l2"><a class="reference internal" href="performance.html#sysstat">9.3.6. sysstat</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="simple.html">9.4. simple</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="simple.html#link">9.4.1. link</a></li>
+<li class="toctree-l2"><a class="reference internal" href="simple.html#find">9.4.2. find</a></li>
+<li class="toctree-l2"><a class="reference internal" href="simple.html#rpm">9.4.3. rpm</a></li>
+<li class="toctree-l2"><a class="reference internal" href="simple.html#alternatives">9.4.4. alternatives</a></li>
+</ul>
+</li>
+</ul>
 </div>
 </div>
 
@@ -148,11 +104,11 @@ iptables -t nat -A POSTROUTING -j MASQUERADE -p tcp --dport 8080 -s 172.17.0.4 -
       <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
         <div class="sphinxsidebarwrapper">
   <h4>Previous topic</h4>
-  <p class="topless"><a href="aws.html"
-                        title="previous chapter">8.2. aws</a></p>
+  <p class="topless"><a href="../vrtl/docker.html"
+                        title="previous chapter">8.3. docker</a></p>
   <h4>Next topic</h4>
-  <p class="topless"><a href="../tips/index.html"
-                        title="next chapter">9. tips</a></p>
+  <p class="topless"><a href="windows.html"
+                        title="next chapter">9.1. windows</a></p>
 <div id="searchbox" style="display: none" role="search">
   <h3>Quick search</h3>
     <form class="search" action="../search.html" method="get">
@@ -180,13 +136,12 @@ iptables -t nat -A POSTROUTING -j MASQUERADE -p tcp --dport 8080 -s 172.17.0.4 -
           <a href="../py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
         <li class="right" >
-          <a href="../tips/index.html" title="9. tips"
+          <a href="windows.html" title="9.1. windows"
              >next</a> |</li>
         <li class="right" >
-          <a href="aws.html" title="8.2. aws"
+          <a href="../vrtl/docker.html" title="8.3. docker"
              >previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../index.html">SLMan 0.0.2 documentation</a> &raquo;</li>
-          <li class="nav-item nav-item-1"><a href="index.html" >8. vrtl</a> &raquo;</li> 
+        <li class="nav-item nav-item-0"><a href="../index.html">SLMan 0.0.2 documentation</a> &raquo;</li> 
       </ul>
     </div>
     <div class="footer" role="contentinfo">

@@ -1,6 +1,7 @@
-tool
+tips
 ====
 .. toctree::
     windows
-    linux
+    remote
     performance
+    simple

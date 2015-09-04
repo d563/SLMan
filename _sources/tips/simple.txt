@@ -1,31 +1,20 @@
-linux
-=====
-dry-run
--------
-::
-
-    rsync  -vrlpzn --checksum --delete --exclude="**/.svn**" -e ssh ~/from/ d563@host:~/to/
-
-    tar ztvf xxx.tar.gz
-
-    zipinfo xxx.zip
-
+simple
+======
 link
 ----
 ::
 
     ln -nfs real link
-
     chown -h user link
-
     unlink link
 
-search
-------
+find
+----
 ::
 
     find ./ \
-      -maxdepth 1 \
+      -mindepth 1 \
+      -maxdepth 2 \
       -type f \
       -name "*.zip" \
       -user d563 \
@@ -34,16 +23,18 @@ search
       -perm 664 \
       -exec echo {} \; | xargs echo
 
+rpm
+---
+::
+
     rpm -qf /usr/java/jdk1.7.0_75/bin/java
     rpm -ql jdk
     rpm -q --scripts jdk
 
+alternatives
+------------
+::
+
     alternatives --display java
     alternatives --config java
     update-alternatives --auto java
-
-scp
----
-::
-
-    scp -rp local_dir remote_host:

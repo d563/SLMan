@@ -1,6 +1,5 @@
 nfs
 ===
-
 common
 ------
 ::
@@ -34,7 +33,7 @@ server
 
 ::
 
-    echo '/var 127.0.0.1/255.0.0.0(fsid=10,rw,no_root_squash,sync)' >> /etc/exports
+    echo '/var 127.0.0.0/255.255.255.0(fsid=10,rw,no_root_squash,sync)' >> /etc/exports
 
     exportfs -v
     exportfs -ra

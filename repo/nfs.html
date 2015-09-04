@@ -88,7 +88,7 @@ chkconfig rpcidmapd on
 <div class="highlight-python"><div class="highlight"><pre>/etc/init.d/nfs start
 </pre></div>
 </div>
-<div class="highlight-python" id="index-1"><div class="highlight"><pre>echo &#39;/var 127.0.0.1/255.0.0.0(fsid=10,rw,no_root_squash,sync)&#39; &gt;&gt; /etc/exports
+<div class="highlight-python" id="index-1"><div class="highlight"><pre>echo &#39;/var 127.0.0.0/255.255.255.0(fsid=10,rw,no_root_squash,sync)&#39; &gt;&gt; /etc/exports
 
 exportfs -v
 exportfs -ra
