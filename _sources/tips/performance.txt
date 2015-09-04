@@ -9,6 +9,8 @@ coreutils
 ::
 
     uname -a              システム情報
+    df -h                 ディスク・ドライブ情報
+    du -hs *              ファイル容量
 
 procps
 ------
