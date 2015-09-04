@@ -34,3 +34,76 @@ rsync (ssh)
     -v : --verbose
     -z : --compress (zip)
     -n : --dry-run
+
+rsyncd
+------
+.. index:: /etc/rsyncd.conf
+.. index:: /etc/xinetd.d/rsync
+
+::
+
+    yum -y install xinetd rsync
+
+    sed -i \
+    -e 's/disable.*/disable = no/' \
+    -e 's/flags.*/flags = IPv4/' \
+    /etc/xinetd.d/rsync
+
+    echo '
+    uid = root
+    gid = root
+    log file = /var/log/rsyncd.log
+    [d563]
+      path = /tmp/d563
+      hosts allow = 127.0.0.0/24
+      hosts deny = *
+      read only = no' > /etc/rsyncd.conf
+
+    mkdir /home/d563
+    mkdir /tmp/d563
+
+    /etc/init.d/xinetd start
+
+::
+
+    netstat -lntp | grep 873
+    # rsync -av /home/d563 rsync://127.0.0.1/d563
+
+lsyncd
+------
+.. index:: /etc/yum.repos.d/rpmforge.repo
+
+::
+
+    rpm -Uvh http://pkgs.repoforge.org/rpmforge-release/rpmforge-release-0.5.3-1.el6.rf.i686.rpm
+    sed -i -e 's/^enabled.*/enabled=0/' /etc/yum.repos.d/rpmforge.repo
+
+.. index:: /etc/lsyncd.conf
+
+::
+
+    yum -y install lsyncd --enablerepo=rpmforge
+
+    echo '
+    settings {
+      logfile = "/var/log/lsyncd.log",
+      statusFile = "/var/log/lsyncd.stat",
+      statusInterval = 1
+    }
+    sync {
+      default.rsync,
+      source="/home/d563",
+      target="127.0.0.1::d563"
+    }' > /etc/lsyncd.conf
+
+    chmod u+x /etc/sysconfig/lsyncd
+
+    /etc/init.d/lsyncd start
+
+.. index:: /etc/sysctl.conf
+
+::
+
+    echo 'fs.inotify.max_user_watches = 16394' >> /etc/sysctl.conf
+    sysctl -p
+    cat /proc/sys/fs/inotify/max_user_watches

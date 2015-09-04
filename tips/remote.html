@@ -98,6 +98,67 @@
 </pre></div>
 </div>
 </div>
+<div class="section" id="rsyncd">
+<h2>9.2.3. rsyncd<a class="headerlink" href="#rsyncd" title="Permalink to this headline">¶</a></h2>
+<span class="target" id="index-0"></span><div class="highlight-python" id="index-1"><div class="highlight"><pre>yum -y install xinetd rsync
+
+sed -i \
+-e &#39;s/disable.*/disable = no/&#39; \
+-e &#39;s/flags.*/flags = IPv4/&#39; \
+/etc/xinetd.d/rsync
+
+echo &#39;
+uid = root
+gid = root
+log file = /var/log/rsyncd.log
+[d563]
+  path = /tmp/d563
+  hosts allow = 127.0.0.0/24
+  hosts deny = *
+  read only = no&#39; &gt; /etc/rsyncd.conf
+
+mkdir /home/d563
+mkdir /tmp/d563
+
+/etc/init.d/xinetd start
+</pre></div>
+</div>
+<div class="highlight-python"><div class="highlight"><pre>netstat -lntp | grep 873
+# rsync -av /home/d563 rsync://127.0.0.1/d563
+</pre></div>
+</div>
+</div>
+<div class="section" id="lsyncd">
+<h2>9.2.4. lsyncd<a class="headerlink" href="#lsyncd" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-python" id="index-2"><div class="highlight"><pre>rpm -Uvh http://pkgs.repoforge.org/rpmforge-release/rpmforge-release-0.5.3-1.el6.rf.i686.rpm
+sed -i -e &#39;s/^enabled.*/enabled=0/&#39; /etc/yum.repos.d/rpmforge.repo
+</pre></div>
+</div>
+<div class="highlight-python" id="index-3"><div class="highlight"><pre>yum -y install lsyncd --enablerepo=rpmforge
+
+echo &#39;
+settings {
+  logfile = &quot;/var/log/lsyncd.log&quot;,
+  statusFile = &quot;/var/log/lsyncd.stat&quot;,
+  statusInterval = 1
+}
+sync {
+  default.rsync,
+  source=&quot;/home/d563&quot;,
+  target=&quot;127.0.0.1::d563&quot;
+}&#39; &gt; /etc/lsyncd.conf
+
+chmod u+x /etc/sysconfig/lsyncd
+
+/etc/init.d/lsyncd start
+</pre></div>
+</div>
+<div class="highlight-python" id="index-4"><div class="highlight"><pre>echo &#39;fs.inotify.max_user_watches = 16394&#39; &gt;&gt; /etc/sysctl.conf
+sysctl -p
+cat /proc/sys/fs/inotify/max_user_watches
+</pre></div>
+</div>
+</div>
 </div>
 
 
@@ -111,6 +172,8 @@
 <li><a class="reference internal" href="#">9.2. remote</a><ul>
 <li><a class="reference internal" href="#scp">9.2.1. scp</a></li>
 <li><a class="reference internal" href="#rsync-ssh">9.2.2. rsync (ssh)</a></li>
+<li><a class="reference internal" href="#rsyncd">9.2.3. rsyncd</a></li>
+<li><a class="reference internal" href="#lsyncd">9.2.4. lsyncd</a></li>
 </ul>
 </li>
 </ul>
