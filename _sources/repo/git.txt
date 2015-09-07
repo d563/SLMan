@@ -46,13 +46,46 @@ command
 -------
 ::
 
-    git show-branch
-    git cat-file -p HEAD
-    git remote show origin
-    git diff HEAD~2
+    git init d563
+    git init d563.git --bare
 
 ::
 
-    git reset HEAD
-    git reset --hard HEAD
-    git commit --amend
+    git log --oneline --graph --decorate
+    git diff 1111 --name-status
+
+    git add -A
+    git commit -m?
+    git commit -m? --amend
+
+    git reset 1111
+    git reset 1111 --hard
+
+::
+
+    git branch -a
+    git branch b001 1111
+    git branch b001 -d
+
+    git checkout master
+    git merge b001
+
+::
+
+    git tag
+    git tag v0.1 1111
+    git tag v0.1 1111 -a -m?
+    git tag v0.1 -d
+
+::
+
+    git clone file:///opt/git/d563.git
+
+    git push origin master
+    git push origin b001
+    git push origin v0.1
+    git push origin :b001
+    git push origin :v0.1
+
+    git fetch --prune
+    git merge origin/master
