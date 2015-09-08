@@ -1,6 +1,5 @@
 windows
 =======
-
 rlogin
 ------
 
@@ -18,7 +17,7 @@ winscp
 
 * Preferences > Preferences...
     - Editors > Edit...
-        + (削除) Force text transfer mode for files edited in external editor
+        + Force text transfer mode for files edited in external editor > 削除
     - Transfer > Edit...
         + Binary
 
@@ -73,4 +72,4 @@ virtualbox
     - アダプター1 > NAT
     - アダプター2 > ホストオンリーアダプタ
 
-* [*] System clock uses UTC
+* System clock uses UTC

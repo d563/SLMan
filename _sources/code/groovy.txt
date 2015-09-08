@@ -11,7 +11,6 @@ file
 ----
 .. code-block:: groovy
 
-
     new URL('http://d563.github.io/SLMan/_static/template.html').text
 
     new File('/Windows/System32/drivers/etc/hosts').text

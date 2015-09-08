@@ -6,7 +6,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>9. tips &mdash; SLMan 0.0.2 documentation</title>
+    <title>8.4. vagrant &mdash; SLMan 0.0.2 documentation</title>
     
     <link rel="stylesheet" href="../_static/pyramid.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
@@ -25,8 +25,9 @@
     <script type="text/javascript" src="../_static/underscore.js"></script>
     <script type="text/javascript" src="../_static/doctools.js"></script>
     <link rel="top" title="SLMan 0.0.2 documentation" href="../index.html" />
-    <link rel="next" title="9.1. windows" href="windows.html" />
-    <link rel="prev" title="8.4. vagrant" href="../vrtl/vagrant.html" />
+    <link rel="up" title="8. vrtl" href="index.html" />
+    <link rel="next" title="9. tips" href="../tips/index.html" />
+    <link rel="prev" title="8.3. docker" href="docker.html" />
 <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Neuton&amp;subset=latin" type="text/css" media="screen" charset="utf-8" />
 <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Nobile:regular,italic,bold,bolditalic&amp;subset=latin" type="text/css" media="screen" charset="utf-8" />
 <!--[if lte IE 6]>
@@ -46,12 +47,13 @@
           <a href="../py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
         <li class="right" >
-          <a href="windows.html" title="9.1. windows"
+          <a href="../tips/index.html" title="9. tips"
              accesskey="N">next</a> |</li>
         <li class="right" >
-          <a href="../vrtl/vagrant.html" title="8.4. vagrant"
+          <a href="docker.html" title="8.3. docker"
              accesskey="P">previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../index.html">SLMan 0.0.2 documentation</a> &raquo;</li> 
+        <li class="nav-item nav-item-0"><a href="../index.html">SLMan 0.0.2 documentation</a> &raquo;</li>
+          <li class="nav-item nav-item-1"><a href="index.html" accesskey="U">8. vrtl</a> &raquo;</li> 
       </ul>
     </div>  
 
@@ -60,43 +62,28 @@
         <div class="bodywrapper">
           <div class="body" role="main">
             
-  <div class="section" id="tips">
-<h1>9. tips<a class="headerlink" href="#tips" title="Permalink to this headline">¶</a></h1>
-<div class="toctree-wrapper compound">
-<ul>
-<li class="toctree-l1"><a class="reference internal" href="windows.html">9.1. windows</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="windows.html#rlogin">9.1.1. rlogin</a></li>
-<li class="toctree-l2"><a class="reference internal" href="windows.html#winscp">9.1.2. winscp</a></li>
-<li class="toctree-l2"><a class="reference internal" href="windows.html#winshot">9.1.3. winshot</a></li>
-<li class="toctree-l2"><a class="reference internal" href="windows.html#eclipse">9.1.4. eclipse</a></li>
-<li class="toctree-l2"><a class="reference internal" href="windows.html#virtualbox">9.1.5. virtualbox</a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="remote.html">9.2. remote</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="remote.html#scp">9.2.1. scp</a></li>
-<li class="toctree-l2"><a class="reference internal" href="remote.html#rsync-ssh">9.2.2. rsync (ssh)</a></li>
-<li class="toctree-l2"><a class="reference internal" href="remote.html#rsyncd">9.2.3. rsyncd</a></li>
-<li class="toctree-l2"><a class="reference internal" href="remote.html#lsyncd">9.2.4. lsyncd</a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="performance.html">9.3. performance</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="performance.html#coreutils">9.3.1. coreutils</a></li>
-<li class="toctree-l2"><a class="reference internal" href="performance.html#procps">9.3.2. procps</a></li>
-<li class="toctree-l2"><a class="reference internal" href="performance.html#net-tools-6-x">9.3.3. net-tools (6.X)</a></li>
-<li class="toctree-l2"><a class="reference internal" href="performance.html#iproute-7-x">9.3.4. iproute (7.X)</a></li>
-<li class="toctree-l2"><a class="reference internal" href="performance.html#strace">9.3.5. strace</a></li>
-<li class="toctree-l2"><a class="reference internal" href="performance.html#sysstat">9.3.6. sysstat</a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="simple.html">9.4. simple</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="simple.html#link">9.4.1. link</a></li>
-<li class="toctree-l2"><a class="reference internal" href="simple.html#find">9.4.2. find</a></li>
-<li class="toctree-l2"><a class="reference internal" href="simple.html#egrep">9.4.3. egrep</a></li>
-<li class="toctree-l2"><a class="reference internal" href="simple.html#rpm">9.4.4. rpm</a></li>
-<li class="toctree-l2"><a class="reference internal" href="simple.html#alternatives">9.4.5. alternatives</a></li>
-</ul>
-</li>
-</ul>
+  <div class="section" id="vagrant">
+<h1>8.4. vagrant<a class="headerlink" href="#vagrant" title="Permalink to this headline">¶</a></h1>
+<div class="highlight-python" id="index-0"><div class="highlight"><pre>cd /etc/yum.repos.d
+wget http://download.virtualbox.org/virtualbox/rpm/rhel/virtualbox.repo
+sed -i -e &#39;s/^enabled.*/enabled=0/&#39; /etc/yum.repos.d/virtualbox.repo
+</pre></div>
+</div>
+<div class="highlight-python"><div class="highlight"><pre>yum -y install dkms VirtualBox-4.3 --enablerepo=epel,virtualbox
+
+export KERN_DIR=/usr/src/kernels/2.6.32-573.3.1.el6-i386
+/etc/init.d/vboxdrv setup
+
+VBoxManage list vms
+</pre></div>
+</div>
+<div class="highlight-python"><div class="highlight"><pre>rpm -Uvh https://dl.bintray.com/mitchellh/vagrant/vagrant_1.7.4_i686.rpm
+
+vagrant init rafacas/centos66-i386-plain
+vagrant up
+vagrant ssh
+vagrant halt
+</pre></div>
 </div>
 </div>
 
@@ -107,11 +94,11 @@
       <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
         <div class="sphinxsidebarwrapper">
   <h4>Previous topic</h4>
-  <p class="topless"><a href="../vrtl/vagrant.html"
-                        title="previous chapter">8.4. vagrant</a></p>
+  <p class="topless"><a href="docker.html"
+                        title="previous chapter">8.3. docker</a></p>
   <h4>Next topic</h4>
-  <p class="topless"><a href="windows.html"
-                        title="next chapter">9.1. windows</a></p>
+  <p class="topless"><a href="../tips/index.html"
+                        title="next chapter">9. tips</a></p>
 <div id="searchbox" style="display: none" role="search">
   <h3>Quick search</h3>
     <form class="search" action="../search.html" method="get">
@@ -139,12 +126,13 @@
           <a href="../py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
         <li class="right" >
-          <a href="windows.html" title="9.1. windows"
+          <a href="../tips/index.html" title="9. tips"
              >next</a> |</li>
         <li class="right" >
-          <a href="../vrtl/vagrant.html" title="8.4. vagrant"
+          <a href="docker.html" title="8.3. docker"
              >previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../index.html">SLMan 0.0.2 documentation</a> &raquo;</li> 
+        <li class="nav-item nav-item-0"><a href="../index.html">SLMan 0.0.2 documentation</a> &raquo;</li>
+          <li class="nav-item nav-item-1"><a href="index.html" >8. vrtl</a> &raquo;</li> 
       </ul>
     </div>
     <div class="footer" role="contentinfo">

@@ -1,6 +1,5 @@
 krb5
 ====
-
 kdc
 ---
 .. index:: /var/kerberos/krb5kdc/kdc.conf

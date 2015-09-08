@@ -4,3 +4,4 @@ vrtl
     virtualenv
     aws
     docker
+    vagrant

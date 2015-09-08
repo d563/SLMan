@@ -1,6 +1,5 @@
 maven
 =====
-
 proxy
 -----
 ::
@@ -65,7 +64,7 @@ client
     unzip apache-maven-3.1.1-bin.zip
     ln -nfs /usr/local/lib/apache-maven-3.1.1/bin/mvn /usr/local/bin/mvn
 
-.. module ~/.m2/settings.xml
+.. index:: ~/.m2/settings.xml
 .. code-block:: xml
 
     <settings>

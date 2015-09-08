@@ -1,0 +1,28 @@
+vagrant
+=======
+.. index:: /etc/yum.repos.d/virtualbox.repo
+
+::
+
+    cd /etc/yum.repos.d
+    wget http://download.virtualbox.org/virtualbox/rpm/rhel/virtualbox.repo
+    sed -i -e 's/^enabled.*/enabled=0/' /etc/yum.repos.d/virtualbox.repo
+
+::
+
+    yum -y install dkms VirtualBox-4.3 --enablerepo=epel,virtualbox
+
+    export KERN_DIR=/usr/src/kernels/2.6.32-573.3.1.el6-i386
+    /etc/init.d/vboxdrv setup
+
+    VBoxManage list vms
+
+::
+
+    rpm -Uvh https://dl.bintray.com/mitchellh/vagrant/vagrant_1.7.4_i686.rpm
+
+    vagrant init rafacas/centos66-i386-plain
+    vagrant up
+    vagrant ssh
+    vagrant halt
+
