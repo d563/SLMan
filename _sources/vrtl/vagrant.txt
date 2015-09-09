@@ -1,5 +1,11 @@
 vagrant
 =======
+::
+
+    rpm -Uvh https://dl.bintray.com/mitchellh/vagrant/vagrant_1.7.4_i686.rpm
+
+virtualbox
+----------
 .. index:: /etc/yum.repos.d/virtualbox.repo
 
 ::
@@ -17,12 +23,68 @@ vagrant
 
     VBoxManage list vms
 
+image
+-----
+* デバイス > Guest AdditionsのCDイメージを挿入
+
 ::
 
-    rpm -Uvh https://dl.bintray.com/mitchellh/vagrant/vagrant_1.7.4_i686.rpm
+    yum -y update kernel
+    yum -y install kernel-devel gcc
+    yum clean all
 
-    vagrant init rafacas/centos66-i386-plain
+    reboot
+
+
+::
+
+    mkdir /media/cdrom
+    mount -r /dev/cdrom /media/cdrom
+    sh /media/cdrom/VBoxLinuxAdditions.run
+    umount /media/cdrom
+
+.. index:: /etc/sudoers
+
+::
+
+    rm -f /etc/udev/rules.d/70-persistent-net.rules
+
+    sed -i -e 's/^.*requiretty/#Defaults requiretty/' /etc/sudoers
+
+    # ssh-keygen
+
+box
+---
+::
+
+    vagrant package --base d563img
+    vagrant box add --name d563box package.box
+    vagrant box list
+    vagrant box remove d563box
+
+::
+
+    vagrant init d563box
+
+.. module:: Vagrantfile
+
+::
+
+    # -*- mode: ruby -*-
+    # vi: set ft=ruby :
+
+    # Vagrantfile
+    Vagrant.configure(2) do |config|
+      config.vm.box = "d563box"
+      config.vm.network :forwarded_port, guest: 22, host: 2222, id: "ssh", auto_correct: true
+      config.ssh.private_key_path = "~/.ssh/d563_rsa"
+      config.ssh.username = "root"
+    end
+
+::
+
     vagrant up
     vagrant ssh
     vagrant halt
 
+    vagrant destroy

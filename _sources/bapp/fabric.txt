@@ -11,7 +11,7 @@ fabric
     git init .
     mkdir fabfile
 
-.. module:: fabfile/__init__.py
+.. module:: __init__.py
 .. code-block:: python
 
     # -*- coding: utf-8 -*-
@@ -22,7 +22,7 @@ fabric
     # env.user = 'd563'
     # env.password = 'pass'
 
-.. module:: fabfile/fabmodule.py
+.. module:: fabmodule.py
 .. code-block:: python
 
     # -*- coding: utf-8 -*-
@@ -50,7 +50,7 @@ fabric
     fab -l
     fab fabmodule.tmpPut
 
-.. module:: fabfile/fabmodule-test.py
+.. module:: fabmodule-test.py
 .. code-block:: python
 
     # -*- coding: utf-8 -*-

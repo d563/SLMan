@@ -83,9 +83,7 @@ RUN\
  yum -y reinstall glibc-common &amp;&amp;\
  yum clean all
 RUN\
- wget http://archive.apache.org/dist/tomcat/tomcat-7/v7.0.59/bin/apache-tomcat-7.0.59.tar.gz &amp;&amp;\
- tar xvzf apache-tomcat-7.0.59.tar.gz &amp;&amp;\
- rm -f apache-tomcat-7.0.59.tar.gz &amp;&amp;\
+ wget -O - http://archive.apache.org/dist/tomcat/tomcat-7/v7.0.59/bin/apache-tomcat-7.0.59.tar.gz | tar xvzf - &amp;&amp;\
  mv apache-tomcat-7.0.59 tomcat
 ENV LANG ja_JP.UTF-8
 ENV CATALINA_OPTS\

@@ -73,7 +73,7 @@ git init .
 mkdir fabfile
 </pre></div>
 </div>
-<span class="target" id="module-fabfile/__init__.py"></span><div class="highlight-python"><div class="highlight"><pre><span class="c"># -*- coding: utf-8 -*-</span>
+<span class="target" id="module-__init__.py"></span><div class="highlight-python"><div class="highlight"><pre><span class="c"># -*- coding: utf-8 -*-</span>
 <span class="c"># fabfile/__init__.py</span>
 <span class="kn">from</span> <span class="nn">fabric.api</span> <span class="kn">import</span> <span class="n">env</span>
 <span class="kn">import</span> <span class="nn">fabmodule</span>
@@ -82,7 +82,7 @@ mkdir fabfile
 <span class="c"># env.password = &#39;pass&#39;</span>
 </pre></div>
 </div>
-<span class="target" id="module-fabfile/fabmodule.py"></span><div class="highlight-python"><div class="highlight"><pre><span class="c"># -*- coding: utf-8 -*-</span>
+<span class="target" id="module-fabmodule.py"></span><div class="highlight-python"><div class="highlight"><pre><span class="c"># -*- coding: utf-8 -*-</span>
 <span class="c"># fabfile/fabmodule.py</span>
 <span class="kn">from</span> <span class="nn">fabric.api</span> <span class="kn">import</span> <span class="n">env</span><span class="p">,</span> <span class="n">local</span><span class="p">,</span> <span class="n">lcd</span><span class="p">,</span> <span class="n">put</span><span class="p">,</span> <span class="n">run</span><span class="p">,</span> <span class="n">sudo</span><span class="p">,</span> <span class="n">cd</span>
 <span class="kn">from</span> <span class="nn">fabric.contrib.files</span> <span class="kn">import</span> <span class="n">exists</span>
@@ -107,7 +107,7 @@ mkdir fabfile
 fab fabmodule.tmpPut
 </pre></div>
 </div>
-<span class="target" id="module-fabfile/fabmodule-test.py"></span><div class="highlight-python"><div class="highlight"><pre><span class="c"># -*- coding: utf-8 -*-</span>
+<span class="target" id="module-fabmodule-test.py"></span><div class="highlight-python"><div class="highlight"><pre><span class="c"># -*- coding: utf-8 -*-</span>
 <span class="c"># fabfile/fabmodule-test.py</span>
 <span class="kn">from</span> <span class="nn">mock</span> <span class="kn">import</span> <span class="n">patch</span><span class="p">,</span> <span class="n">call</span>
 <span class="kn">import</span> <span class="nn">fabmodule</span> <span class="kn">as</span> <span class="nn">f</span>
