@@ -199,15 +199,59 @@
 </dl>
 </li>
 </ul>
+<div class="highlight-python"><div class="highlight"><pre>echo &#39;CATALINA_OPTS=&quot;-agentlib:jdwp=transport=dt_socket,address=8000,server=y,suspend=n&quot;&#39; &gt; bin/setenv.sh
+</pre></div>
+</div>
+<ul>
+<li><dl class="first docutils">
+<dt>デバッグ &gt; デバッグの構成 &gt; リモートJavaアプリケーション</dt>
+<dd><ul class="first last simple">
+<li>ホスト</li>
+<li>ポート &gt; 8000</li>
+</ul>
+</dd>
+</dl>
+</li>
+</ul>
 </div>
 <div class="section" id="virtualbox">
 <h2>9.1.5. virtualbox<a class="headerlink" href="#virtualbox" title="Permalink to this headline">¶</a></h2>
 <ul>
 <li><dl class="first docutils">
-<dt>設定 &gt; ネットワーク</dt>
+<dt>設定</dt>
+<dd><ul class="first last">
+<li><dl class="first docutils">
+<dt>システム &gt; 起動順序</dt>
 <dd><ul class="first last simple">
-<li>アダプター1 &gt; NAT</li>
-<li>アダプター2 &gt; ホストオンリーアダプタ</li>
+<li>ハードディスク</li>
+<li>CD/DVD</li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><p class="first">オーディオ &gt; オーディオを有効化 &gt; 削除</p>
+</li>
+<li><p class="first">USB &gt; USBコントローラーを有効化 &gt; 削除</p>
+</li>
+<li><dl class="first docutils">
+<dt>ネットワーク &gt; アダプター1</dt>
+<dd><ul class="first last">
+<li><p class="first">NAT</p>
+</li>
+<li><dl class="first docutils">
+<dt>ポートフォワーディング</dt>
+<dd><ul class="first last simple">
+<li>プロトコル &gt; 127.0.0.1</li>
+<li>ホストポート &gt; 2222</li>
+<li>ゲストポート &gt; 22</li>
+</ul>
+</dd>
+</dl>
+</li>
+</ul>
+</dd>
+</dl>
+</li>
 </ul>
 </dd>
 </dl>

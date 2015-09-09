@@ -65,11 +65,28 @@ eclipse
     - Tomcatインストール／ディレクトリー
     - JRE
 
+::
+
+    echo 'CATALINA_OPTS="-agentlib:jdwp=transport=dt_socket,address=8000,server=y,suspend=n"' > bin/setenv.sh
+
+* デバッグ > デバッグの構成 > リモートJavaアプリケーション
+    - ホスト
+    - ポート > 8000
+
 virtualbox
 ----------
 
-* 設定 > ネットワーク
-    - アダプター1 > NAT
-    - アダプター2 > ホストオンリーアダプタ
+* 設定 
+    - システム > 起動順序
+        + ハードディスク
+        + CD/DVD
+    - オーディオ > オーディオを有効化 > 削除
+    - USB > USBコントローラーを有効化 > 削除
+    - ネットワーク > アダプター1 
+        + NAT
+        + ポートフォワーディング
+            - プロトコル > 127.0.0.1
+            - ホストポート > 2222
+            - ゲストポート > 22
 
 * System clock uses UTC
