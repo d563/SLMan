@@ -1,6 +1,7 @@
-base
+init
 ====
 .. toctree::
-    centos
+    base
+    package
     vim
     httpd

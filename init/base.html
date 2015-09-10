@@ -6,7 +6,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>1.1. centos &mdash; SLMan 0.0.2 documentation</title>
+    <title>1.1. base &mdash; SLMan 0.0.2 documentation</title>
     
     <link rel="stylesheet" href="../_static/pyramid.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
@@ -25,9 +25,9 @@
     <script type="text/javascript" src="../_static/underscore.js"></script>
     <script type="text/javascript" src="../_static/doctools.js"></script>
     <link rel="top" title="SLMan 0.0.2 documentation" href="../index.html" />
-    <link rel="up" title="1. base" href="index.html" />
-    <link rel="next" title="1.2. vim" href="vim.html" />
-    <link rel="prev" title="1. base" href="index.html" />
+    <link rel="up" title="1. init" href="index.html" />
+    <link rel="next" title="1.2. package" href="package.html" />
+    <link rel="prev" title="1. init" href="index.html" />
 <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Neuton&amp;subset=latin" type="text/css" media="screen" charset="utf-8" />
 <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Nobile:regular,italic,bold,bolditalic&amp;subset=latin" type="text/css" media="screen" charset="utf-8" />
 <!--[if lte IE 6]>
@@ -47,13 +47,13 @@
           <a href="../py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
         <li class="right" >
-          <a href="vim.html" title="1.2. vim"
+          <a href="package.html" title="1.2. package"
              accesskey="N">next</a> |</li>
         <li class="right" >
-          <a href="index.html" title="1. base"
+          <a href="index.html" title="1. init"
              accesskey="P">previous</a> |</li>
         <li class="nav-item nav-item-0"><a href="../index.html">SLMan 0.0.2 documentation</a> &raquo;</li>
-          <li class="nav-item nav-item-1"><a href="index.html" accesskey="U">1. base</a> &raquo;</li> 
+          <li class="nav-item nav-item-1"><a href="index.html" accesskey="U">1. init</a> &raquo;</li> 
       </ul>
     </div>  
 
@@ -62,8 +62,8 @@
         <div class="bodywrapper">
           <div class="body" role="main">
             
-  <div class="section" id="centos">
-<h1>1.1. centos<a class="headerlink" href="#centos" title="Permalink to this headline">¶</a></h1>
+  <div class="section" id="base">
+<h1>1.1. base<a class="headerlink" href="#base" title="Permalink to this headline">¶</a></h1>
 <div class="section" id="image">
 <h2>1.1.1. image<a class="headerlink" href="#image" title="Permalink to this headline">¶</a></h2>
 <div class="highlight-python"><div class="highlight"><pre># 6
@@ -128,34 +128,13 @@ Defaults passprompt = &quot;%u@%h Password: &quot;
 </pre></div>
 </div>
 </div>
-<div class="section" id="package">
-<h2>1.1.7. package<a class="headerlink" href="#package" title="Permalink to this headline">¶</a></h2>
-<div class="highlight-python" id="index-8"><div class="highlight"><pre>sed -i.org -e &#39;s/debuglevel=2/debuglevel=1/&#39; /etc/yum.conf
-</pre></div>
-</div>
-<div class="highlight-python"><div class="highlight"><pre># 6
-yum -y install wget unzip gcc gcc-c++ java-1.7.0-openjdk-devel python-devel python-setuptools openssh-clients
-
-# 7
-yum -y install wget unzip gcc gcc-c++ java-1.7.0-openjdk-devel python-devel
-</pre></div>
-</div>
-<div class="highlight-python"><div class="highlight"><pre>yum -y update
-</pre></div>
-</div>
-<div class="highlight-python"><div class="highlight"><pre>easy_install pip
-pip install -U setuptools
-pip install -U setuptools
-</pre></div>
-</div>
-</div>
 <div class="section" id="sshd">
-<h2>1.1.8. sshd<a class="headerlink" href="#sshd" title="Permalink to this headline">¶</a></h2>
-<div class="highlight-python" id="index-9"><div class="highlight"><pre>sed -i.org -e &#39;/#Port 22/aPort 443&#39; /etc/ssh/sshd_config
+<h2>1.1.7. sshd<a class="headerlink" href="#sshd" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-python" id="index-8"><div class="highlight"><pre>sed -i.org -e &#39;/#Port 22/aPort 443&#39; /etc/ssh/sshd_config
 service sshd restart
 </pre></div>
 </div>
-<span class="target" id="index-10"></span><span class="target" id="index-11"></span><div class="highlight-python" id="index-12"><div class="highlight"><pre>ssh-keygen -t rsa -C &quot;mail.d563@gmail.com&quot;
+<span class="target" id="index-9"></span><span class="target" id="index-10"></span><div class="highlight-python" id="index-11"><div class="highlight"><pre>ssh-keygen -t rsa -C &quot;mail.d563@gmail.com&quot;
 cd ~/.ssh
 cat id_rsa.pub &gt;&gt; authorized_keys
 chmod 600 authorized_keys
@@ -163,8 +142,8 @@ chmod 600 authorized_keys
 </div>
 </div>
 <div class="section" id="iptables">
-<h2>1.1.9. iptables<a class="headerlink" href="#iptables" title="Permalink to this headline">¶</a></h2>
-<div class="highlight-python" id="index-13"><div class="highlight"><pre># 6
+<h2>1.1.8. iptables<a class="headerlink" href="#iptables" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-python" id="index-12"><div class="highlight"><pre># 6
 sed -i.org -e &#39;s/--dport 22/--dport 443/&#39; /etc/sysconfig/iptables
 service iptables restart
 
@@ -185,24 +164,14 @@ COMMIT
 </div>
 </div>
 <div class="section" id="firewalld">
-<h2>1.1.10. firewalld<a class="headerlink" href="#firewalld" title="Permalink to this headline">¶</a></h2>
-<div class="highlight-none" id="index-14"><div class="highlight"><pre># 7
+<h2>1.1.9. firewalld<a class="headerlink" href="#firewalld" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-none" id="index-13"><div class="highlight"><pre># 7
 cat /usr/lib/firewalld/services/ssh.xml
 cat /usr/lib/firewalld/services/https.xml
 firewall-cmd --list-all
 firewall-cmd --permanent --add-service=https
 firewall-cmd --permanent --remove-service=ssh
 firewall-cmd --reload
-</pre></div>
-</div>
-</div>
-<div class="section" id="bash-completion">
-<h2>1.1.11. bash-completion<a class="headerlink" href="#bash-completion" title="Permalink to this headline">¶</a></h2>
-<div class="highlight-python" id="index-15"><div class="highlight"><pre>rpm -Uvh http://dl.fedoraproject.org/pub/epel/6/x86_64/epel-release-6-8.noarch.rpm
-sed -i -e &#39;s/^enabled.*/enabled=0/&#39; /etc/yum.repos.d/epel.repo
-</pre></div>
-</div>
-<div class="highlight-python"><div class="highlight"><pre>yum -y install bash-completion --enablerepo=epel
 </pre></div>
 </div>
 </div>
@@ -216,28 +185,26 @@ sed -i -e &#39;s/^enabled.*/enabled=0/&#39; /etc/yum.repos.d/epel.repo
         <div class="sphinxsidebarwrapper">
   <h3><a href="../index.html">Table Of Contents</a></h3>
   <ul>
-<li><a class="reference internal" href="#">1.1. centos</a><ul>
+<li><a class="reference internal" href="#">1.1. base</a><ul>
 <li><a class="reference internal" href="#image">1.1.1. image</a></li>
 <li><a class="reference internal" href="#network">1.1.2. network</a></li>
 <li><a class="reference internal" href="#hostname">1.1.3. hostname</a></li>
 <li><a class="reference internal" href="#location">1.1.4. location</a></li>
 <li><a class="reference internal" href="#selinux">1.1.5. selinux</a></li>
 <li><a class="reference internal" href="#visudo">1.1.6. visudo</a></li>
-<li><a class="reference internal" href="#package">1.1.7. package</a></li>
-<li><a class="reference internal" href="#sshd">1.1.8. sshd</a></li>
-<li><a class="reference internal" href="#iptables">1.1.9. iptables</a></li>
-<li><a class="reference internal" href="#firewalld">1.1.10. firewalld</a></li>
-<li><a class="reference internal" href="#bash-completion">1.1.11. bash-completion</a></li>
+<li><a class="reference internal" href="#sshd">1.1.7. sshd</a></li>
+<li><a class="reference internal" href="#iptables">1.1.8. iptables</a></li>
+<li><a class="reference internal" href="#firewalld">1.1.9. firewalld</a></li>
 </ul>
 </li>
 </ul>
 
   <h4>Previous topic</h4>
   <p class="topless"><a href="index.html"
-                        title="previous chapter">1. base</a></p>
+                        title="previous chapter">1. init</a></p>
   <h4>Next topic</h4>
-  <p class="topless"><a href="vim.html"
-                        title="next chapter">1.2. vim</a></p>
+  <p class="topless"><a href="package.html"
+                        title="next chapter">1.2. package</a></p>
 <div id="searchbox" style="display: none" role="search">
   <h3>Quick search</h3>
     <form class="search" action="../search.html" method="get">
@@ -265,13 +232,13 @@ sed -i -e &#39;s/^enabled.*/enabled=0/&#39; /etc/yum.repos.d/epel.repo
           <a href="../py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
         <li class="right" >
-          <a href="vim.html" title="1.2. vim"
+          <a href="package.html" title="1.2. package"
              >next</a> |</li>
         <li class="right" >
-          <a href="index.html" title="1. base"
+          <a href="index.html" title="1. init"
              >previous</a> |</li>
         <li class="nav-item nav-item-0"><a href="../index.html">SLMan 0.0.2 documentation</a> &raquo;</li>
-          <li class="nav-item nav-item-1"><a href="index.html" >1. base</a> &raquo;</li> 
+          <li class="nav-item nav-item-1"><a href="index.html" >1. init</a> &raquo;</li> 
       </ul>
     </div>
     <div class="footer" role="contentinfo">

@@ -6,7 +6,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>1.2. vim &mdash; SLMan 0.0.2 documentation</title>
+    <title>1.2. package &mdash; SLMan 0.0.2 documentation</title>
     
     <link rel="stylesheet" href="../_static/pyramid.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
@@ -25,9 +25,9 @@
     <script type="text/javascript" src="../_static/underscore.js"></script>
     <script type="text/javascript" src="../_static/doctools.js"></script>
     <link rel="top" title="SLMan 0.0.2 documentation" href="../index.html" />
-    <link rel="up" title="1. base" href="index.html" />
-    <link rel="next" title="1.3. httpd" href="httpd.html" />
-    <link rel="prev" title="1.1. centos" href="centos.html" />
+    <link rel="up" title="1. init" href="index.html" />
+    <link rel="next" title="1.3. vim" href="vim.html" />
+    <link rel="prev" title="1.1. base" href="base.html" />
 <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Neuton&amp;subset=latin" type="text/css" media="screen" charset="utf-8" />
 <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Nobile:regular,italic,bold,bolditalic&amp;subset=latin" type="text/css" media="screen" charset="utf-8" />
 <!--[if lte IE 6]>
@@ -47,13 +47,13 @@
           <a href="../py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
         <li class="right" >
-          <a href="httpd.html" title="1.3. httpd"
+          <a href="vim.html" title="1.3. vim"
              accesskey="N">next</a> |</li>
         <li class="right" >
-          <a href="centos.html" title="1.1. centos"
+          <a href="base.html" title="1.1. base"
              accesskey="P">previous</a> |</li>
         <li class="nav-item nav-item-0"><a href="../index.html">SLMan 0.0.2 documentation</a> &raquo;</li>
-          <li class="nav-item nav-item-1"><a href="index.html" accesskey="U">1. base</a> &raquo;</li> 
+          <li class="nav-item nav-item-1"><a href="index.html" accesskey="U">1. init</a> &raquo;</li> 
       </ul>
     </div>  
 
@@ -62,27 +62,41 @@
         <div class="bodywrapper">
           <div class="body" role="main">
             
-  <div class="section" id="vim">
-<h1>1.2. vim<a class="headerlink" href="#vim" title="Permalink to this headline">¶</a></h1>
-<div class="highlight-python"><div class="highlight"><pre>yum -y install vim-enhanced
+  <div class="section" id="package">
+<h1>1.2. package<a class="headerlink" href="#package" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="yum">
+<h2>1.2.1. yum<a class="headerlink" href="#yum" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-python" id="index-0"><div class="highlight"><pre>sed -i.org -e &#39;s/debuglevel=2/debuglevel=1/&#39; /etc/yum.conf
 </pre></div>
 </div>
-<div class="highlight-python" id="index-0"><div class="highlight"><pre>mv /etc/profile.d/vim.sh /etc/profile.d/vim.sh.org
-echo &quot;alias vi=&#39;vim&#39;
-alias view=&#39;vim -R&#39;&quot; &gt; /etc/profile.d/vim.sh
+<div class="highlight-python"><div class="highlight"><pre># 6
+yum -y install wget unzip gcc gcc-c++ java-1.7.0-openjdk-devel python-devel python-setuptools openssh-clients
+
+# 7
+yum -y install wget unzip gcc gcc-c++ java-1.7.0-openjdk-devel python-devel
 </pre></div>
 </div>
-<div class="highlight-python" id="index-1"><div class="highlight"><pre>cat &lt;&lt; &#39;[EOF]&#39; &gt;&gt; /etc/vimrc
-set expandtab
-set tabstop=4
-set softtabstop=4
-set shiftwidth=4
-&quot; set autoindent
-set ignorecase
-set incsearch
-set ruler
-[EOF]
+<div class="highlight-python"><div class="highlight"><pre>yum -y update
 </pre></div>
+</div>
+</div>
+<div class="section" id="pip">
+<h2>1.2.2. pip<a class="headerlink" href="#pip" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-python"><div class="highlight"><pre>easy_install pip
+pip install -U setuptools
+pip install -U setuptools
+</pre></div>
+</div>
+</div>
+<div class="section" id="bash-completion">
+<h2>1.2.3. bash-completion<a class="headerlink" href="#bash-completion" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-python" id="index-1"><div class="highlight"><pre>rpm -Uvh http://dl.fedoraproject.org/pub/epel/6/x86_64/epel-release-6-8.noarch.rpm
+sed -i -e &#39;s/^enabled.*/enabled=0/&#39; /etc/yum.repos.d/epel.repo
+</pre></div>
+</div>
+<div class="highlight-python"><div class="highlight"><pre>yum -y install bash-completion --enablerepo=epel
+</pre></div>
+</div>
 </div>
 </div>
 
@@ -92,12 +106,22 @@ set ruler
       </div>
       <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
         <div class="sphinxsidebarwrapper">
+  <h3><a href="../index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">1.2. package</a><ul>
+<li><a class="reference internal" href="#yum">1.2.1. yum</a></li>
+<li><a class="reference internal" href="#pip">1.2.2. pip</a></li>
+<li><a class="reference internal" href="#bash-completion">1.2.3. bash-completion</a></li>
+</ul>
+</li>
+</ul>
+
   <h4>Previous topic</h4>
-  <p class="topless"><a href="centos.html"
-                        title="previous chapter">1.1. centos</a></p>
+  <p class="topless"><a href="base.html"
+                        title="previous chapter">1.1. base</a></p>
   <h4>Next topic</h4>
-  <p class="topless"><a href="httpd.html"
-                        title="next chapter">1.3. httpd</a></p>
+  <p class="topless"><a href="vim.html"
+                        title="next chapter">1.3. vim</a></p>
 <div id="searchbox" style="display: none" role="search">
   <h3>Quick search</h3>
     <form class="search" action="../search.html" method="get">
@@ -125,13 +149,13 @@ set ruler
           <a href="../py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
         <li class="right" >
-          <a href="httpd.html" title="1.3. httpd"
+          <a href="vim.html" title="1.3. vim"
              >next</a> |</li>
         <li class="right" >
-          <a href="centos.html" title="1.1. centos"
+          <a href="base.html" title="1.1. base"
              >previous</a> |</li>
         <li class="nav-item nav-item-0"><a href="../index.html">SLMan 0.0.2 documentation</a> &raquo;</li>
-          <li class="nav-item nav-item-1"><a href="index.html" >1. base</a> &raquo;</li> 
+          <li class="nav-item nav-item-1"><a href="index.html" >1. init</a> &raquo;</li> 
       </ul>
     </div>
     <div class="footer" role="contentinfo">

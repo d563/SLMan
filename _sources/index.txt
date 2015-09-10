@@ -4,7 +4,7 @@ SLMan
     :maxdepth: 2
     :numbered:
 
-    base/index
+    init/index
     repo/index
     data/index
     auto/index

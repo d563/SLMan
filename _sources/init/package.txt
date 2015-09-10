@@ -1,0 +1,42 @@
+package
+=======
+yum
+---
+.. index:: /etc/yum.conf
+
+::
+
+    sed -i.org -e 's/debuglevel=2/debuglevel=1/' /etc/yum.conf
+
+::
+
+    # 6
+    yum -y install wget unzip gcc gcc-c++ java-1.7.0-openjdk-devel python-devel python-setuptools openssh-clients
+
+    # 7
+    yum -y install wget unzip gcc gcc-c++ java-1.7.0-openjdk-devel python-devel
+
+::
+
+    yum -y update
+
+pip
+---
+::
+
+    easy_install pip
+    pip install -U setuptools
+    pip install -U setuptools
+
+bash-completion
+---------------
+.. index:: /etc/yum.repos.d/epel.repo
+
+::
+
+    rpm -Uvh http://dl.fedoraproject.org/pub/epel/6/x86_64/epel-release-6-8.noarch.rpm
+    sed -i -e 's/^enabled.*/enabled=0/' /etc/yum.repos.d/epel.repo
+
+::
+
+    yum -y install bash-completion --enablerepo=epel
