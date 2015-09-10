@@ -1,5 +1,5 @@
-jrxml
-=====
+jasperreports
+=============
 ::
 
     http://jaist.dl.sourceforge.net/project/jasperstudio/JaspersoftStudio-6.0.4/TIBCOJaspersoftStudio-6.0.4.final-windows-installer-x86.exe

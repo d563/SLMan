@@ -4,3 +4,4 @@ bapp
     fabric
     ant
     make
+    jasperreports

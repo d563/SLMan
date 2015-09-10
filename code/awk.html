@@ -6,7 +6,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>6. oapp &mdash; SLMan 0.0.2 documentation</title>
+    <title>7.2. awk &mdash; SLMan 0.0.2 documentation</title>
     
     <link rel="stylesheet" href="../_static/pyramid.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
@@ -25,8 +25,9 @@
     <script type="text/javascript" src="../_static/underscore.js"></script>
     <script type="text/javascript" src="../_static/doctools.js"></script>
     <link rel="top" title="SLMan 0.0.2 documentation" href="../index.html" />
-    <link rel="next" title="6.1. sphinx" href="sphinx.html" />
-    <link rel="prev" title="5.4. jasperreports" href="../bapp/jasperreports.html" />
+    <link rel="up" title="7. code" href="index.html" />
+    <link rel="next" title="7.3. python" href="python.html" />
+    <link rel="prev" title="7.1. bash" href="bash.html" />
 <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Neuton&amp;subset=latin" type="text/css" media="screen" charset="utf-8" />
 <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Nobile:regular,italic,bold,bolditalic&amp;subset=latin" type="text/css" media="screen" charset="utf-8" />
 <!--[if lte IE 6]>
@@ -46,12 +47,13 @@
           <a href="../py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
         <li class="right" >
-          <a href="sphinx.html" title="6.1. sphinx"
+          <a href="python.html" title="7.3. python"
              accesskey="N">next</a> |</li>
         <li class="right" >
-          <a href="../bapp/jasperreports.html" title="5.4. jasperreports"
+          <a href="bash.html" title="7.1. bash"
              accesskey="P">previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../index.html">SLMan 0.0.2 documentation</a> &raquo;</li> 
+        <li class="nav-item nav-item-0"><a href="../index.html">SLMan 0.0.2 documentation</a> &raquo;</li>
+          <li class="nav-item nav-item-1"><a href="index.html" accesskey="U">7. code</a> &raquo;</li> 
       </ul>
     </div>  
 
@@ -60,18 +62,41 @@
         <div class="bodywrapper">
           <div class="body" role="main">
             
-  <div class="section" id="oapp">
-<h1>6. oapp<a class="headerlink" href="#oapp" title="Permalink to this headline">¶</a></h1>
-<div class="toctree-wrapper compound">
-<ul>
-<li class="toctree-l1"><a class="reference internal" href="sphinx.html">6.1. sphinx</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="sphinx.html#theme">6.1.1. theme</a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="wsgi.html">6.2. wsgi</a></li>
-<li class="toctree-l1"><a class="reference internal" href="tomcat.html">6.3. tomcat</a></li>
-<li class="toctree-l1"><a class="reference internal" href="meteor.html">6.4. meteor</a></li>
-</ul>
+  <div class="section" id="awk">
+<h1>7.2. awk<a class="headerlink" href="#awk" title="Permalink to this headline">¶</a></h1>
+<div class="highlight-python"><div class="highlight"><pre>ls -l --time-style=+&quot;%Y/%m/%d %H:%M:%s&quot; | awk &#39;NR != 1 {printf &quot;%s %s:%s %s\n&quot;,$1,$3,$4,$8}&#39;
+</pre></div>
+</div>
+<span class="target" id="module-template.awk"></span><div class="highlight-awk"><div class="highlight"><pre><span class="c1">#!/bin/awk -f</span>
+<span class="c1"># template.awk</span>
+<span class="nb">BEGIN</span> <span class="p">{</span>
+  <span class="nb">FS</span> <span class="o">=</span> <span class="s2">&quot;,&quot;</span><span class="p">;</span>
+  <span class="nb">OFS</span> <span class="o">=</span> <span class="s2">&quot;/&quot;</span><span class="p">;</span>
+  <span class="nx">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+<span class="sr">/str/</span> <span class="p">{</span>
+  <span class="nx">i</span><span class="o">++</span><span class="p">;</span>
+<span class="p">}</span>
+<span class="p">{</span>
+  <span class="k">if</span> <span class="p">(</span><span class="o">$</span><span class="mi">0</span> <span class="o">!=</span> <span class="s2">&quot;&quot;</span><span class="p">)</span> <span class="p">{</span>
+    <span class="kr">printf</span> <span class="s2">&quot;line:%d -&gt; %s\n&quot;</span><span class="p">,</span> <span class="nb">NR</span><span class="p">,</span> <span class="o">$</span><span class="mi">0</span><span class="p">;</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+<span class="nb">END</span> <span class="p">{</span>
+  <span class="kr">print</span> <span class="nx">i</span><span class="p">,</span> <span class="nb">NR</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<div class="highlight-python"><div class="highlight"><pre>cat &lt;&lt; &#39;[EOF]&#39; &gt;&gt; dat
+a,b,c
+d,str,f
+
+g,h,i
+[EOF]
+
+chmod +x ./template.awk
+./template.awk dat
+</pre></div>
 </div>
 </div>
 
@@ -82,11 +107,11 @@
       <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
         <div class="sphinxsidebarwrapper">
   <h4>Previous topic</h4>
-  <p class="topless"><a href="../bapp/jasperreports.html"
-                        title="previous chapter">5.4. jasperreports</a></p>
+  <p class="topless"><a href="bash.html"
+                        title="previous chapter">7.1. bash</a></p>
   <h4>Next topic</h4>
-  <p class="topless"><a href="sphinx.html"
-                        title="next chapter">6.1. sphinx</a></p>
+  <p class="topless"><a href="python.html"
+                        title="next chapter">7.3. python</a></p>
 <div id="searchbox" style="display: none" role="search">
   <h3>Quick search</h3>
     <form class="search" action="../search.html" method="get">
@@ -114,12 +139,13 @@
           <a href="../py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
         <li class="right" >
-          <a href="sphinx.html" title="6.1. sphinx"
+          <a href="python.html" title="7.3. python"
              >next</a> |</li>
         <li class="right" >
-          <a href="../bapp/jasperreports.html" title="5.4. jasperreports"
+          <a href="bash.html" title="7.1. bash"
              >previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../index.html">SLMan 0.0.2 documentation</a> &raquo;</li> 
+        <li class="nav-item nav-item-0"><a href="../index.html">SLMan 0.0.2 documentation</a> &raquo;</li>
+          <li class="nav-item nav-item-1"><a href="index.html" >7. code</a> &raquo;</li> 
       </ul>
     </div>
     <div class="footer" role="contentinfo">

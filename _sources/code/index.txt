@@ -1,7 +1,7 @@
 code
 ====
 .. toctree::
-    shell
+    bash
+    awk
     python
     groovy
-    jrxml
