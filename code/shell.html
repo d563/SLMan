@@ -65,51 +65,78 @@
   <div class="section" id="shell">
 <h1>7.1. shell<a class="headerlink" href="#shell" title="Permalink to this headline">¶</a></h1>
 <div class="section" id="module-template.sh">
-<span id="base"></span><h2>7.1.1. base<a class="headerlink" href="#module-template.sh" title="Permalink to this headline">¶</a></h2>
+<span id="bash"></span><h2>7.1.1. bash<a class="headerlink" href="#module-template.sh" title="Permalink to this headline">¶</a></h2>
 <div class="highlight-shell"><div class="highlight"><pre><span class="c">#!/bin/bash</span>
 <span class="c"># template.sh</span>
-set_args<span class="o">()</span> <span class="o">{</span>
-  <span class="nv">CNT</span><span class="o">=</span>0
-  <span class="nv">ARGS_CNT</span><span class="o">=</span><span class="nv">$#</span>
-  <span class="k">for</span> i in <span class="nv">$@</span>
-  <span class="k">do</span>
-    <span class="k">case</span> <span class="nv">$1</span> in
-      -a<span class="o">)</span> <span class="nb">shift</span><span class="p">;</span> <span class="nv">A</span><span class="o">=</span><span class="nv">$1</span><span class="p">;</span>    <span class="nv">CNT</span><span class="o">=</span><span class="sb">`</span>expr <span class="nv">$CNT</span> + 2<span class="sb">`</span> <span class="p">;;</span>
-      -b<span class="o">)</span> <span class="nb">shift</span><span class="p">;</span> <span class="nv">B</span><span class="o">=</span><span class="nv">$1</span><span class="p">;</span>    <span class="nv">CNT</span><span class="o">=</span><span class="sb">`</span>expr <span class="nv">$CNT</span> + 2<span class="sb">`</span> <span class="p">;;</span>
-      -v<span class="o">)</span> <span class="nb">set</span> -x<span class="p">;</span>         <span class="nv">CNT</span><span class="o">=</span><span class="sb">`</span>expr <span class="nv">$CNT</span> + 1<span class="sb">`</span> <span class="p">;;</span>
-      *<span class="o">)</span>  <span class="nv">ARGS</span><span class="o">=</span><span class="s2">&quot;</span><span class="nv">$ARGS</span><span class="s2"> </span><span class="nv">$1</span><span class="s2">&quot;</span> <span class="nv">CNT</span><span class="o">=</span><span class="sb">`</span>expr <span class="nv">$CNT</span> + 1<span class="sb">`</span> <span class="p">;;</span>
-    <span class="k">esac</span>
-    <span class="k">if</span> <span class="o">[[</span> <span class="nv">$CNT</span> -ge <span class="nv">$ARGS_CNT</span> <span class="o">]]</span><span class="p">;</span> <span class="k">then</span>
-      <span class="nb">break</span>
-<span class="nb">    </span><span class="k">fi</span>
-    <span class="nb">shift</span>
-<span class="nb">  </span><span class="k">done</span>
-<span class="o">}</span>
-set_args <span class="s2">&quot;</span><span class="nv">$@</span><span class="s2">&quot;</span>
-<span class="nb">echo</span> <span class="nv">$@</span>
-<span class="nb">echo</span> <span class="nv">$A</span>
-<span class="nb">echo</span> <span class="nv">$B</span>
-<span class="nb">echo</span> <span class="nv">$ARGS</span>
-<span class="nb">echo</span> <span class="si">${</span><span class="nv">A</span><span class="p">%%TEST*</span><span class="si">}</span>
-<span class="nb">echo</span> <span class="si">${</span><span class="nv">A</span><span class="p">##*TEST</span><span class="si">}</span>
-<span class="o">[[</span> -z <span class="nv">$A</span> <span class="o">]]</span><span class="p">;</span> <span class="nb">echo</span> <span class="nv">$?</span>
-<span class="o">[[</span> -e <span class="nv">$A</span> <span class="o">]]</span><span class="p">;</span> <span class="nb">echo</span> <span class="nv">$?</span>
-<span class="o">[[</span> -f <span class="nv">$A</span> <span class="o">]]</span><span class="p">;</span> <span class="nb">echo</span> <span class="nv">$?</span>
-<span class="o">[[</span> -d <span class="nv">$A</span> <span class="o">]]</span><span class="p">;</span> <span class="nb">echo</span> <span class="nv">$?</span>
-<span class="o">[[</span> <span class="nv">$A</span> <span class="o">=</span> TEST <span class="o">]]</span><span class="p">;</span> <span class="nb">echo</span> <span class="nv">$?</span>
-<span class="o">[[</span> <span class="nv">$A</span> <span class="o">=</span>~ ^TEST<span class="o">[</span>0-9a-z<span class="o">]{</span>3<span class="o">}</span><span class="nv">$ </span><span class="o">]]</span><span class="p">;</span> <span class="nb">echo</span> <span class="nv">$?</span>
-<span class="o">[[</span> <span class="nv">a</span> <span class="o">=</span> a <span class="o">]]</span> <span class="o">&amp;&amp;</span> <span class="o">[[</span> <span class="nv">a</span> <span class="o">=</span> aa <span class="o">]]</span><span class="p">;</span> <span class="nb">echo</span> <span class="nv">$?</span>
-<span class="o">[[</span> <span class="nv">a</span> <span class="o">=</span> a <span class="o">]]</span> <span class="o">||</span> <span class="o">[[</span> <span class="nv">a</span> <span class="o">=</span> aa <span class="o">]]</span><span class="p">;</span> <span class="nb">echo</span> <span class="nv">$?</span>
-<span class="o">[[</span> ! -z <span class="nv">$A</span> <span class="o">]]</span><span class="p">;</span> <span class="nb">echo</span> <span class="nv">$?</span>
+<span class="nb">echo</span> <span class="s1">&#39;$0 -&gt;&#39;</span> <span class="nv">$0</span>
+<span class="nb">echo</span> <span class="s1">&#39;$@ -&gt;&#39;</span> <span class="nv">$@</span>
+<span class="nb">echo</span> <span class="s1">&#39;$1 -&gt;&#39;</span> <span class="nv">$1</span>
+
+<span class="nb">echo</span> <span class="s1">&#39;${1%STR*} -&gt;&#39;</span> <span class="si">${</span><span class="nv">1</span><span class="p">%STR*</span><span class="si">}</span>
+<span class="nb">echo</span> <span class="s1">&#39;${1%%STR*} -&gt;&#39;</span> <span class="si">${</span><span class="nv">1</span><span class="p">%%STR*</span><span class="si">}</span>
+<span class="nb">echo</span> <span class="s1">&#39;${1#*STR} -&gt;&#39;</span> <span class="si">${</span><span class="nv">1</span><span class="p">#*STR</span><span class="si">}</span>
+<span class="nb">echo</span> <span class="s1">&#39;${1##*STR} -&gt;&#39;</span> <span class="si">${</span><span class="nv">1</span><span class="p">##*STR</span><span class="si">}</span>
+
+<span class="o">[[</span> -z <span class="nv">$1</span> <span class="o">]]</span><span class="p">;</span> <span class="nb">echo</span> <span class="s1">&#39;[[ -z $1 ]] -&gt;&#39;</span> <span class="nv">$?</span>
+<span class="o">[[</span> -e <span class="nv">$1</span> <span class="o">]]</span><span class="p">;</span> <span class="nb">echo</span> <span class="s1">&#39;[[ -e $1 ]] -&gt;&#39;</span> <span class="nv">$?</span>
+<span class="o">[[</span> -f <span class="nv">$1</span> <span class="o">]]</span><span class="p">;</span> <span class="nb">echo</span> <span class="s1">&#39;[[ -f $1 ]] -&gt;&#39;</span> <span class="nv">$?</span>
+<span class="o">[[</span> -d <span class="nv">$1</span> <span class="o">]]</span><span class="p">;</span> <span class="nb">echo</span> <span class="s1">&#39;[[ -d $1 ]] -&gt;&#39;</span> <span class="nv">$?</span>
+<span class="o">[[</span> ! -z <span class="nv">$1</span> <span class="o">]]</span><span class="p">;</span> <span class="nb">echo</span> <span class="s1">&#39;[[ ! -z $1 ]] -&gt;&#39;</span> <span class="nv">$?</span>
+
+<span class="o">[[</span> <span class="nv">$1</span> <span class="o">=</span> STR <span class="o">]]</span><span class="p">;</span> <span class="nb">echo</span> <span class="s1">&#39;[[ $1 = STR ]] -&gt;&#39;</span> <span class="nv">$?</span>
+<span class="o">[[</span> <span class="nv">$1</span> <span class="o">=</span>~ ^STR<span class="o">[</span>0-9a-z<span class="o">]{</span>3<span class="o">}</span><span class="nv">$|</span><span class="m">1</span> <span class="o">]]</span><span class="p">;</span> <span class="nb">echo</span> <span class="s1">&#39;[[ $1 =~ ^STR[0-9a-z]{3}$|1 ]] -&gt;&#39;</span> <span class="nv">$?</span>
+<span class="o">[[</span> <span class="nv">$1</span> <span class="o">=</span> <span class="nv">$2</span> <span class="o">]]</span> <span class="o">&amp;&amp;</span> <span class="o">[[</span> <span class="nv">$1</span> <span class="o">=</span> <span class="nv">$3</span> <span class="o">]]</span><span class="p">;</span> <span class="nb">echo</span> <span class="s1">&#39;[[ $1 = $2 ]] &amp;&amp; [[ $1 = $3 ]] -&gt;&#39;</span> <span class="nv">$?</span>
+<span class="o">[[</span> <span class="nv">$1</span> <span class="o">=</span> <span class="nv">$2</span> <span class="o">]]</span> <span class="o">||</span> <span class="o">[[</span> <span class="nv">$1</span> <span class="o">=</span> <span class="nv">$3</span> <span class="o">]]</span><span class="p">;</span> <span class="nb">echo</span> <span class="s1">&#39;[[ $1 = $2 ]] || [[ $1 = $3 ]] -&gt;&#39;</span> <span class="nv">$?</span>
+
+func<span class="o">()</span> <span class="o">{</span> <span class="k">return</span> <span class="nv">$1</span><span class="p">;</span> <span class="o">}</span><span class="p">;</span> func <span class="nv">$2</span><span class="p">;</span> <span class="nb">echo</span> <span class="s1">&#39;func() { return $1; }; func $2 -&gt;&#39;</span> <span class="nv">$?</span>
+<span class="nb">echo</span> <span class="s1">&#39;for s in $@; do echo $s; done -&gt;&#39;</span><span class="p">;</span> <span class="k">for</span> s in <span class="nv">$@</span><span class="p">;</span> <span class="k">do</span> <span class="nb">echo</span> <span class="nv">$s</span><span class="p">;</span> <span class="k">done</span>
+<span class="nb">echo</span> <span class="s1">&#39;exit $2&#39;</span><span class="p">;</span> <span class="nb">exit</span> <span class="nv">$2</span>
 </pre></div>
 </div>
 <div class="highlight-python"><div class="highlight"><pre>chmod +x ./template.sh
-./template.sh -a AATESTBB -v
+./template.sh 1 1 1
+</pre></div>
+</div>
+</div>
+<div class="section" id="awk">
+<h2>7.1.2. awk<a class="headerlink" href="#awk" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-python"><div class="highlight"><pre>ls -l --time-style=+&quot;%Y/%m/%d %H:%M:%s&quot; | awk &#39;NR != 1 {printf &quot;%s %s:%s %s\n&quot;,$1,$3,$4,$8}&#39;
+</pre></div>
+</div>
+<span class="target" id="module-template.awk"></span><div class="highlight-awk"><div class="highlight"><pre><span class="c1">#!/bin/awk -f</span>
+<span class="c1"># template.awk</span>
+<span class="nb">BEGIN</span> <span class="p">{</span>
+  <span class="nb">FS</span> <span class="o">=</span> <span class="s2">&quot;,&quot;</span><span class="p">;</span>
+  <span class="nb">OFS</span> <span class="o">=</span> <span class="s2">&quot;/&quot;</span><span class="p">;</span>
+  <span class="nx">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+<span class="sr">/str/</span> <span class="p">{</span>
+  <span class="nx">i</span><span class="o">++</span><span class="p">;</span>
+<span class="p">}</span>
+<span class="p">{</span>
+  <span class="k">if</span> <span class="p">(</span><span class="o">$</span><span class="mi">0</span> <span class="o">!=</span> <span class="s2">&quot;&quot;</span><span class="p">)</span> <span class="p">{</span>
+    <span class="kr">printf</span> <span class="s2">&quot;line:%d -&gt; %s\n&quot;</span><span class="p">,</span> <span class="nb">NR</span><span class="p">,</span> <span class="o">$</span><span class="mi">0</span><span class="p">;</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+<span class="nb">END</span> <span class="p">{</span>
+  <span class="kr">print</span> <span class="nx">i</span><span class="p">,</span> <span class="nb">NR</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<div class="highlight-python"><div class="highlight"><pre>cat &lt;&lt; &#39;[EOF]&#39; &gt;&gt; dat
+a,b,c
+d,str,f
+
+g,h,i
+[EOF]
+
+chmod +x ./template.awk
+./template.awk dat
 </pre></div>
 </div>
 </div>
 <div class="section" id="module-mavend">
-<span id="daemon"></span><h2>7.1.2. daemon<a class="headerlink" href="#module-mavend" title="Permalink to this headline">¶</a></h2>
+<span id="daemon"></span><h2>7.1.3. daemon<a class="headerlink" href="#module-mavend" title="Permalink to this headline">¶</a></h2>
 <div class="highlight-shell"><div class="highlight"><pre><span class="c">#!/bin/bash</span>
 <span class="c"># chkconfig: - 80 20</span>
 <span class="c"># description: maven server</span>
@@ -172,8 +199,9 @@ chkconfig mavend on
   <h3><a href="../index.html">Table Of Contents</a></h3>
   <ul>
 <li><a class="reference internal" href="#">7.1. shell</a><ul>
-<li><a class="reference internal" href="#module-template.sh">7.1.1. base</a></li>
-<li><a class="reference internal" href="#module-mavend">7.1.2. daemon</a></li>
+<li><a class="reference internal" href="#module-template.sh">7.1.1. bash</a></li>
+<li><a class="reference internal" href="#awk">7.1.2. awk</a></li>
+<li><a class="reference internal" href="#module-mavend">7.1.3. daemon</a></li>
 </ul>
 </li>
 </ul>

@@ -1,50 +1,80 @@
 shell
 =====
-base
+bash
 ----
 .. module:: template.sh
 .. code-block:: shell
 
     #!/bin/bash
     # template.sh
-    set_args() {
-      CNT=0
-      ARGS_CNT=$#
-      for i in $@
-      do
-        case $1 in
-          -a) shift; A=$1;    CNT=`expr $CNT + 2` ;;
-          -b) shift; B=$1;    CNT=`expr $CNT + 2` ;;
-          -v) set -x;         CNT=`expr $CNT + 1` ;;
-          *)  ARGS="$ARGS $1" CNT=`expr $CNT + 1` ;;
-        esac
-        if [[ $CNT -ge $ARGS_CNT ]]; then
-          break
-        fi
-        shift
-      done
-    }
-    set_args "$@"
-    echo $@
-    echo $A
-    echo $B
-    echo $ARGS
-    echo ${A%%TEST*}
-    echo ${A##*TEST}
-    [[ -z $A ]]; echo $?
-    [[ -e $A ]]; echo $?
-    [[ -f $A ]]; echo $?
-    [[ -d $A ]]; echo $?
-    [[ $A = TEST ]]; echo $?
-    [[ $A =~ ^TEST[0-9a-z]{3}$ ]]; echo $?
-    [[ a = a ]] && [[ a = aa ]]; echo $?
-    [[ a = a ]] || [[ a = aa ]]; echo $?
-    [[ ! -z $A ]]; echo $?
+    echo '$0 ->' $0
+    echo '$@ ->' $@
+    echo '$1 ->' $1
+
+    echo '${1%STR*} ->' ${1%STR*}
+    echo '${1%%STR*} ->' ${1%%STR*}
+    echo '${1#*STR} ->' ${1#*STR}
+    echo '${1##*STR} ->' ${1##*STR}
+
+    [[ -z $1 ]]; echo '[[ -z $1 ]] ->' $?
+    [[ -e $1 ]]; echo '[[ -e $1 ]] ->' $?
+    [[ -f $1 ]]; echo '[[ -f $1 ]] ->' $?
+    [[ -d $1 ]]; echo '[[ -d $1 ]] ->' $?
+    [[ ! -z $1 ]]; echo '[[ ! -z $1 ]] ->' $?
+
+    [[ $1 = STR ]]; echo '[[ $1 = STR ]] ->' $?
+    [[ $1 =~ ^STR[0-9a-z]{3}$|1 ]]; echo '[[ $1 =~ ^STR[0-9a-z]{3}$|1 ]] ->' $?
+    [[ $1 = $2 ]] && [[ $1 = $3 ]]; echo '[[ $1 = $2 ]] && [[ $1 = $3 ]] ->' $?
+    [[ $1 = $2 ]] || [[ $1 = $3 ]]; echo '[[ $1 = $2 ]] || [[ $1 = $3 ]] ->' $?
+
+    func() { return $1; }; func $2; echo 'func() { return $1; }; func $2 ->' $?
+    echo 'for s in $@; do echo $s; done ->'; for s in $@; do echo $s; done
+    echo 'exit $2'; exit $2
 
 ::
 
     chmod +x ./template.sh
-    ./template.sh -a AATESTBB -v
+    ./template.sh 1 1 1
+
+awk
+---
+::
+
+    ls -l --time-style=+"%Y/%m/%d %H:%M:%s" | awk 'NR != 1 {printf "%s %s:%s %s\n",$1,$3,$4,$8}'
+
+.. module:: template.awk
+.. code-block:: awk
+
+    #!/bin/awk -f
+    # template.awk
+    BEGIN {
+      FS = ",";
+      OFS = "/";
+      i = 0;
+    }
+    /str/ {
+      i++;
+    }
+    {
+      if ($0 != "") {
+        printf "line:%d -> %s\n", NR, $0;
+      }
+    }
+    END {
+      print i, NR;
+    }
+
+::
+
+    cat << '[EOF]' >> dat
+    a,b,c
+    d,str,f
+
+    g,h,i
+    [EOF]
+
+    chmod +x ./template.awk
+    ./template.awk dat
 
 daemon
 ------
