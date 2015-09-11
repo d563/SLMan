@@ -1,7 +1,6 @@
 init
 ====
 .. toctree::
-    base
-    package
-    vim
+    minimal
+    additional
     httpd

@@ -41,6 +41,83 @@ github
 
     git clone git@github.com:d563/SLMan.git /var/www/html
 
+gitolite
+--------
+::
+
+    yum -y install gitolite
+
+::
+
+    su - gitolite
+
+    ssh-keygen
+    mv ~/.ssh/id_rsa.pub ~/.ssh/admin.pub
+
+.. index:: ~/.ssh/config
+.. index:: /var/lib/gitolite/.gitolite.rc
+
+::
+
+    cat << '[EOF]' > ~/.ssh/config
+    host d563
+        user gitolite
+        hostname 127.0.0.1
+        port 22
+        identityfile ~/.ssh/admin.pub
+    [EOF]
+
+    chmod 600 ~/.ssh/config
+
+    gl-setup ~/.ssh/admin.pub
+
+    cat /var/lib/gitolite/.gitolite.rc
+
+    git clone ssh://127.0.0.1/gitolite-admin
+
+.. index:: /var/lib/gitolite/gitolite-admin/conf/gitolite.conf
+
+::
+
+    cat << '[EOF]' > /var/lib/gitolite/gitolite-admin/conf/gitolite.conf
+    @test =
+    @devel =
+    @admin = admin
+
+    repo gitolite-admin
+        RW+ = @admin
+
+    repo testing
+        RW+ = @all
+
+    repo d563
+        R   = @test
+        RW  = @devel
+        RW+ = @admin
+    [EOF]
+
+    cd gitolite-admin
+    git commit -minit
+
+server
+------
+.. index:: /var/lib/gitolite/repositories/*.git
+.. index:: /etc/gitweb.conf
+.. index:: /etc/httpd/conf/httpd.conf
+
+::
+
+    sed -i.org \
+    -e 's:^#our $projectroot.*:our $projectroot = "/var/lib/gitolite/repositories";:' \
+    /etc/gitweb.conf
+
+    sed -i.org \
+    -e 's/User apache/User gitolite/' \
+    -e 's/Group apache/Group gitolite/' \
+    /etc/httpd/conf/httpd.conf
+
+    service iptables restart
+
 command
 -------
 ::

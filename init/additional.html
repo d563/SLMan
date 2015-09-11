@@ -6,7 +6,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>1.2. package &mdash; SLMan 0.0.2 documentation</title>
+    <title>1.2. additional &mdash; SLMan 0.0.2 documentation</title>
     
     <link rel="stylesheet" href="../_static/pyramid.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
@@ -26,8 +26,8 @@
     <script type="text/javascript" src="../_static/doctools.js"></script>
     <link rel="top" title="SLMan 0.0.2 documentation" href="../index.html" />
     <link rel="up" title="1. init" href="index.html" />
-    <link rel="next" title="1.3. vim" href="vim.html" />
-    <link rel="prev" title="1.1. base" href="base.html" />
+    <link rel="next" title="1.3. httpd" href="httpd.html" />
+    <link rel="prev" title="1.1. minimal" href="minimal.html" />
 <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Neuton&amp;subset=latin" type="text/css" media="screen" charset="utf-8" />
 <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Nobile:regular,italic,bold,bolditalic&amp;subset=latin" type="text/css" media="screen" charset="utf-8" />
 <!--[if lte IE 6]>
@@ -47,10 +47,10 @@
           <a href="../py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
         <li class="right" >
-          <a href="vim.html" title="1.3. vim"
+          <a href="httpd.html" title="1.3. httpd"
              accesskey="N">next</a> |</li>
         <li class="right" >
-          <a href="base.html" title="1.1. base"
+          <a href="minimal.html" title="1.1. minimal"
              accesskey="P">previous</a> |</li>
         <li class="nav-item nav-item-0"><a href="../index.html">SLMan 0.0.2 documentation</a> &raquo;</li>
           <li class="nav-item nav-item-1"><a href="index.html" accesskey="U">1. init</a> &raquo;</li> 
@@ -62,8 +62,8 @@
         <div class="bodywrapper">
           <div class="body" role="main">
             
-  <div class="section" id="package">
-<h1>1.2. package<a class="headerlink" href="#package" title="Permalink to this headline">¶</a></h1>
+  <div class="section" id="additional">
+<h1>1.2. additional<a class="headerlink" href="#additional" title="Permalink to this headline">¶</a></h1>
 <div class="section" id="yum">
 <h2>1.2.1. yum<a class="headerlink" href="#yum" title="Permalink to this headline">¶</a></h2>
 <div class="highlight-python" id="index-0"><div class="highlight"><pre>sed -i.org -e &#39;s/debuglevel=2/debuglevel=1/&#39; /etc/yum.conf
@@ -98,6 +98,29 @@ sed -i -e &#39;s/^enabled.*/enabled=0/&#39; /etc/yum.repos.d/epel.repo
 </pre></div>
 </div>
 </div>
+<div class="section" id="vim">
+<h2>1.2.4. vim<a class="headerlink" href="#vim" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-python"><div class="highlight"><pre>yum -y install vim-enhanced
+</pre></div>
+</div>
+<div class="highlight-python" id="index-2"><div class="highlight"><pre>mv /etc/profile.d/vim.sh /etc/profile.d/vim.sh.org
+echo &quot;alias vi=&#39;vim&#39;
+alias view=&#39;vim -R&#39;&quot; &gt; /etc/profile.d/vim.sh
+</pre></div>
+</div>
+<div class="highlight-python" id="index-3"><div class="highlight"><pre>cat &lt;&lt; &#39;[EOF]&#39; &gt;&gt; /etc/vimrc
+set expandtab
+set tabstop=4
+set softtabstop=4
+set shiftwidth=4
+&quot; set autoindent
+set ignorecase
+set incsearch
+set ruler
+[EOF]
+</pre></div>
+</div>
+</div>
 </div>
 
 
@@ -108,20 +131,21 @@ sed -i -e &#39;s/^enabled.*/enabled=0/&#39; /etc/yum.repos.d/epel.repo
         <div class="sphinxsidebarwrapper">
   <h3><a href="../index.html">Table Of Contents</a></h3>
   <ul>
-<li><a class="reference internal" href="#">1.2. package</a><ul>
+<li><a class="reference internal" href="#">1.2. additional</a><ul>
 <li><a class="reference internal" href="#yum">1.2.1. yum</a></li>
 <li><a class="reference internal" href="#pip">1.2.2. pip</a></li>
 <li><a class="reference internal" href="#bash-completion">1.2.3. bash-completion</a></li>
+<li><a class="reference internal" href="#vim">1.2.4. vim</a></li>
 </ul>
 </li>
 </ul>
 
   <h4>Previous topic</h4>
-  <p class="topless"><a href="base.html"
-                        title="previous chapter">1.1. base</a></p>
+  <p class="topless"><a href="minimal.html"
+                        title="previous chapter">1.1. minimal</a></p>
   <h4>Next topic</h4>
-  <p class="topless"><a href="vim.html"
-                        title="next chapter">1.3. vim</a></p>
+  <p class="topless"><a href="httpd.html"
+                        title="next chapter">1.3. httpd</a></p>
 <div id="searchbox" style="display: none" role="search">
   <h3>Quick search</h3>
     <form class="search" action="../search.html" method="get">
@@ -149,10 +173,10 @@ sed -i -e &#39;s/^enabled.*/enabled=0/&#39; /etc/yum.repos.d/epel.repo
           <a href="../py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
         <li class="right" >
-          <a href="vim.html" title="1.3. vim"
+          <a href="httpd.html" title="1.3. httpd"
              >next</a> |</li>
         <li class="right" >
-          <a href="base.html" title="1.1. base"
+          <a href="minimal.html" title="1.1. minimal"
              >previous</a> |</li>
         <li class="nav-item nav-item-0"><a href="../index.html">SLMan 0.0.2 documentation</a> &raquo;</li>
           <li class="nav-item nav-item-1"><a href="index.html" >1. init</a> &raquo;</li> 
