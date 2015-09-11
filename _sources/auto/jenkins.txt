@@ -1,5 +1,7 @@
 jenkins
 =======
+server
+------
 .. index:: /etc/yum.repos.d/jenkins.repo
 
 ::

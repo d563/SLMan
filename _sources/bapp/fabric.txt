@@ -4,6 +4,8 @@ fabric
 
     pip install fabric nose mock
 
+template
+--------
 ::
 
     mkdir /var/lib/git/fabric
@@ -50,6 +52,8 @@ fabric
     fab -l
     fab fabmodule.tmpPut
 
+test
+----
 .. module:: fabmodule-test.py
 .. code-block:: python
 

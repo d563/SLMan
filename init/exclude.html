@@ -6,7 +6,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>1.4. exclude &mdash; SLMan 0.0.2 documentation</title>
+    <title>1.3. exclude &mdash; SLMan 0.0.2 documentation</title>
     
     <link rel="stylesheet" href="../_static/pyramid.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
@@ -26,8 +26,8 @@
     <script type="text/javascript" src="../_static/doctools.js"></script>
     <link rel="top" title="SLMan 0.0.2 documentation" href="../index.html" />
     <link rel="up" title="1. init" href="index.html" />
-    <link rel="next" title="2. repo" href="../repo/index.html" />
-    <link rel="prev" title="1.3. httpd" href="httpd.html" />
+    <link rel="next" title="1.4. httpd" href="httpd.html" />
+    <link rel="prev" title="1.2. include" href="include.html" />
 <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Neuton&amp;subset=latin" type="text/css" media="screen" charset="utf-8" />
 <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Nobile:regular,italic,bold,bolditalic&amp;subset=latin" type="text/css" media="screen" charset="utf-8" />
 <!--[if lte IE 6]>
@@ -47,10 +47,10 @@
           <a href="../py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
         <li class="right" >
-          <a href="../repo/index.html" title="2. repo"
+          <a href="httpd.html" title="1.4. httpd"
              accesskey="N">next</a> |</li>
         <li class="right" >
-          <a href="httpd.html" title="1.3. httpd"
+          <a href="include.html" title="1.2. include"
              accesskey="P">previous</a> |</li>
         <li class="nav-item nav-item-0"><a href="../index.html">SLMan 0.0.2 documentation</a> &raquo;</li>
           <li class="nav-item nav-item-1"><a href="index.html" accesskey="U">1. init</a> &raquo;</li> 
@@ -63,28 +63,67 @@
           <div class="body" role="main">
             
   <div class="section" id="exclude">
-<h1>1.4. exclude<a class="headerlink" href="#exclude" title="Permalink to this headline">¶</a></h1>
-<div class="highlight-python"><div class="highlight"><pre># 6
-chkconfig auditd off
+<h1>1.3. exclude<a class="headerlink" href="#exclude" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="selinux">
+<h2>1.3.1. selinux<a class="headerlink" href="#selinux" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-python" id="index-0"><div class="highlight"><pre>sed -i.org -e &#39;s/^SELINUX=.*/SELINUX=disabled/&#39; /etc/selinux/config
+setenforce 0
+</pre></div>
+</div>
+</div>
+<div class="section" id="chkconfig-6-x">
+<h2>1.3.2. chkconfig (6.X)<a class="headerlink" href="#chkconfig-6-x" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-python"><div class="highlight"><pre>chkconfig auditd off
 chkconfig blk-availability off
 chkconfig httpd off
 chkconfig ip6tables off
+chkconfig iptables off
 chkconfig kdump off
 chkconfig lvm2-monitor off
 chkconfig mdmonitor off
 chkconfig netfs off
 chkconfig postfix off
 chkconfig udev-post off
+
+chkconfig | awk &#39;{if($5 == &quot;3:on&quot;){print $1}}&#39;
+  crond
+  network
+  rsyslog
+  sshd
 </pre></div>
 </div>
-<div class="highlight-python"><div class="highlight"><pre># 6
-chkconfig | awk &#39;{if($5 == &quot;3:on&quot;){print $1}}&#39;
-# crond
-# httpd
-# network
-# rsyslog
-# sshd
+</div>
+<div class="section" id="iptables-6-x">
+<h2>1.3.3. iptables (6.X)<a class="headerlink" href="#iptables-6-x" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-python" id="index-1"><div class="highlight"><pre>sed -i.org -e &#39;s/--dport 22/--dport 443/&#39; /etc/sysconfig/iptables
+service iptables restart
+
+cat &lt;&lt; &#39;[EOF]&#39; &gt; /etc/sysconfig/iptables
+*filter
+:INPUT ACCEPT [0:0]
+:FORWARD ACCEPT [0:0]
+:OUTPUT ACCEPT [0:0]
+-A INPUT -m state --state ESTABLISHED,RELATED -j ACCEPT
+-A INPUT -p icmp -j ACCEPT
+-A INPUT -i lo -j ACCEPT
+-A INPUT -m state --state NEW -m tcp -p tcp --dport 22 -j ACCEPT
+-A INPUT -j REJECT --reject-with icmp-host-prohibited
+-A FORWARD -j REJECT --reject-with icmp-host-prohibited
+COMMIT
+[EOF]
 </pre></div>
+</div>
+</div>
+<div class="section" id="firewalld-7-x">
+<h2>1.3.4. firewalld (7.X)<a class="headerlink" href="#firewalld-7-x" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-none" id="index-2"><div class="highlight"><pre>cat /usr/lib/firewalld/services/ssh.xml
+cat /usr/lib/firewalld/services/https.xml
+firewall-cmd --list-all
+firewall-cmd --permanent --add-service=https
+firewall-cmd --permanent --remove-service=ssh
+firewall-cmd --reload
+</pre></div>
+</div>
 </div>
 </div>
 
@@ -94,12 +133,23 @@ chkconfig | awk &#39;{if($5 == &quot;3:on&quot;){print $1}}&#39;
       </div>
       <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
         <div class="sphinxsidebarwrapper">
+  <h3><a href="../index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">1.3. exclude</a><ul>
+<li><a class="reference internal" href="#selinux">1.3.1. selinux</a></li>
+<li><a class="reference internal" href="#chkconfig-6-x">1.3.2. chkconfig (6.X)</a></li>
+<li><a class="reference internal" href="#iptables-6-x">1.3.3. iptables (6.X)</a></li>
+<li><a class="reference internal" href="#firewalld-7-x">1.3.4. firewalld (7.X)</a></li>
+</ul>
+</li>
+</ul>
+
   <h4>Previous topic</h4>
-  <p class="topless"><a href="httpd.html"
-                        title="previous chapter">1.3. httpd</a></p>
+  <p class="topless"><a href="include.html"
+                        title="previous chapter">1.2. include</a></p>
   <h4>Next topic</h4>
-  <p class="topless"><a href="../repo/index.html"
-                        title="next chapter">2. repo</a></p>
+  <p class="topless"><a href="httpd.html"
+                        title="next chapter">1.4. httpd</a></p>
 <div id="searchbox" style="display: none" role="search">
   <h3>Quick search</h3>
     <form class="search" action="../search.html" method="get">
@@ -127,10 +177,10 @@ chkconfig | awk &#39;{if($5 == &quot;3:on&quot;){print $1}}&#39;
           <a href="../py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
         <li class="right" >
-          <a href="../repo/index.html" title="2. repo"
+          <a href="httpd.html" title="1.4. httpd"
              >next</a> |</li>
         <li class="right" >
-          <a href="httpd.html" title="1.3. httpd"
+          <a href="include.html" title="1.2. include"
              >previous</a> |</li>
         <li class="nav-item nav-item-0"><a href="../index.html">SLMan 0.0.2 documentation</a> &raquo;</li>
           <li class="nav-item nav-item-1"><a href="index.html" >1. init</a> &raquo;</li> 

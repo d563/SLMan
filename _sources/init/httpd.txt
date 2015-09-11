@@ -1,5 +1,7 @@
 httpd
 =====
+server
+------
 ::
 
     yum -y install httpd
@@ -59,6 +61,8 @@ httpd
     htdigest -c /etc/httpd/.htdigest SLMan d563
     htdigest /etc/httpd/.htdigest SLMan d564
 
+template
+--------
 .. module:: template.json
 
 ::

@@ -13,6 +13,8 @@ meteor
     [EOF]
     chmod 775 mongod
 
+template
+--------
 ::
 
     cd ~

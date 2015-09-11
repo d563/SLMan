@@ -1,7 +1,7 @@
 init
 ====
 .. toctree::
-    minimal
-    additional
-    httpd
+    base
+    include
     exclude
+    httpd

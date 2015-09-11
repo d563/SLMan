@@ -1,5 +1,5 @@
-additional
-==========
+include
+=======
 yum
 ---
 .. index:: /etc/yum.conf

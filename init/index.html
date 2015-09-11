@@ -25,7 +25,7 @@
     <script type="text/javascript" src="../_static/underscore.js"></script>
     <script type="text/javascript" src="../_static/doctools.js"></script>
     <link rel="top" title="SLMan 0.0.2 documentation" href="../index.html" />
-    <link rel="next" title="1.1. minimal" href="minimal.html" />
+    <link rel="next" title="1.1. base" href="base.html" />
     <link rel="prev" title="SLMan" href="../index.html" />
 <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Neuton&amp;subset=latin" type="text/css" media="screen" charset="utf-8" />
 <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Nobile:regular,italic,bold,bolditalic&amp;subset=latin" type="text/css" media="screen" charset="utf-8" />
@@ -46,7 +46,7 @@
           <a href="../py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
         <li class="right" >
-          <a href="minimal.html" title="1.1. minimal"
+          <a href="base.html" title="1.1. base"
              accesskey="N">next</a> |</li>
         <li class="right" >
           <a href="../index.html" title="SLMan"
@@ -64,27 +64,34 @@
 <h1>1. init<a class="headerlink" href="#init" title="Permalink to this headline">¶</a></h1>
 <div class="toctree-wrapper compound">
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="minimal.html">1.1. minimal</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="minimal.html#image">1.1.1. image</a></li>
-<li class="toctree-l2"><a class="reference internal" href="minimal.html#network">1.1.2. network</a></li>
-<li class="toctree-l2"><a class="reference internal" href="minimal.html#hostname">1.1.3. hostname</a></li>
-<li class="toctree-l2"><a class="reference internal" href="minimal.html#location">1.1.4. location</a></li>
-<li class="toctree-l2"><a class="reference internal" href="minimal.html#selinux">1.1.5. selinux</a></li>
-<li class="toctree-l2"><a class="reference internal" href="minimal.html#visudo">1.1.6. visudo</a></li>
-<li class="toctree-l2"><a class="reference internal" href="minimal.html#sshd">1.1.7. sshd</a></li>
-<li class="toctree-l2"><a class="reference internal" href="minimal.html#iptables">1.1.8. iptables</a></li>
-<li class="toctree-l2"><a class="reference internal" href="minimal.html#firewalld">1.1.9. firewalld</a></li>
+<li class="toctree-l1"><a class="reference internal" href="base.html">1.1. base</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="base.html#image">1.1.1. image</a></li>
+<li class="toctree-l2"><a class="reference internal" href="base.html#network">1.1.2. network</a></li>
+<li class="toctree-l2"><a class="reference internal" href="base.html#hostname">1.1.3. hostname</a></li>
+<li class="toctree-l2"><a class="reference internal" href="base.html#location">1.1.4. location</a></li>
+<li class="toctree-l2"><a class="reference internal" href="base.html#visudo">1.1.5. visudo</a></li>
+<li class="toctree-l2"><a class="reference internal" href="base.html#sshd">1.1.6. sshd</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="additional.html">1.2. additional</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="additional.html#yum">1.2.1. yum</a></li>
-<li class="toctree-l2"><a class="reference internal" href="additional.html#pip">1.2.2. pip</a></li>
-<li class="toctree-l2"><a class="reference internal" href="additional.html#bash-completion">1.2.3. bash-completion</a></li>
-<li class="toctree-l2"><a class="reference internal" href="additional.html#vim">1.2.4. vim</a></li>
+<li class="toctree-l1"><a class="reference internal" href="include.html">1.2. include</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="include.html#yum">1.2.1. yum</a></li>
+<li class="toctree-l2"><a class="reference internal" href="include.html#pip">1.2.2. pip</a></li>
+<li class="toctree-l2"><a class="reference internal" href="include.html#bash-completion">1.2.3. bash-completion</a></li>
+<li class="toctree-l2"><a class="reference internal" href="include.html#vim">1.2.4. vim</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="httpd.html">1.3. httpd</a></li>
-<li class="toctree-l1"><a class="reference internal" href="exclude.html">1.4. exclude</a></li>
+<li class="toctree-l1"><a class="reference internal" href="exclude.html">1.3. exclude</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="exclude.html#selinux">1.3.1. selinux</a></li>
+<li class="toctree-l2"><a class="reference internal" href="exclude.html#chkconfig-6-x">1.3.2. chkconfig (6.X)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="exclude.html#iptables-6-x">1.3.3. iptables (6.X)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="exclude.html#firewalld-7-x">1.3.4. firewalld (7.X)</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="httpd.html">1.4. httpd</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="httpd.html#server">1.4.1. server</a></li>
+<li class="toctree-l2"><a class="reference internal" href="httpd.html#module-template.json">1.4.2. template</a></li>
+</ul>
+</li>
 </ul>
 </div>
 </div>
@@ -99,8 +106,8 @@
   <p class="topless"><a href="../index.html"
                         title="previous chapter">SLMan</a></p>
   <h4>Next topic</h4>
-  <p class="topless"><a href="minimal.html"
-                        title="next chapter">1.1. minimal</a></p>
+  <p class="topless"><a href="base.html"
+                        title="next chapter">1.1. base</a></p>
 <div id="searchbox" style="display: none" role="search">
   <h3>Quick search</h3>
     <form class="search" action="../search.html" method="get">
@@ -128,7 +135,7 @@
           <a href="../py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
         <li class="right" >
-          <a href="minimal.html" title="1.1. minimal"
+          <a href="base.html" title="1.1. base"
              >next</a> |</li>
         <li class="right" >
           <a href="../index.html" title="SLMan"

@@ -6,7 +6,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>1.3. httpd &mdash; SLMan 0.0.2 documentation</title>
+    <title>1.4. httpd &mdash; SLMan 0.0.2 documentation</title>
     
     <link rel="stylesheet" href="../_static/pyramid.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
@@ -26,8 +26,8 @@
     <script type="text/javascript" src="../_static/doctools.js"></script>
     <link rel="top" title="SLMan 0.0.2 documentation" href="../index.html" />
     <link rel="up" title="1. init" href="index.html" />
-    <link rel="next" title="1.4. exclude" href="exclude.html" />
-    <link rel="prev" title="1.2. additional" href="additional.html" />
+    <link rel="next" title="2. repo" href="../repo/index.html" />
+    <link rel="prev" title="1.3. exclude" href="exclude.html" />
 <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Neuton&amp;subset=latin" type="text/css" media="screen" charset="utf-8" />
 <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Nobile:regular,italic,bold,bolditalic&amp;subset=latin" type="text/css" media="screen" charset="utf-8" />
 <!--[if lte IE 6]>
@@ -47,10 +47,10 @@
           <a href="../py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
         <li class="right" >
-          <a href="exclude.html" title="1.4. exclude"
+          <a href="../repo/index.html" title="2. repo"
              accesskey="N">next</a> |</li>
         <li class="right" >
-          <a href="additional.html" title="1.2. additional"
+          <a href="exclude.html" title="1.3. exclude"
              accesskey="P">previous</a> |</li>
         <li class="nav-item nav-item-0"><a href="../index.html">SLMan 0.0.2 documentation</a> &raquo;</li>
           <li class="nav-item nav-item-1"><a href="index.html" accesskey="U">1. init</a> &raquo;</li> 
@@ -63,7 +63,9 @@
           <div class="body" role="main">
             
   <div class="section" id="httpd">
-<h1>1.3. httpd<a class="headerlink" href="#httpd" title="Permalink to this headline">¶</a></h1>
+<h1>1.4. httpd<a class="headerlink" href="#httpd" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="server">
+<h2>1.4.1. server<a class="headerlink" href="#server" title="Permalink to this headline">¶</a></h2>
 <div class="highlight-python"><div class="highlight"><pre>yum -y install httpd
 </pre></div>
 </div>
@@ -114,7 +116,10 @@ htdigest -c /etc/httpd/.htdigest SLMan d563
 htdigest /etc/httpd/.htdigest SLMan d564
 </pre></div>
 </div>
-<span class="target" id="module-template.json"></span><div class="highlight-python"><div class="highlight"><pre>// template.json
+</div>
+<div class="section" id="module-template.json">
+<span id="template"></span><h2>1.4.2. template<a class="headerlink" href="#module-template.json" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-python"><div class="highlight"><pre>// template.json
 [{
   &quot;def&quot; : &quot;ヘッダ１&quot;,
   &quot;val&quot; : &quot;コンテンツ１&quot;
@@ -311,6 +316,7 @@ htdigest /etc/httpd/.htdigest SLMan d564
 </pre></div>
 </div>
 </div>
+</div>
 
 
           </div>
@@ -318,12 +324,21 @@ htdigest /etc/httpd/.htdigest SLMan d564
       </div>
       <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
         <div class="sphinxsidebarwrapper">
+  <h3><a href="../index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">1.4. httpd</a><ul>
+<li><a class="reference internal" href="#server">1.4.1. server</a></li>
+<li><a class="reference internal" href="#module-template.json">1.4.2. template</a></li>
+</ul>
+</li>
+</ul>
+
   <h4>Previous topic</h4>
-  <p class="topless"><a href="additional.html"
-                        title="previous chapter">1.2. additional</a></p>
-  <h4>Next topic</h4>
   <p class="topless"><a href="exclude.html"
-                        title="next chapter">1.4. exclude</a></p>
+                        title="previous chapter">1.3. exclude</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="../repo/index.html"
+                        title="next chapter">2. repo</a></p>
 <div id="searchbox" style="display: none" role="search">
   <h3>Quick search</h3>
     <form class="search" action="../search.html" method="get">
@@ -351,10 +366,10 @@ htdigest /etc/httpd/.htdigest SLMan d564
           <a href="../py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
         <li class="right" >
-          <a href="exclude.html" title="1.4. exclude"
+          <a href="../repo/index.html" title="2. repo"
              >next</a> |</li>
         <li class="right" >
-          <a href="additional.html" title="1.2. additional"
+          <a href="exclude.html" title="1.3. exclude"
              >previous</a> |</li>
         <li class="nav-item nav-item-0"><a href="../index.html">SLMan 0.0.2 documentation</a> &raquo;</li>
           <li class="nav-item nav-item-1"><a href="index.html" >1. init</a> &raquo;</li> 

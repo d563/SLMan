@@ -4,6 +4,8 @@ sphinx
 
     pip install sphinx
 
+template
+--------
 ::
 
     mkdir /var/lib/git/sphinx

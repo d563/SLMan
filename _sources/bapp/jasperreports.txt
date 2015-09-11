@@ -10,6 +10,8 @@ jasperreports
     wget http://dl.ipafont.ipa.go.jp/IPAexfont/IPAexfont00201.zip
     unzip IPAexfont00201.zip
 
+template
+--------
 .. code-block:: none
 
     cat << '[EOF]' > jasperreports_extension.properties

@@ -4,6 +4,8 @@ tomcat
 
     yum -y install tomcat6
 
+template
+--------
 ::
 
     mkdir /var/lib/git/tomcat

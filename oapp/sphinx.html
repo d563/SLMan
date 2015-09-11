@@ -67,6 +67,8 @@
 <div class="highlight-python"><div class="highlight"><pre>pip install sphinx
 </pre></div>
 </div>
+<div class="section" id="template">
+<h2>6.1.1. template<a class="headerlink" href="#template" title="Permalink to this headline">¶</a></h2>
 <div class="highlight-python"><div class="highlight"><pre><span class="n">mkdir</span> <span class="o">/</span><span class="n">var</span><span class="o">/</span><span class="n">lib</span><span class="o">/</span><span class="n">git</span><span class="o">/</span><span class="n">sphinx</span>
 <span class="n">cd</span> <span class="o">/</span><span class="n">var</span><span class="o">/</span><span class="n">lib</span><span class="o">/</span><span class="n">git</span><span class="o">/</span><span class="n">sphinx</span>
 <span class="n">sphinx</span><span class="o">-</span><span class="n">quickstart</span>
@@ -121,8 +123,9 @@ chmod u+x pull.sh push.sh
 <div class="highlight-python"><div class="highlight"><pre>make clean html
 </pre></div>
 </div>
+</div>
 <div class="section" id="theme">
-<h2>6.1.1. theme<a class="headerlink" href="#theme" title="Permalink to this headline">¶</a></h2>
+<h2>6.1.2. theme<a class="headerlink" href="#theme" title="Permalink to this headline">¶</a></h2>
 <div class="highlight-python"><div class="highlight"><pre>vi conf.py
   html_theme = &#39;SLMan&#39;
   html_theme_path = [&#39;.&#39;]
@@ -150,7 +153,8 @@ echo &#39;{% extends &quot;!layout.html&quot; %}&#39; &gt; SLMan/layout.html
   <h3><a href="../index.html">Table Of Contents</a></h3>
   <ul>
 <li><a class="reference internal" href="#">6.1. sphinx</a><ul>
-<li><a class="reference internal" href="#theme">6.1.1. theme</a></li>
+<li><a class="reference internal" href="#template">6.1.1. template</a></li>
+<li><a class="reference internal" href="#theme">6.1.2. theme</a></li>
 </ul>
 </li>
 </ul>

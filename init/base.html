@@ -6,7 +6,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>1.1. minimal &mdash; SLMan 0.0.2 documentation</title>
+    <title>1.1. base &mdash; SLMan 0.0.2 documentation</title>
     
     <link rel="stylesheet" href="../_static/pyramid.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
@@ -26,7 +26,7 @@
     <script type="text/javascript" src="../_static/doctools.js"></script>
     <link rel="top" title="SLMan 0.0.2 documentation" href="../index.html" />
     <link rel="up" title="1. init" href="index.html" />
-    <link rel="next" title="1.2. additional" href="additional.html" />
+    <link rel="next" title="1.2. include" href="include.html" />
     <link rel="prev" title="1. init" href="index.html" />
 <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Neuton&amp;subset=latin" type="text/css" media="screen" charset="utf-8" />
 <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Nobile:regular,italic,bold,bolditalic&amp;subset=latin" type="text/css" media="screen" charset="utf-8" />
@@ -47,7 +47,7 @@
           <a href="../py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
         <li class="right" >
-          <a href="additional.html" title="1.2. additional"
+          <a href="include.html" title="1.2. include"
              accesskey="N">next</a> |</li>
         <li class="right" >
           <a href="index.html" title="1. init"
@@ -62,12 +62,12 @@
         <div class="bodywrapper">
           <div class="body" role="main">
             
-  <div class="section" id="minimal">
-<h1>1.1. minimal<a class="headerlink" href="#minimal" title="Permalink to this headline">¶</a></h1>
+  <div class="section" id="base">
+<h1>1.1. base<a class="headerlink" href="#base" title="Permalink to this headline">¶</a></h1>
 <div class="section" id="image">
 <h2>1.1.1. image<a class="headerlink" href="#image" title="Permalink to this headline">¶</a></h2>
 <div class="highlight-python"><div class="highlight"><pre># 6
-http://ftp.riken.jp/Linux/centos/6/isos/i386/CentOS-6.6-i386-netinstall.iso
+http://ftp.riken.jp/Linux/centos/6/isos/i386/CentOS-6.7-i386-netinstall.iso
 http://ftp.riken.jp/Linux/centos/6/os/i386/
 </pre></div>
 </div>
@@ -112,15 +112,8 @@ timedatectl
 </pre></div>
 </div>
 </div>
-<div class="section" id="selinux">
-<h2>1.1.5. selinux<a class="headerlink" href="#selinux" title="Permalink to this headline">¶</a></h2>
-<div class="highlight-python" id="index-7"><div class="highlight"><pre>sed -i.org -e &#39;s/^SELINUX=.*/SELINUX=disabled/&#39; /etc/selinux/config
-setenforce 0
-</pre></div>
-</div>
-</div>
 <div class="section" id="visudo">
-<h2>1.1.6. visudo<a class="headerlink" href="#visudo" title="Permalink to this headline">¶</a></h2>
+<h2>1.1.5. visudo<a class="headerlink" href="#visudo" title="Permalink to this headline">¶</a></h2>
 <div class="highlight-python"><div class="highlight"><pre># Defaults requiretty
 Defaults timestamp_timeout = 0
 Defaults passprompt = &quot;%u@%h Password: &quot;
@@ -129,49 +122,15 @@ Defaults passprompt = &quot;%u@%h Password: &quot;
 </div>
 </div>
 <div class="section" id="sshd">
-<h2>1.1.7. sshd<a class="headerlink" href="#sshd" title="Permalink to this headline">¶</a></h2>
-<div class="highlight-python" id="index-8"><div class="highlight"><pre>sed -i.org -e &#39;/#Port 22/aPort 443&#39; /etc/ssh/sshd_config
+<h2>1.1.6. sshd<a class="headerlink" href="#sshd" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-python" id="index-7"><div class="highlight"><pre>sed -i.org -e &#39;/#Port 22/aPort 443&#39; /etc/ssh/sshd_config
 service sshd restart
 </pre></div>
 </div>
-<span class="target" id="index-9"></span><span class="target" id="index-10"></span><div class="highlight-python" id="index-11"><div class="highlight"><pre>ssh-keygen -t rsa -C &quot;mail.d563@gmail.com&quot;
+<span class="target" id="index-8"></span><span class="target" id="index-9"></span><div class="highlight-python" id="index-10"><div class="highlight"><pre>ssh-keygen -t rsa -C &quot;mail.d563@gmail.com&quot;
 cd ~/.ssh
 cat id_rsa.pub &gt;&gt; authorized_keys
 chmod 600 authorized_keys
-</pre></div>
-</div>
-</div>
-<div class="section" id="iptables">
-<h2>1.1.8. iptables<a class="headerlink" href="#iptables" title="Permalink to this headline">¶</a></h2>
-<div class="highlight-python" id="index-12"><div class="highlight"><pre># 6
-sed -i.org -e &#39;s/--dport 22/--dport 443/&#39; /etc/sysconfig/iptables
-service iptables restart
-
-cat &lt;&lt; &#39;[EOF]&#39; &gt; /etc/sysconfig/iptables
-*filter
-:INPUT ACCEPT [0:0]
-:FORWARD ACCEPT [0:0]
-:OUTPUT ACCEPT [0:0]
--A INPUT -m state --state ESTABLISHED,RELATED -j ACCEPT
--A INPUT -p icmp -j ACCEPT
--A INPUT -i lo -j ACCEPT
--A INPUT -m state --state NEW -m tcp -p tcp --dport 22 -j ACCEPT
--A INPUT -j REJECT --reject-with icmp-host-prohibited
--A FORWARD -j REJECT --reject-with icmp-host-prohibited
-COMMIT
-[EOF]
-</pre></div>
-</div>
-</div>
-<div class="section" id="firewalld">
-<h2>1.1.9. firewalld<a class="headerlink" href="#firewalld" title="Permalink to this headline">¶</a></h2>
-<div class="highlight-none" id="index-13"><div class="highlight"><pre># 7
-cat /usr/lib/firewalld/services/ssh.xml
-cat /usr/lib/firewalld/services/https.xml
-firewall-cmd --list-all
-firewall-cmd --permanent --add-service=https
-firewall-cmd --permanent --remove-service=ssh
-firewall-cmd --reload
 </pre></div>
 </div>
 </div>
@@ -185,16 +144,13 @@ firewall-cmd --reload
         <div class="sphinxsidebarwrapper">
   <h3><a href="../index.html">Table Of Contents</a></h3>
   <ul>
-<li><a class="reference internal" href="#">1.1. minimal</a><ul>
+<li><a class="reference internal" href="#">1.1. base</a><ul>
 <li><a class="reference internal" href="#image">1.1.1. image</a></li>
 <li><a class="reference internal" href="#network">1.1.2. network</a></li>
 <li><a class="reference internal" href="#hostname">1.1.3. hostname</a></li>
 <li><a class="reference internal" href="#location">1.1.4. location</a></li>
-<li><a class="reference internal" href="#selinux">1.1.5. selinux</a></li>
-<li><a class="reference internal" href="#visudo">1.1.6. visudo</a></li>
-<li><a class="reference internal" href="#sshd">1.1.7. sshd</a></li>
-<li><a class="reference internal" href="#iptables">1.1.8. iptables</a></li>
-<li><a class="reference internal" href="#firewalld">1.1.9. firewalld</a></li>
+<li><a class="reference internal" href="#visudo">1.1.5. visudo</a></li>
+<li><a class="reference internal" href="#sshd">1.1.6. sshd</a></li>
 </ul>
 </li>
 </ul>
@@ -203,8 +159,8 @@ firewall-cmd --reload
   <p class="topless"><a href="index.html"
                         title="previous chapter">1. init</a></p>
   <h4>Next topic</h4>
-  <p class="topless"><a href="additional.html"
-                        title="next chapter">1.2. additional</a></p>
+  <p class="topless"><a href="include.html"
+                        title="next chapter">1.2. include</a></p>
 <div id="searchbox" style="display: none" role="search">
   <h3>Quick search</h3>
     <form class="search" action="../search.html" method="get">
@@ -232,7 +188,7 @@ firewall-cmd --reload
           <a href="../py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
         <li class="right" >
-          <a href="additional.html" title="1.2. additional"
+          <a href="include.html" title="1.2. include"
              >next</a> |</li>
         <li class="right" >
           <a href="index.html" title="1. init"

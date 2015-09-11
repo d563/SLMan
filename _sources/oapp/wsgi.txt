@@ -4,6 +4,8 @@ wsgi
 
     yum -y install mod_wsgi
 
+template
+--------
 .. module:: json.py
 .. code-block:: python
 

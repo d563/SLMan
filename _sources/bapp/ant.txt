@@ -1,11 +1,11 @@
 ant
 ===
-base
-----
 ::
 
     yum -y install ant
 
+template
+--------
 ::
 
     wget http://central.maven.org/maven2/org/codehaus/groovy/groovy-all/2.4.3/groovy-all-2.4.3.jar

@@ -1,5 +1,7 @@
 subversion
 ==========
+server
+------
 ::
 
     yum -y install subversion mod_dav_svn

@@ -62,8 +62,10 @@
         <div class="bodywrapper">
           <div class="body" role="main">
             
-  <div class="section" id="module-template.sh">
-<span id="bash"></span><h1>7.1. bash<a class="headerlink" href="#module-template.sh" title="Permalink to this headline">¶</a></h1>
+  <div class="section" id="bash">
+<h1>7.1. bash<a class="headerlink" href="#bash" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="module-template.sh">
+<span id="test"></span><h2>7.1.1. test<a class="headerlink" href="#module-template.sh" title="Permalink to this headline">¶</a></h2>
 <div class="highlight-shell"><div class="highlight"><pre><span class="c">#!/bin/bash</span>
 <span class="c"># template.sh</span>
 <span class="nb">echo</span> <span class="s1">&#39;$0 -&gt;&#39;</span> <span class="nv">$0</span>
@@ -95,8 +97,9 @@ func<span class="o">()</span> <span class="o">{</span> <span class="k">return</s
 ./template.sh 1 1 1
 </pre></div>
 </div>
+</div>
 <div class="section" id="module-mavend">
-<span id="daemon"></span><h2>7.1.1. daemon<a class="headerlink" href="#module-mavend" title="Permalink to this headline">¶</a></h2>
+<span id="daemon"></span><h2>7.1.2. daemon<a class="headerlink" href="#module-mavend" title="Permalink to this headline">¶</a></h2>
 <div class="highlight-shell"><div class="highlight"><pre><span class="c">#!/bin/bash</span>
 <span class="c"># chkconfig: - 80 20</span>
 <span class="c"># description: maven server</span>
@@ -159,7 +162,8 @@ chkconfig mavend on
   <h3><a href="../index.html">Table Of Contents</a></h3>
   <ul>
 <li><a class="reference internal" href="#">7.1. bash</a><ul>
-<li><a class="reference internal" href="#module-mavend">7.1.1. daemon</a></li>
+<li><a class="reference internal" href="#module-template.sh">7.1.1. test</a></li>
+<li><a class="reference internal" href="#module-mavend">7.1.2. daemon</a></li>
 </ul>
 </li>
 </ul>

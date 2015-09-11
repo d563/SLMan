@@ -1,5 +1,7 @@
 make
 ====
+template
+--------
 .. module:: header.h
 .. code-block:: c
 
