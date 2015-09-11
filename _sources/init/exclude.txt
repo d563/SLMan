@@ -1,0 +1,25 @@
+exclude
+=======
+::
+
+    # 6
+    chkconfig auditd off
+    chkconfig blk-availability off
+    chkconfig httpd off
+    chkconfig ip6tables off
+    chkconfig kdump off
+    chkconfig lvm2-monitor off
+    chkconfig mdmonitor off
+    chkconfig netfs off
+    chkconfig postfix off
+    chkconfig udev-post off
+
+::
+
+    # 6
+    chkconfig | awk '{if($5 == "3:on"){print $1}}'
+    # crond
+    # httpd
+    # network
+    # rsyslog
+    # sshd

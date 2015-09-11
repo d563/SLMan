@@ -4,3 +4,4 @@ init
     minimal
     additional
     httpd
+    exclude

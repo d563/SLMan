@@ -4,8 +4,6 @@ awk
 
     ls -l --time-style=+"%Y/%m/%d %H:%M:%s" | awk 'NR != 1 {printf "%s %s:%s %s\n",$1,$3,$4,$8}'
 
-    chkconfig | awk '{if($5 == "3:on"){print $1}}'
-
 .. module:: template.awk
 .. code-block:: awk
 
