@@ -4,11 +4,11 @@ docker
 
     yum -y install docker
 
-::
-
     systemctl enable docker
     systemctl start docker
 
+usage
+-----
 ::
 
     docker pull centos:6

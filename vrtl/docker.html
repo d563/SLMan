@@ -65,12 +65,13 @@
   <div class="section" id="docker">
 <h1>8.3. docker<a class="headerlink" href="#docker" title="Permalink to this headline">¶</a></h1>
 <div class="highlight-python"><div class="highlight"><pre>yum -y install docker
-</pre></div>
-</div>
-<div class="highlight-python"><div class="highlight"><pre>systemctl enable docker
+
+systemctl enable docker
 systemctl start docker
 </pre></div>
 </div>
+<div class="section" id="usage">
+<h2>8.3.1. usage<a class="headerlink" href="#usage" title="Permalink to this headline">¶</a></h2>
 <div class="highlight-python"><div class="highlight"><pre>docker pull centos:6
 docker images
 </pre></div>
@@ -138,6 +139,7 @@ iptables -t nat -A POSTROUTING -j MASQUERADE -p tcp --dport 8080 -s 172.17.0.4 -
 </pre></div>
 </div>
 </div>
+</div>
 
 
           </div>
@@ -145,6 +147,14 @@ iptables -t nat -A POSTROUTING -j MASQUERADE -p tcp --dport 8080 -s 172.17.0.4 -
       </div>
       <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
         <div class="sphinxsidebarwrapper">
+  <h3><a href="../index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">8.3. docker</a><ul>
+<li><a class="reference internal" href="#usage">8.3.1. usage</a></li>
+</ul>
+</li>
+</ul>
+
   <h4>Previous topic</h4>
   <p class="topless"><a href="aws.html"
                         title="previous chapter">8.2. aws</a></p>

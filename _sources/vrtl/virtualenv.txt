@@ -4,6 +4,8 @@ virtualenv
 
     pip install virtualenv virtualenvwrapper
 
+usage
+-----
 .. index:: /etc/profile.d/virtualenv.sh
 
 ::
