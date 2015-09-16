@@ -45,3 +45,14 @@ alternatives
     alternatives --display java
     alternatives --config java
     update-alternatives --auto java
+
+jobs
+----
+::
+
+    nohup sleep 100 &
+    jobs
+
+    fg %1
+    Ctl+z
+    bg %1
