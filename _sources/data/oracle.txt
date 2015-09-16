@@ -14,7 +14,7 @@ server
 ::
 
     # Oracle Database 10g Express Edition requires 996 MB of swap space.
-    dd if=/dev/zero of=/tmp/swapfile bs=1024 count=256000
+    dd if=/dev/zero of=/tmp/swapfile bs=1M count=256000
     chmod 660 /tmp/swapfile
     mkswap /tmp/swapfile
     swapon /tmp/swapfile

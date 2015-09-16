@@ -43,15 +43,21 @@ image
     sh /media/cdrom/VBoxLinuxAdditions.run
     umount /media/cdrom
 
+.. index:: /etc/udev/rules.d/70-persistent-net.rules
+.. index:: /lib/udev/rules.d/75-persistent-net-generator.rules
 .. index:: /etc/sudoers
-
-::
+.. code-block:: none
 
     rm -f /etc/udev/rules.d/70-persistent-net.rules
+    rm -rf /dev/.udev/
+    rm -f /lib/udev/rules.d/75-persistent-net-generator.rules
 
     sed -i -e 's/^.*requiretty/#Defaults requiretty/' /etc/sudoers
 
     # ssh-keygen
+
+    dd if=/dev/zero of=/EMPTY bs=1M
+    rm -f /EMPTY
 
 box
 ---

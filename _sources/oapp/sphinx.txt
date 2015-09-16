@@ -55,12 +55,11 @@ template
     cat << '[EOF]' > push.sh
     rm -rf /var/www/html/*
     cp -rf _build/html/* /var/www/html
-    d=`pwd`
-    cd /var/www/html
+    pushd /var/www/html
     git add -A
     git commit -mupdate
     git push
-    cd $d
+    popd
     [EOF]
 
     chmod u+x pull.sh push.sh

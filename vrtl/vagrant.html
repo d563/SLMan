@@ -101,11 +101,16 @@ reboot
 <span class="n">umount</span> <span class="o">/</span><span class="n">media</span><span class="o">/</span><span class="n">cdrom</span>
 </pre></div>
 </div>
-<div class="highlight-python" id="index-1"><div class="highlight"><pre>rm -f /etc/udev/rules.d/70-persistent-net.rules
+<span class="target" id="index-1"></span><span class="target" id="index-2"></span><div class="highlight-none" id="index-3"><div class="highlight"><pre>rm -f /etc/udev/rules.d/70-persistent-net.rules
+rm -rf /dev/.udev/
+rm -f /lib/udev/rules.d/75-persistent-net-generator.rules
 
 sed -i -e &#39;s/^.*requiretty/#Defaults requiretty/&#39; /etc/sudoers
 
 # ssh-keygen
+
+dd if=/dev/zero of=/EMPTY bs=1M
+rm -f /EMPTY
 </pre></div>
 </div>
 </div>
