@@ -6,7 +6,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>9.2. remote &mdash; SLMan 0.0.2 documentation</title>
+    <title>9.3. resource &mdash; SLMan 0.0.2 documentation</title>
     
     <link rel="stylesheet" href="../_static/pyramid.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
@@ -25,9 +25,9 @@
     <script type="text/javascript" src="../_static/underscore.js"></script>
     <script type="text/javascript" src="../_static/doctools.js"></script>
     <link rel="top" title="SLMan 0.0.2 documentation" href="../index.html" />
-    <link rel="up" title="9. tips" href="index.html" />
-    <link rel="next" title="9.3. performance" href="performance.html" />
-    <link rel="prev" title="9.1. windows" href="windows.html" />
+    <link rel="up" title="9. misc" href="index.html" />
+    <link rel="next" title="9.4. operation" href="operation.html" />
+    <link rel="prev" title="9.2. remote" href="remote.html" />
 <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Neuton&amp;subset=latin" type="text/css" media="screen" charset="utf-8" />
 <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Nobile:regular,italic,bold,bolditalic&amp;subset=latin" type="text/css" media="screen" charset="utf-8" />
 <!--[if lte IE 6]>
@@ -47,13 +47,13 @@
           <a href="../py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
         <li class="right" >
-          <a href="performance.html" title="9.3. performance"
+          <a href="operation.html" title="9.4. operation"
              accesskey="N">next</a> |</li>
         <li class="right" >
-          <a href="windows.html" title="9.1. windows"
+          <a href="remote.html" title="9.2. remote"
              accesskey="P">previous</a> |</li>
         <li class="nav-item nav-item-0"><a href="../index.html">SLMan 0.0.2 documentation</a> &raquo;</li>
-          <li class="nav-item nav-item-1"><a href="index.html" accesskey="U">9. tips</a> &raquo;</li> 
+          <li class="nav-item nav-item-1"><a href="index.html" accesskey="U">9. misc</a> &raquo;</li> 
       </ul>
     </div>  
 
@@ -62,100 +62,87 @@
         <div class="bodywrapper">
           <div class="body" role="main">
             
-  <div class="section" id="remote">
-<h1>9.2. remote<a class="headerlink" href="#remote" title="Permalink to this headline">¶</a></h1>
-<div class="section" id="scp">
-<h2>9.2.1. scp<a class="headerlink" href="#scp" title="Permalink to this headline">¶</a></h2>
-<div class="highlight-python"><div class="highlight"><pre>scp -rp local_dir 127.0.0.1:
+  <div class="section" id="resource">
+<h1>9.3. resource<a class="headerlink" href="#resource" title="Permalink to this headline">¶</a></h1>
+<div class="highlight-python"><div class="highlight"><pre>cat /proc/cpuinfo     CPU情報
+</pre></div>
+</div>
+<div class="section" id="coreutils">
+<h2>9.3.1. coreutils<a class="headerlink" href="#coreutils" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-python"><div class="highlight"><pre>uname -a              システム情報
+df -h                 ディスク・ドライブ情報
+du -hs *              ファイル容量
 </pre></div>
 </div>
 </div>
-<div class="section" id="rsync-ssh">
-<h2>9.2.2. rsync (ssh)<a class="headerlink" href="#rsync-ssh" title="Permalink to this headline">¶</a></h2>
-<div class="highlight-python"><div class="highlight"><pre>rsync \
-  -rlpvz \
-  -e ssh \
-  --checksum \
-  --delete \
-  --include-from=&#39;list.txt&#39; \
-  --exclude=&#39;**/.svn**&#39; \
-  ~/from/ \
-  root@127.0.0.1:~/to/
-</pre></div>
-</div>
-<div class="highlight-python"><div class="highlight"><pre>-r : --recursive
--l : --links
--p : --perms
+<div class="section" id="procps">
+<h2>9.3.2. procps<a class="headerlink" href="#procps" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-python"><div class="highlight"><pre>top
+  -u tomcat           ユーザ指定
+  -H                  スレッド表示
+  -p 12345            プロセス指定
 
--t : --times
--g : --group
--o : --owner
--D : --devices --specials
+  表示変更
+    1                 マルチコア
+    c                 フルパス
 
--v : --verbose
--z : --compress (zip)
--n : --dry-run
+  ソート変更
+    P                 CPU使用率
+    T                 CPU時間
+    M                 メモリ
+
+ps
+  alxfww              詳細ツリー
+  alx -L              スレッド表示
+
+free
+  -ms1                1秒間隔（メガバイト）
 </pre></div>
 </div>
 </div>
-<div class="section" id="rsyncd">
-<h2>9.2.3. rsyncd<a class="headerlink" href="#rsyncd" title="Permalink to this headline">¶</a></h2>
-<span class="target" id="index-0"></span><div class="highlight-python" id="index-1"><div class="highlight"><pre>yum -y install xinetd rsync
+<div class="section" id="net-tools-6-x">
+<h2>9.3.3. net-tools (6.X)<a class="headerlink" href="#net-tools-6-x" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-python"><div class="highlight"><pre>yum -y install net-tools
 
-sed -i \
--e &#39;s/disable.*/disable = no/&#39; \
--e &#39;s/flags.*/flags = IPv4/&#39; \
-/etc/xinetd.d/rsync
-
-echo &#39;
-uid = root
-gid = root
-log file = /var/log/rsyncd.log
-[d563]
-  path = /tmp/d563
-  hosts allow = 127.0.0.0/24
-  hosts deny = *
-  read only = no&#39; &gt; /etc/rsyncd.conf
-
-mkdir /home/d563
-mkdir /tmp/d563
-
-/etc/init.d/xinetd start
-</pre></div>
-</div>
-<div class="highlight-python"><div class="highlight"><pre>netstat -lntp | grep 873
-# rsync -av /home/d563 rsync://127.0.0.1/d563
+netstat
+  -lntp               TCPポート
+  -lnup               UDPポート
 </pre></div>
 </div>
 </div>
-<div class="section" id="lsyncd">
-<h2>9.2.4. lsyncd<a class="headerlink" href="#lsyncd" title="Permalink to this headline">¶</a></h2>
-<div class="highlight-python" id="index-2"><div class="highlight"><pre>rpm -Uvh http://pkgs.repoforge.org/rpmforge-release/rpmforge-release-0.5.3-1.el6.rf.i686.rpm
-sed -i -e &#39;s/^enabled.*/enabled=0/&#39; /etc/yum.repos.d/rpmforge.repo
+<div class="section" id="iproute-7-x">
+<h2>9.3.4. iproute (7.X)<a class="headerlink" href="#iproute-7-x" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-python"><div class="highlight"><pre>yum -y install iproute
+
+ss
+  -lntp               TCPポート
+  -lnup               UDPポート
 </pre></div>
 </div>
-<div class="highlight-python" id="index-3"><div class="highlight"><pre>yum -y install lsyncd --enablerepo=rpmforge
+</div>
+<div class="section" id="strace">
+<h2>9.3.5. strace<a class="headerlink" href="#strace" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-python"><div class="highlight"><pre>yum -y install strace
 
-echo &#39;
-settings {
-  logfile = &quot;/var/log/lsyncd.log&quot;,
-  statusFile = &quot;/var/log/lsyncd.stat&quot;,
-  statusInterval = 1
-}
-sync {
-  default.rsync,
-  source=&quot;/home/d563&quot;,
-  target=&quot;127.0.0.1::d563&quot;
-}&#39; &gt; /etc/lsyncd.conf
-
-chmod u+x /etc/sysconfig/lsyncd
-
-/etc/init.d/lsyncd start
+strace                システムコール出力
+  -p 12345            プロセス指定
 </pre></div>
 </div>
-<div class="highlight-python" id="index-4"><div class="highlight"><pre>echo &#39;fs.inotify.max_user_watches = 16394&#39; &gt;&gt; /etc/sysctl.conf
-sysctl -p
-cat /proc/sys/fs/inotify/max_user_watches
+</div>
+<div class="section" id="sysstat">
+<h2>9.3.6. sysstat<a class="headerlink" href="#sysstat" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-python"><div class="highlight"><pre>yum -y install sysstat
+
+sar
+  -f /var/log/sa/sa01 日付指定
+  -P ALL              マルチコア
+  -q                  ロードアベレージ
+  -W                  スワップ
+  60 150              60秒間隔150回
+
+pidstat
+  -p 12345            プロセス指定
+  1                   1秒間隔
 </pre></div>
 </div>
 </div>
@@ -169,21 +156,23 @@ cat /proc/sys/fs/inotify/max_user_watches
         <div class="sphinxsidebarwrapper">
   <h3><a href="../index.html">Table Of Contents</a></h3>
   <ul>
-<li><a class="reference internal" href="#">9.2. remote</a><ul>
-<li><a class="reference internal" href="#scp">9.2.1. scp</a></li>
-<li><a class="reference internal" href="#rsync-ssh">9.2.2. rsync (ssh)</a></li>
-<li><a class="reference internal" href="#rsyncd">9.2.3. rsyncd</a></li>
-<li><a class="reference internal" href="#lsyncd">9.2.4. lsyncd</a></li>
+<li><a class="reference internal" href="#">9.3. resource</a><ul>
+<li><a class="reference internal" href="#coreutils">9.3.1. coreutils</a></li>
+<li><a class="reference internal" href="#procps">9.3.2. procps</a></li>
+<li><a class="reference internal" href="#net-tools-6-x">9.3.3. net-tools (6.X)</a></li>
+<li><a class="reference internal" href="#iproute-7-x">9.3.4. iproute (7.X)</a></li>
+<li><a class="reference internal" href="#strace">9.3.5. strace</a></li>
+<li><a class="reference internal" href="#sysstat">9.3.6. sysstat</a></li>
 </ul>
 </li>
 </ul>
 
   <h4>Previous topic</h4>
-  <p class="topless"><a href="windows.html"
-                        title="previous chapter">9.1. windows</a></p>
+  <p class="topless"><a href="remote.html"
+                        title="previous chapter">9.2. remote</a></p>
   <h4>Next topic</h4>
-  <p class="topless"><a href="performance.html"
-                        title="next chapter">9.3. performance</a></p>
+  <p class="topless"><a href="operation.html"
+                        title="next chapter">9.4. operation</a></p>
 <div id="searchbox" style="display: none" role="search">
   <h3>Quick search</h3>
     <form class="search" action="../search.html" method="get">
@@ -211,13 +200,13 @@ cat /proc/sys/fs/inotify/max_user_watches
           <a href="../py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
         <li class="right" >
-          <a href="performance.html" title="9.3. performance"
+          <a href="operation.html" title="9.4. operation"
              >next</a> |</li>
         <li class="right" >
-          <a href="windows.html" title="9.1. windows"
+          <a href="remote.html" title="9.2. remote"
              >previous</a> |</li>
         <li class="nav-item nav-item-0"><a href="../index.html">SLMan 0.0.2 documentation</a> &raquo;</li>
-          <li class="nav-item nav-item-1"><a href="index.html" >9. tips</a> &raquo;</li> 
+          <li class="nav-item nav-item-1"><a href="index.html" >9. misc</a> &raquo;</li> 
       </ul>
     </div>
     <div class="footer" role="contentinfo">

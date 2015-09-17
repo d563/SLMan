@@ -6,7 +6,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>9.4. simple &mdash; SLMan 0.0.2 documentation</title>
+    <title>9.4. operation &mdash; SLMan 0.0.2 documentation</title>
     
     <link rel="stylesheet" href="../_static/pyramid.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
@@ -25,8 +25,8 @@
     <script type="text/javascript" src="../_static/underscore.js"></script>
     <script type="text/javascript" src="../_static/doctools.js"></script>
     <link rel="top" title="SLMan 0.0.2 documentation" href="../index.html" />
-    <link rel="up" title="9. tips" href="index.html" />
-    <link rel="prev" title="9.3. performance" href="performance.html" />
+    <link rel="up" title="9. misc" href="index.html" />
+    <link rel="prev" title="9.3. resource" href="resource.html" />
 <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Neuton&amp;subset=latin" type="text/css" media="screen" charset="utf-8" />
 <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Nobile:regular,italic,bold,bolditalic&amp;subset=latin" type="text/css" media="screen" charset="utf-8" />
 <!--[if lte IE 6]>
@@ -46,10 +46,10 @@
           <a href="../py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
         <li class="right" >
-          <a href="performance.html" title="9.3. performance"
+          <a href="resource.html" title="9.3. resource"
              accesskey="P">previous</a> |</li>
         <li class="nav-item nav-item-0"><a href="../index.html">SLMan 0.0.2 documentation</a> &raquo;</li>
-          <li class="nav-item nav-item-1"><a href="index.html" accesskey="U">9. tips</a> &raquo;</li> 
+          <li class="nav-item nav-item-1"><a href="index.html" accesskey="U">9. misc</a> &raquo;</li> 
       </ul>
     </div>  
 
@@ -58,8 +58,8 @@
         <div class="bodywrapper">
           <div class="body" role="main">
             
-  <div class="section" id="simple">
-<h1>9.4. simple<a class="headerlink" href="#simple" title="Permalink to this headline">¶</a></h1>
+  <div class="section" id="operation">
+<h1>9.4. operation<a class="headerlink" href="#operation" title="Permalink to this headline">¶</a></h1>
 <div class="section" id="link">
 <h2>9.4.1. link<a class="headerlink" href="#link" title="Permalink to this headline">¶</a></h2>
 <div class="highlight-python"><div class="highlight"><pre>ln -nfs real link
@@ -117,36 +117,6 @@ bg %1
 </pre></div>
 </div>
 </div>
-<div class="section" id="awk">
-<h2>9.4.7. awk<a class="headerlink" href="#awk" title="Permalink to this headline">¶</a></h2>
-<div class="highlight-python"><div class="highlight"><pre>ls -l --time-style=+&quot;%Y/%m/%d %H:%M:%s&quot; | awk &#39;NR != 1 {printf &quot;%s %s:%s %s\n&quot;,$1,$3,$4,$8}&#39;
-</pre></div>
-</div>
-<span class="target" id="module-template.awk"></span><div class="highlight-awk"><div class="highlight"><pre><span class="c1">#!/bin/awk -f</span>
-<span class="c1"># template.awk</span>
-<span class="nb">BEGIN</span> <span class="p">{</span>
-  <span class="nb">FS</span> <span class="o">=</span> <span class="s2">&quot;,&quot;</span><span class="p">;</span>
-  <span class="nb">OFS</span> <span class="o">=</span> <span class="s2">&quot;/&quot;</span><span class="p">;</span>
-  <span class="nx">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
-<span class="p">}</span>
-<span class="sr">/1,0/</span> <span class="p">{</span>
-  <span class="nx">i</span><span class="o">++</span><span class="p">;</span>
-<span class="p">}</span>
-<span class="p">{</span>
-  <span class="k">if</span> <span class="p">(</span><span class="o">$</span><span class="mi">0</span> <span class="o">!=</span> <span class="s2">&quot;&quot;</span><span class="p">)</span> <span class="p">{</span>
-    <span class="kr">printf</span> <span class="s2">&quot;line:%d -&gt; %s\n&quot;</span><span class="p">,</span> <span class="nb">NR</span><span class="p">,</span> <span class="o">$</span><span class="mi">0</span><span class="p">;</span>
-  <span class="p">}</span>
-<span class="p">}</span>
-<span class="nb">END</span> <span class="p">{</span>
-  <span class="kr">print</span> <span class="nx">i</span><span class="p">,</span> <span class="nb">NR</span><span class="p">;</span>
-<span class="p">}</span>
-</pre></div>
-</div>
-<div class="highlight-python"><div class="highlight"><pre>chmod +x ./template.awk
-./template.awk d563.csv
-</pre></div>
-</div>
-</div>
 </div>
 
 
@@ -157,21 +127,20 @@ bg %1
         <div class="sphinxsidebarwrapper">
   <h3><a href="../index.html">Table Of Contents</a></h3>
   <ul>
-<li><a class="reference internal" href="#">9.4. simple</a><ul>
+<li><a class="reference internal" href="#">9.4. operation</a><ul>
 <li><a class="reference internal" href="#link">9.4.1. link</a></li>
 <li><a class="reference internal" href="#find">9.4.2. find</a></li>
 <li><a class="reference internal" href="#egrep">9.4.3. egrep</a></li>
 <li><a class="reference internal" href="#rpm">9.4.4. rpm</a></li>
 <li><a class="reference internal" href="#alternatives">9.4.5. alternatives</a></li>
 <li><a class="reference internal" href="#jobs">9.4.6. jobs</a></li>
-<li><a class="reference internal" href="#awk">9.4.7. awk</a></li>
 </ul>
 </li>
 </ul>
 
   <h4>Previous topic</h4>
-  <p class="topless"><a href="performance.html"
-                        title="previous chapter">9.3. performance</a></p>
+  <p class="topless"><a href="resource.html"
+                        title="previous chapter">9.3. resource</a></p>
 <div id="searchbox" style="display: none" role="search">
   <h3>Quick search</h3>
     <form class="search" action="../search.html" method="get">
@@ -199,10 +168,10 @@ bg %1
           <a href="../py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
         <li class="right" >
-          <a href="performance.html" title="9.3. performance"
+          <a href="resource.html" title="9.3. resource"
              >previous</a> |</li>
         <li class="nav-item nav-item-0"><a href="../index.html">SLMan 0.0.2 documentation</a> &raquo;</li>
-          <li class="nav-item nav-item-1"><a href="index.html" >9. tips</a> &raquo;</li> 
+          <li class="nav-item nav-item-1"><a href="index.html" >9. misc</a> &raquo;</li> 
       </ul>
     </div>
     <div class="footer" role="contentinfo">
