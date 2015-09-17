@@ -2,6 +2,6 @@ code
 ====
 .. toctree::
     bash
-    awk
+    c
     python
     groovy

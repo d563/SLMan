@@ -1,5 +1,5 @@
-make
-====
+c
+=
 template
 --------
 .. module:: header.h

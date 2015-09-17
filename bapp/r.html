@@ -1,0 +1,190 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>5.3. r &mdash; SLMan 0.0.2 documentation</title>
+    
+    <link rel="stylesheet" href="../_static/pyramid.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/SLMan.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '0.0.2',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <link rel="top" title="SLMan 0.0.2 documentation" href="../index.html" />
+    <link rel="up" title="5. bapp" href="index.html" />
+    <link rel="next" title="5.4. jasperreports" href="jasperreports.html" />
+    <link rel="prev" title="5.2. ant" href="ant.html" />
+<link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Neuton&amp;subset=latin" type="text/css" media="screen" charset="utf-8" />
+<link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Nobile:regular,italic,bold,bolditalic&amp;subset=latin" type="text/css" media="screen" charset="utf-8" />
+<!--[if lte IE 6]>
+<link rel="stylesheet" href="../_static/ie6.css" type="text/css" media="screen" charset="utf-8" />
+<![endif]-->
+
+  </head>
+  <body role="document">
+
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="jasperreports.html" title="5.4. jasperreports"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="ant.html" title="5.2. ant"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">SLMan 0.0.2 documentation</a> &raquo;</li>
+          <li class="nav-item nav-item-1"><a href="index.html" accesskey="U">5. bapp</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="r">
+<h1>5.3. r<a class="headerlink" href="#r" title="Permalink to this headline">¶</a></h1>
+<div class="highlight-python"><div class="highlight"><pre>yum -y install R --enablerepo=epel
+</pre></div>
+</div>
+<div class="section" id="template">
+<h2>5.3.1. template<a class="headerlink" href="#template" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">cat</span> <span class="o">&lt;&lt;</span> <span class="s">&#39;[EOF]&#39;</span> <span class="o">&gt;</span> <span class="n">d563</span><span class="o">.</span><span class="n">csv</span>
+<span class="n">aaa</span><span class="p">,</span><span class="n">bbb</span><span class="p">,</span><span class="n">ccc</span>
+<span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span>
+<span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span>
+<span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span>
+<span class="p">[</span><span class="n">EOF</span><span class="p">]</span>
+
+<span class="n">R</span>
+</pre></div>
+</div>
+<div class="highlight-R"><div class="highlight"><pre>install.packages<span class="p">(</span><span class="s">&#39;arules&#39;</span><span class="p">,</span> repos<span class="o">=</span><span class="s">&#39;http://R-Forge.R-project.org&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="highlight-R"><div class="highlight"><pre><span class="kn">library</span><span class="p">(</span>arules<span class="p">)</span>
+dt.fr <span class="o">=</span> read.csv<span class="p">(</span><span class="s">&#39;d563.csv&#39;</span><span class="p">)</span>
+<span class="kp">class</span><span class="p">(</span>dt.fr<span class="p">)</span>
+dt.mt <span class="o">=</span> <span class="kp">as.matrix</span><span class="p">(</span>dt.fr<span class="p">)</span>
+dt.tr <span class="o">=</span> as.tr<span class="p">(</span>dt.mt<span class="p">)</span>
+dt.ap <span class="o">=</span> apriori<span class="p">(</span>dt.tr<span class="p">,</span> parameter<span class="o">=</span><span class="kt">list</span><span class="p">(</span>supp<span class="o">=</span><span class="m">0.0001</span><span class="p">,</span> maxlen<span class="o">=</span><span class="m">5</span><span class="p">,</span> confidence<span class="o">=</span><span class="m">0.01</span><span class="p">))</span>
+inspect<span class="p">(</span><span class="kp">head</span><span class="p">(</span><span class="kp">sort</span><span class="p">(</span>dt.ap<span class="p">,</span> by<span class="o">=</span><span class="s">&#39;lift&#39;</span><span class="p">),</span> n<span class="o">=</span><span class="m">20</span><span class="p">))</span>
+</pre></div>
+</div>
+<div class="highlight-R"><div class="highlight"><pre><span class="kp">write</span><span class="p">(</span>as<span class="p">(</span>dt.mt<span class="p">,</span> <span class="s">&#39;transactions&#39;</span><span class="p">),</span> <span class="s">&#39;d563.tr&#39;</span><span class="p">,</span> sep<span class="o">=</span><span class="s">&#39;,&#39;</span><span class="p">)</span>
+dt.tr <span class="o">=</span> read.transactions<span class="p">(</span><span class="s">&#39;d563.tr&#39;</span><span class="p">,</span> sep<span class="o">=</span><span class="s">&#39;,&#39;</span><span class="p">)</span>
+
+itemFrequencyPlot<span class="p">(</span>dt.tr<span class="p">,</span> type<span class="o">=</span><span class="s">&#39;absolute&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<span class="target" id="module-apriori.R"></span><div class="highlight-R"><div class="highlight"><pre><span class="c1">#!/usr/bin/Rscript --vanilla</span>
+<span class="c1"># apriori.R</span>
+args <span class="o">=</span> <span class="kp">commandArgs</span><span class="p">(</span>trailingOnly<span class="o">=</span><span class="bp">T</span><span class="p">)</span>
+<span class="kr">if</span><span class="p">(</span><span class="kp">length</span><span class="p">(</span><span class="kp">args</span><span class="p">)</span> <span class="o">!=</span> <span class="m">2</span><span class="p">)</span> <span class="p">{</span>
+  <span class="kp">write</span><span class="p">(</span><span class="s">&#39;Usage: csvFile outFile&#39;</span><span class="p">,</span> <span class="kp">stderr</span><span class="p">())</span>
+  <span class="kp">q</span><span class="p">()</span>
+<span class="p">}</span>
+<span class="kn">library</span><span class="p">(</span>arules<span class="p">)</span>
+<span class="kp">write</span><span class="p">(</span>
+  capture.output<span class="p">(</span>inspect<span class="p">(</span>
+    <span class="kp">head</span><span class="p">(</span><span class="kp">sort</span><span class="p">(</span>
+      apriori<span class="p">(</span>
+        as.tr<span class="p">(</span><span class="kp">as.matrix</span><span class="p">(</span>read.csv<span class="p">(</span><span class="kp">args</span><span class="p">[</span><span class="m">1</span><span class="p">]))),</span>
+        parameter<span class="o">=</span><span class="kt">list</span><span class="p">(</span>
+          supp<span class="o">=</span><span class="m">0.0001</span><span class="p">,</span>
+          maxlen<span class="o">=</span><span class="m">5</span><span class="p">,</span>
+          confidence<span class="o">=</span><span class="m">0.01</span><span class="p">)),</span>
+      by<span class="o">=</span><span class="s">&#39;lift&#39;</span>
+    n<span class="o">=</span><span class="m">20</span><span class="p">))),</span>
+  <span class="kp">args</span><span class="p">[</span><span class="m">2</span><span class="p">])</span>
+</pre></div>
+</div>
+<div class="highlight-python"><div class="highlight"><pre>chmod +x ./apriori.R
+./apriori.R d563.csv d563.out
+</pre></div>
+</div>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="../index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">5.3. r</a><ul>
+<li><a class="reference internal" href="#template">5.3.1. template</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="ant.html"
+                        title="previous chapter">5.2. ant</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="jasperreports.html"
+                        title="next chapter">5.4. jasperreports</a></p>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="jasperreports.html" title="5.4. jasperreports"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="ant.html" title="5.2. ant"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">SLMan 0.0.2 documentation</a> &raquo;</li>
+          <li class="nav-item nav-item-1"><a href="index.html" >5. bapp</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &copy; Copyright 2015, Daisuke Maeda.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.3.1.
+    </div>
+  </body>
+</html>

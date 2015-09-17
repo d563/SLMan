@@ -263,3 +263,14 @@ template
     <template name="show">
       <h1>{{.}}</h1>
     </template>
+
+nvd3
+----
+::
+
+    git clone https://github.com/ganezasan/NVD3-Metore.git
+    cd NVD3-Metore
+    meteor list
+    meteor remove d3 mrt:nvd3js
+    meteor add d3js:d3 nvd3:nvd3@=1.7.1
+    meteor run -p 0.0.0.0:80 &

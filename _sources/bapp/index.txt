@@ -3,5 +3,5 @@ bapp
 .. toctree::
     fabric
     ant
-    make
+    r
     jasperreports
