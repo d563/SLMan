@@ -27,16 +27,16 @@ template
     dt.fr = read.csv('d563.csv')
     class(dt.fr)
     dt.mt = as.matrix(dt.fr)
-    dt.tr = as.tr(dt.mt)
-    dt.ap = apriori(dt.tr, parameter=list(supp=0.0001, maxlen=5, confidence=0.01))
+    dt.ts = as.ts(dt.mt)
+    dt.ap = apriori(dt.ts, parameter=list(supp=0.0001, maxlen=5, confidence=0.01))
     inspect(head(sort(dt.ap, by='lift'), n=20))
 
 .. code-block:: R
 
-    write(as(dt.mt, 'transactions'), 'd563.tr', sep=',')
-    dt.tr = read.transactions('d563.tr', sep=',')
+    write(as(dt.mt, 'transactions'), 'd563.ts', sep=',')
+    dt.ts = read.transactions('d563.ts', sep=',')
 
-    itemFrequencyPlot(dt.tr, type='absolute')
+    itemFrequencyPlot(dt.ts, type='absolute')
 
 .. module:: apriori.R
 .. code-block:: R
@@ -53,12 +53,12 @@ template
       capture.output(inspect(
         head(sort(
           apriori(
-            as.tr(as.matrix(read.csv(args[1]))),
+            as.ts(as.matrix(read.csv(args[1]))),
             parameter=list(
               supp=0.0001,
               maxlen=5,
               confidence=0.01)),
-          by='lift'
+          by='lift'),
         n=20))),
       args[2])
 

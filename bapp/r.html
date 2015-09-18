@@ -86,15 +86,15 @@
 dt.fr <span class="o">=</span> read.csv<span class="p">(</span><span class="s">&#39;d563.csv&#39;</span><span class="p">)</span>
 <span class="kp">class</span><span class="p">(</span>dt.fr<span class="p">)</span>
 dt.mt <span class="o">=</span> <span class="kp">as.matrix</span><span class="p">(</span>dt.fr<span class="p">)</span>
-dt.tr <span class="o">=</span> as.tr<span class="p">(</span>dt.mt<span class="p">)</span>
-dt.ap <span class="o">=</span> apriori<span class="p">(</span>dt.tr<span class="p">,</span> parameter<span class="o">=</span><span class="kt">list</span><span class="p">(</span>supp<span class="o">=</span><span class="m">0.0001</span><span class="p">,</span> maxlen<span class="o">=</span><span class="m">5</span><span class="p">,</span> confidence<span class="o">=</span><span class="m">0.01</span><span class="p">))</span>
+dt.ts <span class="o">=</span> as.ts<span class="p">(</span>dt.mt<span class="p">)</span>
+dt.ap <span class="o">=</span> apriori<span class="p">(</span>dt.ts<span class="p">,</span> parameter<span class="o">=</span><span class="kt">list</span><span class="p">(</span>supp<span class="o">=</span><span class="m">0.0001</span><span class="p">,</span> maxlen<span class="o">=</span><span class="m">5</span><span class="p">,</span> confidence<span class="o">=</span><span class="m">0.01</span><span class="p">))</span>
 inspect<span class="p">(</span><span class="kp">head</span><span class="p">(</span><span class="kp">sort</span><span class="p">(</span>dt.ap<span class="p">,</span> by<span class="o">=</span><span class="s">&#39;lift&#39;</span><span class="p">),</span> n<span class="o">=</span><span class="m">20</span><span class="p">))</span>
 </pre></div>
 </div>
-<div class="highlight-R"><div class="highlight"><pre><span class="kp">write</span><span class="p">(</span>as<span class="p">(</span>dt.mt<span class="p">,</span> <span class="s">&#39;transactions&#39;</span><span class="p">),</span> <span class="s">&#39;d563.tr&#39;</span><span class="p">,</span> sep<span class="o">=</span><span class="s">&#39;,&#39;</span><span class="p">)</span>
-dt.tr <span class="o">=</span> read.transactions<span class="p">(</span><span class="s">&#39;d563.tr&#39;</span><span class="p">,</span> sep<span class="o">=</span><span class="s">&#39;,&#39;</span><span class="p">)</span>
+<div class="highlight-R"><div class="highlight"><pre><span class="kp">write</span><span class="p">(</span>as<span class="p">(</span>dt.mt<span class="p">,</span> <span class="s">&#39;transactions&#39;</span><span class="p">),</span> <span class="s">&#39;d563.ts&#39;</span><span class="p">,</span> sep<span class="o">=</span><span class="s">&#39;,&#39;</span><span class="p">)</span>
+dt.ts <span class="o">=</span> read.transactions<span class="p">(</span><span class="s">&#39;d563.ts&#39;</span><span class="p">,</span> sep<span class="o">=</span><span class="s">&#39;,&#39;</span><span class="p">)</span>
 
-itemFrequencyPlot<span class="p">(</span>dt.tr<span class="p">,</span> type<span class="o">=</span><span class="s">&#39;absolute&#39;</span><span class="p">)</span>
+itemFrequencyPlot<span class="p">(</span>dt.ts<span class="p">,</span> type<span class="o">=</span><span class="s">&#39;absolute&#39;</span><span class="p">)</span>
 </pre></div>
 </div>
 <span class="target" id="module-apriori.R"></span><div class="highlight-R"><div class="highlight"><pre><span class="c1">#!/usr/bin/Rscript --vanilla</span>
@@ -109,12 +109,12 @@ args <span class="o">=</span> <span class="kp">commandArgs</span><span class="p"
   capture.output<span class="p">(</span>inspect<span class="p">(</span>
     <span class="kp">head</span><span class="p">(</span><span class="kp">sort</span><span class="p">(</span>
       apriori<span class="p">(</span>
-        as.tr<span class="p">(</span><span class="kp">as.matrix</span><span class="p">(</span>read.csv<span class="p">(</span><span class="kp">args</span><span class="p">[</span><span class="m">1</span><span class="p">]))),</span>
+        as.ts<span class="p">(</span><span class="kp">as.matrix</span><span class="p">(</span>read.csv<span class="p">(</span><span class="kp">args</span><span class="p">[</span><span class="m">1</span><span class="p">]))),</span>
         parameter<span class="o">=</span><span class="kt">list</span><span class="p">(</span>
           supp<span class="o">=</span><span class="m">0.0001</span><span class="p">,</span>
           maxlen<span class="o">=</span><span class="m">5</span><span class="p">,</span>
           confidence<span class="o">=</span><span class="m">0.01</span><span class="p">)),</span>
-      by<span class="o">=</span><span class="s">&#39;lift&#39;</span>
+      by<span class="o">=</span><span class="s">&#39;lift&#39;</span><span class="p">),</span>
     n<span class="o">=</span><span class="m">20</span><span class="p">))),</span>
   <span class="kp">args</span><span class="p">[</span><span class="m">2</span><span class="p">])</span>
 </pre></div>
