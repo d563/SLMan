@@ -41,6 +41,8 @@ agent
     cd Hinemos_Agent-4.1.2_rhel5-rhel6
     ./agent_installer_JP.sh
 
+.. index:: /opt/hinemos_agent/conf/Agent.properties
+
 ::
 
     /opt/hinemos_agent/bin/agent_start.sh
