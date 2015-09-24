@@ -4,8 +4,6 @@ r
 
     yum -y install R --enablerepo=epel
 
-template
---------
 ::
 
     cat << '[EOF]' > d563.csv
@@ -13,10 +11,14 @@ template
     1,0,1
     0,1,0
     1,1,1
+    2,0,2
+    2,2,2
     [EOF]
 
     R
 
+association
+-----------
 .. code-block:: R
 
     install.packages('arules', repos='http://R-Forge.R-project.org')
@@ -38,6 +40,59 @@ template
 
     itemFrequencyPlot(dt.ts, type='absolute')
 
+0to1
+----
+.. code-block:: R
+
+    dt.fr = read.csv('d563.csv')
+    dt.mt = apply(dt.fr, MARGIN=2, FUN=function(X)(X-min(X))/diff(range(X)))
+
+cosine
+------
+.. code-block:: R
+
+    install.packages('amap', repos='http://cran.r-project.org')
+
+.. code-block:: R
+
+    library(amap)
+    dt.fr = read.csv('d563.csv')
+    dt.ds = Dist(dt.fr, method='pearson')
+    dt.cl = kmeans(dt.ds, 3)$cluster
+    cbind(dt.fr, ddd=dt.cl)
+
+tree
+----
+.. code-block:: R
+
+    install.packages('rpart', repos='http://cran.r-project.org')
+    install.packages('partykit', repos='http://cran.r-project.org')
+
+.. code-block:: R
+
+    library(rpart)
+    library(partykit)
+
+    tmp = data.frame(Titanic)
+    df = data.frame(
+      Class = rep(tmp$Class, tmp$Freq),
+      Sex = rep(tmp$Sex, tmp$Freq),
+      Age = rep(tmp$Age, tmp$Freq),
+      Survived = rep(tmp$Survived, tmp$Freq)
+    )
+
+    ct1 = rpart(Survived ~ Class + Sex + Age, data=df, method='class')
+    plot(as.party(ct1))
+
+.. code-block:: R
+
+    printcp(ct1)
+    plotcp(ct1)
+
+    ct2 = rpart(Survived ~ Class + Sex + Age, data=df, method='class', cp=0.022504)
+
+template
+--------
 .. module:: apriori.R
 .. code-block:: R
 
