@@ -4,8 +4,6 @@ virtualenv
 
     pip install virtualenv virtualenvwrapper
 
-usage
------
 .. index:: /etc/profile.d/virtualenv.sh
 
 ::
@@ -14,10 +12,10 @@ usage
     echo "WORKON_HOME=/usr/local/lib/virtualenv
     . $(which virtualenvwrapper.sh)" > /etc/profile.d/virtualenv.sh
 
-::
-
     . /etc/profile.d/virtualenv.sh
 
+usage
+-----
 ::
 
     mkvirtualenv d563

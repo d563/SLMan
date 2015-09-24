@@ -7,8 +7,8 @@ docker
     systemctl enable docker
     systemctl start docker
 
-usage
------
+template
+--------
 ::
 
     docker pull centos:6
@@ -52,6 +52,8 @@ usage
     CMD tomcat/bin/catalina.sh start && tail -f /dev/null
     [EOF]
 
+usage
+-----
 ::
 
     docker build -t d563/co6:1 .
@@ -71,6 +73,8 @@ usage
     docker rm -f co6
     docker rmi d563/co6:1
 
+routing
+-------
 ::
 
     iptables -t nat -L -n --line-numbers

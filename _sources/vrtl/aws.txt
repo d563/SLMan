@@ -4,8 +4,8 @@ aws
 
     pip install boto
 
-usage
------
+template
+--------
 .. index:: /etc/profile.d/aws.sh
 
 ::

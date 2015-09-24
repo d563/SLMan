@@ -70,8 +70,8 @@ systemctl enable docker
 systemctl start docker
 </pre></div>
 </div>
-<div class="section" id="usage">
-<h2>8.3.1. usage<a class="headerlink" href="#usage" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="template">
+<h2>8.3.1. template<a class="headerlink" href="#template" title="Permalink to this headline">¶</a></h2>
 <div class="highlight-python"><div class="highlight"><pre>docker pull centos:6
 docker images
 </pre></div>
@@ -111,6 +111,9 @@ CMD tomcat/bin/catalina.sh start &amp;&amp; tail -f /dev/null
 [EOF]
 </pre></div>
 </div>
+</div>
+<div class="section" id="usage">
+<h2>8.3.2. usage<a class="headerlink" href="#usage" title="Permalink to this headline">¶</a></h2>
 <div class="highlight-python"><div class="highlight"><pre>docker build -t d563/co6:1 .
 
 docker run -d \
@@ -128,6 +131,9 @@ docker rm -f co6
 docker rmi d563/co6:1
 </pre></div>
 </div>
+</div>
+<div class="section" id="routing">
+<h2>8.3.3. routing<a class="headerlink" href="#routing" title="Permalink to this headline">¶</a></h2>
 <div class="highlight-python"><div class="highlight"><pre>iptables -t nat -L -n --line-numbers
 
 # iptables -t nat -D DOCKER 1
@@ -150,7 +156,9 @@ iptables -t nat -A POSTROUTING -j MASQUERADE -p tcp --dport 8080 -s 172.17.0.4 -
   <h3><a href="../index.html">Table Of Contents</a></h3>
   <ul>
 <li><a class="reference internal" href="#">8.3. docker</a><ul>
-<li><a class="reference internal" href="#usage">8.3.1. usage</a></li>
+<li><a class="reference internal" href="#template">8.3.1. template</a></li>
+<li><a class="reference internal" href="#usage">8.3.2. usage</a></li>
+<li><a class="reference internal" href="#routing">8.3.3. routing</a></li>
 </ul>
 </li>
 </ul>

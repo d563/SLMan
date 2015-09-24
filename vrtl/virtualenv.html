@@ -67,16 +67,15 @@
 <div class="highlight-python"><div class="highlight"><pre>pip install virtualenv virtualenvwrapper
 </pre></div>
 </div>
-<div class="section" id="usage">
-<h2>8.1.1. usage<a class="headerlink" href="#usage" title="Permalink to this headline">¶</a></h2>
 <div class="highlight-python" id="index-0"><div class="highlight"><pre>mkdir /usr/local/lib/virtualenv
 echo &quot;WORKON_HOME=/usr/local/lib/virtualenv
 . $(which virtualenvwrapper.sh)&quot; &gt; /etc/profile.d/virtualenv.sh
+
+. /etc/profile.d/virtualenv.sh
 </pre></div>
 </div>
-<div class="highlight-python"><div class="highlight"><pre>. /etc/profile.d/virtualenv.sh
-</pre></div>
-</div>
+<div class="section" id="usage">
+<h2>8.1.1. usage<a class="headerlink" href="#usage" title="Permalink to this headline">¶</a></h2>
 <div class="highlight-python"><div class="highlight"><pre>mkvirtualenv d563
 workon d563
 deactivate
