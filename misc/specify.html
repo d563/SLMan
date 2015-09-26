@@ -6,7 +6,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>9.4. operation &mdash; SLMan 0.0.2 documentation</title>
+    <title>9.5. specify &mdash; SLMan 0.0.2 documentation</title>
     
     <link rel="stylesheet" href="../_static/pyramid.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
@@ -26,8 +26,7 @@
     <script type="text/javascript" src="../_static/doctools.js"></script>
     <link rel="top" title="SLMan 0.0.2 documentation" href="../index.html" />
     <link rel="up" title="9. misc" href="index.html" />
-    <link rel="next" title="9.5. specify" href="specify.html" />
-    <link rel="prev" title="9.3. monitor" href="monitor.html" />
+    <link rel="prev" title="9.4. operation" href="operation.html" />
 <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Neuton&amp;subset=latin" type="text/css" media="screen" charset="utf-8" />
 <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Nobile:regular,italic,bold,bolditalic&amp;subset=latin" type="text/css" media="screen" charset="utf-8" />
 <!--[if lte IE 6]>
@@ -47,10 +46,7 @@
           <a href="../py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
         <li class="right" >
-          <a href="specify.html" title="9.5. specify"
-             accesskey="N">next</a> |</li>
-        <li class="right" >
-          <a href="monitor.html" title="9.3. monitor"
+          <a href="operation.html" title="9.4. operation"
              accesskey="P">previous</a> |</li>
         <li class="nav-item nav-item-0"><a href="../index.html">SLMan 0.0.2 documentation</a> &raquo;</li>
           <li class="nav-item nav-item-1"><a href="index.html" accesskey="U">9. misc</a> &raquo;</li> 
@@ -62,64 +58,143 @@
         <div class="bodywrapper">
           <div class="body" role="main">
             
-  <div class="section" id="operation">
-<h1>9.4. operation<a class="headerlink" href="#operation" title="Permalink to this headline">¶</a></h1>
-<div class="section" id="link">
-<h2>9.4.1. link<a class="headerlink" href="#link" title="Permalink to this headline">¶</a></h2>
-<div class="highlight-python"><div class="highlight"><pre>ln -nfs real link
-chown -h user link
-unlink link
-</pre></div>
+  <div class="section" id="specify">
+<h1>9.5. specify<a class="headerlink" href="#specify" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="what">
+<h2>9.5.1. what<a class="headerlink" href="#what" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>要求仕様</li>
+<li>変更要求仕様</li>
+<li>追加機能要求仕様</li>
+</ul>
+<table border="1" class="docutils">
+<colgroup>
+<col width="33%" />
+<col width="33%" />
+<col width="33%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>（親要求番号）</td>
+<td>要求</td>
+<td>&nbsp;</td>
+</tr>
+<tr class="row-even"><td>&nbsp;</td>
+<td>理由</td>
+<td>&nbsp;</td>
+</tr>
+<tr class="row-odd"><td>&nbsp;</td>
+<td>説明</td>
+<td>&nbsp;</td>
+</tr>
+<tr class="row-even"><td>&nbsp;</td>
+<td>（子要求番号）</td>
+<td>要求</td>
+</tr>
+<tr class="row-odd"><td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>理由</td>
+</tr>
+<tr class="row-even"><td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>説明</td>
+</tr>
+<tr class="row-odd"><td>&nbsp;</td>
+<td>&lt;カテゴリ&gt;</td>
+<td>&nbsp;</td>
+</tr>
+<tr class="row-even"><td>&nbsp;</td>
+<td>□ □ □</td>
+<td>（要求仕様番号）</td>
+</tr>
+</tbody>
+</table>
+<ul class="simple">
+<li>品質特性</li>
+</ul>
+<table border="1" class="docutils">
+<colgroup>
+<col width="17%" />
+<col width="17%" />
+<col width="17%" />
+<col width="17%" />
+<col width="17%" />
+<col width="17%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">機能性</th>
+<th class="head">信頼性</th>
+<th class="head">使用性</th>
+<th class="head">効率性</th>
+<th class="head">保守性</th>
+<th class="head">移植性</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>合目的性</td>
+<td>成熟性</td>
+<td>理解性</td>
+<td>実行効率性</td>
+<td>解析性</td>
+<td>環境適応性</td>
+</tr>
+<tr class="row-odd"><td>正確性</td>
+<td>障害許容性</td>
+<td>習得性</td>
+<td>資源効率性</td>
+<td>変更作業性</td>
+<td>移植作業性</td>
+</tr>
+<tr class="row-even"><td>接続性</td>
+<td>回復生</td>
+<td>操作性</td>
+<td>&nbsp;</td>
+<td>安定性</td>
+<td>規格準拠性</td>
+</tr>
+<tr class="row-odd"><td>整合性</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>試験性</td>
+<td>置換性</td>
+</tr>
+<tr class="row-even"><td>セキュリティ</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+</tr>
+</tbody>
+</table>
+<ul class="simple">
+<li>テスト仕様</li>
+</ul>
+<table border="1" class="docutils">
+<colgroup>
+<col width="33%" />
+<col width="33%" />
+<col width="33%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>（テスト番号）</td>
+<td>（テスト内容）</td>
+<td>（関連要求仕様番号）</td>
+</tr>
+</tbody>
+</table>
 </div>
+<div class="section" id="where">
+<h2>9.5.2. where<a class="headerlink" href="#where" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>トレーサビリティマトリックス</li>
+</ul>
 </div>
-<div class="section" id="find">
-<h2>9.4.2. find<a class="headerlink" href="#find" title="Permalink to this headline">¶</a></h2>
-<div class="highlight-python"><div class="highlight"><pre>find ./ \
-  -mindepth 1 \
-  -maxdepth 2 \
-  -type f \
-  -name &quot;*.zip&quot; \
-  -user d563 \
-  -group d563 \
-  -ctime +90 \
-  -perm 664 \
-  -exec echo {} \; | xargs echo
-</pre></div>
-</div>
-</div>
-<div class="section" id="egrep">
-<h2>9.4.3. egrep<a class="headerlink" href="#egrep" title="Permalink to this headline">¶</a></h2>
-<div class="highlight-python"><div class="highlight"><pre>egrep -r &#39;str1|str2&#39; dir
-egrep -rv &#39;exclude&#39; dir
-</pre></div>
-</div>
-</div>
-<div class="section" id="rpm">
-<h2>9.4.4. rpm<a class="headerlink" href="#rpm" title="Permalink to this headline">¶</a></h2>
-<div class="highlight-python"><div class="highlight"><pre>rpm -qf /usr/java/jdk1.7.0_75/bin/java
-rpm -ql jdk
-rpm -q --scripts jdk
-</pre></div>
-</div>
-</div>
-<div class="section" id="alternatives">
-<h2>9.4.5. alternatives<a class="headerlink" href="#alternatives" title="Permalink to this headline">¶</a></h2>
-<div class="highlight-python"><div class="highlight"><pre>alternatives --display java
-alternatives --config java
-update-alternatives --auto java
-</pre></div>
-</div>
-</div>
-<div class="section" id="jobs">
-<h2>9.4.6. jobs<a class="headerlink" href="#jobs" title="Permalink to this headline">¶</a></h2>
-<div class="highlight-python"><div class="highlight"><pre>nohup sleep 100 &amp;
-jobs
-
-fg %1
-Ctl+z
-bg %1
-</pre></div>
-</div>
+<div class="section" id="how">
+<h2>9.5.3. how<a class="headerlink" href="#how" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>スペックアウト</li>
+</ul>
 </div>
 </div>
 
@@ -131,23 +206,17 @@ bg %1
         <div class="sphinxsidebarwrapper">
   <h3><a href="../index.html">Table Of Contents</a></h3>
   <ul>
-<li><a class="reference internal" href="#">9.4. operation</a><ul>
-<li><a class="reference internal" href="#link">9.4.1. link</a></li>
-<li><a class="reference internal" href="#find">9.4.2. find</a></li>
-<li><a class="reference internal" href="#egrep">9.4.3. egrep</a></li>
-<li><a class="reference internal" href="#rpm">9.4.4. rpm</a></li>
-<li><a class="reference internal" href="#alternatives">9.4.5. alternatives</a></li>
-<li><a class="reference internal" href="#jobs">9.4.6. jobs</a></li>
+<li><a class="reference internal" href="#">9.5. specify</a><ul>
+<li><a class="reference internal" href="#what">9.5.1. what</a></li>
+<li><a class="reference internal" href="#where">9.5.2. where</a></li>
+<li><a class="reference internal" href="#how">9.5.3. how</a></li>
 </ul>
 </li>
 </ul>
 
   <h4>Previous topic</h4>
-  <p class="topless"><a href="monitor.html"
-                        title="previous chapter">9.3. monitor</a></p>
-  <h4>Next topic</h4>
-  <p class="topless"><a href="specify.html"
-                        title="next chapter">9.5. specify</a></p>
+  <p class="topless"><a href="operation.html"
+                        title="previous chapter">9.4. operation</a></p>
 <div id="searchbox" style="display: none" role="search">
   <h3>Quick search</h3>
     <form class="search" action="../search.html" method="get">
@@ -175,10 +244,7 @@ bg %1
           <a href="../py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
         <li class="right" >
-          <a href="specify.html" title="9.5. specify"
-             >next</a> |</li>
-        <li class="right" >
-          <a href="monitor.html" title="9.3. monitor"
+          <a href="operation.html" title="9.4. operation"
              >previous</a> |</li>
         <li class="nav-item nav-item-0"><a href="../index.html">SLMan 0.0.2 documentation</a> &raquo;</li>
           <li class="nav-item nav-item-1"><a href="index.html" >9. misc</a> &raquo;</li> 

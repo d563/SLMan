@@ -5,3 +5,4 @@ misc
     remote
     monitor
     operation
+    specify
