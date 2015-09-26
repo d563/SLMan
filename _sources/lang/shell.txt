@@ -69,8 +69,8 @@ awk
     chmod +x ./template.awk
     ./template.awk d563.csv
 
-daemon
-------
+daemon (6.X)
+------------
 .. module:: mavend
 .. code-block:: shell
 
