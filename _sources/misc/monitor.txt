@@ -1,5 +1,5 @@
-resource
-========
+monitor
+=======
 ::
 
     cat /proc/cpuinfo     CPU情報

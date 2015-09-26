@@ -17,36 +17,91 @@ template
 --------
 ::
 
-    cd ~
-    meteor create --list
-    meteor create --example leaderboard
-    cd leaderboard
-    meteor
+    meteor create d563
+    cd d563
+    mkdir server client lib
 
 ::
 
-    mkdir server client lib
     meteor list
-    meteor add meteorhacks:npm
+
+    meteor add d3js:d3
+    meteor add ejson
     meteor add iron:router
+    meteor add meteorhacks:npm
     meteor add mizzao:bootstrap-3
     meteor add mrt:cron
+    meteor add nvd3:nvd3@=1.7.1
+    meteor add random
     meteor add udondan:bulk-collection-update
-    meteor remove autopublish insecure
-    meteor
+    meteor remove autopublish
+    meteor remove insecure
+
+    meteor run -p 0.0.0.0:80
 
 ::
 
-    echo '{ "mysql": "2.7.0" }' > packages.json
+    # echo '{ "mysql": "2.7.0" }' > packages.json
     # echo '{ "oracle": "0.3.8" }' > packages.json
 
-    vi leaderboard.js
-
+.. module:: d563.js
 .. code-block:: javascript
 
-    Players = new Mongo.Collection("players");
+    // d563.js
+    Players = new Meteor.Collection('players');
+    Peoples = new Meteor.Collection('peoples');
 
     if (Meteor.isClient) {
+      function getRandomInt(min, max) {
+        return Math.floor(Math.random() * (max - min + 1)) + min;
+      }
+
+      Template.d563.rendered = function() {
+        Meteor.subscribe('all-peoples');
+
+        var chart = nv.models.lineChart()
+          .margin({left: 100})
+          .useInteractiveGuideline(true)
+          .showLegend(true)
+          .showYAxis(true)
+          .showXAxis(true);
+
+        nv.addGraph(function() {
+          chart.xAxis.axisLabel('Person number').tickFormat(d3.format('d'));
+          chart.yAxis.axisLabel('Age (years)').tickFormat(d3.format('d'));
+          d3.select('#chart svg').datum(
+            [{ values: Peoples.find().fetch(), key: 'Age' }]
+          ).call(chart);
+          nv.utils.windowResize(function() { chart.update() });
+          return chart;
+        });
+
+        Deps.autorun(function () {
+          d3.select('#chart svg').datum(
+            [{ values: Peoples.find().fetch(), key: 'Age' }]
+          ).call(chart);
+          chart.update();
+        });
+      };
+
+      Template.d563.events({
+        'click #addDataButton': function() {
+          var age = getRandomInt(13, 89);
+          var lastPerson = Peoples.findOne({}, {fields: {x: 1}, sort: {x: -1}, limit: 1, reactive: false});
+          if (lastPerson) {
+            Peoples.insert({x:(lastPerson.x + 1), y:age});
+          } else {
+            Peoples.insert({x:1, y:age});
+          }
+        },
+        'click #removeDataButton': function() {
+          var lastPerson = Peoples.findOne({}, {fields: {x: 1}, sort: {x: -1}, limit: 1, reactive: false});
+          if (lastPerson) {
+            Peoples.remove(lastPerson._id);
+          }
+        }
+      });
+
       Template.leaderboard.rendered = function() {
         Meteor.subscribe('all-players');
       };
@@ -56,26 +111,26 @@ template
           return Players.find({}, { sort: { score: -1, name: 1 } });
         },
         selectedName: function () {
-          var player = Players.findOne(Session.get("selectedPlayer"));
+          var player = Players.findOne(Session.get('selectedPlayer'));
           return player && player.name;
         }
       });
 
       Template.leaderboard.events({
         'click .inc': function () {
-          Players.update(Session.get("selectedPlayer"), {$inc: {score: 5}});
+          Players.update(Session.get('selectedPlayer'), {$inc: {score: 5}});
         }
       });
 
       Template.player.helpers({
         selected: function () {
-          return Session.equals("selectedPlayer", this._id) ? "selected" : '';
+          return Session.equals('selectedPlayer', this._id) ? 'selected' : '';
         }
       });
 
       Template.player.events({
         'click': function () {
-          Session.set("selectedPlayer", this._id);
+          Session.set('selectedPlayer', this._id);
         }
       });
 
@@ -84,13 +139,16 @@ template
         notFoundTemplate: 'notFound'
       });
 
-      Router.map(function() {
-        this.route('leaderboard', {path: '/'});
-        this.route('d563', {path: '/d563'});
-        this.route('show', {
-          path: '/show/:_id',
-          data: function() { return this.params._id; }
-        });
+      Router.route('/', function() {
+        this.render('leaderboard');
+      }, {name: 'leaderboard'});
+
+      Router.route('/d563', function() {
+        this.render('d563');
+      });
+
+      Router.route('/show/:_id', function() {
+        this.render('show', {data: function() { return this.params._id; }});
       });
     }
 
@@ -99,9 +157,17 @@ template
         return Players.find();
       });
 
+      Meteor.publish('all-peoples', function() {
+        return Peoples.find();
+      });
+
       Players.allow({
-        insert: function(userId, doc) { return true; },
         update: function(userId, docs, fields, modifier) { return true; },
+        fetch: undefined
+      });
+
+      Peoples.allow({
+        insert: function(userId, doc) { return true; },
         remove: function(userId, docs) { return true; },
         fetch: undefined
       });
@@ -109,8 +175,8 @@ template
       Meteor.startup(function () {
         Players.remove({});
         if (Players.find().count() === 0) {
-          var names = ["Ada Lovelace", "Grace Hopper", "Marie Curie",
-                       "Carl Friedrich Gauss", "Nikola Tesla", "Claude Shannon"];
+          var names = ['Ada Lovelace', 'Grace Hopper', 'Marie Curie',
+                       'Carl Friedrich Gauss', 'Nikola Tesla', 'Claude Shannon'];
           var data = []
           _.each(names, function (name) {
             //Players.insert({
@@ -119,14 +185,14 @@ template
               score: Math.floor(Random.fraction() * 10) * 5
             });
           });
-          bulkCollectionUpdate(Players, data, {primaryKey: "name"});
+          bulkCollectionUpdate(Players, data, {primaryKey: 'name'});
 
           var execSync = Meteor.wrapAsync(Meteor.npmRequire('child_process').exec);
-          console.log(execSync("echo init!").replace(/\n/g, ''));
+          console.log(execSync('echo init!').replace(/\n/g, ''));
 
           var cron = new Meteor.Cron({
             events: {
-              "* * * * * ": function() { Meteor.call("direct1", "test"); }
+              '* * * * * ': function() { Meteor.call('direct1', 'test'); }
             }
           });
         }
@@ -137,24 +203,18 @@ template
         'direct2': function(arg) {console.log(arg)}
       });
 
-      Router.map(function() {
-        this.route('direct', {
-          path: ['/direct1', '/direct2'],
-          where: 'server',
-          action: function() {
-            var name = this.request.url.replace("/", "");
-            Meteor.call(name, this.request.body);
-            this.response.setHeader('Content-Type', 'application/json');
-            this.response.end("{'ret': 'OK'}");
-            console.log(name + "Called!");
-          }
-        });
-      });
+      Router.route('/direct1', function() {
+        var name = this.request.url.replace('/', '');
+        Meteor.call(name, this.request.body);
+        this.response.setHeader('Content-Type', 'application/json');
+        this.response.end('{"ret": "OK"}');
+        console.log(name + 'Called!');
+      }, {where: 'server', path: ['/direct1', '/direct2']});
     }
 
 .. code-block:: javascript
 
-    Players = new Mongo.Collection(
+    Players = new Meteor.Collection(
       'players',
       {_driver: new MongoInternals.RemoteCollectionDriver('mongodb://localhost:27017/testdb')}
     );
@@ -199,12 +259,10 @@ template
         con.close();
       });
 
-::
-
-    vi leaderboard.html
-
+.. module:: d563.html
 .. code-block:: html
 
+    <!-- d563.html -->
     <head>
       <title>Leaderboard</title>
       <meta http-equiv="X-UA-Compatible" content="IE=edge" />
@@ -257,20 +315,15 @@ template
     </template>
 
     <template name="d563">
-      <h1>d563</h1>
+      <div id="chart">
+        <svg style="height:500px;"/>
+      </div>
+      <div style="text-align:right;">
+        <a class="btn" href="#" id="addDataButton">Add</a>
+        <a class="btn" href="#" id="removeDataButton">Remove</a>
+      </div>
     </template>
 
     <template name="show">
       <h1>{{.}}</h1>
     </template>
-
-nvd3
-----
-::
-
-    git clone https://github.com/ganezasan/NVD3-Metore.git
-    cd NVD3-Metore
-    meteor list
-    meteor remove d3 mrt:nvd3js
-    meteor add d3js:d3 nvd3:nvd3@=1.7.1
-    meteor run -p 0.0.0.0:80 &

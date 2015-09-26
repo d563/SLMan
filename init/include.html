@@ -90,7 +90,12 @@ pip install -U setuptools
 </div>
 <div class="section" id="bash-completion">
 <h2>1.2.3. bash-completion<a class="headerlink" href="#bash-completion" title="Permalink to this headline">¶</a></h2>
-<div class="highlight-python" id="index-1"><div class="highlight"><pre>rpm -Uvh http://dl.fedoraproject.org/pub/epel/6/x86_64/epel-release-6-8.noarch.rpm
+<div class="highlight-python" id="index-1"><div class="highlight"><pre># 6
+rpm -Uvh http://dl.fedoraproject.org/pub/epel/6/x86_64/epel-release-6-8.noarch.rpm
+
+# 7
+rpm -Uvh http://dl.fedoraproject.org/pub/epel/7/x86_64/e/epel-release-7-5.noarch.rpm
+
 sed -i -e &#39;s/^enabled.*/enabled=0/&#39; /etc/yum.repos.d/epel.repo
 </pre></div>
 </div>

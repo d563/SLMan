@@ -3,5 +3,5 @@ misc
 .. toctree::
     windows
     remote
-    resource
+    monitor
     operation

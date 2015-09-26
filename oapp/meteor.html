@@ -77,33 +77,87 @@ chmod 775 mongod
 </div>
 <div class="section" id="template">
 <h2>6.4.1. template<a class="headerlink" href="#template" title="Permalink to this headline">¶</a></h2>
-<div class="highlight-python"><div class="highlight"><pre>cd ~
-meteor create --list
-meteor create --example leaderboard
-cd leaderboard
-meteor
+<div class="highlight-python"><div class="highlight"><pre>meteor create d563
+cd d563
+mkdir server client lib
 </pre></div>
 </div>
-<div class="highlight-python"><div class="highlight"><pre>mkdir server client lib
-meteor list
-meteor add meteorhacks:npm
+<div class="highlight-python"><div class="highlight"><pre>meteor list
+
+meteor add d3js:d3
+meteor add ejson
 meteor add iron:router
+meteor add meteorhacks:npm
 meteor add mizzao:bootstrap-3
 meteor add mrt:cron
+meteor add nvd3:nvd3@=1.7.1
+meteor add random
 meteor add udondan:bulk-collection-update
-meteor remove autopublish insecure
-meteor
-</pre></div>
-</div>
-<div class="highlight-python"><div class="highlight"><pre>echo &#39;{ &quot;mysql&quot;: &quot;2.7.0&quot; }&#39; &gt; packages.json
-# echo &#39;{ &quot;oracle&quot;: &quot;0.3.8&quot; }&#39; &gt; packages.json
+meteor remove autopublish
+meteor remove insecure
 
-vi leaderboard.js
+meteor run -p 0.0.0.0:80
 </pre></div>
 </div>
-<div class="highlight-javascript"><div class="highlight"><pre><span class="nx">Players</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Mongo</span><span class="p">.</span><span class="nx">Collection</span><span class="p">(</span><span class="s2">&quot;players&quot;</span><span class="p">);</span>
+<div class="highlight-python"><div class="highlight"><pre><span class="c"># echo &#39;{ &quot;mysql&quot;: &quot;2.7.0&quot; }&#39; &gt; packages.json</span>
+<span class="c"># echo &#39;{ &quot;oracle&quot;: &quot;0.3.8&quot; }&#39; &gt; packages.json</span>
+</pre></div>
+</div>
+<span class="target" id="module-d563.js"></span><div class="highlight-javascript"><div class="highlight"><pre><span class="c1">// d563.js</span>
+<span class="nx">Players</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Meteor</span><span class="p">.</span><span class="nx">Collection</span><span class="p">(</span><span class="s1">&#39;players&#39;</span><span class="p">);</span>
+<span class="nx">Peoples</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Meteor</span><span class="p">.</span><span class="nx">Collection</span><span class="p">(</span><span class="s1">&#39;peoples&#39;</span><span class="p">);</span>
 
 <span class="k">if</span> <span class="p">(</span><span class="nx">Meteor</span><span class="p">.</span><span class="nx">isClient</span><span class="p">)</span> <span class="p">{</span>
+  <span class="kd">function</span> <span class="nx">getRandomInt</span><span class="p">(</span><span class="nx">min</span><span class="p">,</span> <span class="nx">max</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="nb">Math</span><span class="p">.</span><span class="nx">floor</span><span class="p">(</span><span class="nb">Math</span><span class="p">.</span><span class="nx">random</span><span class="p">()</span> <span class="o">*</span> <span class="p">(</span><span class="nx">max</span> <span class="o">-</span> <span class="nx">min</span> <span class="o">+</span> <span class="mi">1</span><span class="p">))</span> <span class="o">+</span> <span class="nx">min</span><span class="p">;</span>
+  <span class="p">}</span>
+
+  <span class="nx">Template</span><span class="p">.</span><span class="nx">d563</span><span class="p">.</span><span class="nx">rendered</span> <span class="o">=</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+    <span class="nx">Meteor</span><span class="p">.</span><span class="nx">subscribe</span><span class="p">(</span><span class="s1">&#39;all-peoples&#39;</span><span class="p">);</span>
+
+    <span class="kd">var</span> <span class="nx">chart</span> <span class="o">=</span> <span class="nx">nv</span><span class="p">.</span><span class="nx">models</span><span class="p">.</span><span class="nx">lineChart</span><span class="p">()</span>
+      <span class="p">.</span><span class="nx">margin</span><span class="p">({</span><span class="nx">left</span><span class="o">:</span> <span class="mi">100</span><span class="p">})</span>
+      <span class="p">.</span><span class="nx">useInteractiveGuideline</span><span class="p">(</span><span class="kc">true</span><span class="p">)</span>
+      <span class="p">.</span><span class="nx">showLegend</span><span class="p">(</span><span class="kc">true</span><span class="p">)</span>
+      <span class="p">.</span><span class="nx">showYAxis</span><span class="p">(</span><span class="kc">true</span><span class="p">)</span>
+      <span class="p">.</span><span class="nx">showXAxis</span><span class="p">(</span><span class="kc">true</span><span class="p">);</span>
+
+    <span class="nx">nv</span><span class="p">.</span><span class="nx">addGraph</span><span class="p">(</span><span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+      <span class="nx">chart</span><span class="p">.</span><span class="nx">xAxis</span><span class="p">.</span><span class="nx">axisLabel</span><span class="p">(</span><span class="s1">&#39;Person number&#39;</span><span class="p">).</span><span class="nx">tickFormat</span><span class="p">(</span><span class="nx">d3</span><span class="p">.</span><span class="nx">format</span><span class="p">(</span><span class="s1">&#39;d&#39;</span><span class="p">));</span>
+      <span class="nx">chart</span><span class="p">.</span><span class="nx">yAxis</span><span class="p">.</span><span class="nx">axisLabel</span><span class="p">(</span><span class="s1">&#39;Age (years)&#39;</span><span class="p">).</span><span class="nx">tickFormat</span><span class="p">(</span><span class="nx">d3</span><span class="p">.</span><span class="nx">format</span><span class="p">(</span><span class="s1">&#39;d&#39;</span><span class="p">));</span>
+      <span class="nx">d3</span><span class="p">.</span><span class="nx">select</span><span class="p">(</span><span class="s1">&#39;#chart svg&#39;</span><span class="p">).</span><span class="nx">datum</span><span class="p">(</span>
+        <span class="p">[{</span> <span class="nx">values</span><span class="o">:</span> <span class="nx">Peoples</span><span class="p">.</span><span class="nx">find</span><span class="p">().</span><span class="nx">fetch</span><span class="p">(),</span> <span class="nx">key</span><span class="o">:</span> <span class="s1">&#39;Age&#39;</span> <span class="p">}]</span>
+      <span class="p">).</span><span class="nx">call</span><span class="p">(</span><span class="nx">chart</span><span class="p">);</span>
+      <span class="nx">nv</span><span class="p">.</span><span class="nx">utils</span><span class="p">.</span><span class="nx">windowResize</span><span class="p">(</span><span class="kd">function</span><span class="p">()</span> <span class="p">{</span> <span class="nx">chart</span><span class="p">.</span><span class="nx">update</span><span class="p">()</span> <span class="p">});</span>
+      <span class="k">return</span> <span class="nx">chart</span><span class="p">;</span>
+    <span class="p">});</span>
+
+    <span class="nx">Deps</span><span class="p">.</span><span class="nx">autorun</span><span class="p">(</span><span class="kd">function</span> <span class="p">()</span> <span class="p">{</span>
+      <span class="nx">d3</span><span class="p">.</span><span class="nx">select</span><span class="p">(</span><span class="s1">&#39;#chart svg&#39;</span><span class="p">).</span><span class="nx">datum</span><span class="p">(</span>
+        <span class="p">[{</span> <span class="nx">values</span><span class="o">:</span> <span class="nx">Peoples</span><span class="p">.</span><span class="nx">find</span><span class="p">().</span><span class="nx">fetch</span><span class="p">(),</span> <span class="nx">key</span><span class="o">:</span> <span class="s1">&#39;Age&#39;</span> <span class="p">}]</span>
+      <span class="p">).</span><span class="nx">call</span><span class="p">(</span><span class="nx">chart</span><span class="p">);</span>
+      <span class="nx">chart</span><span class="p">.</span><span class="nx">update</span><span class="p">();</span>
+    <span class="p">});</span>
+  <span class="p">};</span>
+
+  <span class="nx">Template</span><span class="p">.</span><span class="nx">d563</span><span class="p">.</span><span class="nx">events</span><span class="p">({</span>
+    <span class="s1">&#39;click #addDataButton&#39;</span><span class="o">:</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+      <span class="kd">var</span> <span class="nx">age</span> <span class="o">=</span> <span class="nx">getRandomInt</span><span class="p">(</span><span class="mi">13</span><span class="p">,</span> <span class="mi">89</span><span class="p">);</span>
+      <span class="kd">var</span> <span class="nx">lastPerson</span> <span class="o">=</span> <span class="nx">Peoples</span><span class="p">.</span><span class="nx">findOne</span><span class="p">({},</span> <span class="p">{</span><span class="nx">fields</span><span class="o">:</span> <span class="p">{</span><span class="nx">x</span><span class="o">:</span> <span class="mi">1</span><span class="p">},</span> <span class="nx">sort</span><span class="o">:</span> <span class="p">{</span><span class="nx">x</span><span class="o">:</span> <span class="o">-</span><span class="mi">1</span><span class="p">},</span> <span class="nx">limit</span><span class="o">:</span> <span class="mi">1</span><span class="p">,</span> <span class="nx">reactive</span><span class="o">:</span> <span class="kc">false</span><span class="p">});</span>
+      <span class="k">if</span> <span class="p">(</span><span class="nx">lastPerson</span><span class="p">)</span> <span class="p">{</span>
+        <span class="nx">Peoples</span><span class="p">.</span><span class="nx">insert</span><span class="p">({</span><span class="nx">x</span><span class="o">:</span><span class="p">(</span><span class="nx">lastPerson</span><span class="p">.</span><span class="nx">x</span> <span class="o">+</span> <span class="mi">1</span><span class="p">),</span> <span class="nx">y</span><span class="o">:</span><span class="nx">age</span><span class="p">});</span>
+      <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+        <span class="nx">Peoples</span><span class="p">.</span><span class="nx">insert</span><span class="p">({</span><span class="nx">x</span><span class="o">:</span><span class="mi">1</span><span class="p">,</span> <span class="nx">y</span><span class="o">:</span><span class="nx">age</span><span class="p">});</span>
+      <span class="p">}</span>
+    <span class="p">},</span>
+    <span class="s1">&#39;click #removeDataButton&#39;</span><span class="o">:</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+      <span class="kd">var</span> <span class="nx">lastPerson</span> <span class="o">=</span> <span class="nx">Peoples</span><span class="p">.</span><span class="nx">findOne</span><span class="p">({},</span> <span class="p">{</span><span class="nx">fields</span><span class="o">:</span> <span class="p">{</span><span class="nx">x</span><span class="o">:</span> <span class="mi">1</span><span class="p">},</span> <span class="nx">sort</span><span class="o">:</span> <span class="p">{</span><span class="nx">x</span><span class="o">:</span> <span class="o">-</span><span class="mi">1</span><span class="p">},</span> <span class="nx">limit</span><span class="o">:</span> <span class="mi">1</span><span class="p">,</span> <span class="nx">reactive</span><span class="o">:</span> <span class="kc">false</span><span class="p">});</span>
+      <span class="k">if</span> <span class="p">(</span><span class="nx">lastPerson</span><span class="p">)</span> <span class="p">{</span>
+        <span class="nx">Peoples</span><span class="p">.</span><span class="nx">remove</span><span class="p">(</span><span class="nx">lastPerson</span><span class="p">.</span><span class="nx">_id</span><span class="p">);</span>
+      <span class="p">}</span>
+    <span class="p">}</span>
+  <span class="p">});</span>
+
   <span class="nx">Template</span><span class="p">.</span><span class="nx">leaderboard</span><span class="p">.</span><span class="nx">rendered</span> <span class="o">=</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
     <span class="nx">Meteor</span><span class="p">.</span><span class="nx">subscribe</span><span class="p">(</span><span class="s1">&#39;all-players&#39;</span><span class="p">);</span>
   <span class="p">};</span>
@@ -113,26 +167,26 @@ vi leaderboard.js
       <span class="k">return</span> <span class="nx">Players</span><span class="p">.</span><span class="nx">find</span><span class="p">({},</span> <span class="p">{</span> <span class="nx">sort</span><span class="o">:</span> <span class="p">{</span> <span class="nx">score</span><span class="o">:</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="nx">name</span><span class="o">:</span> <span class="mi">1</span> <span class="p">}</span> <span class="p">});</span>
     <span class="p">},</span>
     <span class="nx">selectedName</span><span class="o">:</span> <span class="kd">function</span> <span class="p">()</span> <span class="p">{</span>
-      <span class="kd">var</span> <span class="nx">player</span> <span class="o">=</span> <span class="nx">Players</span><span class="p">.</span><span class="nx">findOne</span><span class="p">(</span><span class="nx">Session</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s2">&quot;selectedPlayer&quot;</span><span class="p">));</span>
+      <span class="kd">var</span> <span class="nx">player</span> <span class="o">=</span> <span class="nx">Players</span><span class="p">.</span><span class="nx">findOne</span><span class="p">(</span><span class="nx">Session</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">&#39;selectedPlayer&#39;</span><span class="p">));</span>
       <span class="k">return</span> <span class="nx">player</span> <span class="o">&amp;&amp;</span> <span class="nx">player</span><span class="p">.</span><span class="nx">name</span><span class="p">;</span>
     <span class="p">}</span>
   <span class="p">});</span>
 
   <span class="nx">Template</span><span class="p">.</span><span class="nx">leaderboard</span><span class="p">.</span><span class="nx">events</span><span class="p">({</span>
     <span class="s1">&#39;click .inc&#39;</span><span class="o">:</span> <span class="kd">function</span> <span class="p">()</span> <span class="p">{</span>
-      <span class="nx">Players</span><span class="p">.</span><span class="nx">update</span><span class="p">(</span><span class="nx">Session</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s2">&quot;selectedPlayer&quot;</span><span class="p">),</span> <span class="p">{</span><span class="nx">$inc</span><span class="o">:</span> <span class="p">{</span><span class="nx">score</span><span class="o">:</span> <span class="mi">5</span><span class="p">}});</span>
+      <span class="nx">Players</span><span class="p">.</span><span class="nx">update</span><span class="p">(</span><span class="nx">Session</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">&#39;selectedPlayer&#39;</span><span class="p">),</span> <span class="p">{</span><span class="nx">$inc</span><span class="o">:</span> <span class="p">{</span><span class="nx">score</span><span class="o">:</span> <span class="mi">5</span><span class="p">}});</span>
     <span class="p">}</span>
   <span class="p">});</span>
 
   <span class="nx">Template</span><span class="p">.</span><span class="nx">player</span><span class="p">.</span><span class="nx">helpers</span><span class="p">({</span>
     <span class="nx">selected</span><span class="o">:</span> <span class="kd">function</span> <span class="p">()</span> <span class="p">{</span>
-      <span class="k">return</span> <span class="nx">Session</span><span class="p">.</span><span class="nx">equals</span><span class="p">(</span><span class="s2">&quot;selectedPlayer&quot;</span><span class="p">,</span> <span class="k">this</span><span class="p">.</span><span class="nx">_id</span><span class="p">)</span> <span class="o">?</span> <span class="s2">&quot;selected&quot;</span> <span class="o">:</span> <span class="s1">&#39;&#39;</span><span class="p">;</span>
+      <span class="k">return</span> <span class="nx">Session</span><span class="p">.</span><span class="nx">equals</span><span class="p">(</span><span class="s1">&#39;selectedPlayer&#39;</span><span class="p">,</span> <span class="k">this</span><span class="p">.</span><span class="nx">_id</span><span class="p">)</span> <span class="o">?</span> <span class="s1">&#39;selected&#39;</span> <span class="o">:</span> <span class="s1">&#39;&#39;</span><span class="p">;</span>
     <span class="p">}</span>
   <span class="p">});</span>
 
   <span class="nx">Template</span><span class="p">.</span><span class="nx">player</span><span class="p">.</span><span class="nx">events</span><span class="p">({</span>
     <span class="s1">&#39;click&#39;</span><span class="o">:</span> <span class="kd">function</span> <span class="p">()</span> <span class="p">{</span>
-      <span class="nx">Session</span><span class="p">.</span><span class="nx">set</span><span class="p">(</span><span class="s2">&quot;selectedPlayer&quot;</span><span class="p">,</span> <span class="k">this</span><span class="p">.</span><span class="nx">_id</span><span class="p">);</span>
+      <span class="nx">Session</span><span class="p">.</span><span class="nx">set</span><span class="p">(</span><span class="s1">&#39;selectedPlayer&#39;</span><span class="p">,</span> <span class="k">this</span><span class="p">.</span><span class="nx">_id</span><span class="p">);</span>
     <span class="p">}</span>
   <span class="p">});</span>
 
@@ -141,13 +195,16 @@ vi leaderboard.js
     <span class="nx">notFoundTemplate</span><span class="o">:</span> <span class="s1">&#39;notFound&#39;</span>
   <span class="p">});</span>
 
-  <span class="nx">Router</span><span class="p">.</span><span class="nx">map</span><span class="p">(</span><span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
-    <span class="k">this</span><span class="p">.</span><span class="nx">route</span><span class="p">(</span><span class="s1">&#39;leaderboard&#39;</span><span class="p">,</span> <span class="p">{</span><span class="nx">path</span><span class="o">:</span> <span class="s1">&#39;/&#39;</span><span class="p">});</span>
-    <span class="k">this</span><span class="p">.</span><span class="nx">route</span><span class="p">(</span><span class="s1">&#39;d563&#39;</span><span class="p">,</span> <span class="p">{</span><span class="nx">path</span><span class="o">:</span> <span class="s1">&#39;/d563&#39;</span><span class="p">});</span>
-    <span class="k">this</span><span class="p">.</span><span class="nx">route</span><span class="p">(</span><span class="s1">&#39;show&#39;</span><span class="p">,</span> <span class="p">{</span>
-      <span class="nx">path</span><span class="o">:</span> <span class="s1">&#39;/show/:_id&#39;</span><span class="p">,</span>
-      <span class="nx">data</span><span class="o">:</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span> <span class="k">return</span> <span class="k">this</span><span class="p">.</span><span class="nx">params</span><span class="p">.</span><span class="nx">_id</span><span class="p">;</span> <span class="p">}</span>
-    <span class="p">});</span>
+  <span class="nx">Router</span><span class="p">.</span><span class="nx">route</span><span class="p">(</span><span class="s1">&#39;/&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+    <span class="k">this</span><span class="p">.</span><span class="nx">render</span><span class="p">(</span><span class="s1">&#39;leaderboard&#39;</span><span class="p">);</span>
+  <span class="p">},</span> <span class="p">{</span><span class="nx">name</span><span class="o">:</span> <span class="s1">&#39;leaderboard&#39;</span><span class="p">});</span>
+
+  <span class="nx">Router</span><span class="p">.</span><span class="nx">route</span><span class="p">(</span><span class="s1">&#39;/d563&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+    <span class="k">this</span><span class="p">.</span><span class="nx">render</span><span class="p">(</span><span class="s1">&#39;d563&#39;</span><span class="p">);</span>
+  <span class="p">});</span>
+
+  <span class="nx">Router</span><span class="p">.</span><span class="nx">route</span><span class="p">(</span><span class="s1">&#39;/show/:_id&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+    <span class="k">this</span><span class="p">.</span><span class="nx">render</span><span class="p">(</span><span class="s1">&#39;show&#39;</span><span class="p">,</span> <span class="p">{</span><span class="nx">data</span><span class="o">:</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span> <span class="k">return</span> <span class="k">this</span><span class="p">.</span><span class="nx">params</span><span class="p">.</span><span class="nx">_id</span><span class="p">;</span> <span class="p">}});</span>
   <span class="p">});</span>
 <span class="p">}</span>
 
@@ -156,9 +213,17 @@ vi leaderboard.js
     <span class="k">return</span> <span class="nx">Players</span><span class="p">.</span><span class="nx">find</span><span class="p">();</span>
   <span class="p">});</span>
 
+  <span class="nx">Meteor</span><span class="p">.</span><span class="nx">publish</span><span class="p">(</span><span class="s1">&#39;all-peoples&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="nx">Peoples</span><span class="p">.</span><span class="nx">find</span><span class="p">();</span>
+  <span class="p">});</span>
+
   <span class="nx">Players</span><span class="p">.</span><span class="nx">allow</span><span class="p">({</span>
-    <span class="nx">insert</span><span class="o">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">userId</span><span class="p">,</span> <span class="nx">doc</span><span class="p">)</span> <span class="p">{</span> <span class="k">return</span> <span class="kc">true</span><span class="p">;</span> <span class="p">},</span>
     <span class="nx">update</span><span class="o">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">userId</span><span class="p">,</span> <span class="nx">docs</span><span class="p">,</span> <span class="nx">fields</span><span class="p">,</span> <span class="nx">modifier</span><span class="p">)</span> <span class="p">{</span> <span class="k">return</span> <span class="kc">true</span><span class="p">;</span> <span class="p">},</span>
+    <span class="nx">fetch</span><span class="o">:</span> <span class="kc">undefined</span>
+  <span class="p">});</span>
+
+  <span class="nx">Peoples</span><span class="p">.</span><span class="nx">allow</span><span class="p">({</span>
+    <span class="nx">insert</span><span class="o">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">userId</span><span class="p">,</span> <span class="nx">doc</span><span class="p">)</span> <span class="p">{</span> <span class="k">return</span> <span class="kc">true</span><span class="p">;</span> <span class="p">},</span>
     <span class="nx">remove</span><span class="o">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">userId</span><span class="p">,</span> <span class="nx">docs</span><span class="p">)</span> <span class="p">{</span> <span class="k">return</span> <span class="kc">true</span><span class="p">;</span> <span class="p">},</span>
     <span class="nx">fetch</span><span class="o">:</span> <span class="kc">undefined</span>
   <span class="p">});</span>
@@ -166,8 +231,8 @@ vi leaderboard.js
   <span class="nx">Meteor</span><span class="p">.</span><span class="nx">startup</span><span class="p">(</span><span class="kd">function</span> <span class="p">()</span> <span class="p">{</span>
     <span class="nx">Players</span><span class="p">.</span><span class="nx">remove</span><span class="p">({});</span>
     <span class="k">if</span> <span class="p">(</span><span class="nx">Players</span><span class="p">.</span><span class="nx">find</span><span class="p">().</span><span class="nx">count</span><span class="p">()</span> <span class="o">===</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
-      <span class="kd">var</span> <span class="nx">names</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;Ada Lovelace&quot;</span><span class="p">,</span> <span class="s2">&quot;Grace Hopper&quot;</span><span class="p">,</span> <span class="s2">&quot;Marie Curie&quot;</span><span class="p">,</span>
-                   <span class="s2">&quot;Carl Friedrich Gauss&quot;</span><span class="p">,</span> <span class="s2">&quot;Nikola Tesla&quot;</span><span class="p">,</span> <span class="s2">&quot;Claude Shannon&quot;</span><span class="p">];</span>
+      <span class="kd">var</span> <span class="nx">names</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;Ada Lovelace&#39;</span><span class="p">,</span> <span class="s1">&#39;Grace Hopper&#39;</span><span class="p">,</span> <span class="s1">&#39;Marie Curie&#39;</span><span class="p">,</span>
+                   <span class="s1">&#39;Carl Friedrich Gauss&#39;</span><span class="p">,</span> <span class="s1">&#39;Nikola Tesla&#39;</span><span class="p">,</span> <span class="s1">&#39;Claude Shannon&#39;</span><span class="p">];</span>
       <span class="kd">var</span> <span class="nx">data</span> <span class="o">=</span> <span class="p">[]</span>
       <span class="nx">_</span><span class="p">.</span><span class="nx">each</span><span class="p">(</span><span class="nx">names</span><span class="p">,</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">name</span><span class="p">)</span> <span class="p">{</span>
         <span class="c1">//Players.insert({</span>
@@ -176,14 +241,14 @@ vi leaderboard.js
           <span class="nx">score</span><span class="o">:</span> <span class="nb">Math</span><span class="p">.</span><span class="nx">floor</span><span class="p">(</span><span class="nx">Random</span><span class="p">.</span><span class="nx">fraction</span><span class="p">()</span> <span class="o">*</span> <span class="mi">10</span><span class="p">)</span> <span class="o">*</span> <span class="mi">5</span>
         <span class="p">});</span>
       <span class="p">});</span>
-      <span class="nx">bulkCollectionUpdate</span><span class="p">(</span><span class="nx">Players</span><span class="p">,</span> <span class="nx">data</span><span class="p">,</span> <span class="p">{</span><span class="nx">primaryKey</span><span class="o">:</span> <span class="s2">&quot;name&quot;</span><span class="p">});</span>
+      <span class="nx">bulkCollectionUpdate</span><span class="p">(</span><span class="nx">Players</span><span class="p">,</span> <span class="nx">data</span><span class="p">,</span> <span class="p">{</span><span class="nx">primaryKey</span><span class="o">:</span> <span class="s1">&#39;name&#39;</span><span class="p">});</span>
 
       <span class="kd">var</span> <span class="nx">execSync</span> <span class="o">=</span> <span class="nx">Meteor</span><span class="p">.</span><span class="nx">wrapAsync</span><span class="p">(</span><span class="nx">Meteor</span><span class="p">.</span><span class="nx">npmRequire</span><span class="p">(</span><span class="s1">&#39;child_process&#39;</span><span class="p">).</span><span class="nx">exec</span><span class="p">);</span>
-      <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">execSync</span><span class="p">(</span><span class="s2">&quot;echo init!&quot;</span><span class="p">).</span><span class="nx">replace</span><span class="p">(</span><span class="sr">/\n/g</span><span class="p">,</span> <span class="s1">&#39;&#39;</span><span class="p">));</span>
+      <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">execSync</span><span class="p">(</span><span class="s1">&#39;echo init!&#39;</span><span class="p">).</span><span class="nx">replace</span><span class="p">(</span><span class="sr">/\n/g</span><span class="p">,</span> <span class="s1">&#39;&#39;</span><span class="p">));</span>
 
       <span class="kd">var</span> <span class="nx">cron</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Meteor</span><span class="p">.</span><span class="nx">Cron</span><span class="p">({</span>
         <span class="nx">events</span><span class="o">:</span> <span class="p">{</span>
-          <span class="s2">&quot;* * * * * &quot;</span><span class="o">:</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span> <span class="nx">Meteor</span><span class="p">.</span><span class="nx">call</span><span class="p">(</span><span class="s2">&quot;direct1&quot;</span><span class="p">,</span> <span class="s2">&quot;test&quot;</span><span class="p">);</span> <span class="p">}</span>
+          <span class="s1">&#39;* * * * * &#39;</span><span class="o">:</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span> <span class="nx">Meteor</span><span class="p">.</span><span class="nx">call</span><span class="p">(</span><span class="s1">&#39;direct1&#39;</span><span class="p">,</span> <span class="s1">&#39;test&#39;</span><span class="p">);</span> <span class="p">}</span>
         <span class="p">}</span>
       <span class="p">});</span>
     <span class="p">}</span>
@@ -194,23 +259,17 @@ vi leaderboard.js
     <span class="s1">&#39;direct2&#39;</span><span class="o">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">arg</span><span class="p">)</span> <span class="p">{</span><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">arg</span><span class="p">)}</span>
   <span class="p">});</span>
 
-  <span class="nx">Router</span><span class="p">.</span><span class="nx">map</span><span class="p">(</span><span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
-    <span class="k">this</span><span class="p">.</span><span class="nx">route</span><span class="p">(</span><span class="s1">&#39;direct&#39;</span><span class="p">,</span> <span class="p">{</span>
-      <span class="nx">path</span><span class="o">:</span> <span class="p">[</span><span class="s1">&#39;/direct1&#39;</span><span class="p">,</span> <span class="s1">&#39;/direct2&#39;</span><span class="p">],</span>
-      <span class="nx">where</span><span class="o">:</span> <span class="s1">&#39;server&#39;</span><span class="p">,</span>
-      <span class="nx">action</span><span class="o">:</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
-        <span class="kd">var</span> <span class="nx">name</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">request</span><span class="p">.</span><span class="nx">url</span><span class="p">.</span><span class="nx">replace</span><span class="p">(</span><span class="s2">&quot;/&quot;</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">);</span>
-        <span class="nx">Meteor</span><span class="p">.</span><span class="nx">call</span><span class="p">(</span><span class="nx">name</span><span class="p">,</span> <span class="k">this</span><span class="p">.</span><span class="nx">request</span><span class="p">.</span><span class="nx">body</span><span class="p">);</span>
-        <span class="k">this</span><span class="p">.</span><span class="nx">response</span><span class="p">.</span><span class="nx">setHeader</span><span class="p">(</span><span class="s1">&#39;Content-Type&#39;</span><span class="p">,</span> <span class="s1">&#39;application/json&#39;</span><span class="p">);</span>
-        <span class="k">this</span><span class="p">.</span><span class="nx">response</span><span class="p">.</span><span class="nx">end</span><span class="p">(</span><span class="s2">&quot;{&#39;ret&#39;: &#39;OK&#39;}&quot;</span><span class="p">);</span>
-        <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">name</span> <span class="o">+</span> <span class="s2">&quot;Called!&quot;</span><span class="p">);</span>
-      <span class="p">}</span>
-    <span class="p">});</span>
-  <span class="p">});</span>
+  <span class="nx">Router</span><span class="p">.</span><span class="nx">route</span><span class="p">(</span><span class="s1">&#39;/direct1&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+    <span class="kd">var</span> <span class="nx">name</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">request</span><span class="p">.</span><span class="nx">url</span><span class="p">.</span><span class="nx">replace</span><span class="p">(</span><span class="s1">&#39;/&#39;</span><span class="p">,</span> <span class="s1">&#39;&#39;</span><span class="p">);</span>
+    <span class="nx">Meteor</span><span class="p">.</span><span class="nx">call</span><span class="p">(</span><span class="nx">name</span><span class="p">,</span> <span class="k">this</span><span class="p">.</span><span class="nx">request</span><span class="p">.</span><span class="nx">body</span><span class="p">);</span>
+    <span class="k">this</span><span class="p">.</span><span class="nx">response</span><span class="p">.</span><span class="nx">setHeader</span><span class="p">(</span><span class="s1">&#39;Content-Type&#39;</span><span class="p">,</span> <span class="s1">&#39;application/json&#39;</span><span class="p">);</span>
+    <span class="k">this</span><span class="p">.</span><span class="nx">response</span><span class="p">.</span><span class="nx">end</span><span class="p">(</span><span class="s1">&#39;{&quot;ret&quot;: &quot;OK&quot;}&#39;</span><span class="p">);</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">name</span> <span class="o">+</span> <span class="s1">&#39;Called!&#39;</span><span class="p">);</span>
+  <span class="p">},</span> <span class="p">{</span><span class="nx">where</span><span class="o">:</span> <span class="s1">&#39;server&#39;</span><span class="p">,</span> <span class="nx">path</span><span class="o">:</span> <span class="p">[</span><span class="s1">&#39;/direct1&#39;</span><span class="p">,</span> <span class="s1">&#39;/direct2&#39;</span><span class="p">]});</span>
 <span class="p">}</span>
 </pre></div>
 </div>
-<div class="highlight-javascript"><div class="highlight"><pre><span class="nx">Players</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Mongo</span><span class="p">.</span><span class="nx">Collection</span><span class="p">(</span>
+<div class="highlight-javascript"><div class="highlight"><pre><span class="nx">Players</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Meteor</span><span class="p">.</span><span class="nx">Collection</span><span class="p">(</span>
   <span class="s1">&#39;players&#39;</span><span class="p">,</span>
   <span class="p">{</span><span class="nx">_driver</span><span class="o">:</span> <span class="k">new</span> <span class="nx">MongoInternals</span><span class="p">.</span><span class="nx">RemoteCollectionDriver</span><span class="p">(</span><span class="s1">&#39;mongodb://localhost:27017/testdb&#39;</span><span class="p">)}</span>
 <span class="p">);</span>
@@ -255,10 +314,8 @@ vi leaderboard.js
 <span class="p">});</span>
 </pre></div>
 </div>
-<div class="highlight-python"><div class="highlight"><pre>vi leaderboard.html
-</pre></div>
-</div>
-<div class="highlight-html"><div class="highlight"><pre><span class="nt">&lt;head&gt;</span>
+<span class="target" id="module-d563.html"></span><div class="highlight-html"><div class="highlight"><pre><span class="c">&lt;!-- d563.html --&gt;</span>
+<span class="nt">&lt;head&gt;</span>
   <span class="nt">&lt;title&gt;</span>Leaderboard<span class="nt">&lt;/title&gt;</span>
   <span class="nt">&lt;meta</span> <span class="na">http-equiv=</span><span class="s">&quot;X-UA-Compatible&quot;</span> <span class="na">content=</span><span class="s">&quot;IE=edge&quot;</span> <span class="nt">/&gt;</span>
 <span class="nt">&lt;/head&gt;</span>
@@ -310,23 +367,18 @@ vi leaderboard.js
 <span class="nt">&lt;/template&gt;</span>
 
 <span class="nt">&lt;template</span> <span class="na">name=</span><span class="s">&quot;d563&quot;</span><span class="nt">&gt;</span>
-  <span class="nt">&lt;h1&gt;</span>d563<span class="nt">&lt;/h1&gt;</span>
+  <span class="nt">&lt;div</span> <span class="na">id=</span><span class="s">&quot;chart&quot;</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;svg</span> <span class="na">style=</span><span class="s">&quot;height:500px;&quot;</span><span class="nt">/&gt;</span>
+  <span class="nt">&lt;/div&gt;</span>
+  <span class="nt">&lt;div</span> <span class="na">style=</span><span class="s">&quot;text-align:right;&quot;</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;a</span> <span class="na">class=</span><span class="s">&quot;btn&quot;</span> <span class="na">href=</span><span class="s">&quot;#&quot;</span> <span class="na">id=</span><span class="s">&quot;addDataButton&quot;</span><span class="nt">&gt;</span>Add<span class="nt">&lt;/a&gt;</span>
+    <span class="nt">&lt;a</span> <span class="na">class=</span><span class="s">&quot;btn&quot;</span> <span class="na">href=</span><span class="s">&quot;#&quot;</span> <span class="na">id=</span><span class="s">&quot;removeDataButton&quot;</span><span class="nt">&gt;</span>Remove<span class="nt">&lt;/a&gt;</span>
+  <span class="nt">&lt;/div&gt;</span>
 <span class="nt">&lt;/template&gt;</span>
 
 <span class="nt">&lt;template</span> <span class="na">name=</span><span class="s">&quot;show&quot;</span><span class="nt">&gt;</span>
   <span class="nt">&lt;h1&gt;</span>{{.}}<span class="nt">&lt;/h1&gt;</span>
 <span class="nt">&lt;/template&gt;</span>
-</pre></div>
-</div>
-</div>
-<div class="section" id="nvd3">
-<h2>6.4.2. nvd3<a class="headerlink" href="#nvd3" title="Permalink to this headline">¶</a></h2>
-<div class="highlight-python"><div class="highlight"><pre>git clone https://github.com/ganezasan/NVD3-Metore.git
-cd NVD3-Metore
-meteor list
-meteor remove d3 mrt:nvd3js
-meteor add d3js:d3 nvd3:nvd3@=1.7.1
-meteor run -p 0.0.0.0:80 &amp;
 </pre></div>
 </div>
 </div>
@@ -342,7 +394,6 @@ meteor run -p 0.0.0.0:80 &amp;
   <ul>
 <li><a class="reference internal" href="#">6.4. meteor</a><ul>
 <li><a class="reference internal" href="#template">6.4.1. template</a></li>
-<li><a class="reference internal" href="#nvd3">6.4.2. nvd3</a></li>
 </ul>
 </li>
 </ul>
