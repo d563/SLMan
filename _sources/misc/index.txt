@@ -4,5 +4,4 @@ misc
     windows
     remote
     monitor
-    operation
     specify

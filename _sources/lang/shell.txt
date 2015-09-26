@@ -123,3 +123,49 @@ daemon
 
     chmod 775 /etc/init.d/mavend
     chkconfig mavend on
+
+link
+----
+::
+
+    ln -nfs real link
+    chown -h user link
+    unlink link
+
+find
+----
+::
+
+    find ./ \
+      -mindepth 1 \
+      -maxdepth 2 \
+      -type f \
+      -name "*.zip" \
+      -user d563 \
+      -group d563 \
+      -ctime +90 \
+      -perm 664 \
+      -exec echo {} \; | xargs echo
+
+egrep
+-----
+::
+
+    egrep -r 'str1|str2' dir
+    egrep -rv 'exclude' dir
+
+rpm
+---
+::
+
+    rpm -qf /usr/java/jdk1.7.0_75/bin/java
+    rpm -ql jdk
+    rpm -q --scripts jdk
+
+alternatives
+------------
+::
+
+    alternatives --display java
+    alternatives --config java
+    update-alternatives --auto java
