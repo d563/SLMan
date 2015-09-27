@@ -73,5 +73,5 @@ vim
     set ignorecase
     set incsearch
     set ruler
+    set nrformats=
     [EOF]
-
