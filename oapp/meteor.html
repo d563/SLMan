@@ -91,7 +91,6 @@ meteor add meteorhacks:npm
 meteor add mizzao:bootstrap-3
 meteor add mrt:cron
 meteor add nvd3:nvd3@=1.7.1
-meteor add random
 meteor add udondan:bulk-collection-update
 meteor remove autopublish
 meteor remove insecure
@@ -107,11 +106,13 @@ meteor run -p 0.0.0.0:80
 <span class="nx">Players</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Meteor</span><span class="p">.</span><span class="nx">Collection</span><span class="p">(</span><span class="s1">&#39;players&#39;</span><span class="p">);</span>
 <span class="nx">Peoples</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Meteor</span><span class="p">.</span><span class="nx">Collection</span><span class="p">(</span><span class="s1">&#39;peoples&#39;</span><span class="p">);</span>
 
-<span class="k">if</span> <span class="p">(</span><span class="nx">Meteor</span><span class="p">.</span><span class="nx">isClient</span><span class="p">)</span> <span class="p">{</span>
-  <span class="kd">function</span> <span class="nx">getRandomInt</span><span class="p">(</span><span class="nx">min</span><span class="p">,</span> <span class="nx">max</span><span class="p">)</span> <span class="p">{</span>
+<span class="nx">D563</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="nx">getRandomInt</span><span class="o">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">min</span><span class="p">,</span> <span class="nx">max</span><span class="p">)</span> <span class="p">{</span>
     <span class="k">return</span> <span class="nb">Math</span><span class="p">.</span><span class="nx">floor</span><span class="p">(</span><span class="nb">Math</span><span class="p">.</span><span class="nx">random</span><span class="p">()</span> <span class="o">*</span> <span class="p">(</span><span class="nx">max</span> <span class="o">-</span> <span class="nx">min</span> <span class="o">+</span> <span class="mi">1</span><span class="p">))</span> <span class="o">+</span> <span class="nx">min</span><span class="p">;</span>
   <span class="p">}</span>
+<span class="p">};</span>
 
+<span class="k">if</span> <span class="p">(</span><span class="nx">Meteor</span><span class="p">.</span><span class="nx">isClient</span><span class="p">)</span> <span class="p">{</span>
   <span class="nx">Template</span><span class="p">.</span><span class="nx">d563</span><span class="p">.</span><span class="nx">rendered</span> <span class="o">=</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
     <span class="nx">Meteor</span><span class="p">.</span><span class="nx">subscribe</span><span class="p">(</span><span class="s1">&#39;all-peoples&#39;</span><span class="p">);</span>
 
@@ -142,12 +143,11 @@ meteor run -p 0.0.0.0:80
 
   <span class="nx">Template</span><span class="p">.</span><span class="nx">d563</span><span class="p">.</span><span class="nx">events</span><span class="p">({</span>
     <span class="s1">&#39;click #addDataButton&#39;</span><span class="o">:</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
-      <span class="kd">var</span> <span class="nx">age</span> <span class="o">=</span> <span class="nx">getRandomInt</span><span class="p">(</span><span class="mi">13</span><span class="p">,</span> <span class="mi">89</span><span class="p">);</span>
       <span class="kd">var</span> <span class="nx">lastPerson</span> <span class="o">=</span> <span class="nx">Peoples</span><span class="p">.</span><span class="nx">findOne</span><span class="p">({},</span> <span class="p">{</span><span class="nx">fields</span><span class="o">:</span> <span class="p">{</span><span class="nx">x</span><span class="o">:</span> <span class="mi">1</span><span class="p">},</span> <span class="nx">sort</span><span class="o">:</span> <span class="p">{</span><span class="nx">x</span><span class="o">:</span> <span class="o">-</span><span class="mi">1</span><span class="p">},</span> <span class="nx">limit</span><span class="o">:</span> <span class="mi">1</span><span class="p">,</span> <span class="nx">reactive</span><span class="o">:</span> <span class="kc">false</span><span class="p">});</span>
       <span class="k">if</span> <span class="p">(</span><span class="nx">lastPerson</span><span class="p">)</span> <span class="p">{</span>
-        <span class="nx">Peoples</span><span class="p">.</span><span class="nx">insert</span><span class="p">({</span><span class="nx">x</span><span class="o">:</span><span class="p">(</span><span class="nx">lastPerson</span><span class="p">.</span><span class="nx">x</span> <span class="o">+</span> <span class="mi">1</span><span class="p">),</span> <span class="nx">y</span><span class="o">:</span><span class="nx">age</span><span class="p">});</span>
+        <span class="nx">Peoples</span><span class="p">.</span><span class="nx">insert</span><span class="p">({</span><span class="nx">x</span><span class="o">:</span> <span class="p">(</span><span class="nx">lastPerson</span><span class="p">.</span><span class="nx">x</span> <span class="o">+</span> <span class="mi">1</span><span class="p">),</span> <span class="nx">y</span><span class="o">:</span> <span class="nx">D563</span><span class="p">.</span><span class="nx">getRandomInt</span><span class="p">(</span><span class="mi">13</span><span class="p">,</span> <span class="mi">89</span><span class="p">)});</span>
       <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
-        <span class="nx">Peoples</span><span class="p">.</span><span class="nx">insert</span><span class="p">({</span><span class="nx">x</span><span class="o">:</span><span class="mi">1</span><span class="p">,</span> <span class="nx">y</span><span class="o">:</span><span class="nx">age</span><span class="p">});</span>
+        <span class="nx">Peoples</span><span class="p">.</span><span class="nx">insert</span><span class="p">({</span><span class="nx">x</span><span class="o">:</span> <span class="mi">1</span><span class="p">,</span> <span class="nx">y</span><span class="o">:</span> <span class="nx">D563</span><span class="p">.</span><span class="nx">getRandomInt</span><span class="p">(</span><span class="mi">13</span><span class="p">,</span> <span class="mi">89</span><span class="p">)});</span>
       <span class="p">}</span>
     <span class="p">},</span>
     <span class="s1">&#39;click #removeDataButton&#39;</span><span class="o">:</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
@@ -238,7 +238,7 @@ meteor run -p 0.0.0.0:80
         <span class="c1">//Players.insert({</span>
         <span class="nx">data</span><span class="p">.</span><span class="nx">push</span><span class="p">({</span>
           <span class="nx">name</span><span class="o">:</span> <span class="nx">name</span><span class="p">,</span>
-          <span class="nx">score</span><span class="o">:</span> <span class="nb">Math</span><span class="p">.</span><span class="nx">floor</span><span class="p">(</span><span class="nx">Random</span><span class="p">.</span><span class="nx">fraction</span><span class="p">()</span> <span class="o">*</span> <span class="mi">10</span><span class="p">)</span> <span class="o">*</span> <span class="mi">5</span>
+          <span class="nx">score</span><span class="o">:</span> <span class="nx">D563</span><span class="p">.</span><span class="nx">getRandomInt</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">100</span><span class="p">)</span>
         <span class="p">});</span>
       <span class="p">});</span>
       <span class="nx">bulkCollectionUpdate</span><span class="p">(</span><span class="nx">Players</span><span class="p">,</span> <span class="nx">data</span><span class="p">,</span> <span class="p">{</span><span class="nx">primaryKey</span><span class="o">:</span> <span class="s1">&#39;name&#39;</span><span class="p">});</span>
@@ -248,7 +248,7 @@ meteor run -p 0.0.0.0:80
 
       <span class="kd">var</span> <span class="nx">cron</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Meteor</span><span class="p">.</span><span class="nx">Cron</span><span class="p">({</span>
         <span class="nx">events</span><span class="o">:</span> <span class="p">{</span>
-          <span class="s1">&#39;* * * * * &#39;</span><span class="o">:</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span> <span class="nx">Meteor</span><span class="p">.</span><span class="nx">call</span><span class="p">(</span><span class="s1">&#39;direct1&#39;</span><span class="p">,</span> <span class="s1">&#39;test&#39;</span><span class="p">);</span> <span class="p">}</span>
+          <span class="s1">&#39;* * * * *&#39;</span><span class="o">:</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span> <span class="nx">Meteor</span><span class="p">.</span><span class="nx">call</span><span class="p">(</span><span class="s1">&#39;direct1&#39;</span><span class="p">,</span> <span class="s1">&#39;test&#39;</span><span class="p">);</span> <span class="p">}</span>
         <span class="p">}</span>
       <span class="p">});</span>
     <span class="p">}</span>

@@ -32,7 +32,6 @@ template
     meteor add mizzao:bootstrap-3
     meteor add mrt:cron
     meteor add nvd3:nvd3@=1.7.1
-    meteor add random
     meteor add udondan:bulk-collection-update
     meteor remove autopublish
     meteor remove insecure
@@ -51,11 +50,13 @@ template
     Players = new Meteor.Collection('players');
     Peoples = new Meteor.Collection('peoples');
 
-    if (Meteor.isClient) {
-      function getRandomInt(min, max) {
+    D563 = {
+      getRandomInt: function(min, max) {
         return Math.floor(Math.random() * (max - min + 1)) + min;
       }
+    };
 
+    if (Meteor.isClient) {
       Template.d563.rendered = function() {
         Meteor.subscribe('all-peoples');
 
@@ -86,12 +87,11 @@ template
 
       Template.d563.events({
         'click #addDataButton': function() {
-          var age = getRandomInt(13, 89);
           var lastPerson = Peoples.findOne({}, {fields: {x: 1}, sort: {x: -1}, limit: 1, reactive: false});
           if (lastPerson) {
-            Peoples.insert({x:(lastPerson.x + 1), y:age});
+            Peoples.insert({x: (lastPerson.x + 1), y: D563.getRandomInt(13, 89)});
           } else {
-            Peoples.insert({x:1, y:age});
+            Peoples.insert({x: 1, y: D563.getRandomInt(13, 89)});
           }
         },
         'click #removeDataButton': function() {
@@ -182,7 +182,7 @@ template
             //Players.insert({
             data.push({
               name: name,
-              score: Math.floor(Random.fraction() * 10) * 5
+              score: D563.getRandomInt(1, 100)
             });
           });
           bulkCollectionUpdate(Players, data, {primaryKey: 'name'});
@@ -192,7 +192,7 @@ template
 
           var cron = new Meteor.Cron({
             events: {
-              '* * * * * ': function() { Meteor.call('direct1', 'test'); }
+              '* * * * *': function() { Meteor.call('direct1', 'test'); }
             }
           });
         }
