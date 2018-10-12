@@ -3,7 +3,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="jp">
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <title>ローカル環境 &#8212; DMZ砲  documentation</title>
+    <title>手元のパソコン &#8212; GESEN  documentation</title>
     <link rel="stylesheet" href="_static/bootstrap-sphinx.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
     <link rel="stylesheet" href="_static/styles.css" type="text/css" />
@@ -45,7 +45,7 @@
           <span class="icon-bar"></span>
         </button>
         <a class="navbar-brand" href="index.html">
-          DMZ砲</a>
+          GESEN</a>
         <span class="navbar-text navbar-version pull-left"><b></b></span>
       </div>
 
@@ -63,30 +63,10 @@
       role="menu"
       aria-labelledby="dLabelGlobalToc"><ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="introduction.html">はじめに</a></li>
-<li class="toctree-l1 current"><a class="current reference internal" href="#">ローカル環境</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">手元のパソコン</a></li>
 </ul>
 </ul>
 </li>
-              
-                <li class="dropdown">
-  <a role="button"
-     id="dLabelLocalToc"
-     data-toggle="dropdown"
-     data-target="#"
-     href="#">記事内の移動 <b class="caret"></b></a>
-  <ul class="dropdown-menu localtoc"
-      role="menu"
-      aria-labelledby="dLabelLocalToc"><ul>
-<li><a class="reference internal" href="#">ローカル環境</a><ul>
-<li><a class="reference internal" href="#id2">基本方針</a></li>
-<li><a class="reference internal" href="#git-bash">Git Bash</a></li>
-<li><a class="reference internal" href="#anaconda3">Anaconda3</a></li>
-</ul>
-</li>
-</ul>
-</ul>
-</li>
-              
             
             
             
@@ -113,8 +93,12 @@
   <div class="row">
       <div class="col-md-3">
         <div id="sidebar" class="bs-sidenav" role="complementary"><ul>
-<li><a class="reference internal" href="#">ローカル環境</a><ul>
-<li><a class="reference internal" href="#id2">基本方針</a></li>
+<li><a class="reference internal" href="#">手元のパソコン</a><ul>
+<li><a class="reference internal" href="#id2">「こだわらない」にこだわる</a><ul>
+<li><a class="reference internal" href="#id3">意識するポイント</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#id4">基本方針</a></li>
 <li><a class="reference internal" href="#git-bash">Git Bash</a></li>
 <li><a class="reference internal" href="#anaconda3">Anaconda3</a></li>
 </ul>
@@ -133,9 +117,31 @@
     <div class="col-md-9 content">
       
   <div class="section" id="id1">
-<h1>ローカル環境<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h1>
+<h1>手元のパソコン<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h1>
 <div class="section" id="id2">
-<h2>基本方針<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h2>
+<h2>「こだわらない」にこだわる<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h2>
+<p>　ITエンジニアが作業をするためには、手元にパソコンがなければ始まりません。
+スマホさえあれば何でもできるという強者もいるでしょうが、筆者の場合はパソコンを必ず用意します。
+OSは <code class="docutils literal"><span class="pre">Windows</span></code> や <code class="docutils literal"><span class="pre">Mac</span></code> 、はたまた <code class="docutils literal"><span class="pre">Linux</span></code> をベースにしたものなどがありますが、正直 <code class="docutils literal"><span class="pre">Windows</span></code> で何も困りません。
+やれアップデートがウザい、やれ普通すぎてダサいなどと考える前に、たいがいの仕事場で調達できるメリットを冷静に捉えましょう。
+とはいえ現実に <code class="docutils literal"><span class="pre">Windows</span></code> のコマンドプロンプトが使いづらいのも事実なので <code class="docutils literal"><span class="pre">Mintty</span></code> を使えるようにしておきます。</p>
+<div class="section" id="id3">
+<h3>意識するポイント<a class="headerlink" href="#id3" title="Permalink to this headline">¶</a></h3>
+<p>　手元のパソコンに求める要件は実際に行う作業によって大きく違ってくるとは思いますが、必ず押さえておきたいポイントがあります。
+それは、 <strong>壊れても泣きを見ない</strong> という点です。
+運用対象のサーバであれば、１台が壊れても業務が続けられるように冗長化して構築することも多いかと思います。
+ところが、手元のパソコンを冗長化しているという話は聞きません。
+実は、個人の業務を含めた運用全体を１つのシステムとして捉えた場合、最後に単一障害点として残るのは、個人のパソコンなのです。
+ということで、以下が要件に含まれてきます。</p>
+<ol class="arabic simple">
+<li>消えて困るファイルは外部にも置く</li>
+<li>作り直せるぐらいシンプルな環境を保つ</li>
+</ol>
+<p>ついつい自分流にアレンジした凝った環境を作りたくなる</p>
+</div>
+</div>
+<div class="section" id="id4">
+<h2>基本方針<a class="headerlink" href="#id4" title="Permalink to this headline">¶</a></h2>
 <ul class="simple">
 <li><code class="docutils literal"><span class="pre">Windows</span></code> を使ってはいけない職場は少ないので素直に <code class="docutils literal"><span class="pre">Windows</span></code> に慣れる</li>
 <li><code class="docutils literal"><span class="pre">cmd.exe</span></code> は使いにくいので <code class="docutils literal"><span class="pre">Mintty</span></code> から <code class="docutils literal"><span class="pre">bash</span></code> や管理用のコマンドが使える状態にしておく</li>
