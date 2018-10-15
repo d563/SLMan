@@ -94,13 +94,23 @@
       <div class="col-md-3">
         <div id="sidebar" class="bs-sidenav" role="complementary"><ul>
 <li><a class="reference internal" href="#">手元のパソコン</a><ul>
-<li><a class="reference internal" href="#id2">「こだわらない」にこだわる</a><ul>
-<li><a class="reference internal" href="#id3">意識するポイント</a></li>
+<li><a class="reference internal" href="#id2">こだわらないにこだわる</a></li>
+<li><a class="reference internal" href="#id3">環境構築のポイント</a></li>
+<li><a class="reference internal" href="#id4">おすすめのソフトウェア</a><ul>
+<li><a class="reference internal" href="#git-bash">Git Bash</a><ul>
+<li><a class="reference internal" href="#bash-profile">.bash_profile</a></li>
+<li><a class="reference internal" href="#bashrc">.bashrc</a></li>
+<li><a class="reference internal" href="#minttyrc">.minttyrc</a></li>
+<li><a class="reference internal" href="#gitconfig">.gitconfig</a></li>
 </ul>
 </li>
-<li><a class="reference internal" href="#id4">基本方針</a></li>
-<li><a class="reference internal" href="#git-bash">Git Bash</a></li>
-<li><a class="reference internal" href="#anaconda3">Anaconda3</a></li>
+<li><a class="reference internal" href="#anaconda3">Anaconda3</a><ul>
+<li><a class="reference internal" href="#path">Path</a></li>
+<li><a class="reference internal" href="#id5">.bashrc</a></li>
+</ul>
+</li>
+</ul>
+</li>
 </ul>
 </li>
 </ul>
@@ -119,72 +129,58 @@
   <div class="section" id="id1">
 <h1>手元のパソコン<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h1>
 <div class="section" id="id2">
-<h2>「こだわらない」にこだわる<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h2>
+<h2>こだわらないにこだわる<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h2>
 <p>　ITエンジニアが作業をするためには、手元にパソコンがなければ始まりません。
-スマホさえあれば何でもできるという強者もいるでしょうが、筆者の場合はパソコンを必ず用意します。
-OSは <code class="docutils literal"><span class="pre">Windows</span></code> や <code class="docutils literal"><span class="pre">Mac</span></code> 、はたまた <code class="docutils literal"><span class="pre">Linux</span></code> をベースにしたものなどがありますが、正直 <code class="docutils literal"><span class="pre">Windows</span></code> で何も困りません。
-やれアップデートがウザい、やれ普通すぎてダサいなどと考える前に、たいがいの仕事場で調達できるメリットを冷静に捉えましょう。
-とはいえ現実に <code class="docutils literal"><span class="pre">Windows</span></code> のコマンドプロンプトが使いづらいのも事実なので <code class="docutils literal"><span class="pre">Mintty</span></code> を使えるようにしておきます。</p>
+スマホさえあれば何でもできるという強者もいるでしょうが、筆者の場合は必ずパソコンを用意します。
+OSは <code class="docutils literal"><span class="pre">Windows</span></code> や <code class="docutils literal"><span class="pre">Mac</span></code> 、はたまた <code class="docutils literal"><span class="pre">Linux</span></code> をベースにしたものなどがありますが、正直 <code class="docutils literal"><span class="pre">Windows</span></code> で全く困りません。
+やれアップデートがウザい、やれ普通すぎてダサいなどと毒づく前に、 <strong>たいがいの仕事場で調達できるメリット</strong> を冷静に捉えましょう。
+とはいえ、 <code class="docutils literal"><span class="pre">Windows</span></code> のコマンドプロンプトが使いづらいのも事実なので <code class="docutils literal"><span class="pre">Mintty</span></code> を使えるようにしておきます。</p>
+</div>
+<hr class="docutils" />
 <div class="section" id="id3">
-<h3>意識するポイント<a class="headerlink" href="#id3" title="Permalink to this headline">¶</a></h3>
-<p>　手元のパソコンに求める要件は実際に行う作業によって大きく違ってくるとは思いますが、必ず押さえておきたいポイントがあります。
+<h2>環境構築のポイント<a class="headerlink" href="#id3" title="Permalink to this headline">¶</a></h2>
+<p>　手元のパソコンに求める要件は業務内容により大きく異なるため触れませんが、必ず押さえておきたいポイントがあります。
 それは、 <strong>壊れても泣きを見ない</strong> という点です。
 運用対象のサーバであれば、１台が壊れても業務が続けられるように冗長化して構築することも多いかと思います。
 ところが、手元のパソコンを冗長化しているという話は聞きません。
-実は、個人の業務を含めた運用全体を１つのシステムとして捉えた場合、最後に単一障害点として残るのは、個人のパソコンなのです。
-ということで、以下が要件に含まれてきます。</p>
+実は、個人の業務を含めた運用全体を１つのシステムとして捉えた場合、最後の単一障害点として残るものは個人のパソコンなのです。
+ということで、以下の要件が必要になります。</p>
 <ol class="arabic simple">
-<li>消えて困るファイルは外部にも置く</li>
+<li>無くなって困るファイルは外部にも置く</li>
 <li>作り直せるぐらいシンプルな環境を保つ</li>
 </ol>
-<p>ついつい自分流にアレンジした凝った環境を作りたくなる</p>
-</div>
-</div>
-<div class="section" id="id4">
-<h2>基本方針<a class="headerlink" href="#id4" title="Permalink to this headline">¶</a></h2>
-<ul class="simple">
-<li><code class="docutils literal"><span class="pre">Windows</span></code> を使ってはいけない職場は少ないので素直に <code class="docutils literal"><span class="pre">Windows</span></code> に慣れる</li>
-<li><code class="docutils literal"><span class="pre">cmd.exe</span></code> は使いにくいので <code class="docutils literal"><span class="pre">Mintty</span></code> から <code class="docutils literal"><span class="pre">bash</span></code> や管理用のコマンドが使える状態にしておく</li>
-<li>本気でサーバの挙動を調査するなら <code class="docutils literal"><span class="pre">EC2</span></code> や <code class="docutils literal"><span class="pre">VirtualBox</span></code> で建てれば良い</li>
-</ul>
+<p>（1.）については、仕事場の環境が整っていないのであれば提案して変えていくしかありません。
+（2.）については、ついつい凝った環境を作りたくなるものですが <strong>GUIでしか編集できない設定</strong>  は避けたいところです。
+いずれにせよ、設定ファイルが容易に復元できる手段を確立しておきます。</p>
 </div>
 <hr class="docutils" />
+<div class="section" id="id4">
+<h2>おすすめのソフトウェア<a class="headerlink" href="#id4" title="Permalink to this headline">¶</a></h2>
 <div class="section" id="git-bash">
-<h2>Git Bash<a class="headerlink" href="#git-bash" title="Permalink to this headline">¶</a></h2>
-<p><a class="reference external" href="https://gitforwindows.org/">https://gitforwindows.org/</a> からインストーラをダウンロードし、デフォルトの設定でインストールする。
-（デフォルトで <code class="docutils literal"><span class="pre">Mintty</span></code> での起動が選ばれるはず）</p>
-<p><code class="docutils literal"><span class="pre">.bash_profile</span></code> はログインする（と言うより <code class="docutils literal"><span class="pre">Mintty</span></code> を起動する）たび、
-<code class="docutils literal"><span class="pre">.bashrc</span></code> は <code class="docutils literal"><span class="pre">bash</span></code> コマンドを実行するたびに読み込まれるので、
-<code class="docutils literal"><span class="pre">.bash_profile</span></code> から <code class="docutils literal"><span class="pre">.bashrc</span></code> を読み込むような記述にしておくと困らない。
-（こららのファイルは <code class="docutils literal"><span class="pre">c:\Users</span></code> 配下のログインユーザ名のディレクトリに置く）</p>
-<ul>
-<li><dl class="first docutils">
-<dt>.bash_profile</dt>
-<dd><div class="first last highlight-default"><div class="highlight"><pre><span></span><span class="p">[[</span> <span class="o">-</span><span class="n">f</span> <span class="o">~/.</span><span class="n">bashrc</span> <span class="p">]]</span> <span class="o">&amp;&amp;</span> <span class="o">.</span> <span class="o">~/.</span><span class="n">bashrc</span>
+<h3>Git Bash<a class="headerlink" href="#git-bash" title="Permalink to this headline">¶</a></h3>
+<p>　<code class="docutils literal"><span class="pre">Mintty</span></code> から <code class="docutils literal"><span class="pre">git</span></code> などのシェルコマンドが使えるようにします。
+<a class="reference external" href="https://gitforwindows.org/">https://gitforwindows.org/</a> よりインストーラをダウンロードしてデフォルトのオプション（ <code class="docutils literal"><span class="pre">Mintty</span></code> で起動する設定）にてインストールします。
+あらかじめ作っておいた以下の設定ファイルをホーム（ <code class="docutils literal"><span class="pre">Mintty</span></code> の起動時にいる）ディレクトリの直下に置きます。</p>
+<div class="section" id="bash-profile">
+<h4>.bash_profile<a class="headerlink" href="#bash-profile" title="Permalink to this headline">¶</a></h4>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="p">[[</span> <span class="o">-</span><span class="n">f</span> <span class="o">~/.</span><span class="n">bashrc</span> <span class="p">]]</span> <span class="o">&amp;&amp;</span> <span class="o">.</span> <span class="o">~/.</span><span class="n">bashrc</span>
 </pre></div>
 </div>
-</dd>
-</dl>
-</li>
-<li><dl class="first docutils">
-<dt>.bashrc</dt>
-<dd><div class="first last highlight-default"><div class="highlight"><pre><span></span><span class="n">alias</span> <span class="n">ls</span><span class="o">=</span><span class="s1">&#39;ls --color=auto --show-control-chars&#39;</span>
+</div>
+<div class="section" id="bashrc">
+<h4>.bashrc<a class="headerlink" href="#bashrc" title="Permalink to this headline">¶</a></h4>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">alias</span> <span class="n">ls</span><span class="o">=</span><span class="s1">&#39;ls --color=auto --show-control-chars&#39;</span>
 <span class="n">alias</span> <span class="n">ll</span><span class="o">=</span><span class="s1">&#39;ls -l&#39;</span>
 <span class="n">PS1</span><span class="o">=</span><span class="s1">&#39;$(pwd) $ &#39;</span>
 <span class="n">LANG</span><span class="o">=</span><span class="n">ja_JP</span><span class="o">.</span><span class="n">UTF</span><span class="o">-</span><span class="mi">8</span>
 </pre></div>
 </div>
-</dd>
-</dl>
-</li>
-</ul>
-<div class="line-block">
-<div class="line">　<code class="docutils literal"><span class="pre">Mintty</span></code> 自体の設定も <code class="docutils literal"><span class="pre">.minttyrc</span></code> ファイルを配置・編集することでできる。</div>
+<p><code class="docutils literal"><span class="pre">.bash_profile</span></code> は <code class="docutils literal"><span class="pre">Mintty</span></code> を起動するたびに、 <code class="docutils literal"><span class="pre">.bashrc</span></code> は <code class="docutils literal"><span class="pre">bash</span></code> コマンドを実行するたびに読み込まれます。
+この設定では <code class="docutils literal"><span class="pre">.bash_profile</span></code> から <code class="docutils literal"><span class="pre">.bashrc</span></code> を読み込むように定義しています。</p>
 </div>
-<ul>
-<li><dl class="first docutils">
-<dt>.minttyrc</dt>
-<dd><div class="first last highlight-default"><div class="highlight"><pre><span></span><span class="n">BoldAsFont</span><span class="o">=</span><span class="n">no</span>
+<div class="section" id="minttyrc">
+<h4>.minttyrc<a class="headerlink" href="#minttyrc" title="Permalink to this headline">¶</a></h4>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">BoldAsFont</span><span class="o">=</span><span class="n">no</span>
 <span class="n">FontHeight</span><span class="o">=</span><span class="mi">11</span>
 <span class="n">ThemeFile</span><span class="o">=</span>
 <span class="n">BackgroundColour</span><span class="o">=</span><span class="mi">250</span><span class="p">,</span><span class="mi">250</span><span class="p">,</span><span class="mi">250</span>
@@ -199,18 +195,11 @@ OSは <code class="docutils literal"><span class="pre">Windows</span></code> や
 <span class="n">Charset</span><span class="o">=</span><span class="n">UTF</span><span class="o">-</span><span class="mi">8</span>
 </pre></div>
 </div>
-</dd>
-</dl>
-</li>
-</ul>
-<div class="line-block">
-<div class="line">　<code class="docutils literal"><span class="pre">git</span></code> のグローバル設定も <code class="docutils literal"><span class="pre">.gitconfig</span></code> ファイルを配置・編集することでできる。</div>
+<p><code class="docutils literal"><span class="pre">Mintty</span></code> 自身の設定も定義ファイルとして置かれるので、自分に合うよう編集して残しておきます。</p>
 </div>
-<ul>
-<li><dl class="first docutils">
-<dt>.gitconfig</dt>
-<dd><p class="first">（空白はタブ１文字）</p>
-<div class="last highlight-default"><div class="highlight"><pre><span></span><span class="p">[</span><span class="n">user</span><span class="p">]</span>
+<div class="section" id="gitconfig">
+<h4>.gitconfig<a class="headerlink" href="#gitconfig" title="Permalink to this headline">¶</a></h4>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="p">[</span><span class="n">user</span><span class="p">]</span>
     <span class="n">name</span> <span class="o">=</span> <span class="n">Daisuke</span> <span class="n">Maeda</span>
     <span class="n">email</span> <span class="o">=</span> <span class="n">mail</span><span class="o">.</span><span class="n">d563</span><span class="nd">@gmail</span><span class="o">.</span><span class="n">com</span>
 <span class="p">[</span><span class="n">core</span><span class="p">]</span>
@@ -223,25 +212,37 @@ OSは <code class="docutils literal"><span class="pre">Windows</span></code> や
     <span class="n">helper</span> <span class="o">=</span> <span class="n">wincred</span>
 </pre></div>
 </div>
-</dd>
-</dl>
-</li>
-</ul>
+<p><code class="docutils literal"><span class="pre">git</span></code> のユーザ設定も残しておきます。
+<code class="docutils literal"><span class="pre">git</span> <span class="pre">config</span> <span class="pre">--global</span></code> のコマンドを残すことでも同じことが表現できます。
+設定ファイルで残す方法には注意点があり <strong>インデントは厳密にタブ１文字</strong> とする必要があります。</p>
+</div>
 </div>
 <div class="section" id="anaconda3">
-<h2>Anaconda3<a class="headerlink" href="#anaconda3" title="Permalink to this headline">¶</a></h2>
-<ul>
-<li><dl class="first docutils">
-<dt>PATH</dt>
-<dd><div class="first last highlight-default"><div class="highlight"><pre><span></span><span class="n">C</span><span class="p">:</span>\<span class="n">ProgramData</span>\<span class="n">Anaconda3</span>
+<h3>Anaconda3<a class="headerlink" href="#anaconda3" title="Permalink to this headline">¶</a></h3>
+<p>　筆者は <code class="docutils literal"><span class="pre">python</span></code> でスクリプトを組むことが多いので、手元のパソコンでも使えるようにします。
+<a class="reference external" href="https://www.anaconda.com/">https://www.anaconda.com/</a> よりインストーラをダウンロードしてデフォルトのオプションでインストールします。</p>
+<div class="section" id="path">
+<h4>Path<a class="headerlink" href="#path" title="Permalink to this headline">¶</a></h4>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">C</span><span class="p">:</span>\<span class="n">ProgramData</span>\<span class="n">Anaconda3</span>
 <span class="n">C</span><span class="p">:</span>\<span class="n">ProgramData</span>\<span class="n">Anaconda3</span>\<span class="n">Library</span>\<span class="nb">bin</span>
 <span class="n">C</span><span class="p">:</span>\<span class="n">ProgramData</span>\<span class="n">Anaconda3</span>\<span class="n">Scripts</span>
 </pre></div>
 </div>
-</dd>
-</dl>
-</li>
-</ul>
+<p>このような環境変数の <code class="docutils literal"><span class="pre">Path</span></code> が追加されますが、コマンドプロンプトから使わないのであれば全く必要ありません。
+煩雑になるので、筆者の場合は「環境変数」の設定画面からこれらを <strong>消します</strong> 。</p>
+</div>
+<div class="section" id="id5">
+<h4>.bashrc<a class="headerlink" href="#id5" title="Permalink to this headline">¶</a></h4>
+<div class="highlight-default"><div class="highlight"><pre><span></span>alias python=&#39;start python&#39;
+export PATH=/c/ProgramData/Anaconda3:/c/ProgramData/Anaconda3/Library/bin:/c/ProgramData/Anaconda3/Scripts:$PATH
+</pre></div>
+</div>
+<p><code class="docutils literal"><span class="pre">Mintty</span></code> は構造上 <code class="docutils literal"><span class="pre">Windows</span></code> 用の <code class="docutils literal"><span class="pre">python</span></code> を対話モードで実行できません。
+素直に別ウィンドウを開けて実行するよう <code class="docutils literal"><span class="pre">.bashrc</span></code> にエイリアス追記します。
+<code class="docutils literal"><span class="pre">Path</span></code> についても、テキストベースで切り替えられるようこちらに定義します。
+なお、 <code class="docutils literal"><span class="pre">python</span></code> が含まれるスクリプトについては <code class="docutils literal"><span class="pre">Mintty</span></code> 上で問題なく実行することができます。</p>
+</div>
+</div>
 </div>
 </div>
 
