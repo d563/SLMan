@@ -144,13 +144,13 @@ OSは <code class="docutils literal"><span class="pre">Windows</span></code> や
 運用対象のサーバであれば、１台が壊れても業務が続けられるように冗長化して構築することも多いかと思います。
 ところが、手元のパソコンを冗長化しているという話は聞きません。
 実は、個人の業務を含めた運用全体を１つのシステムとして捉えた場合、最後の単一障害点として残るものは個人のパソコンなのです。
-ということで、以下の要件が必要になります。</p>
+ということで、以下の要件を含めます。</p>
 <ol class="arabic simple">
 <li>無くなって困るファイルは外部にも置く</li>
 <li>作り直せるぐらいシンプルな環境を保つ</li>
 </ol>
-<p>（1.）については、仕事場の環境が整っていないのであれば提案して変えていくしかありません。
-（2.）については、ついつい凝った環境を作りたくなるものですが <strong>GUIでしか編集できない設定</strong>  は避けたいところです。
+<p>（1.）は、仕事場の環境が整っていない場合は提案して変えていくしかありません。
+（2.）は、ついつい凝った環境を作りたくなるものですが <strong>GUIでしか編集できない設定</strong>  は避けたいところです。
 いずれにせよ、設定ファイルが容易に復元できる手段を確立しておきます。</p>
 </div>
 <hr class="docutils" />
@@ -213,8 +213,8 @@ OSは <code class="docutils literal"><span class="pre">Windows</span></code> や
 </pre></div>
 </div>
 <p><code class="docutils literal"><span class="pre">git</span></code> のユーザ設定も残しておきます。
-<code class="docutils literal"><span class="pre">git</span> <span class="pre">config</span> <span class="pre">--global</span></code> のコマンドを残すことでも同じことが表現できます。
-設定ファイルで残す方法には注意点があり <strong>インデントは厳密にタブ１文字</strong> とする必要があります。</p>
+<code class="docutils literal"><span class="pre">git</span> <span class="pre">config</span> <span class="pre">--global</span></code> のコマンドを残すことで同じことが表現できますのが、筆者は結果が残っている方が安心できます。
+ただ、 <code class="docutils literal"><span class="pre">.gitconfig</span></code> には注意点があり <strong>インデントは厳密にタブ１文字</strong> としておく必要があります。</p>
 </div>
 </div>
 <div class="section" id="anaconda3">
@@ -237,8 +237,8 @@ OSは <code class="docutils literal"><span class="pre">Windows</span></code> や
 export PATH=/c/ProgramData/Anaconda3:/c/ProgramData/Anaconda3/Library/bin:/c/ProgramData/Anaconda3/Scripts:$PATH
 </pre></div>
 </div>
-<p><code class="docutils literal"><span class="pre">Mintty</span></code> は構造上 <code class="docutils literal"><span class="pre">Windows</span></code> 用の <code class="docutils literal"><span class="pre">python</span></code> を対話モードで実行できません。
-素直に別ウィンドウを開けて実行するよう <code class="docutils literal"><span class="pre">.bashrc</span></code> にエイリアス追記します。
+<p><code class="docutils literal"><span class="pre">Mintty</span></code> は仕様上 <code class="docutils literal"><span class="pre">Windows</span></code> 用である <code class="docutils literal"><span class="pre">python</span></code> を対話モードで実行できません。
+素直に別ウィンドウを開けて実行するように <code class="docutils literal"><span class="pre">.bashrc</span></code> にエイリアスを追記します。
 <code class="docutils literal"><span class="pre">Path</span></code> についても、テキストベースで切り替えられるようこちらに定義します。
 なお、 <code class="docutils literal"><span class="pre">python</span></code> が含まれるスクリプトについては <code class="docutils literal"><span class="pre">Mintty</span></code> 上で問題なく実行することができます。</p>
 </div>
