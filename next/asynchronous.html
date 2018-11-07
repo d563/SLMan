@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml" lang="jp">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>いきなり非同期処理 &#8212; GESEN  documentation</title>
+    <link rel="stylesheet" href="_static/bootstrap-sphinx.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="_static/styles.css" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    './',
+        VERSION:     '',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true,
+        SOURCELINK_SUFFIX: '.txt'
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="_static/js/jquery-1.11.0.min.js"></script>
+    <script type="text/javascript" src="_static/js/jquery-fix.js"></script>
+    <script type="text/javascript" src="_static/bootstrap-3.3.7/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="_static/bootstrap-sphinx.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="ニュースで英語術" href="english.html" />
+    <link rel="prev" title="手元のパソコン" href="local-machine.html" />
+<meta charset='utf-8'>
+<meta http-equiv='X-UA-Compatible' content='IE=edge,chrome=1'>
+<meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1'>
+<meta name="apple-mobile-web-app-capable" content="yes">
+
+  </head>
+  <body>
+
+  <div id="navbar" class="navbar navbar-default navbar-fixed-top">
+    <div class="container">
+      <div class="navbar-header">
+        <!-- .btn-navbar is used as the toggle for collapsed navbar content -->
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".nav-collapse">
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand" href="index.html">
+          GESEN</a>
+        <span class="navbar-text navbar-version pull-left"><b></b></span>
+      </div>
+
+        <div class="collapse navbar-collapse nav-collapse">
+          <ul class="nav navbar-nav">
+            
+            
+              <li class="dropdown globaltoc-container">
+  <a role="button"
+     id="dLabelGlobalToc"
+     data-toggle="dropdown"
+     data-target="#"
+     href="index.html">すべての記事 <b class="caret"></b></a>
+  <ul class="dropdown-menu globaltoc"
+      role="menu"
+      aria-labelledby="dLabelGlobalToc"><ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="introduction.html">はじめに</a></li>
+<li class="toctree-l1"><a class="reference internal" href="local-machine.html">手元のパソコン</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">いきなり非同期処理</a></li>
+<li class="toctree-l1"><a class="reference internal" href="english.html">ニュースで英語術</a></li>
+<li class="toctree-l1"><a class="reference internal" href="test.html">論文試験対策</a></li>
+</ul>
+</ul>
+</li>
+            
+            
+            
+            
+              <li class="hidden-sm"></li>
+            
+          </ul>
+
+          
+            
+<form class="navbar-form navbar-right" action="search.html" method="get">
+ <div class="form-group">
+  <input type="text" name="q" class="form-control" placeholder="Search" />
+ </div>
+  <input type="hidden" name="check_keywords" value="yes" />
+  <input type="hidden" name="area" value="default" />
+</form>
+          
+        </div>
+    </div>
+  </div>
+
+<div class="container">
+  <div class="row">
+      <div class="col-md-3">
+        <div id="sidebar" class="bs-sidenav" role="complementary"><ul>
+<li><a class="reference internal" href="#">いきなり非同期処理</a><ul>
+<li><a class="reference internal" href="#id2">進化のバトンタッチ</a></li>
+<li><a class="reference internal" href="#id3">プロセス外から攻める</a></li>
+<li><a class="reference internal" href="#id4">出力に溺れないために</a></li>
+</ul>
+</li>
+</ul>
+
+<form action="search.html" method="get">
+ <div class="form-group">
+  <input type="text" name="q" class="form-control" placeholder="Search" />
+ </div>
+  <input type="hidden" name="check_keywords" value="yes" />
+  <input type="hidden" name="area" value="default" />
+</form>
+        </div>
+      </div>
+    <div class="col-md-9 content">
+      
+  <div class="section" id="id1">
+<h1>いきなり非同期処理<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="id2">
+<h2>進化のバトンタッチ<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h2>
+<p>　ハードウェアの進化に合わせてソフトウェアは進化します。
+CPUのクロック周波数が限界に近づき１つのマシンに複数のCPUやコアが搭載されるようになりました。
+ハードウェアがこのような進化を辿るとソフトウェアの進化にも影響が出ます。
+それが <strong>非同期処理</strong> です。
+ソフトウェアの出す命令が <strong>連続する必要がある</strong> かどうかについてはソフトウェア自身にしか判りません。
+そのため様々なプログラム言語が非同期処理を実装しやすいよう進化しています。</p>
+</div>
+<div class="section" id="id3">
+<h2>プロセス外から攻める<a class="headerlink" href="#id3" title="Permalink to this headline">¶</a></h2>
+<p>　Linux系のサーバであればシェルスクリプト経由でプロセスが起動できます。
+起動されたプロセス内での非同期処理を検討する前にシェルスクリプトによる非同期起動を候補に加えたいものです。
+苦労してプログラムを改修したが、結果的に複数プロセスの同時起動で済む話だったなんてことは避けましょう。</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span>out() { echo ERR-$1 1&gt;&amp;2 &amp;&amp; sleep 1 &amp;&amp; echo OUT-$1; } &amp;&amp; export -f out
+</pre></div>
+</div>
+<p>実験用に関数を定義します。
+引数を１つ取り、それを含む文字列を標準エラー出力し、１秒待ってから標準出力するシンプルな関数です。</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">seq</span> <span class="mi">1</span> <span class="mi">18</span> <span class="o">|</span> <span class="n">xargs</span> <span class="o">-</span><span class="n">P</span> <span class="mi">12</span> <span class="o">-</span><span class="n">I</span><span class="o">%</span> <span class="n">bash</span> <span class="o">-</span><span class="n">c</span> <span class="s1">&#39;out %&#39;</span>
+</pre></div>
+</div>
+<p>適当な数値を生成し <code class="docutils literal"><span class="pre">xargs</span></code> で関数を非同期起動します。
+<code class="docutils literal"><span class="pre">-P</span></code> オプションで同時実行の最大数を制御します。
+<code class="docutils literal"><span class="pre">-I</span></code> オプションで引数の位置を決めるとともに <strong>引数の数を１つに固定</strong> します。</p>
+</div>
+<div class="section" id="id4">
+<h2>出力に溺れないために<a class="headerlink" href="#id4" title="Permalink to this headline">¶</a></h2>
+<p>　人類の進化はハードウェアやソフトウェアの進化には全く歯が立ちません。
+処理が速くなったと喜んだのも束の間で標準エラー出力を見逃して足下をすくわれるというケースも少なくありません。
+非同期起動の出力でも異常を検出できるよう設計しましょう。</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">exe</span><span class="p">()</span> <span class="p">{</span> <span class="n">seq</span> <span class="mi">1</span> <span class="mi">18</span> <span class="o">|</span> <span class="n">xargs</span> <span class="o">-</span><span class="n">P</span> <span class="mi">12</span> <span class="o">-</span><span class="n">I</span><span class="o">%</span> <span class="n">bash</span> <span class="o">-</span><span class="n">c</span> <span class="s1">&#39;out %&#39;</span><span class="p">;</span> <span class="p">}</span> <span class="o">&amp;&amp;</span> <span class="n">export</span> <span class="o">-</span><span class="n">f</span> <span class="n">exe</span>
+</pre></div>
+</div>
+<p>実験用に関数を追加で定義します。内容は先程の非同期起動そのものです。</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="c1"># コンソールに全ての出力を表示する</span>
+<span class="p">{</span> <span class="n">exe</span> <span class="o">|</span> <span class="n">tee</span> <span class="n">OUT</span><span class="o">.</span><span class="n">log</span><span class="p">;</span> <span class="p">}</span> <span class="mi">3</span><span class="o">&gt;&amp;</span><span class="mi">1</span> <span class="mi">1</span><span class="o">&gt;&amp;</span><span class="mi">2</span> <span class="mi">2</span><span class="o">&gt;&amp;</span><span class="mi">3</span> <span class="o">|</span> <span class="n">tee</span> <span class="n">ERR</span><span class="o">.</span><span class="n">log</span>
+
+<span class="c1"># コンソールに標準エラー出力だけを表示する</span>
+<span class="p">{</span> <span class="n">exe</span> <span class="o">&gt;</span>     <span class="n">OUT</span><span class="o">.</span><span class="n">log</span><span class="p">;</span> <span class="p">}</span> <span class="mi">3</span><span class="o">&gt;&amp;</span><span class="mi">1</span> <span class="mi">1</span><span class="o">&gt;&amp;</span><span class="mi">2</span> <span class="mi">2</span><span class="o">&gt;&amp;</span><span class="mi">3</span> <span class="o">|</span> <span class="n">tee</span> <span class="n">ERR</span><span class="o">.</span><span class="n">log</span>
+</pre></div>
+</div>
+<p>標準出力と標準エラー出力を別々のログファイルに書き出した上でコンソールの表示を調整します。
+ポイントは <code class="docutils literal"><span class="pre">tee</span></code> コマンドが常に <strong>標準出力</strong> をファイルに書き出す点です。
+<code class="docutils literal"><span class="pre">{</span> <span class="pre">}</span></code> で囲むことで関数自体の標準出力に対する操作までを１つのコマンドに見立てます。
+ファイルディスクリプタの <code class="docutils literal"><span class="pre">3</span></code> をダミーで生成しておき、標準出力と標準エラー出力を入れ替えて対処します。</p>
+</div>
+</div>
+
+
+    </div>
+      
+  </div>
+</div>
+<footer class="footer">
+  <div class="container">
+    <p class="pull-right">
+      <a href="#">Back to top</a>
+      
+    </p>
+    <p>
+        &copy; Copyright 2018, Daisuke Maeda.<br/>
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.6.6.<br/>
+    </p>
+  </div>
+</footer>
+  </body>
+</html>
