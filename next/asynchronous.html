@@ -3,7 +3,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="jp">
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <title>いきなり非同期処理 &#8212; GESEN  documentation</title>
+    <title>いきなり非同期 &#8212; ハヤ利／スタ利  documentation</title>
     <link rel="stylesheet" href="_static/bootstrap-sphinx.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
     <link rel="stylesheet" href="_static/styles.css" type="text/css" />
@@ -26,7 +26,7 @@
     <script type="text/javascript" src="_static/bootstrap-sphinx.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="ニュースで英語術" href="english.html" />
+    <link rel="next" title="親離れ／子離れ" href="over-attached.html" />
     <link rel="prev" title="手元のパソコン" href="local-machine.html" />
 <meta charset='utf-8'>
 <meta http-equiv='X-UA-Compatible' content='IE=edge,chrome=1'>
@@ -46,7 +46,7 @@
           <span class="icon-bar"></span>
         </button>
         <a class="navbar-brand" href="index.html">
-          GESEN</a>
+          ハヤ利／スタ利</a>
         <span class="navbar-text navbar-version pull-left"><b></b></span>
       </div>
 
@@ -65,7 +65,8 @@
       aria-labelledby="dLabelGlobalToc"><ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="introduction.html">はじめに</a></li>
 <li class="toctree-l1"><a class="reference internal" href="local-machine.html">手元のパソコン</a></li>
-<li class="toctree-l1 current"><a class="current reference internal" href="#">いきなり非同期処理</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">いきなり非同期</a></li>
+<li class="toctree-l1"><a class="reference internal" href="over-attached.html">親離れ／子離れ</a></li>
 <li class="toctree-l1"><a class="reference internal" href="english.html">ニュースで英語術</a></li>
 <li class="toctree-l1"><a class="reference internal" href="test.html">論文試験対策</a></li>
 </ul>
@@ -97,7 +98,7 @@
   <div class="row">
       <div class="col-md-3">
         <div id="sidebar" class="bs-sidenav" role="complementary"><ul>
-<li><a class="reference internal" href="#">いきなり非同期処理</a><ul>
+<li><a class="reference internal" href="#">いきなり非同期</a><ul>
 <li><a class="reference internal" href="#id2">進化のバトンタッチ</a></li>
 <li><a class="reference internal" href="#id3">プロセス外から攻める</a></li>
 <li><a class="reference internal" href="#id4">出力に溺れないために</a></li>
@@ -117,14 +118,14 @@
     <div class="col-md-9 content">
       
   <div class="section" id="id1">
-<h1>いきなり非同期処理<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h1>
+<h1>いきなり非同期<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h1>
 <div class="section" id="id2">
 <h2>進化のバトンタッチ<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h2>
 <p>　ハードウェアの進化に合わせてソフトウェアは進化します。
 CPUのクロック周波数が限界に近づき１つのマシンに複数のCPUやコアが搭載されるようになりました。
 ハードウェアがこのような進化を辿るとソフトウェアの進化にも影響が出ます。
 それが <strong>非同期処理</strong> です。
-ソフトウェアの出す命令が <strong>連続する必要がある</strong> かどうかについてはソフトウェア自身にしか判りません。
+ソフトウェアの出す命令が <strong>連続する必要があるかどうか</strong> についてはソフトウェア自身にしか判りません。
 そのため様々なプログラム言語が非同期処理を実装しやすいよう進化しています。</p>
 </div>
 <div class="section" id="id3">
