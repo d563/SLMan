@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml" lang="jp">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>カーネルパラメータ &#8212; ハヤ利／スタ利  documentation</title>
+    <link rel="stylesheet" href="_static/bootstrap-sphinx.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="_static/styles.css" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    './',
+        VERSION:     '',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true,
+        SOURCELINK_SUFFIX: '.txt'
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="_static/js/jquery-1.11.0.min.js"></script>
+    <script type="text/javascript" src="_static/js/jquery-fix.js"></script>
+    <script type="text/javascript" src="_static/bootstrap-3.3.7/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="_static/bootstrap-sphinx.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="いきなり非同期" href="asynchronous.html" />
+    <link rel="prev" title="手元のパソコン" href="local-machine.html" />
+<meta charset='utf-8'>
+<meta http-equiv='X-UA-Compatible' content='IE=edge,chrome=1'>
+<meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1'>
+<meta name="apple-mobile-web-app-capable" content="yes">
+
+  </head>
+  <body>
+
+  <div id="navbar" class="navbar navbar-default navbar-fixed-top">
+    <div class="container">
+      <div class="navbar-header">
+        <!-- .btn-navbar is used as the toggle for collapsed navbar content -->
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".nav-collapse">
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand" href="index.html">
+          ハヤ利／スタ利</a>
+        <span class="navbar-text navbar-version pull-left"><b></b></span>
+      </div>
+
+        <div class="collapse navbar-collapse nav-collapse">
+          <ul class="nav navbar-nav">
+            
+            
+              <li class="dropdown globaltoc-container">
+  <a role="button"
+     id="dLabelGlobalToc"
+     data-toggle="dropdown"
+     data-target="#"
+     href="index.html">すべての記事 <b class="caret"></b></a>
+  <ul class="dropdown-menu globaltoc"
+      role="menu"
+      aria-labelledby="dLabelGlobalToc"><ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="introduction.html">はじめに</a></li>
+<li class="toctree-l1"><a class="reference internal" href="local-machine.html">手元のパソコン</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">カーネルパラメータ</a></li>
+<li class="toctree-l1"><a class="reference internal" href="asynchronous.html">いきなり非同期</a></li>
+<li class="toctree-l1"><a class="reference internal" href="over-attached.html">親離れ／子離れ</a></li>
+<li class="toctree-l1"><a class="reference internal" href="english.html">ニュースで英語術</a></li>
+<li class="toctree-l1"><a class="reference internal" href="test.html">論文試験対策</a></li>
+</ul>
+</ul>
+</li>
+            
+            
+            
+            
+              <li class="hidden-sm"></li>
+            
+          </ul>
+
+          
+            
+<form class="navbar-form navbar-right" action="search.html" method="get">
+ <div class="form-group">
+  <input type="text" name="q" class="form-control" placeholder="Search" />
+ </div>
+  <input type="hidden" name="check_keywords" value="yes" />
+  <input type="hidden" name="area" value="default" />
+</form>
+          
+        </div>
+    </div>
+  </div>
+
+<div class="container">
+  <div class="row">
+      <div class="col-md-3">
+        <div id="sidebar" class="bs-sidenav" role="complementary"><ul>
+<li><a class="reference internal" href="#">カーネルパラメータ</a><ul>
+<li><a class="reference internal" href="#id2">悲鳴を聞く</a></li>
+<li><a class="reference internal" href="#id3">バックログに詰め込む</a></li>
+<li><a class="reference internal" href="#id4">回転率を上げる</a></li>
+<li><a class="reference internal" href="#id5">役割を尖らせる</a></li>
+</ul>
+</li>
+</ul>
+
+<form action="search.html" method="get">
+ <div class="form-group">
+  <input type="text" name="q" class="form-control" placeholder="Search" />
+ </div>
+  <input type="hidden" name="check_keywords" value="yes" />
+  <input type="hidden" name="area" value="default" />
+</form>
+        </div>
+      </div>
+    <div class="col-md-9 content">
+      
+  <div class="section" id="id1">
+<h1>カーネルパラメータ<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="id2">
+<h2>悲鳴を聞く<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h2>
+<p>　サーバの性能といえばCPUとメモリ、そしてディスクIOで決まります。
+ネットワークなどの外部をとりまく環境もパフォーマンスを左右しますがサーバ内の資源といえばこれらの３つです。
+これらの１つでも詰まった状態になればロードアベレージの上昇という形で悲鳴を聞くことができます。
+カーネルの初期設定では外部から資源を守るためかTCPコネクションまわりの設定が控えめです。
+このままでは正しく悲鳴を聞く聞こえてきません。
+これから説明するカーネルパラメータを設定ファイル <code class="docutils literal"><span class="pre">/etc/sysctl.conf</span></code> に追記し <code class="docutils literal"><span class="pre">sysctl</span> <span class="pre">-p</span></code> コマンドで反映しましょう。</p>
+</div>
+<div class="section" id="id3">
+<h2>バックログに詰め込む<a class="headerlink" href="#id3" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="c1"># SYN-RECEIVED状態のソケットキューの最大数（初期値：128）</span>
+<span class="n">net</span><span class="o">.</span><span class="n">ipv4</span><span class="o">.</span><span class="n">tcp_max_syn_backlog</span> <span class="o">=</span> <span class="mi">10240</span>
+
+<span class="c1"># ESTABLISHED状態のソケットキューの最大数（初期値：128）</span>
+<span class="n">net</span><span class="o">.</span><span class="n">core</span><span class="o">.</span><span class="n">somaxconn</span> <span class="o">=</span> <span class="mi">65535</span>
+</pre></div>
+</div>
+<p>　バックログとはソケットをキューイングするOSの仕組みです。
+アプリケーションがアセプトするまでのソケットが対象となります。
+一時的なバーストに耐えられるよう最大数を増やしておきましょう。
+SYN-RECEIVED状態とはSYNを受け付けてACKを受け取る前、ESTABLISHED状態とはACKを受け取りアセプトされる前を指します。
+各ソケットキューの最大数はサーバ側で受け付けるポートごとにカウントされるので注意しましょう。</p>
+</div>
+<div class="section" id="id4">
+<h2>回転率を上げる<a class="headerlink" href="#id4" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="c1"># FIN-WAIT-2状態でFINを待つ秒数（初期値：60）</span>
+<span class="n">net</span><span class="o">.</span><span class="n">ipv4</span><span class="o">.</span><span class="n">tcp_fin_timeout</span> <span class="o">=</span> <span class="mi">10</span>
+
+<span class="c1"># TIME-WAIT状態でRSTを受け取るとCLOSED状態にする（初期値：0）</span>
+<span class="n">net</span><span class="o">.</span><span class="n">ipv4</span><span class="o">.</span><span class="n">tcp_rfc1337</span> <span class="o">=</span> <span class="mi">1</span>
+
+<span class="c1"># TIME-WAIT状態で自分からの接続先が同じソケットを再利用する（初期値：0）</span>
+<span class="n">net</span><span class="o">.</span><span class="n">ipv4</span><span class="o">.</span><span class="n">tcp_tw_reuse</span> <span class="o">=</span> <span class="mi">1</span>
+</pre></div>
+</div>
+<p>　コネクションは必ず相手が存在するため扱いがデリケートになります。
+デリケートすぎる部分は資源の有効活用のために削ぎ落とす必要があります。
+FIN-WAIT-2状態は自らのFINに対するACKを受け付けた状態なので仮に相手からFINが来なくても早めにTIME-WAIT状態に移します。
+TIME-WAIT状態は待ち状態ですが明確にRSTを受け付けたのであれば迷わずCLOSED状態に移します。
+また全く同じ相手で自分から仕掛けたソケットは強気に使い回します。</p>
+</div>
+<div class="section" id="id5">
+<h2>役割を尖らせる<a class="headerlink" href="#id5" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="c1"># 自分からの接続で使用するポートの範囲（初期値：32768 61000）</span>
+<span class="n">net</span><span class="o">.</span><span class="n">ipv4</span><span class="o">.</span><span class="n">ip_local_port_range</span> <span class="o">=</span> <span class="mi">1024</span> <span class="mi">65535</span>
+
+<span class="c1"># 実メモリを気にせず確保する（初期値：0）</span>
+<span class="n">vm</span><span class="o">.</span><span class="n">overcommit_memory</span> <span class="o">=</span> <span class="mi">1</span>
+</pre></div>
+</div>
+<p>　サーバごとの役割りを明確に別けておき <strong>他のプロセスを気にしない強気な設定</strong> をしましょう。
+他のプロセスが待ち受けるポートと重複する可能性がないので限りあるポートが最大限に使えます。
+OOM Killerも他に重要なプロセスがない状態であれば恐くはありません。
+プロセス再起動の仕組みを整えた上で潔く殺されましょう。</p>
+</div>
+</div>
+
+
+    </div>
+      
+  </div>
+</div>
+<footer class="footer">
+  <div class="container">
+    <p class="pull-right">
+      <a href="#">Back to top</a>
+      
+    </p>
+    <p>
+        &copy; Copyright 2018, Daisuke Maeda.<br/>
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.6.6.<br/>
+    </p>
+  </div>
+</footer>
+  </body>
+</html>
