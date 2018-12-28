@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml" lang="jp">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>Command &#8212; システムエングザエティスト道  documentation</title>
+    <link rel="stylesheet" href="../_static/bootstrap-sphinx.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/styles.css" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true,
+        SOURCELINK_SUFFIX: '.txt'
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="../_static/js/jquery-1.11.0.min.js"></script>
+    <script type="text/javascript" src="../_static/js/jquery-fix.js"></script>
+    <script type="text/javascript" src="../_static/bootstrap-3.3.7/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="../_static/bootstrap-sphinx.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="prev" title="親離れ／子離れ" href="../00400/over-attached.html" />
+<meta charset='utf-8'>
+<meta http-equiv='X-UA-Compatible' content='IE=edge,chrome=1'>
+<meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1'>
+<meta name="apple-mobile-web-app-capable" content="yes">
+
+  </head>
+  <body>
+
+  <div id="navbar" class="navbar navbar-default navbar-fixed-top">
+    <div class="container">
+      <div class="navbar-header">
+        <!-- .btn-navbar is used as the toggle for collapsed navbar content -->
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".nav-collapse">
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand" href="../index.html">
+          システムエングザエティスト道</a>
+        <span class="navbar-text navbar-version pull-left"><b></b></span>
+      </div>
+
+        <div class="collapse navbar-collapse nav-collapse">
+          <ul class="nav navbar-nav">
+            
+            
+              <li class="dropdown globaltoc-container">
+  <a role="button"
+     id="dLabelGlobalToc"
+     data-toggle="dropdown"
+     data-target="#"
+     href="../index.html">すべての記事 <b class="caret"></b></a>
+  <ul class="dropdown-menu globaltoc"
+      role="menu"
+      aria-labelledby="dLabelGlobalToc"><ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../00000/introduction.html">はじめに</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../00100/local-machine.html">手元のパソコン</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../00200/kernel-parameters.html">カーネルパラメータ</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../00300/asynchronous.html">いきなり非同期</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../00400/over-attached.html">親離れ／子離れ</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Command</a></li>
+</ul>
+</ul>
+</li>
+            
+            
+            
+            
+              <li class="hidden-sm"></li>
+            
+          </ul>
+
+          
+            
+<form class="navbar-form navbar-right" action="../search.html" method="get">
+ <div class="form-group">
+  <input type="text" name="q" class="form-control" placeholder="Search" />
+ </div>
+  <input type="hidden" name="check_keywords" value="yes" />
+  <input type="hidden" name="area" value="default" />
+</form>
+          
+        </div>
+    </div>
+  </div>
+
+<div class="container">
+  <div class="row">
+      <div class="col-md-3">
+        <div id="sidebar" class="bs-sidenav" role="complementary"><ul>
+<li><a class="reference internal" href="#">Command</a><ul>
+<li><a class="reference internal" href="#basic">Basic</a><ul>
+<li><a class="reference internal" href="#curl">curl</a></li>
+<li><a class="reference internal" href="#find">find</a></li>
+<li><a class="reference internal" href="#for">for</a></li>
+<li><a class="reference internal" href="#git">git</a></li>
+<li><a class="reference internal" href="#grep">grep</a></li>
+<li><a class="reference internal" href="#mongo">mongo</a></li>
+<li><a class="reference internal" href="#psql">psql</a></li>
+<li><a class="reference internal" href="#screen">screen</a></li>
+<li><a class="reference internal" href="#xargs">xargs</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#advanced">Advanced</a><ul>
+<li><a class="reference internal" href="#id1">curl</a></li>
+<li><a class="reference internal" href="#id2">find</a></li>
+<li><a class="reference internal" href="#id3">git</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+<form action="../search.html" method="get">
+ <div class="form-group">
+  <input type="text" name="q" class="form-control" placeholder="Search" />
+ </div>
+  <input type="hidden" name="check_keywords" value="yes" />
+  <input type="hidden" name="area" value="default" />
+</form>
+        </div>
+      </div>
+    <div class="col-md-9 content">
+      
+  <div class="section" id="command">
+<h1>Command<a class="headerlink" href="#command" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="basic">
+<h2>Basic<a class="headerlink" href="#basic" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="curl">
+<h3>curl<a class="headerlink" href="#curl" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-default"><div class="highlight"><pre><span></span>URL=https://www.yahoo.co.jp
+FILE=data.txt
+
+# &gt; REQUEST-HEADER
+# &gt;
+# RESPONSE-HEADER
+curl -svI $URL 2&gt;&amp;1 | grep -v &#39;^[*|&lt;]&#39;
+
+# GET-DATA
+curl -sL $URL
+
+# POST-DATA
+curl -svd @$FILE $URL
+
+# POST-FORM
+curl -sv -F key=value -F file=@$FILE $URL
+</pre></div>
+</div>
+</div>
+<div class="section" id="find">
+<h3>find<a class="headerlink" href="#find" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-default"><div class="highlight"><pre><span></span>find . ! -user root
+find . ! -group root
+find . -type d ! -perm 775
+find . -type f ! -perm 664
+find . -name &#39;*.log&#39;
+
+# 深さ -&gt; 1階層
+find . -mindepth 1 -maxdepth 1
+
+# 古い -&gt; (1+2)*24時間
+find . -mtime +2
+
+# 新しい -&gt; 3*24時間
+find . -mtime -3
+
+# 空ディレクトリの削除
+find . -type d -empty -delete
+</pre></div>
+</div>
+</div>
+<div class="section" id="for">
+<h3>for<a class="headerlink" href="#for" title="Permalink to this headline">¶</a></h3>
+</div>
+<div class="section" id="git">
+<h3>git<a class="headerlink" href="#git" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">git</span> <span class="n">init</span>
+<span class="n">rm</span> <span class="o">-</span><span class="n">rf</span> <span class="o">.</span><span class="n">git</span>
+
+<span class="n">git</span> <span class="n">add</span> <span class="o">-</span><span class="n">A</span> <span class="o">.</span>
+<span class="n">git</span> <span class="n">reset</span> <span class="n">HEAD</span> <span class="o">.</span>
+
+<span class="n">git</span> <span class="n">diff</span> <span class="n">HEAD</span><span class="o">^..</span><span class="n">HEAD</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="grep">
+<h3>grep<a class="headerlink" href="#grep" title="Permalink to this headline">¶</a></h3>
+</div>
+<div class="section" id="mongo">
+<h3>mongo<a class="headerlink" href="#mongo" title="Permalink to this headline">¶</a></h3>
+</div>
+<div class="section" id="psql">
+<h3>psql<a class="headerlink" href="#psql" title="Permalink to this headline">¶</a></h3>
+</div>
+<div class="section" id="screen">
+<h3>screen<a class="headerlink" href="#screen" title="Permalink to this headline">¶</a></h3>
+</div>
+<div class="section" id="xargs">
+<h3>xargs<a class="headerlink" href="#xargs" title="Permalink to this headline">¶</a></h3>
+</div>
+</div>
+<div class="section" id="advanced">
+<h2>Advanced<a class="headerlink" href="#advanced" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="id1">
+<h3>curl<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-default"><div class="highlight"><pre><span></span>#!/bin/bash
+# S3一括アップロード
+baseDir=
+targetDir=
+s3Key=
+s3Secret=
+bucket=
+domain=s3-ap-northeast-1.amazonaws.com
+condition=$(date -d yesterday +%Y%m%d)&#39;*.html&#39;
+for line in $(find $baseDir/$targetDir -type f -name $condition | sort)
+do
+ object=${line#$baseDir*}
+ resource=/$bucket$object
+ case ${line##*\.} in
+  html) contentType=text/html        ;;
+  gz)   contentType=application/gzip ;;
+  png)  contentType=image/png        ;;
+  *)    contentType=text/plain       ;;
+ esac
+ dateValue=$(date -R)
+ stringToSign=&quot;PUT\n\n$contentType\n$dateValue\n$resource&quot;
+ signature=$(echo -en $stringToSign | openssl sha1 -hmac $s3Secret -binary | base64)
+ echo $dateValue $object
+ curl -X PUT -T $line\
+  -H &quot;Host: $bucket.s3.amazonaws.com&quot;\
+  -H &quot;Date: $dateValue&quot;\
+  -H &quot;Content-Type: $contentType&quot;\
+  -H &quot;Authorization: AWS $s3Key:$signature&quot;\
+  https://$bucket.$domain$object
+done
+</pre></div>
+</div>
+</div>
+<div class="section" id="id2">
+<h3>find<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="c1"># パイプを利用した操作（ファイルを削除）</span>
+<span class="n">find</span> <span class="o">.</span> <span class="o">-</span><span class="nb">type</span> <span class="n">f</span> <span class="o">-</span><span class="n">mtime</span> <span class="o">+</span><span class="mi">2</span> <span class="o">-</span><span class="n">print0</span> <span class="o">|</span> <span class="n">xargs</span> <span class="o">-</span><span class="mi">0</span> <span class="o">--</span><span class="n">no</span><span class="o">-</span><span class="n">run</span><span class="o">-</span><span class="k">if</span><span class="o">-</span><span class="n">empty</span> <span class="n">rm</span> <span class="o">-</span><span class="n">f</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="id3">
+<h3>git<a class="headerlink" href="#id3" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-default"><div class="highlight"><pre><span></span># 絶対パス指定
+DIR=/c/work/sandbox
+git --git-dir $DIR/.git --work-tree=$DIR status
+
+# expect実行
+USER=main
+PASS=fsfs
+expect -c &quot;spawn git push origin develop; expect Username; send $USER\n; expect Password; send $PASS\n; expect $; exit 0&quot;
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+
+
+    </div>
+      
+  </div>
+</div>
+<footer class="footer">
+  <div class="container">
+    <p class="pull-right">
+      <a href="#">Back to top</a>
+      
+    </p>
+    <p>
+        &copy; Copyright 2019, Daisuke Maeda.<br/>
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.6.6.<br/>
+    </p>
+  </div>
+</footer>
+  </body>
+</html>

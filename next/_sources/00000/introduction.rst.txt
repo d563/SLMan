@@ -1,0 +1,66 @@
+はじめに
+########
+
+このサイトについて
+******************
+
+このサイトはIT関連の備忘録です。
+技術的なことだけを淡々と書いてもつまらないので、システムやプロジェクトをとりまく全般を対象とします。
+
+流行りの技術には ``知識`` や ``資金`` が集まり、廃りの技術からは ``教訓`` が残ります。
+それぞれの ``利益`` をバランスよく吸収できればと思います。
+
+筆者について
+************
+
+:名前: Daisuke Maeda（d563）
+:生年月日: 1979/09/17
+:連絡先: mail.d563@gmail.com
+:生活拠点: 京都・大阪
+
+略歴
+====
+
+* 京都の大学を卒業後、単身で東京に渡り営業職に就くも半年で辞める
+* 東京に留まり塾講師・家庭教師兼アダルトゲーム開発というカオスな生活を半年ほど送る
+* 大手家電メーカ系列のSIerに潜り込み、数年間のプログラマ修行を積む
+* 京都に戻り、大手SIerに専門職として就くも数年で辞める
+* フリーランスとして大手機械メーカに出向き、数年間のシステムアーキテクト修行を積む
+* ECのASPベンチャーに就きシステム刷新プロジェクトのサーバ設計・構築・運用を担う
+
+認定歴
+======
+
+======= ============================================================================================
+Date    Certified
+======= ============================================================================================
+2018/12 `システムアーキテクト <https://www.jitec.ipa.go.jp/>`_
+2017/06 `情報処理安全確保支援士（試験合格のみ） <https://www.jitec.ipa.go.jp/>`_
+2013/12 `ネットワークスペシャリスト <https://www.jitec.ipa.go.jp/>`_
+2013/06 `プロジェクトマネージャ <https://www.jitec.ipa.go.jp/>`_
+2012/01 `MCITP Windows Server 2008 Server Administrator <https://www.microsoft.com/ja-jp/learning/>`_
+2011/11 `MCTS Windows Server 2008 Network Infrastructure, Configuring <https://www.microsoft.com/ja-jp/learning/>`_
+2011/10 `MCTS Windows Server 2008 Active Directory, Configuring <https://www.microsoft.com/ja-jp/learning/>`_
+2009/07 `Linux Professional Institute Certification LPIC-3 Core <https://linuc.org/>`_
+2009/06 `データベーススペシャリスト <https://www.jitec.ipa.go.jp/>`_
+2009/06 `Linux Professional Institute Certification LPIC-2 <https://linuc.org/>`_
+2009/06 `UML Modeling Skill Certification L2 <https://umtp-japan.org/>`_
+2008/04 `ORACLE MASTER GOLD Oracle Database 10g（試験合格のみ） <https://www.oracle.com/>`_
+2008/03 `Linux Professional Institute Certification LPIC-1 <https://linuc.org/>`_
+2008/02 `UML Modeling Skill Certification L1 <https://umtp-japan.org/>`_
+2008/01 `ORACLE MASTER SILVER Oracle PL/SQL Developer <https://www.oracle.com/>`_
+2008/01 `ORACLE MASTER SILVER Oracle Database 10g <https://www.oracle.com/>`_
+2007/12 `ORACLE MASTER BRONZE Oracle Database 10g <https://www.oracle.com/>`_
+2006/06 `Sun Certified Web Component Developer for Java 2EE Platform 1.4 <https://www.oracle.com/>`_
+2006/06 `ソフトウェア開発技術者 <https://www.jitec.ipa.go.jp/>`_
+2006/01 `Sun Certified Programmer for the Java 2 Platform 1.4 <https://www.oracle.com/>`_
+2005/05 `基本情報処理技術者 <https://www.jitec.ipa.go.jp/>`_
+2004/11 `初級システムアドミニストレータ <https://www.jitec.ipa.go.jp/>`_
+======= ============================================================================================
+
+免責について
+************
+
+このサイト内の記事を起因とした如何なる損害が発生したとしても筆者は責任を負いかねます。
+記事の内容は全て筆者の個人的な見解や動作確認の結果であり何らかの効果を保証するものではありません。
+あらゆる判断については自己責任でお願いします。

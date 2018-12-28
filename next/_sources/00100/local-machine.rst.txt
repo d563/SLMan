@@ -1,0 +1,158 @@
+手元のパソコン
+##############
+
+こだわらないにこだわる
+**********************
+
+IT関連の作業をするには、手元にパソコンがなければ始まりません。
+スマホさえあれば何でもできるという強者もいるでしょうが、素直にパソコンを用意しましょう。
+
+OSはWindowsやMac、はたまたLinuxをベースにしたものなどいろいろありますが、正直Windowsで困らないでしょう。
+やれアップデートがウザい、やれ普通すぎてダサいなどと毒づく前に、 **たいがいの仕事場で調達できるメリット** を重視しましょう。
+とはいえWindowsのコマンドプロンプトは使い辛いので ``mintty`` を使えるようにしておきます。
+
+環境構築のポイント
+******************
+
+手元のパソコンに求める要件は業務内容により大きく異なるため触れませんが、必ず押さえておきたいポイントが１つだけあります。
+それは **壊れても泣きを見ない** という点です。
+運用対象のサーバであれば、１台が壊れても業務が続けられるように冗長化して構築することも多いかと思います。
+ところが手元のパソコンを冗長化しているという話は全く聞きません。
+個人の業務を含めた運用全体を１つのシステムとして捉えた場合に最後の単一障害点として残るものは、たいがい個人のパソコンとなります。
+ということで以下の要件を含めましょう。
+
+1. 無くなって困るファイルは外部にも置く
+2. 作り直せるぐらいシンプルな環境を保つ
+
+（1.）は、仕事場の環境が整っていない場合は提案して変えていくしかありません。
+（2.）は、ついつい凝った環境を作りたくなるものですが **GUIでしか編集できない設定**  は避けたいところです。
+いずれにせよ、設定ファイルが容易に復元できる手段を確立しておきます。
+
+おすすめのソフトウェア
+**********************
+
+Git Bash
+========
+
+mintty自体やgitを含めたシェルスクリプトが使えるようにします。
+https://gitforwindows.org/ よりインストーラをダウンロードしてデフォルトのオプション（minttyで起動する設定）でインストールしましょう。
+あらかじめ作っておいた以下の設定ファイルをホーム（minttyの起動時にいる）ディレクトリの直下に置きます。
+
+
+.bash_profile
+-------------
+::
+
+    [[ -f ~/.bashrc ]] && . ~/.bashrc
+
+.bashrc
+-------
+::
+
+    alias ls='ls --color=auto --show-control-chars'
+    alias ll='ls -l'
+    PS1='$(pwd) $ '
+    LANG=ja_JP.UTF-8
+
+``.bash_profile`` はminttyを起動するたびに、 ``.bashrc`` はbashコマンドを実行するたびに読み込まれます。
+この設定では ``.bash_profile`` から ``.bashrc`` を読み込むように定義しています。
+
+.minttyrc
+---------
+::
+
+    BoldAsFont=no
+    FontHeight=11
+    ThemeFile=
+    BackgroundColour=250,250,250
+    ForegroundColour=60,60,60
+    Columns=150
+    Rows=30
+    Font=ＭＳ ゴシック
+    BoldAsColour=no
+    RightClickAction=paste
+    Language=ja
+    Locale=ja_JP
+    Charset=UTF-8
+
+mintty自体の設定も定義ファイルとして置かれるので、自分に合うよう編集して残しておきましょう。
+
+.gitconfig
+----------
+::
+
+    [user]
+        name = Daisuke Maeda
+        email = mail.d563@gmail.com
+    [core]
+        autocrlf = false
+    [http]
+        sslVerify = true
+    [push]
+        default = nothing
+    [credential]
+        helper = wincred
+
+gitのユーザ設定も残しておきます。
+``git config --global`` のコマンドを残すことでも同じことが表現できますのが、筆者は結果を残す方が安心できます。
+ただ ``.gitconfig`` には注意点があり **インデントは厳密にタブ１文字** としておく必要があります。
+
+Anaconda3
+=========
+
+筆者は ``python`` でスクリプトを組むことが多いので、手元のパソコンでも使えるようにしています。
+https://www.anaconda.com/ よりインストーラをダウンロードしてデフォルトのオプションでインストールします。
+
+Path
+----
+::
+
+    C:\ProgramData\Anaconda3
+    C:\ProgramData\Anaconda3\Library\bin
+    C:\ProgramData\Anaconda3\Scripts
+
+このような環境変数の ``Path`` が追加されますが、コマンドプロンプトから使わないのであれば全く必要ありません。
+筆者の場合は「環境変数」の設定画面から **これらの設定を消します** 。
+
+.bashrc
+-------
+::
+
+    alias python='start python'
+    export PATH=/c/ProgramData/Anaconda3:/c/ProgramData/Anaconda3/Library/bin:/c/ProgramData/Anaconda3/Scripts:$PATH
+
+minttyはWindows用であるpythonを対話モードで実行することができません。
+素直に別ウィンドウを開けて実行するように ``.bashrc`` にエイリアスを追記します。
+環境変数の ``Path`` についても、テキストベースで切り替えられるように ``.bashrc`` で定義します。
+なおpythonが含まれるスクリプトについてはmintty上で問題なく実行することができます。
+
+VirtualBox
+==========
+
+運用対象のサーバに近い環境で検証がしたい場合は、Amazon EC2などでVMを調達することがあります。
+こちらは外部サービスですので、使い方によってはコストが気になります。
+こういった場合は手元のパソコン上でVMを調達するためにVirtualBoxを使います。
+インストーラは https://www.virtualbox.org/ よりダウンロードができます。
+筆者の場合はCentOSのMinimalイメージをインストールしたVMを、あらかじめ作成しておきます。
+CentOSのインストーラは https://www.centos.org/ よりダウンロードができます。
+インストール直後のスナップショットを残しておけば、その後の操作が **いくらでもやり直せる** ので便利です。
+
+${vm-name}.vbox
+---------------
+::
+
+    （抜粋）
+    <Network>
+      <Adapter slot="0" enabled="true" （省略）>
+        <NAT>
+          <Forwarding name="HTTP" proto="1" hostip="127.0.0.1" hostport="8880" guestport="80"/>
+          <Forwarding name="SSH" proto="1" hostip="127.0.0.1" hostport="2222" guestport="22"/>
+        </NAT>
+      </Adapter>
+    </Network>
+
+VMの定義はホームディレクトリ直下の ``VirtualBox VMs`` の中にVMと同じ名称で作成されます。
+必要に応じて拡張子が ``vbox`` である設定ファイルを修正します。
+筆者の場合はネットワーク自体の検証が目的である場合を除き、ネットワークアダプタは ``NAT`` を選びます。
+その上で必要に応じてポートフォワーディングを設定します。
+このようにして外部に（IPを余分に消費するなどの）影響を与えること無くVM内との通信を制御することができます。

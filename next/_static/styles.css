@@ -1,6 +1,28 @@
 body {
+    font-family: '游ゴシック体', 'Yu Gothic', YuGothic, sans-serif;
     font-size: 16px;
     font-weight: 500;
     line-height: 1.8;
-    font-family: '游ゴシック体', 'Yu Gothic', YuGothic, sans-serif;
+}
+h1, .h1, h2, .h2, h3, .h3, h4, .h4, th {
+    color: #777777;
+    font-weight: bold;
+}
+h2, .h2 {
+    margin-bottom: 16px;
+    margin-top: 32px;
+}
+h3, .h3 {
+    font-size: 16px;
+}
+h4, .h4 {
+    font-size: 14px;
+}
+b, strong {
+    font-size: 20px;
+}
+p, pre {
+    margin-bottom: 16px;
+    margin-left: 8px;
+    margin-top: 16px;
 }
