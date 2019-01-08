@@ -1,10 +1,9 @@
-
 <!DOCTYPE html>
 
 <html xmlns="http://www.w3.org/1999/xhtml" lang="jp">
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <title>Index &#8212; システムアングザエティスト入門  documentation</title>
+    <title>Anaconda3 &#8212; システムアングザエティスト入門  documentation</title>
     <link rel="stylesheet" href="_static/bootstrap-sphinx.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
     <link rel="stylesheet" href="_static/styles.css" type="text/css" />
@@ -25,8 +24,10 @@
     <script type="text/javascript" src="_static/js/jquery-fix.js"></script>
     <script type="text/javascript" src="_static/bootstrap-3.3.7/js/bootstrap.min.js"></script>
     <script type="text/javascript" src="_static/bootstrap-sphinx.js"></script>
-    <link rel="index" title="Index" href="#" />
+    <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="VirtualBox" href="local-machine-3.html" />
+    <link rel="prev" title="Git Bash" href="local-machine-1.html" />
 <meta charset='utf-8'>
 <meta http-equiv='X-UA-Compatible' content='IE=edge,chrome=1'>
 <meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1'>
@@ -61,9 +62,9 @@
      href="index.html">すべての記事 <b class="caret"></b></a>
   <ul class="dropdown-menu globaltoc"
       role="menu"
-      aria-labelledby="dLabelGlobalToc"><ul>
+      aria-labelledby="dLabelGlobalToc"><ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="introduction.html">はじめに</a></li>
-<li class="toctree-l1"><a class="reference internal" href="local-machine.html">手元のパソコン</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="local-machine.html">手元のパソコン</a></li>
 <li class="toctree-l1"><a class="reference internal" href="kernel-parameters.html">カーネルパラメータ</a></li>
 <li class="toctree-l1"><a class="reference internal" href="asynchronous.html">いきなり非同期</a></li>
 <li class="toctree-l1"><a class="reference internal" href="over-attached.html">親離れ／子離れ</a></li>
@@ -75,13 +76,28 @@
                 <li class="dropdown">
   <ul class="dropdown-menu localtoc"
       role="menu"
-      aria-labelledby="dLabelLocalToc"></ul>
+      aria-labelledby="dLabelLocalToc"><ul>
+<li><a class="reference internal" href="#">Anaconda3</a><ul>
+<li><a class="reference internal" href="#path">Path</a></li>
+<li><a class="reference internal" href="#bashrc">.bashrc</a></li>
+</ul>
+</li>
+</ul>
+</ul>
 </li>
               
             
             
               
                 
+  <li>
+    <a href="local-machine-1.html" title="Previous Chapter: Git Bash"><span class="glyphicon glyphicon-chevron-left visible-sm"></span><span class="hidden-sm hidden-tablet">&laquo; Git Bash</span>
+    </a>
+  </li>
+  <li>
+    <a href="local-machine-3.html" title="Next Chapter: VirtualBox"><span class="glyphicon glyphicon-chevron-right visible-sm"></span><span class="hidden-sm hidden-tablet">VirtualBox &raquo;</span>
+    </a>
+  </li>
               
             
             
@@ -108,7 +124,14 @@
 <div class="container">
   <div class="row">
       <div class="col-md-3">
-        <div id="sidebar" class="bs-sidenav" role="complementary">
+        <div id="sidebar" class="bs-sidenav" role="complementary"><ul>
+<li><a class="reference internal" href="#">Anaconda3</a><ul>
+<li><a class="reference internal" href="#path">Path</a></li>
+<li><a class="reference internal" href="#bashrc">.bashrc</a></li>
+</ul>
+</li>
+</ul>
+
 <form action="search.html" method="get">
  <div class="form-group">
   <input type="text" name="q" class="form-control" placeholder="Search" />
@@ -120,11 +143,31 @@
       </div>
     <div class="col-md-9 content">
       
-
-<h1 id="index">Index</h1>
-
-<div class="genindex-jumpbox">
- 
+  <div class="section" id="anaconda3">
+<h1>Anaconda3<a class="headerlink" href="#anaconda3" title="Permalink to this headline">¶</a></h1>
+<p>筆者は <code class="docutils literal"><span class="pre">python</span></code> でスクリプトを組むことが多いので、手元のパソコンでも使えるようにしています。
+<a class="reference external" href="https://www.anaconda.com/">https://www.anaconda.com/</a> よりインストーラをダウンロードしてデフォルトのオプションでインストールします。</p>
+<div class="section" id="path">
+<h2>Path<a class="headerlink" href="#path" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">C</span><span class="p">:</span>\<span class="n">ProgramData</span>\<span class="n">Anaconda3</span>
+<span class="n">C</span><span class="p">:</span>\<span class="n">ProgramData</span>\<span class="n">Anaconda3</span>\<span class="n">Library</span>\<span class="nb">bin</span>
+<span class="n">C</span><span class="p">:</span>\<span class="n">ProgramData</span>\<span class="n">Anaconda3</span>\<span class="n">Scripts</span>
+</pre></div>
+</div>
+<p>このような環境変数の <code class="docutils literal"><span class="pre">Path</span></code> が追加されますが、コマンドプロンプトから使わないのであれば全く必要ありません。
+筆者の場合は「環境変数」の設定画面から <strong>これらの設定を消します</strong> 。</p>
+</div>
+<div class="section" id="bashrc">
+<h2>.bashrc<a class="headerlink" href="#bashrc" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-default"><div class="highlight"><pre><span></span>alias python=&#39;start python&#39;
+export PATH=/c/ProgramData/Anaconda3:/c/ProgramData/Anaconda3/Library/bin:/c/ProgramData/Anaconda3/Scripts:$PATH
+</pre></div>
+</div>
+<p>minttyはWindows用であるpythonを対話モードで実行することができません。
+素直に別ウィンドウを開けて実行するように <code class="docutils literal"><span class="pre">.bashrc</span></code> にエイリアスを追記します。
+環境変数の <code class="docutils literal"><span class="pre">Path</span></code> についても、テキストベースで切り替えられるように <code class="docutils literal"><span class="pre">.bashrc</span></code> で定義します。
+なおpythonが含まれるスクリプトについてはmintty上で問題なく実行することができます。</p>
+</div>
 </div>
 
 

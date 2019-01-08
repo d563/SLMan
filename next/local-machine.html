@@ -1,10 +1,9 @@
-
 <!DOCTYPE html>
 
 <html xmlns="http://www.w3.org/1999/xhtml" lang="jp">
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <title>Index &#8212; システムアングザエティスト入門  documentation</title>
+    <title>手元のパソコン &#8212; システムアングザエティスト入門  documentation</title>
     <link rel="stylesheet" href="_static/bootstrap-sphinx.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
     <link rel="stylesheet" href="_static/styles.css" type="text/css" />
@@ -25,8 +24,10 @@
     <script type="text/javascript" src="_static/js/jquery-fix.js"></script>
     <script type="text/javascript" src="_static/bootstrap-3.3.7/js/bootstrap.min.js"></script>
     <script type="text/javascript" src="_static/bootstrap-sphinx.js"></script>
-    <link rel="index" title="Index" href="#" />
+    <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Git Bash" href="local-machine-1.html" />
+    <link rel="prev" title="はじめに" href="introduction.html" />
 <meta charset='utf-8'>
 <meta http-equiv='X-UA-Compatible' content='IE=edge,chrome=1'>
 <meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1'>
@@ -61,9 +62,9 @@
      href="index.html">すべての記事 <b class="caret"></b></a>
   <ul class="dropdown-menu globaltoc"
       role="menu"
-      aria-labelledby="dLabelGlobalToc"><ul>
+      aria-labelledby="dLabelGlobalToc"><ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="introduction.html">はじめに</a></li>
-<li class="toctree-l1"><a class="reference internal" href="local-machine.html">手元のパソコン</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">手元のパソコン</a></li>
 <li class="toctree-l1"><a class="reference internal" href="kernel-parameters.html">カーネルパラメータ</a></li>
 <li class="toctree-l1"><a class="reference internal" href="asynchronous.html">いきなり非同期</a></li>
 <li class="toctree-l1"><a class="reference internal" href="over-attached.html">親離れ／子離れ</a></li>
@@ -75,13 +76,29 @@
                 <li class="dropdown">
   <ul class="dropdown-menu localtoc"
       role="menu"
-      aria-labelledby="dLabelLocalToc"></ul>
+      aria-labelledby="dLabelLocalToc"><ul>
+<li><a class="reference internal" href="#">手元のパソコン</a><ul>
+<li><a class="reference internal" href="#id2">こだわらないにこだわる</a></li>
+<li><a class="reference internal" href="#id3">環境構築のポイント</a></li>
+<li><a class="reference internal" href="#id4">おすすめのソフトウェア</a></li>
+</ul>
+</li>
+</ul>
+</ul>
 </li>
               
             
             
               
                 
+  <li>
+    <a href="introduction.html" title="Previous Chapter: はじめに"><span class="glyphicon glyphicon-chevron-left visible-sm"></span><span class="hidden-sm hidden-tablet">&laquo; はじめに</span>
+    </a>
+  </li>
+  <li>
+    <a href="local-machine-1.html" title="Next Chapter: Git Bash"><span class="glyphicon glyphicon-chevron-right visible-sm"></span><span class="hidden-sm hidden-tablet">Git Bash &raquo;</span>
+    </a>
+  </li>
               
             
             
@@ -108,7 +125,15 @@
 <div class="container">
   <div class="row">
       <div class="col-md-3">
-        <div id="sidebar" class="bs-sidenav" role="complementary">
+        <div id="sidebar" class="bs-sidenav" role="complementary"><ul>
+<li><a class="reference internal" href="#">手元のパソコン</a><ul>
+<li><a class="reference internal" href="#id2">こだわらないにこだわる</a></li>
+<li><a class="reference internal" href="#id3">環境構築のポイント</a></li>
+<li><a class="reference internal" href="#id4">おすすめのソフトウェア</a></li>
+</ul>
+</li>
+</ul>
+
 <form action="search.html" method="get">
  <div class="form-group">
   <input type="text" name="q" class="form-control" placeholder="Search" />
@@ -120,11 +145,44 @@
       </div>
     <div class="col-md-9 content">
       
-
-<h1 id="index">Index</h1>
-
-<div class="genindex-jumpbox">
- 
+  <div class="section" id="id1">
+<h1>手元のパソコン<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="id2">
+<h2>こだわらないにこだわる<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h2>
+<p>システムアングザエティストの仕事は手元にパソコンがなければ始まらない。
+スマホさえあれば何でもできるという強者もいるだろうが素直にパソコンを用意する。
+OSはWindows。
+たいがいの職場で調達できるメリットがあるので安易にMacなどに浮気しない。
+とは言えWindowsのコマンドプロンプトは使い辛い。
+CUI環境の充実は必要だ。</p>
+</div>
+<div class="section" id="id3">
+<h2>環境構築のポイント<a class="headerlink" href="#id3" title="Permalink to this headline">¶</a></h2>
+<p>手元のパソコンに求める要件は業務により大きく変わってくるため触れない。
+だが必ず押さえておきたいポイントが１つだけある。
+それは <strong>壊れても泣きを見ない</strong> という点だ。</p>
+<p>運用対象のサーバであれば１台が壊れても業務が続けられるように冗長化して構築することも多い。
+ところが手元のパソコンを冗長化するという話は全く聞かない。
+実際のところ運用全体を１つのシステムとして捉えた場合に最後の単一障害点となるのは個人のパソコンなのだ。
+ということで以下の要件を含める。</p>
+<ol class="arabic simple">
+<li>無くなって困るファイルは外部にも置く</li>
+<li>作り直せるぐらいシンプルな環境を保つ</li>
+</ol>
+<p>（1.）については職場の環境が整っていないのなら提案して変えていくしかない。
+（2.）についてはついつい凝った環境を作りたくなるものだが <strong>GUIでしか編集できない設定</strong> は避けたい。
+いずれにせよ設定ファイルが容易に復元できる手段を確立しておく。</p>
+</div>
+<div class="section" id="id4">
+<h2>おすすめのソフトウェア<a class="headerlink" href="#id4" title="Permalink to this headline">¶</a></h2>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="local-machine-1.html">Git Bash</a></li>
+<li class="toctree-l1"><a class="reference internal" href="local-machine-2.html">Anaconda3</a></li>
+<li class="toctree-l1"><a class="reference internal" href="local-machine-3.html">VirtualBox</a></li>
+</ul>
+</div>
+</div>
 </div>
 
 

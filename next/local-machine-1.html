@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml" lang="jp">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>Git Bash &#8212; システムアングザエティスト入門  documentation</title>
+    <link rel="stylesheet" href="_static/bootstrap-sphinx.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="_static/styles.css" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    './',
+        VERSION:     '',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true,
+        SOURCELINK_SUFFIX: '.txt'
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="_static/js/jquery-1.11.0.min.js"></script>
+    <script type="text/javascript" src="_static/js/jquery-fix.js"></script>
+    <script type="text/javascript" src="_static/bootstrap-3.3.7/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="_static/bootstrap-sphinx.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Anaconda3" href="local-machine-2.html" />
+    <link rel="prev" title="手元のパソコン" href="local-machine.html" />
+<meta charset='utf-8'>
+<meta http-equiv='X-UA-Compatible' content='IE=edge,chrome=1'>
+<meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1'>
+<meta name="apple-mobile-web-app-capable" content="yes">
+
+  </head>
+  <body>
+
+  <div id="navbar" class="navbar navbar-default navbar-fixed-top">
+    <div class="container">
+      <div class="navbar-header">
+        <!-- .btn-navbar is used as the toggle for collapsed navbar content -->
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".nav-collapse">
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand" href="index.html">
+          システムアングザエティスト入門</a>
+        <span class="navbar-text navbar-version pull-left"><b></b></span>
+      </div>
+
+        <div class="collapse navbar-collapse nav-collapse">
+          <ul class="nav navbar-nav">
+            
+            
+              <li class="dropdown globaltoc-container">
+  <a role="button"
+     id="dLabelGlobalToc"
+     data-toggle="dropdown"
+     data-target="#"
+     href="index.html">すべての記事 <b class="caret"></b></a>
+  <ul class="dropdown-menu globaltoc"
+      role="menu"
+      aria-labelledby="dLabelGlobalToc"><ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="introduction.html">はじめに</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="local-machine.html">手元のパソコン</a></li>
+<li class="toctree-l1"><a class="reference internal" href="kernel-parameters.html">カーネルパラメータ</a></li>
+<li class="toctree-l1"><a class="reference internal" href="asynchronous.html">いきなり非同期</a></li>
+<li class="toctree-l1"><a class="reference internal" href="over-attached.html">親離れ／子離れ</a></li>
+<li class="toctree-l1"><a class="reference internal" href="command.html">Command</a></li>
+</ul>
+</ul>
+</li>
+              
+                <li class="dropdown">
+  <ul class="dropdown-menu localtoc"
+      role="menu"
+      aria-labelledby="dLabelLocalToc"><ul>
+<li><a class="reference internal" href="#">Git Bash</a><ul>
+<li><a class="reference internal" href="#bash-profile">.bash_profile</a></li>
+<li><a class="reference internal" href="#bashrc">.bashrc</a></li>
+<li><a class="reference internal" href="#minttyrc">.minttyrc</a></li>
+<li><a class="reference internal" href="#gitconfig">.gitconfig</a></li>
+</ul>
+</li>
+</ul>
+</ul>
+</li>
+              
+            
+            
+              
+                
+  <li>
+    <a href="local-machine.html" title="Previous Chapter: 手元のパソコン"><span class="glyphicon glyphicon-chevron-left visible-sm"></span><span class="hidden-sm hidden-tablet">&laquo; 手元のパソコン</span>
+    </a>
+  </li>
+  <li>
+    <a href="local-machine-2.html" title="Next Chapter: Anaconda3"><span class="glyphicon glyphicon-chevron-right visible-sm"></span><span class="hidden-sm hidden-tablet">Anaconda3 &raquo;</span>
+    </a>
+  </li>
+              
+            
+            
+            
+            
+              <li class="hidden-sm"></li>
+            
+          </ul>
+
+          
+            
+<form class="navbar-form navbar-right" action="search.html" method="get">
+ <div class="form-group">
+  <input type="text" name="q" class="form-control" placeholder="Search" />
+ </div>
+  <input type="hidden" name="check_keywords" value="yes" />
+  <input type="hidden" name="area" value="default" />
+</form>
+          
+        </div>
+    </div>
+  </div>
+
+<div class="container">
+  <div class="row">
+      <div class="col-md-3">
+        <div id="sidebar" class="bs-sidenav" role="complementary"><ul>
+<li><a class="reference internal" href="#">Git Bash</a><ul>
+<li><a class="reference internal" href="#bash-profile">.bash_profile</a></li>
+<li><a class="reference internal" href="#bashrc">.bashrc</a></li>
+<li><a class="reference internal" href="#minttyrc">.minttyrc</a></li>
+<li><a class="reference internal" href="#gitconfig">.gitconfig</a></li>
+</ul>
+</li>
+</ul>
+
+<form action="search.html" method="get">
+ <div class="form-group">
+  <input type="text" name="q" class="form-control" placeholder="Search" />
+ </div>
+  <input type="hidden" name="check_keywords" value="yes" />
+  <input type="hidden" name="area" value="default" />
+</form>
+        </div>
+      </div>
+    <div class="col-md-9 content">
+      
+  <div class="section" id="git-bash">
+<h1>Git Bash<a class="headerlink" href="#git-bash" title="Permalink to this headline">¶</a></h1>
+<p>mintty自体やgitを含めたシェルスクリプトが使えるようにします。
+<a class="reference external" href="https://gitforwindows.org/">https://gitforwindows.org/</a> よりインストーラをダウンロードしてデフォルトのオプション（minttyで起動する設定）でインストールしましょう。
+あらかじめ作っておいた以下の設定ファイルをホーム（minttyの起動時にいる）ディレクトリの直下に置きます。</p>
+<div class="section" id="bash-profile">
+<h2>.bash_profile<a class="headerlink" href="#bash-profile" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="p">[[</span> <span class="o">-</span><span class="n">f</span> <span class="o">~/.</span><span class="n">bashrc</span> <span class="p">]]</span> <span class="o">&amp;&amp;</span> <span class="o">.</span> <span class="o">~/.</span><span class="n">bashrc</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="bashrc">
+<h2>.bashrc<a class="headerlink" href="#bashrc" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">alias</span> <span class="n">ls</span><span class="o">=</span><span class="s1">&#39;ls --color=auto --show-control-chars&#39;</span>
+<span class="n">alias</span> <span class="n">ll</span><span class="o">=</span><span class="s1">&#39;ls -l&#39;</span>
+<span class="n">PS1</span><span class="o">=</span><span class="s1">&#39;$(pwd) $ &#39;</span>
+<span class="n">LANG</span><span class="o">=</span><span class="n">ja_JP</span><span class="o">.</span><span class="n">UTF</span><span class="o">-</span><span class="mi">8</span>
+</pre></div>
+</div>
+<p><code class="docutils literal"><span class="pre">.bash_profile</span></code> はminttyを起動するたびに、 <code class="docutils literal"><span class="pre">.bashrc</span></code> はbashコマンドを実行するたびに読み込まれます。
+この設定では <code class="docutils literal"><span class="pre">.bash_profile</span></code> から <code class="docutils literal"><span class="pre">.bashrc</span></code> を読み込むように定義しています。</p>
+</div>
+<div class="section" id="minttyrc">
+<h2>.minttyrc<a class="headerlink" href="#minttyrc" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">BoldAsFont</span><span class="o">=</span><span class="n">no</span>
+<span class="n">FontHeight</span><span class="o">=</span><span class="mi">11</span>
+<span class="n">ThemeFile</span><span class="o">=</span>
+<span class="n">BackgroundColour</span><span class="o">=</span><span class="mi">250</span><span class="p">,</span><span class="mi">250</span><span class="p">,</span><span class="mi">250</span>
+<span class="n">ForegroundColour</span><span class="o">=</span><span class="mi">60</span><span class="p">,</span><span class="mi">60</span><span class="p">,</span><span class="mi">60</span>
+<span class="n">Columns</span><span class="o">=</span><span class="mi">150</span>
+<span class="n">Rows</span><span class="o">=</span><span class="mi">30</span>
+<span class="n">Font</span><span class="o">=</span><span class="n">ＭＳ</span> <span class="n">ゴシック</span>
+<span class="n">BoldAsColour</span><span class="o">=</span><span class="n">no</span>
+<span class="n">RightClickAction</span><span class="o">=</span><span class="n">paste</span>
+<span class="n">Language</span><span class="o">=</span><span class="n">ja</span>
+<span class="n">Locale</span><span class="o">=</span><span class="n">ja_JP</span>
+<span class="n">Charset</span><span class="o">=</span><span class="n">UTF</span><span class="o">-</span><span class="mi">8</span>
+</pre></div>
+</div>
+<p>mintty自体の設定も定義ファイルとして置かれるので、自分に合うよう編集して残しておきましょう。</p>
+</div>
+<div class="section" id="gitconfig">
+<h2>.gitconfig<a class="headerlink" href="#gitconfig" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="p">[</span><span class="n">user</span><span class="p">]</span>
+    <span class="n">name</span> <span class="o">=</span> <span class="n">Daisuke</span> <span class="n">Maeda</span>
+    <span class="n">email</span> <span class="o">=</span> <span class="n">mail</span><span class="o">.</span><span class="n">d563</span><span class="nd">@gmail</span><span class="o">.</span><span class="n">com</span>
+<span class="p">[</span><span class="n">core</span><span class="p">]</span>
+    <span class="n">autocrlf</span> <span class="o">=</span> <span class="n">false</span>
+<span class="p">[</span><span class="n">http</span><span class="p">]</span>
+    <span class="n">sslVerify</span> <span class="o">=</span> <span class="n">true</span>
+<span class="p">[</span><span class="n">push</span><span class="p">]</span>
+    <span class="n">default</span> <span class="o">=</span> <span class="n">nothing</span>
+<span class="p">[</span><span class="n">credential</span><span class="p">]</span>
+    <span class="n">helper</span> <span class="o">=</span> <span class="n">wincred</span>
+</pre></div>
+</div>
+<p>gitのユーザ設定も残しておきます。
+<code class="docutils literal"><span class="pre">git</span> <span class="pre">config</span> <span class="pre">--global</span></code> のコマンドを残すことでも同じことが表現できますのが、筆者は結果を残す方が安心できます。
+ただ <code class="docutils literal"><span class="pre">.gitconfig</span></code> には注意点があり <strong>インデントは厳密にタブ１文字</strong> としておく必要があります。</p>
+</div>
+</div>
+
+
+    </div>
+      
+  </div>
+</div>
+<footer class="footer">
+  <div class="container">
+    <p class="pull-right">
+      <a href="#">Back to top</a>
+      
+    </p>
+    <p>
+        &copy; Copyright 2019, Daisuke Maeda.<br/>
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.6.6.<br/>
+    </p>
+  </div>
+</footer>
+  </body>
+</html>
